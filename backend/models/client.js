@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Client.hasMany(models.Commande, { foreignKey: 'id_commande', as: 'commande' });
+      Client.belongsTo(models.Panier, { foreignKey: 'id_panier', as: 'panier' });
     }
   };
   Client.init({
@@ -18,10 +19,27 @@ module.exports = (sequelize, DataTypes) => {
     prenom: DataTypes.STRING,
     tel: DataTypes.INTEGER,
     email: DataTypes.STRING,
-    adresse: DataTypes.STRING
-  }, {
+    adresse: DataTypes.STRING,
+    id_commande:
+    {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'Commande',
+            key: 'id'
+        },  
+    id_panier:
+    {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'Panier',
+            key: 'id'
+        },
+       
+  }, 
     sequelize,
     modelName: 'Client',
-  });
+  }});
   return Client;
 };

@@ -4,18 +4,24 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class panier extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+   
     static associate(models) {
-      // define association here
+      panier.belongsTo(models.Client, { foreignKey: 'id_client', as: 'client' });
+   
     }
   };
   panier.init({
-    id_panier: DataTypes.STRING
-  }, {
+    id_panier: DataTypes.STRING,
+
+  id_client:
+                {
+                    type: DataTypes.INTEGER,
+                    allowNull: false,
+                    references: {
+                        model: 'Client',
+                        key: 'id'
+                    },
+  }}, {
     sequelize,
     modelName: 'panier',
   });
