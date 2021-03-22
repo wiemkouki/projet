@@ -14,6 +14,15 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Sous_cat',
+    id_categorie:
+    {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'categorie',
+            key: 'id'
+        },}
+
   });
   return Sous_cat;
 };

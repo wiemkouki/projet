@@ -6,12 +6,25 @@ module.exports = (sequelize, DataTypes) => {
   class fiche_tech extends Model {
    
     static associate(models) {
-      fiche_tech.belongsTo(models.produit, { foreignKey: 'id_fiche_tech', as: 'fiche_tech' });
+      fiche_tech.belongsTo(models.produit, { foreignKey: 'id_produit', as: 'produit' });
     }
   };
   fiche_tech.init({
-    caracteristiques: DataTypes.STRING
-  }, {
+    caracteristiques: DataTypes.STRING,
+    id_produit:
+    {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'produit',
+        key: 'id'
+      },
+  },
+
+
+
+
+   
     sequelize,
     modelName: 'fiche_tech',
   });
