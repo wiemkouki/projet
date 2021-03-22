@@ -28,6 +28,10 @@ seq.authenticate()
 
 var usersRouter = require('./routes/users');
 
+
+
+
 app.use('/users', usersRouter);
+app.use('/client', clientRouter);
 
 module.exports = app;
