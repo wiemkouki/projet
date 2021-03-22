@@ -23,6 +23,12 @@ module.exports = {
       adresse: {
         type: Sequelize.STRING
       },
+      id_panier: {
+        type: Sequelize.INTEGER(11)
+      },
+      id_commande: {
+        type: Sequelize.INTEGER(11)
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
