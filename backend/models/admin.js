@@ -4,11 +4,11 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Admin extends Model {
-   
+
     static associate(models) {
       Admin.belongsToMany(models.commande, { foreignKey: 'id_commande', as: 'commande' });
       Admin.hasMany(models.stock, { foreignKey: 'id_stock', as: 'stock' });
-      
+
     }
   };
   Admin.init({
@@ -16,10 +16,27 @@ module.exports = (sequelize, DataTypes) => {
     tel: DataTypes.INTEGER,
     email: DataTypes.STRING,
     adresse: DataTypes.STRING,
-    logo: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Admin',
+    logo: DataTypes.STRING,
+    id_commande:
+    {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Commande',
+        key: 'id'
+      },
+      id_stock:
+      {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Stock',
+          key: 'id'
+        },
+      },
+      sequelize,
+      modelName: 'Admin',
+    }
   });
   return Admin;
 };

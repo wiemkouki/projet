@@ -10,8 +10,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Sup_admin.init({
-    id: DataTypes.INTEGER
-  }, {
+    id: DataTypes.INTEGER,
+    id_doc_justificatifs:{
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'doc_justificatifs',
+        key: 'id'
+      },
+
+  }, 
     sequelize,
     modelName: 'Sup_admin',
   });
