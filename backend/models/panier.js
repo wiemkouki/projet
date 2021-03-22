@@ -10,8 +10,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   panier.init({
-    id: DataTypes.INTEGER
-  }, {
+    id: DataTypes.INTEGER,
+    id_client:
+    {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'client',
+        key: 'id'
+      },
+
+
+  }, 
     sequelize,
     modelName: 'panier',
   });
