@@ -4,19 +4,24 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class doc_justificatifs extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+  
     static associate(models) {
-      // define association here
+      doc_justificatifs.belongsTo(models.Livreur, { foreignKey: 'id_livreur', as: 'livreur' });
     }
   };
   doc_justificatifs.init({
     libelle: DataTypes.STRING,
-    url_doc: DataTypes.STRING
-  }, {
+    url_doc: DataTypes.STRING,
+    id_livreur:
+                {
+                    type: DataTypes.INTEGER,
+                    allowNull: false,
+                    references: {
+                        model: 'Livreur',
+                        key: 'id'
+                    },
+  },
+  
     sequelize,
     modelName: 'doc_justificatifs',
   });
