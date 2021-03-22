@@ -8,6 +8,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      id_livreur:{
+        type: Sequelize.INTEGER
+      },
+      id_sup_admin:{
+        type: Sequelize.INTEGER
+      },
       libelle: {
         type: Sequelize.STRING
       },

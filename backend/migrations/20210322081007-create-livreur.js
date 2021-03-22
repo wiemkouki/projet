@@ -8,6 +8,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      id_doc_justificatifs:{
+        type: Sequelize.INTEGER
+      },
+      id_commande:{
+        type: Sequelize.INTEGER
+      },
       permis: {
         type: Sequelize.STRING
       },
