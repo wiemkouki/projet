@@ -4,14 +4,15 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class produit extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+    
     static associate(models) {
+<<<<<<< Updated upstream
       Produit.belongsTo(models.panier,{ foreignKey: 'id_panier', as: 'panier' });
       Produit.hasOne(models.fiche_tech, { foreignKey: 'id_produit', as: 'fiche_tech' });
+=======
+      produit.belongsTo(models.panier,{ foreignKey: 'id_panier', as: 'panier' });
+      produit.hasOne(models.fiche_tech, { foreignKey: 'id_produit', as: 'fiche_tech' });
+>>>>>>> Stashed changes
     }
     
   };
