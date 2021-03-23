@@ -20,8 +20,6 @@ module.exports = (sequelize, DataTypes) => {
         model: 'clients',
         key: 'id_client'
       },
-
-
   }, 
     sequelize,
     modelName: 'panier',

@@ -4,9 +4,9 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class fiche_tech extends Model {
-   
+  
     static associate(models) {
-      fiche_tech .belongsTo(models.produit,{ foreignKey: 'id_produit', as: 'produit' });
+   fiche_tech.belongsTo(models.produit,{foreignKey: 'id_produit', as:'produit'})
     }
   };
   fiche_tech.init({
