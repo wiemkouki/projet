@@ -14,12 +14,23 @@ module.exports = {
       id_commande:
       {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        foreignKey: true
+        references: {
+          model: 'Commandes',
+          key: 'id'
         },
-      id_stock: { 
-        type: Sequelize.INTEGER 
+        onUpdate: 'restrict',
+        onDelete: 'restrict'
       },
+      id_stock: { 
+        type: Sequelize.INTEGER ,
+        references: {
+          model: 'stocks',
+          key: 'id'
+        },
+        onUpdate: 'restrict',
+        onDelete: 'restrict'
+      },
+      
 
       nom_boutique: {
         type: Sequelize.STRING

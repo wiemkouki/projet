@@ -7,9 +7,10 @@ module.exports = (sequelize, DataTypes) => {
   
     static associate(models) {
       Client.hasMany(models.Commande, { foreignKey: 'id_commande', as: 'commande' });
-      Client.belongsTo(models.Panier, { foreignKey: 'id_panier', as: 'panier' });
+      Client.hasOne(models.Panier, { foreignKey: 'id_panier', as: 'panier' });
     }
   };
+  
   Client.init({
     nom: DataTypes.STRING,
     prenom: DataTypes.STRING,
@@ -19,23 +20,25 @@ module.exports = (sequelize, DataTypes) => {
     id_commande:
     {
         type: DataTypes.INTEGER,
-        allowNull: false,
         references: {
-            model: 'Commande',
-            key: 'id'
-        },  
+          model: 'commande',
+          key: 'id'
+        },
+        onUpdate: 'restrict',
+        onDelete: 'restrict'
+      },
     id_panier:
     {
         type: DataTypes.INTEGER,
-        allowNull: false,
         references: {
-            model: 'Panier',
-            key: 'id'
+          model: 'panier',
+          key: 'id'
         },
-       
-  }, 
+        onUpdate: 'restrict',
+        onDelete: 'restrict'
+      },
     sequelize,
     modelName: 'Client',
-  }});
+  });
   return Client;
 };

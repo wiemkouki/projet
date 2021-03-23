@@ -10,7 +10,12 @@ module.exports = {
       },
       id_admin:{
         type: Sequelize.INTEGER,
-        foreignKey: true
+        references: {
+          model: 'Admins',
+          key: 'id'
+        },
+        onUpdate: 'restrict',
+        onDelete: 'restrict'
       },
       description: {
         type: Sequelize.STRING

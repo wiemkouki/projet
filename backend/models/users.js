@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) =>
             //         onDelete: 'restrict'
             //     },
         });
-
+       
     User.associate = function(models) {
 
     };

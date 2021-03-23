@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 
     }
   };
+
   Admin.init({
     nom_boutique: DataTypes.STRING,
     tel: DataTypes.INTEGER,
@@ -20,23 +21,27 @@ module.exports = (sequelize, DataTypes) => {
     id_commande:
     {
       type: DataTypes.INTEGER,
-      allowNull: false,
       references: {
-        model: 'Commande',
+        model: 'commandes',
         key: 'id'
       },
+      onUpdate: 'restrict',
+      onDelete: 'restrict'
+    },
       id_stock:
       {
         type: DataTypes.INTEGER,
-        allowNull: false,
         references: {
-          model: 'Stock',
+          model: 'stocks',
           key: 'id'
         },
+        onUpdate: 'restrict',
+        onDelete: 'restrict'
       },
+      
       sequelize,
       modelName: 'Admin',
-    }
+    
   });
   return Admin;
 };

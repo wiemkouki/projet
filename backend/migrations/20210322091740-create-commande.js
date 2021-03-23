@@ -10,15 +10,30 @@ module.exports = {
       },
       id_livreur:{
         type: Sequelize.INTEGER,
-        foreignKey: true,
+        references: {
+          model: 'Livreurs',
+          key: 'id'
+        },
+        onUpdate: 'restrict',
+        onDelete: 'restrict'
       },
       id_admin:{
         type: Sequelize.INTEGER,
-        foreignKey: true,
+        references: {
+          model: 'Admins',
+          key: 'id'
+        },
+        onUpdate: 'restrict',
+        onDelete: 'restrict'
       },
       id_client:{
         type: Sequelize.INTEGER,
-        foreignKey: true,
+        references: {
+          model: 'Clients',
+          key: 'id'
+        },
+        onUpdate: 'restrict',
+        onDelete: 'restrict'
       },
       prix: {
         type: Sequelize.INTEGER

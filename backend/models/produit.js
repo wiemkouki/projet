@@ -10,9 +10,11 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+     Produit.hasOne(models.fiche_tech,{foreignKey: 'id_fiche_tech', as:'fiche_tech'});
+    
     }
   };
+  
   Produit.init({
     nom_p: DataTypes.STRING,
     prix: DataTypes.INTEGER,
