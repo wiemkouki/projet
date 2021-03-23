@@ -8,7 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-<<<<<<< HEAD:backend/migrations/20210322093000-create-produit.js
       id_commande:
       {
         type: Sequelize.INTEGER,
@@ -35,9 +34,6 @@ module.exports = {
         type: Sequelize.STRING
       },
       marque: {
-=======
-      nom_p: {
->>>>>>> fad83aabd2e226428c43716b3ddae6275bc2b0be:backend/migrations/20210323085024-create-produit.js
         type: Sequelize.STRING
       },
       prix: {

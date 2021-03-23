@@ -23,7 +23,6 @@ module.exports = {
       adresse: {
         type: Sequelize.STRING
       },
-<<<<<<< HEAD
       // id_commande:
       // {
       //   type: Sequelize.INTEGER,
@@ -53,25 +52,6 @@ module.exports = {
           }
         }
       );
-=======
-      id_panier: {
-        type: Sequelize.INTEGER(11),
-        foreignKey: true
-      },
-      id_commande: {
-        type: Sequelize.INTEGER(11),
-        foreignKey: true
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
-    });
->>>>>>> fad83aabd2e226428c43716b3ddae6275bc2b0be
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Clients');

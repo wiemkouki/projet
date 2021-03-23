@@ -8,7 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-<<<<<<< HEAD
       id_admin:
       {
         type: Sequelize.INTEGER,
@@ -20,12 +19,6 @@ module.exports = {
      
         onUpdate: 'restrict',
         onDelete: 'restrict' },
-=======
-      id_admin:{
-        type: Sequelize.INTEGER,
-        foreignKey: true
-      },
->>>>>>> fad83aabd2e226428c43716b3ddae6275bc2b0be
       description: {
         type: Sequelize.STRING
       },

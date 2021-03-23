@@ -8,7 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-<<<<<<< HEAD
       id_categorie:
     {
       type: Sequelize.INTEGER,
@@ -21,15 +20,6 @@ module.exports = {
           onUpdate: 'restrict',
           onDelete: 'restrict' },
     
-=======
-      id_categorie:{
-        type: Sequelize.INTEGER,
-        foreignKey: true
-      },
-      id: {
-        type: Sequelize.INTEGER
-      },
->>>>>>> fad83aabd2e226428c43716b3ddae6275bc2b0be
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

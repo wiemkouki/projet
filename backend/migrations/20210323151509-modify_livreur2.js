@@ -3,12 +3,12 @@
 module.exports = {
   up: (queryInterface, Sequelize) =>
   {
-    return queryInterface.addColumn('categories', 'id_sous_categories', {
+    return queryInterface.addColumn('livreurs', 'id_doc_justificatif', {
       type: Sequelize.INTEGER,
       allowNull: false,
       foreignKey:true,
       references: {
-        model: 'sous_cats',
+        model: 'doc_justificatifs',
         key: 'id'
       },
       onUpdate: 'restrict',
@@ -20,6 +20,7 @@ module.exports = {
 
   down: (queryInterface, Sequelize) =>
   {
-    return queryInterface.removeColumn('categories', 'id_sous_categories');
+    return queryInterface.removeColumn('livreurs', 'id_doc_justificatif');
   }
 };
+
