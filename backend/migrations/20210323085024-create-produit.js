@@ -8,7 +8,32 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nom_p: {
+      id_commande:
+      {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'commandes',
+          key: 'id'
+        },
+     
+        onUpdate: 'restrict',
+        onDelete: 'restrict' },
+        // id_panier:
+        // {
+        //   type: Sequelize.INTEGER,
+        //   allowNull: false,
+        //   references: {
+        //     model: 'paniers',
+        //     key: 'id'
+        //   },
+     
+        //   onUpdate: 'restrict',
+        //   onDelete: 'restrict' },
+      libelle: {
+        type: Sequelize.STRING
+      },
+      marque: {
         type: Sequelize.STRING
       },
       prix: {

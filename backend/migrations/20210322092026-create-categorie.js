@@ -8,13 +8,8 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      // id_sous_categorie:{
-      //   type: Sequelize.INTEGER,
-      //   foreignKey: true
-      // },
-      code_cat: {
-        type: Sequelize.INTEGER
-      },
+   
+     
       nom_cat: {
         type: Sequelize.STRING
       },

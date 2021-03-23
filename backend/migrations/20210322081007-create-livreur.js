@@ -9,28 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      // id_commande:
-      // {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: false, 
-      //   references: {
-      //     model: 'commandes',
-      //     key: 'id'
-      //   },
-      //   onUpdate: 'restrict',
-      //   onDelete: 'restrict'
-      // },
-        // id_doc_justificatifs:
-        // {
-        //   type: Sequelize.INTEGER,
-        //   allowNull: false, 
-        //   references: {
-        //     model: 'doc_justificatifs',
-        //     key: 'id_doc_justificatifs'
-        //   },
-        //   onUpdate: 'restrict',
-        //   onDelete: 'restrict'
-        // },
+    
         permis: {
           type: Sequelize.STRING,
           allowNull: false

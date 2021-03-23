@@ -8,33 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      // id_livreur:{
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: 'Livreurs',
-      //     key: 'id'
-      //   },
-      //   onUpdate: 'restrict',
-      //   onDelete: 'restrict'
-      // },
-      // id_admin:{
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: 'Admins',
-      //     key: 'id'
-      //   },
-      //   onUpdate: 'restrict',
-      //   onDelete: 'restrict'
-      // },
-      // id_client:{
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: 'Clients',
-      //     key: 'id'
-      //   },
-      //   onUpdate: 'restrict',
-      //   onDelete: 'restrict'
-      // },
+  
       prix: {
         type: Sequelize.INTEGER
       },

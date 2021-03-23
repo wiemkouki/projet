@@ -11,15 +11,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      // id_commande:
-      // {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: false,
-      //   foreignKey: true
-      //   },
-      // id_stock: { 
-      //   type: Sequelize.INTEGER 
-      // },
 
       nom_boutique: {
         type: Sequelize.STRING
@@ -44,6 +35,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
+     
    });
   },
   down: async (queryInterface, Sequelize) => {
