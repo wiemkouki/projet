@@ -19,17 +19,17 @@ module.exports = {
      
         onUpdate: 'restrict',
         onDelete: 'restrict' },
-        // id_panier:
-        // {
-        //   type: Sequelize.INTEGER,
-        //   allowNull: false,
-        //   references: {
-        //     model: 'paniers',
-        //     key: 'id'
-        //   },
+        id_panier:
+        {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+            model: 'paniers',
+            key: 'id'
+          },
      
-        //   onUpdate: 'restrict',
-        //   onDelete: 'restrict' },
+          onUpdate: 'restrict',
+          onDelete: 'restrict' },
       libelle: {
         type: Sequelize.STRING
       },
