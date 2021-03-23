@@ -11,6 +11,9 @@ module.exports = {
       id: {
         type: Sequelize.INTEGER
       },
+      id_client: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     taille: DataTypes.INTEGER,
     couleur: DataTypes.STRING,
     modele: DataTypes.STRING,
-    matiere: DataTypes.STRING
+    matiere: DataTypes.STRING,
+
   }, {
     sequelize,
     modelName: 'fiche_tech',
