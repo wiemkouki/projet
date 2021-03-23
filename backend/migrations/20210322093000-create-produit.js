@@ -8,12 +8,28 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_commande:{
-        type: Sequelize.INTEGER
-      },
-      id_panier:{
-        type: Sequelize.INTEGER
-      },
+      id_commande:
+      {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'commandes',
+          key: 'id'
+        },
+     
+        onUpdate: 'restrict',
+        onDelete: 'restrict' },
+        // id_panier:
+        // {
+        //   type: Sequelize.INTEGER,
+        //   allowNull: false,
+        //   references: {
+        //     model: 'paniers',
+        //     key: 'id'
+        //   },
+     
+        //   onUpdate: 'restrict',
+        //   onDelete: 'restrict' },
       libelle: {
         type: Sequelize.STRING
       },
@@ -34,7 +50,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+     });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('produits');

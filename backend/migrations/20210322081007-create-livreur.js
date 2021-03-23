@@ -1,3 +1,4 @@
+var DataTypes = require('sequelize/lib/data-types');
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -8,27 +9,46 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_doc_justificatifs:{
-        type: Sequelize.INTEGER
-      },
-      id_commande:{
-        type: Sequelize.INTEGER
-      },
-      permis: {
-        type: Sequelize.STRING
-      },
-      cin: {
-        type: Sequelize.INTEGER
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+      // id_commande:
+      // {
+      //   type: Sequelize.INTEGER,
+      //   allowNull: false, 
+      //   references: {
+      //     model: 'commandes',
+      //     key: 'id'
+      //   },
+      //   onUpdate: 'restrict',
+      //   onDelete: 'restrict'
+      // },
+        // id_doc_justificatifs:
+        // {
+        //   type: Sequelize.INTEGER,
+        //   allowNull: false, 
+        //   references: {
+        //     model: 'doc_justificatifs',
+        //     key: 'id_doc_justificatifs'
+        //   },
+        //   onUpdate: 'restrict',
+        //   onDelete: 'restrict'
+        // },
+        permis: {
+          type: Sequelize.STRING,
+          allowNull: false
+        },
+        cin: {
+          type: Sequelize.INTEGER, 
+          allowNull: false
+        },
+        createdAt: {
+          allowNull: false,
+          type: Sequelize.DATE
+        },
+        updatedAt: {
+          allowNull: false,
+          type: Sequelize.DATE
+        }
       }
-    });
+);
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Livreurs');

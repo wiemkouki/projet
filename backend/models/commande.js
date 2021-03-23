@@ -20,27 +20,27 @@ module.exports = (sequelize, DataTypes) => {
     id_livreur:
     {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: false, foreignKey: true,
       references: {
-        model: 'Livreur',
+        model: 'Livreurs',
         key: 'id'
       },
 
       id_admin:
       {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false, foreignKey: true,
         references: {
-          model: 'admin',
+          model: 'admins',
           key: 'id'
         },
 
         id_client:
         {
           type: DataTypes.INTEGER,
-          allowNull: false,
+          allowNull: false, foreignKey: true,
           references: {
-            model: 'client',
+            model: 'clients',
             key: 'id'
           },
 

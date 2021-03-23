@@ -23,21 +23,35 @@ module.exports = {
       adresse: {
         type: Sequelize.STRING
       },
-      id_panier: {
-        type: Sequelize.INTEGER(11)
-      },
-      id_commande: {
-        type: Sequelize.INTEGER(11)
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
-    });
+      // id_commande:
+      // {
+      //   type: Sequelize.INTEGER,
+      //   allowNull: false, foreignKey: true,
+      //   references: {
+      //     model: 'commandes',
+      //     key: 'id'
+      //   },
+     
+      // onUpdate: 'restrict',
+      // onDelete: 'restrict' },
+      //   id_panier:
+      //   {
+      //     type: Sequelize.INTEGER,
+      //     allowNull: false, foreignKey: true,
+      //     references: {
+      //       model: 'Paniers',
+      //       key: 'id'
+      //     },
+          createdAt: {
+            allowNull: false,
+            type: Sequelize.DATE
+          },
+          updatedAt: {
+            allowNull: false,
+            type: Sequelize.DATE
+          }
+        }
+      );
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Clients');

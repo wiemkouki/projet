@@ -16,17 +16,17 @@ module.exports = (sequelize, DataTypes) => {
     id_livreur:
     {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: false, foreignKey: true,
       references: {
-        model: 'Livreur',
+        model: 'Livreurs',
         key: 'id'
       },
       id_sup_admin:
       {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false, foreignKey: true,
         references: {
-          model: 'sup_admin',
+          model: 'sup_admins',
           key: 'id'
         },
       },

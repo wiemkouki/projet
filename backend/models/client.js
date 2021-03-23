@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   
     static associate(models) {
       Client.hasMany(models.Commande, { foreignKey: 'id_commande', as: 'commande' });
-      Client.belongsTo(models.Panier, { foreignKey: 'id_panier', as: 'panier' });
+      Client.hasOne(models.Panier, { foreignKey: 'id_panier', as: 'panier' });
     }
   };
   Client.init({
@@ -19,17 +19,17 @@ module.exports = (sequelize, DataTypes) => {
     id_commande:
     {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false, foreignKey: true,
         references: {
-            model: 'Commande',
+            model: 'Commandes',
             key: 'id'
         },  
     id_panier:
     {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false, foreignKey: true,
         references: {
-            model: 'Panier',
+            model: 'Paniers',
             key: 'id'
         },
        

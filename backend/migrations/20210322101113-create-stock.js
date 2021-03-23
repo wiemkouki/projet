@@ -8,9 +8,17 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_admin:{
-        type: Sequelize.INTEGER
-      },
+      id_admin:
+      {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'admins',
+          key: 'id'
+        },
+     
+        onUpdate: 'restrict',
+        onDelete: 'restrict' },
       description: {
         type: Sequelize.STRING
       },

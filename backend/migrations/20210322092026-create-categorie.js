@@ -8,12 +8,8 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_sous_categorie:{
-        type: Sequelize.INTEGER
-      },
-      code_cat: {
-        type: Sequelize.INTEGER
-      },
+   
+     
       nom_cat: {
         type: Sequelize.STRING
       },
@@ -28,7 +24,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+        });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Categories');

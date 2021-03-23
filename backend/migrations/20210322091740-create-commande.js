@@ -8,15 +8,37 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_livreur:{
-        type: Sequelize.INTEGER
-      },
-      id_admin:{
-        type: Sequelize.INTEGER
-      },
-      id_client:{
-        type: Sequelize.INTEGER
-      },
+    //   id_livreur:
+    // {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false, foreignKey: true,
+    //   references: {
+    //     model: 'livreurs',
+    //     key: ' id_livreur'
+    //   },
+
+    //   id_admin:
+    //   {
+    //     type: Sequelize.INTEGER,
+    //     allowNull: false, 
+    //     references: {
+    //       model: 'admins',
+    //       key: 'id_admin'
+    //     },
+
+    //     id_client:
+    //     {
+    //       type: Sequelize.INTEGER,
+    //       allowNull: false, 
+    //       references: {
+    //         model: 'clients',
+    //         key: 'id_client'
+    //       },
+     
+    //       onUpdate: 'restrict',
+    //       onDelete: 'restrict' },
+
+
       prix: {
         type: Sequelize.INTEGER
       },
@@ -40,7 +62,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+      });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Commandes');

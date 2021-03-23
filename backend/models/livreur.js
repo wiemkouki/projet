@@ -19,22 +19,22 @@ module.exports = (sequelize, DataTypes) => {
     id_commande:
     {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: false, foreignKey: true,
       references: {
-        model: 'commande',
+        model: 'commandes',
         key: 'id'
       },
       id_doc_justificatifs:
     {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: false, foreignKey: true,
       references: {
         model: 'doc_justificatifs',
         key: 'id'
       },
     }, 
     sequelize,
-    modelName: 'Livreur',
+    modelName: 'Livreurs',
   }});
   return Livreur;
 };

@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class panier extends Model {
     
     static associate(models) {
+      panier.belongsTo(models.client,{ foreignKey: 'id_client', as: 'client' });
       
     }
   };
@@ -16,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'client',
-        key: 'id'
+        model: 'clients',
+        key: 'id_client'
       },
 
 

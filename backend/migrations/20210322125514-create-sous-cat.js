@@ -8,12 +8,18 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_categorie:{
-        type: Sequelize.INTEGER
-      },
-      id: {
-        type: Sequelize.INTEGER
-      },
+      id_categorie:
+    {
+      type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'categories',
+            key: 'id'
+          },
+     
+          onUpdate: 'restrict',
+          onDelete: 'restrict' },
+    
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -22,7 +28,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+      });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Sous_cats');

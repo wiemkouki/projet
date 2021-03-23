@@ -14,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     id_sous_categorie:
     {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false, foreignKey: true,
         references: {
-            model: 'sous_cat',
+            model: 'sous_cats',
             key: 'id'
         },  
   }, 
