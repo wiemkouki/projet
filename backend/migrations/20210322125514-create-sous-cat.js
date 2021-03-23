@@ -8,28 +8,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-<<<<<<< HEAD
-      id_categorie:
-    {
-      type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'categories',
-            key: 'id'
-          },
-     
-          onUpdate: 'restrict',
-          onDelete: 'restrict' },
-    
-=======
-      id_categorie:{
-        type: Sequelize.INTEGER,
-        foreignKey: true
-      },
-      id: {
-        type: Sequelize.INTEGER
-      },
->>>>>>> fad83aabd2e226428c43716b3ddae6275bc2b0be
+      // id_categorie:{
+      //   type: Sequelize.INTEGER,
+      //   foreignKey: true
+      // },
+      // id: {
+      //   type: Sequelize.INTEGER
+      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -8,29 +8,15 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-<<<<<<< HEAD
-      id_admin:
-      {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'admins',
-          key: 'id'
-        },
-     
-        onUpdate: 'restrict',
-        onDelete: 'restrict' },
-=======
-      id_admin:{
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Admins',
-          key: 'id'
-        },
-        onUpdate: 'restrict',
-        onDelete: 'restrict'
-      },
->>>>>>> fad83aabd2e226428c43716b3ddae6275bc2b0be
+      // id_admin:{
+      //   type: Sequelize.INTEGER,
+      //   references: {
+      //     model: 'Admins',
+      //     key: 'id'
+      //   },
+      //   onUpdate: 'restrict',
+      //   onDelete: 'restrict'
+      // },
       description: {
         type: Sequelize.STRING
       },

@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) =>
   {
-    return queryInterface.addColumn('categories', 'sous_categories', {
+    return queryInterface.addColumn('categories', 'id_sous_categories', {
       type: Sequelize.INTEGER,
       allowNull: false,
       foreignKey:true,

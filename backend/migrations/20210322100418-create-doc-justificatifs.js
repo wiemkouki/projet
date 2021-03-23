@@ -8,41 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-<<<<<<< HEAD
-      id_livreur:
-    {
-      type: Sequelize.INTEGER,
-      allowNull: false, foreignKey: true,
-      references: {
-        model: 'Livreurs',
-        key: 'id'
-     
-    },
-     
-    onUpdate: 'restrict',
-    onDelete: 'restrict' },
-
-      id_sup_admin:
-      {
-        type: Sequelize.INTEGER,
-        allowNull: false, foreignKey: true,
-        references: {
-          model: 'sup_admins',
-          key: 'id'
-        },
-     
-        onUpdate: 'restrict',
-        onDelete: 'restrict' },
-=======
-      id_livreur:{
-        type: Sequelize.INTEGER,
-        foreignKey: true
-      },
-      id_sup_admin:{
-        type: Sequelize.INTEGER,
-        foreignKey: true
-      },
->>>>>>> fad83aabd2e226428c43716b3ddae6275bc2b0be
+      // id_livreur:{
+      //   type: Sequelize.INTEGER,
+      //   foreignKey: true
+      // },
+      // id_sup_admin:{
+      //   type: Sequelize.INTEGER,
+      //   foreignKey: true
+      // },
       libelle: {
         type: Sequelize.STRING
       },
