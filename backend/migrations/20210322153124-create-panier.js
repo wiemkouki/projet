@@ -12,7 +12,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       id_client: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        foreignKey: true
       },
       createdAt: {
         allowNull: false,
@@ -22,15 +23,8 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      id_client:
-      {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'client',
-          key: 'id'
-        },
-    }});
+      
+    });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('paniers');

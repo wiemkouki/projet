@@ -1,4 +1,7 @@
 'use strict';
+
+const sequelize = require("sequelize");
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Admins', {
@@ -8,9 +11,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_commande: { 
-        type: Sequelize.INTEGER 
-      },
+      id_commande:
+      {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        foreignKey: true
+        },
       id_stock: { 
         type: Sequelize.INTEGER 
       },
@@ -38,7 +44,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+   });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Admins');

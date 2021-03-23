@@ -9,13 +9,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       id_livreur:{
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        foreignKey: true,
       },
       id_admin:{
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        foreignKey: true,
       },
       id_client:{
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        foreignKey: true,
       },
       prix: {
         type: Sequelize.INTEGER

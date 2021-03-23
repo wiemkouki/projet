@@ -9,10 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       id_livreur:{
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        foreignKey: true
       },
       id_sup_admin:{
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        foreignKey: true
       },
       libelle: {
         type: Sequelize.STRING
