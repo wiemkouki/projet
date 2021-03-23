@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
+  
   note_produit.init({
     rating: DataTypes.STRING
   }, {

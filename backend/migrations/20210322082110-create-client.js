@@ -23,25 +23,7 @@ module.exports = {
       adresse: {
         type: Sequelize.STRING
       },
-      // id_commande:
-      // {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: false, foreignKey: true,
-      //   references: {
-      //     model: 'commandes',
-      //     key: 'id'
-      //   },
      
-      // onUpdate: 'restrict',
-      // onDelete: 'restrict' },
-      //   id_panier:
-      //   {
-      //     type: Sequelize.INTEGER,
-      //     allowNull: false, foreignKey: true,
-      //     references: {
-      //       model: 'Paniers',
-      //       key: 'id'
-      //     },
           createdAt: {
             allowNull: false,
             type: Sequelize.DATE

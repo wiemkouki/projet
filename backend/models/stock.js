@@ -9,17 +9,19 @@ module.exports = (sequelize, DataTypes) => {
       stock.belongsTo(models.Admin, { foreignKey: 'id_admin', as: 'admin' });
     }
   };
+ 
   stock.init({
     description: DataTypes.STRING,
     id_admin:
     {
       type: DataTypes.INTEGER,
-      allowNull: false,
+
       references: {
         model: 'admins',
         key: 'id'
       },
-
+      onUpdate: 'restrict',
+      onDelete: 'restrict'
     },
     sequelize,
     modelName: 'stock',
