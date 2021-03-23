@@ -10,38 +10,27 @@ module.exports = (sequelize, DataTypes) => {
       doc_justificatifs.belongsTo(models.sup_admin, { foreignKey: 'id_sup_admin', as: 'sup_admin' });
     }
   };
-  db.sync({ force: true });
   doc_justificatifs.init({
     libelle: DataTypes.STRING,
     url_doc: DataTypes.STRING,
     id_livreur:
     {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: false, foreignKey: true,
       references: {
-        model: 'Livreur',
+        model: 'Livreurs',
         key: 'id'
       },
       id_sup_admin:
       {
         type: DataTypes.INTEGER,
+        allowNull: false, foreignKey: true,
         references: {
-          model: 'sup_admin',
+          model: 'sup_admins',
           key: 'id'
         },
-        onUpdate: 'restrict',
-        onDelete: 'restrict'
       },
-      id_livreur:
-      {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'livreur',
-          key: 'id'
-        },
-        onUpdate: 'restrict',
-        onDelete: 'restrict'
-      },
+
       sequelize,
       modelName: 'doc_justificatifs',
     }

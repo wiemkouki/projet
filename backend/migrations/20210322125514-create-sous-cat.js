@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('stocks', {
+    await queryInterface.createTable('Sous_cats', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -9,31 +9,27 @@ module.exports = {
         type: Sequelize.INTEGER
       },
 <<<<<<< HEAD
-      id_admin:
-      {
-        type: Sequelize.INTEGER,
+      id_categorie:
+    {
+      type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'admins',
-          key: 'id'
-        },
+            model: 'categories',
+            key: 'id'
+          },
      
-        onUpdate: 'restrict',
-        onDelete: 'restrict' },
+          onUpdate: 'restrict',
+          onDelete: 'restrict' },
+    
 =======
-      id_admin:{
+      id_categorie:{
         type: Sequelize.INTEGER,
-        references: {
-          model: 'Admins',
-          key: 'id'
-        },
-        onUpdate: 'restrict',
-        onDelete: 'restrict'
+        foreignKey: true
+      },
+      id: {
+        type: Sequelize.INTEGER
       },
 >>>>>>> fad83aabd2e226428c43716b3ddae6275bc2b0be
-      description: {
-        type: Sequelize.STRING
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -42,9 +38,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+      });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('stocks');
+    await queryInterface.dropTable('Sous_cats');
   }
 };

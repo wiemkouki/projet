@@ -11,26 +11,36 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+<<<<<<< HEAD
+      // id_commande:
+      // {
+      //   type: Sequelize.INTEGER,
+      //   allowNull: false, foreignKey: true,
+      //   references: {
+      //     model: 'commandes',
+      //     key: 'id',},
+      //     onUpdate: 'restrict',
+      //     onDelete: 'restrict'
+      //   },
+      //   id_stock:
+      //   {type: Sequelize.INTEGER,
+      //     allowNull: false,
+      //     foreignKey: true,
+      //     references: {
+      //       model: 'Stock',
+      //       key: 'id'
+      //     },
+=======
       id_commande:
       {
         type: Sequelize.INTEGER,
-        references: {
-          model: 'Commandes',
-          key: 'id'
+        allowNull: false,
+        foreignKey: true
         },
-        onUpdate: 'restrict',
-        onDelete: 'restrict'
-      },
       id_stock: { 
-        type: Sequelize.INTEGER ,
-        references: {
-          model: 'stocks',
-          key: 'id'
-        },
-        onUpdate: 'restrict',
-        onDelete: 'restrict'
+        type: Sequelize.INTEGER 
       },
-      
+>>>>>>> fad83aabd2e226428c43716b3ddae6275bc2b0be
 
       nom_boutique: {
         type: Sequelize.STRING
@@ -55,6 +65,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
+<<<<<<< HEAD
+    //  
+=======
+>>>>>>> fad83aabd2e226428c43716b3ddae6275bc2b0be
    });
   },
   down: async (queryInterface, Sequelize) => {

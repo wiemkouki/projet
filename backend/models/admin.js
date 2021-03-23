@@ -8,40 +8,40 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Admin.belongsToMany(models.commande, { foreignKey: 'id_commande', as: 'commande' });
       Admin.hasMany(models.stock, { foreignKey: 'id_stock', as: 'stock' });
+      
 
     }
+  
   };
-
-  Admin.init({
-    nom_boutique: DataTypes.STRING,
-    tel: DataTypes.INTEGER,
-    email: DataTypes.STRING,
-    adresse: DataTypes.STRING,
-    logo: DataTypes.STRING,
-    id_commande:
-    {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'commandes',
-        key: 'id'
-      },
-      onUpdate: 'restrict',
-      onDelete: 'restrict'
-    },
-      id_stock:
+ 
+    Admin.init({
+      nom_boutique: DataTypes.STRING,
+      tel: DataTypes.INTEGER,
+      email: DataTypes.STRING,
+      adresse: DataTypes.STRING,
+      logo: DataTypes.STRING,
+      id_commande:
       {
         type: DataTypes.INTEGER,
+        allowNull: false, foreignKey: true,
         references: {
-          model: 'stocks',
+          model: 'Commande',
           key: 'id'
         },
-        onUpdate: 'restrict',
-        onDelete: 'restrict'
+        id_stock:
+        {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+          foreignKey: true,
+          references: {
+            model: 'Stocks',
+            key: 'id'
+          },
+        },
+        sequelize,
+        modelName: 'Admin',
       },
-      
-      sequelize,
-      modelName: 'Admin',
-    
-  });
-  return Admin;
+
+    });
+    return Admin;
 };

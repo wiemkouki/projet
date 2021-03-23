@@ -12,32 +12,29 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
 
+
   Livreur.init({
     permis: DataTypes.STRING,
     cin: DataTypes.INTEGER,
-    // id_commande:
-    // {
-    //   type: DataTypes.INTEGER,
-    //   references: {
-    //     model: 'commande',
-    //     key: 'id'
-    //   },
-    //   onUpdate: 'restrict',
-    //   onDelete: 'restrict'
-    // },
-
-    // id_doc_justificatifs:
-    // {
-    //   type: DataTypes.INTEGER,
-    //   references: {
-    //     model: 'doc_justificatifs',
-    //     key: 'id'
-    //   },
-    //   onUpdate: 'restrict',
-    //   onDelete: 'restrict'
-    // },
+    id_commande:
+    {
+      type: DataTypes.INTEGER,
+      allowNull: false, foreignKey: true,
+      references: {
+        model: 'commandes',
+        key: 'id'
+      },
+      id_doc_justificatifs:
+    {
+      type: DataTypes.INTEGER,
+      allowNull: false, foreignKey: true,
+      references: {
+        model: 'doc_justificatifs',
+        key: 'id'
+      },
+    }, 
     sequelize,
-    modelName: 'Livreur',
-  });
+    modelName: 'Livreurs',
+  }});
   return Livreur;
 };

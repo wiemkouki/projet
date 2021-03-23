@@ -10,11 +10,37 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-     Produit.hasOne(models.fiche_tech,{foreignKey: 'id_fiche_tech', as:'fiche_tech'});
-    
+      // define association here
     }
   };
-  
+<<<<<<< HEAD
+  produit.init({
+    libelle: DataTypes.STRING,
+    marque: DataTypes.STRING,
+    prix: DataTypes.DECIMAL,
+    image_pdt: DataTypes.STRING,
+    id_commande:
+    {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Commandes',
+        key: 'id'
+      },
+      id_panier:
+      {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Paniers',
+          key: 'id'
+        },
+
+      },
+      sequelize,
+      modelName: 'produit',
+    }
+=======
   Produit.init({
     nom_p: DataTypes.STRING,
     prix: DataTypes.INTEGER,
@@ -23,6 +49,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Produit',
+>>>>>>> fad83aabd2e226428c43716b3ddae6275bc2b0be
   });
   return Produit;
 };

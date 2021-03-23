@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
       Commande.belongsToMany(models.Admin, { foreignKey: 'id_admin', as: 'admin' });
     }
   };
-  
   Commande.init({
     prix: DataTypes.INTEGER,
     date: DataTypes.DATE,
@@ -21,37 +20,38 @@ module.exports = (sequelize, DataTypes) => {
     id_livreur:
     {
       type: DataTypes.INTEGER,
+      allowNull: false, foreignKey: true,
       references: {
-        model: 'livreur',
+        model: 'Livreurs',
         key: 'id'
       },
-      onUpdate: 'restrict',
-      onDelete: 'restrict'
-    },
 
       id_admin:
       {
         type: DataTypes.INTEGER,
+        allowNull: false, foreignKey: true,
         references: {
-          model: 'admin',
+          model: 'admins',
           key: 'id'
         },
-        onUpdate: 'restrict',
-        onDelete: 'restrict'
-      },
+
         id_client:
         {
           type: DataTypes.INTEGER,
+          allowNull: false, foreignKey: true,
           references: {
-            model: 'client',
+            model: 'clients',
             key: 'id'
           },
-          onUpdate: 'restrict',
-          onDelete: 'restrict'
+
+
+
+
         },
         sequelize,
         modelName: 'Commande',
-  
+      }
+    }
   });
   return Commande;
 };

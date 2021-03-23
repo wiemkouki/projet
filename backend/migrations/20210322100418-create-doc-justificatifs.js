@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('stocks', {
+    await queryInterface.createTable('doc_justificatifs', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -9,29 +9,44 @@ module.exports = {
         type: Sequelize.INTEGER
       },
 <<<<<<< HEAD
-      id_admin:
+      id_livreur:
+    {
+      type: Sequelize.INTEGER,
+      allowNull: false, foreignKey: true,
+      references: {
+        model: 'Livreurs',
+        key: 'id'
+     
+    },
+     
+    onUpdate: 'restrict',
+    onDelete: 'restrict' },
+
+      id_sup_admin:
       {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: false, foreignKey: true,
         references: {
-          model: 'admins',
+          model: 'sup_admins',
           key: 'id'
         },
      
         onUpdate: 'restrict',
         onDelete: 'restrict' },
 =======
-      id_admin:{
+      id_livreur:{
         type: Sequelize.INTEGER,
-        references: {
-          model: 'Admins',
-          key: 'id'
-        },
-        onUpdate: 'restrict',
-        onDelete: 'restrict'
+        foreignKey: true
+      },
+      id_sup_admin:{
+        type: Sequelize.INTEGER,
+        foreignKey: true
       },
 >>>>>>> fad83aabd2e226428c43716b3ddae6275bc2b0be
-      description: {
+      libelle: {
+        type: Sequelize.STRING
+      },
+      url_doc: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -42,9 +57,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+     } );
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('stocks');
+    await queryInterface.dropTable('doc_justificatifs');
   }
 };

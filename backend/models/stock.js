@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
 
       references: {
-        model: 'admin',
+        model: 'admins',
         key: 'id'
       },
       onUpdate: 'restrict',
