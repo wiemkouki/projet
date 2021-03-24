@@ -30,6 +30,7 @@ module.exports = {
      
           onUpdate: 'restrict',
           onDelete: 'restrict' },
+      
       libelle: {
         type: Sequelize.STRING
       },
