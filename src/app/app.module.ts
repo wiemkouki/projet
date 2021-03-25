@@ -19,7 +19,7 @@ import { Routes , RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ProfilComponent } from './profil/profil.component';
-
+import { AuthModule } from '@auth0/auth0-angular';
 
 const Routes: Routes= [
 
@@ -61,7 +61,12 @@ const Routes: Routes= [
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forRoot(Routes),
-    FormsModule
+    FormsModule,
+    AuthModule.forRoot({
+      domain: 'dev-imkezwu5.us.auth0.com',
+      clientId: '4xchh3Sab63Jcr0HsjwZJOFIvuxI2FyZ'
+    }),
+
 
   ],
   providers: [],
