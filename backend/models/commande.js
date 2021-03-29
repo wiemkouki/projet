@@ -18,13 +18,12 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.STRING,
     adresse_livraison: DataTypes.STRING,
     id_livreur:
-    {
-      type: DataTypes.INTEGER,
+    { type: DataTypes.INTEGER,
       allowNull: false, foreignKey: true,
       references: {
         model: 'Livreurs',
         key: 'id'
-      },
+      },},
 
       id_admin:
       {
@@ -32,8 +31,8 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false, foreignKey: true,
         references: {
           model: 'admins',
-          key: 'id'
-        },
+          key: 'id'}
+      },
 
         id_client:
         {
@@ -41,17 +40,13 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false, foreignKey: true,
           references: {
             model: 'clients',
-            key: 'id'
-          },
+            key: 'id'},
+        }},
 
-
-
-
-        },
+        {
         sequelize,
-        modelName: 'Commande',
-      }
-    }
-  });
+        modelName: 'Commande', 
+    
+         });
   return Commande;
 };

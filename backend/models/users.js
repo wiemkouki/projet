@@ -1,3 +1,4 @@
+
 'use strict';
 
 module.exports = (sequelize, DataTypes) =>
@@ -8,16 +9,19 @@ module.exports = (sequelize, DataTypes) =>
                 {
                     type: DataTypes.STRING,
                     allowNull: false,
+                    required:true
                 },
             password:
                 {
                     type: DataTypes.STRING,
                     allowNull: false,
+                    required:true
                 },
             role:
                 {
                     type: DataTypes.STRING,
                     allowNull: false,
+                    required:true
                 },
             // id_commercant:
             //     {

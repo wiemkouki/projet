@@ -19,8 +19,8 @@ module.exports = (sequelize, DataTypes) => {
             model: 'sous_cats',
             key: 'id'
         },  
-  }, 
-    sequelize,
+  }}, 
+    { sequelize,
     modelName: 'categorie',
   });
   return categorie;

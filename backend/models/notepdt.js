@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
 
       notePdt.belongsTo(models.produit, { foreignKey: 'id_produit', as: 'produit' });
-      
+
     }
   };
 
@@ -24,17 +24,12 @@ module.exports = (sequelize, DataTypes) => {
         model: 'produits',
         key: 'id'
       },
-    //   id_doc_justificatifs:
-    // {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false, foreignKey: true,
-    //   references: {
-    //     model: 'doc_justificatifs',
-    //     key: 'id'
-    //   },
-    }, 
-    sequelize,
-    modelName: 'notePdt',
-  });
+  }},
+
+      {
+      sequelize,
+      modelName: 'notePdt',
+    });
+
   return notePdt;
 };

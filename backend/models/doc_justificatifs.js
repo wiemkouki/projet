@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       references: {
         model: 'Livreurs',
         key: 'id'
-      },
+      }, },
       id_sup_admin:
       {
         type: DataTypes.INTEGER,
@@ -29,11 +29,11 @@ module.exports = (sequelize, DataTypes) => {
           model: 'sup_admins',
           key: 'id'
         },
-      },
-
+  }},
+    {
       sequelize,
       modelName: 'doc_justificatifs',
-    }
+    
   });
   return doc_justificatifs;
 };

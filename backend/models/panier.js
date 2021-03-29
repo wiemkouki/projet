@@ -4,14 +4,15 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class panier extends Model {
-    
+
     static associate(models) {
-      panier.belongsTo(models.client,{ foreignKey: 'id_client', as: 'client' });
-      
+      panier.belongsTo(models.client, { foreignKey: 'id_client', as: 'client' });
+
     }
   };
   panier.init({
     id: DataTypes.INTEGER,
+
     id_client:
     {
       type: DataTypes.INTEGER,
@@ -20,9 +21,11 @@ module.exports = (sequelize, DataTypes) => {
         model: 'clients',
         key: 'id_client'
       },
-  }, 
-    sequelize,
-    modelName: 'panier',
+   } }, 
+
+    {
+      sequelize,
+      modelName: 'panier',
   });
   return panier;
 };

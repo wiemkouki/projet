@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
           model: 'Commande',
           key: 'id'
         },
+      },
         id_stock:
         {
           type: DataTypes.INTEGER,
@@ -37,11 +38,12 @@ module.exports = (sequelize, DataTypes) => {
             model: 'Stocks',
             key: 'id'
           },
-        },
-        sequelize,
-        modelName: 'Admin',
-      },
+        }},
+        {
+          sequelize: sequelize,
+          modelName: 'Admin',
+        }
 
-    });
+    );
     return Admin;
 };

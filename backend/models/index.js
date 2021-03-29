@@ -25,9 +25,9 @@ fs
     db[model.name] = model;
   });
 
-  const db= {
-    user: sequelize.import('./user'),
-  };
+  // const db= {
+  //   user: sequelize.import('./user'),
+  // };
 
 
 Object.keys(db).forEach(modelName => {
@@ -41,4 +41,4 @@ db.Sequelize = Sequelize;
 
 module.exports = db;
 
-db.sync({ force: true });
+// db.sync({ force: true });
