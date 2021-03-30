@@ -9,8 +9,13 @@ module.exports = (sequelize, DataTypes) => {
       stock.belongsTo(models.Admin, { foreignKey: 'id_admin', as: 'admin' });
     }
   };
- 
   stock.init({
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+      },
     description: DataTypes.STRING,
     id_admin:
     {
@@ -22,7 +27,8 @@ module.exports = (sequelize, DataTypes) => {
       },
       onUpdate: 'restrict',
       onDelete: 'restrict'
-    },
+    }},
+    {
     sequelize,
     modelName: 'stock',
   });

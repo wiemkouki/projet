@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const sequelize = require('sequelize');
+const http = require('http');
 
 const app = express();
 
@@ -28,9 +29,7 @@ seq.authenticate()
 
 var usersRouter = require('./routes/users');
 
-
-
-// app.use('/users', usersRouter);
+app.use('/users', usersRouter);
 // app.use('/client', clientRouter);
 // app.use('/admin', adminRouter);
 // app.use('/categorie', categorieRouter);
@@ -44,10 +43,8 @@ var usersRouter = require('./routes/users');
 // app.use('/stock', stockRouter);
 // app.use('/sup_admin', sup_adminRouter);
 
+app.set('port', process.env.PORT || 3000);
 
+const server = http.createServer(app);
 
-
-
-
-
-module.exports = app;
+server.listen(process.env.PORT || 3000);

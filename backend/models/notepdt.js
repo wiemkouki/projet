@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
 
-      notePdt.belongsTo(models.produit, { foreignKey: 'id_produit', as: 'produit' });
+      notePdt.belongsTo(models.Produit, { foreignKey: 'id_produit', as: 'produit' });
 
     }
   };

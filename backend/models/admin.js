@@ -6,9 +6,9 @@ module.exports = (sequelize, DataTypes) => {
   class Admin extends Model {
 
     static associate(models) {
-      Admin.belongsToMany(models.commande, { foreignKey: 'id_commande', as: 'commande' });
+      //Admin.belongsToMany(models.Commande, { foreignKey: 'id_commande', as: 'commande' });
       Admin.hasMany(models.stock, { foreignKey: 'id_stock', as: 'stock' });
-      
+      // User.belongsToMany(Project, { through: UserProject });
 
     }
   

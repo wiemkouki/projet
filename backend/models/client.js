@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   
     static associate(models) {
       Client.hasMany(models.Commande, { foreignKey: 'id_commande', as: 'commande' });
-      Client.hasOne(models.Panier, { foreignKey: 'id_panier', as: 'panier' });
+      Client.hasOne(models.Paniers, { foreignKey: 'id_panier', as: 'panier' });
     }
   };
   Client.init({
@@ -33,7 +33,8 @@ module.exports = (sequelize, DataTypes) => {
             key: 'id'
         },
        
-     }}, 
+     }
+  }, 
   {
     sequelize,
     modelName: 'Client',

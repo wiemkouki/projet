@@ -20,6 +20,7 @@ import {FormsModule} from "@angular/forms";
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ProfilComponent } from './profil/profil.component';
 import { AuthModule } from '@auth0/auth0-angular';
+import { UserServiceService } from './user-service.service';
 
 const Routes: Routes= [
 
@@ -69,7 +70,7 @@ const Routes: Routes= [
 
 
   ],
-  providers: [],
+  providers: [UserServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,16 +3,21 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class panier extends Model {
+  class Panier extends Model {
 
     static associate(models) {
-      panier.belongsTo(models.client, { foreignKey: 'id_client', as: 'client' });
+      Panier.belongsTo(models.Client, { foreignKey: 'id_client', as: 'client' });
 
     }
   };
-  panier.init({
-    id: DataTypes.INTEGER,
-
+  Panier.init({
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+  
+    },
     id_client:
     {
       type: DataTypes.INTEGER,
@@ -20,12 +25,11 @@ module.exports = (sequelize, DataTypes) => {
       references: {
         model: 'clients',
         key: 'id_client'
-      },
-   } }, 
-
+      },},
+  },
     {
       sequelize,
-      modelName: 'panier',
-  });
-  return panier;
+      modelName: 'Paniers',
+    });
+  return Panier;
 };

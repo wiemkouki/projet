@@ -10,10 +10,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Sous_cat.init({
-    id: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'Sous_cat',
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+    },
+     
   id_categorie:
     {
         type: DataTypes.INTEGER,
@@ -21,8 +24,12 @@ module.exports = (sequelize, DataTypes) => {
         references: {
             model: 'categories',
             key: 'id'
-        },}
+        },},},
 
-  });
+      {
+          sequelize,
+          modelName: 'Sous_cat',},
+
+   );
   return Sous_cat;
 };

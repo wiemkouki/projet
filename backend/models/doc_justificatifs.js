@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   class doc_justificatifs extends Model {
 
     static associate(models) {
-      doc_justificatifs.belongsTo(models.Livreur, { foreignKey: 'id_livreur', as: 'livreur' });
-      doc_justificatifs.belongsTo(models.sup_admin, { foreignKey: 'id_sup_admin', as: 'sup_admin' });
+      doc_justificatifs.belongsTo(models.Livreurs, { foreignKey: 'id_livreur', as: 'livreur' });
+      doc_justificatifs.belongsTo(models.Sup_admin, { foreignKey: 'id_sup_admin', as: 'sup_admin' });
     }
   };
   doc_justificatifs.init({

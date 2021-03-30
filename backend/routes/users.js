@@ -12,6 +12,11 @@ const prepareResponse = (response, status, body, type) =>
     response.status(status).send(body);
 };
 
+router.get('/', async function(req, res, next) 
+{
+  prepareResponse(res, 200, { success: true }, 'application/json');
+});
+
 /* GET users listing. */
 router.get('/:id', async function(req, res, next) 
 {

@@ -6,9 +6,9 @@ module.exports = (sequelize, DataTypes) => {
   class Commande extends Model {
 
     static associate(models) {
-      Commande.belongsTo(models.Livreur, { foreignKey: 'id_livreur', as: 'livreur' });
+      Commande.belongsTo(models.Livreurs, { foreignKey: 'id_livreur', as: 'livreur' });
       Commande.belongsTo(models.Client, { foreignKey: 'id_client', as: 'client' });
-      Commande.belongsToMany(models.Admin, { foreignKey: 'id_admin', as: 'admin' });
+      //Commande.belongsToMany(models.Admin, { foreignKey: 'id_admin', as: 'admin' });
     }
   };
   Commande.init({
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       references: {
         model: 'Livreurs',
         key: 'id'
-      },},
+      }},
 
       id_admin:
       {
