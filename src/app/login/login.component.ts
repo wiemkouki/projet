@@ -8,7 +8,8 @@ import { UserServiceService } from '../user-service.service';
 })
 export class LoginComponent implements OnInit 
 {
-  public products: any=[];
+  // public products: any=[];
+  
 
   constructor(private userService: UserServiceService) 
   {
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit
   ngOnInit()
   {
     this.userService.showSuccess().subscribe(function(data) {
-      this.products.push(data);
+      // this.products.push(data);
     });
   }
 
