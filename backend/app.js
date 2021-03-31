@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const sequelize = require('sequelize');
 const http = require('http');
 
+require('dotenv').config();
+
 const app = express();
 
 app.use(express.json());

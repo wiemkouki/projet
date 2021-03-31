@@ -19,7 +19,6 @@ import { Routes , RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ProfilComponent } from './profil/profil.component';
-import { AuthModule } from '@auth0/auth0-angular';
 import { UserServiceService } from './user-service.service';
 
 const Routes: Routes= [
@@ -31,8 +30,6 @@ const Routes: Routes= [
   {path:'profil',component: ProfilComponent}
   ]
   
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,17 +53,14 @@ const Routes: Routes= [
     MatListModule,
     MatButtonModule,
     WavesModule,
-     ButtonsModule, 
-     IconsModule, 
+    ButtonsModule, 
+    IconsModule, 
     MatIconModule,
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forRoot(Routes),
     FormsModule,
-    AuthModule.forRoot({
-      domain: 'dev-imkezwu5.us.auth0.com',
-      clientId: '4xchh3Sab63Jcr0HsjwZJOFIvuxI2FyZ'
-    }),
+    
 
 
   ],

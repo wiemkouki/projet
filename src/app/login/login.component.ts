@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../user-service.service';
+import  { Observable } from 'rxjs';
+import { any } from 'sequelize/types/lib/operators';
 
 @Component({
   selector: 'app-login',
@@ -8,13 +10,11 @@ import { UserServiceService } from '../user-service.service';
 })
 export class LoginComponent implements OnInit 
 {
-  // public products: any=[];
+  public products: any=[];
   
 
   constructor(private userService: UserServiceService) 
-  {
-    
-  }
+  {}
 
   ngOnInit()
   {
@@ -22,5 +22,14 @@ export class LoginComponent implements OnInit
       // this.products.push(data);
     });
   }
+  
+  SignIn(){
+    this.userService.SignIn(data).subscribe(function(data) {
+      console.log(data);
+    }); }
+  }
 
+function data(data: any) {
+  throw new Error('Function not implemented.');
 }
+
