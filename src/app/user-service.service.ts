@@ -28,6 +28,16 @@ export class UserServiceService
           catchError(this.error)
         )
     }
+
+      // Sign-up
+  signUp(data): Observable<any> {
+   let API_URL = this.api_prefix + "/users/signup";
+   return this.http.post(API_URL, data)
+      .pipe(
+        catchError(this.error)
+      )
+  }
+
     
  // Handle Errors 
  error(error: HttpErrorResponse) {

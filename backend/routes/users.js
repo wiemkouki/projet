@@ -9,20 +9,17 @@ const storeToken = require('./auth/storeToken');
 
 const saltRounds = 10;
 
-const prepareResponse = (response, status, body, type) =>
-{
-    //response.set('Content-Type', type);
-    response.status(status).send(body);
+const prepareResponse = (response, status, body, type) => {
+  //response.set('Content-Type', type);
+  response.status(status).send(body);
 };
 
-router.get('/', async function(req, res, next) 
-{
+router.get('/', async function (req, res, next) {
   prepareResponse(res, 200, { success: true }, 'application/json');
 });
 
 /* GET users listing. */
-router.get('/:id', async function(req, res, next) 
-{
+router.get('/:id', async function (req, res, next) {
   let id = req.params.id;
 
   const user = await User.findByPk(id);
@@ -33,132 +30,173 @@ router.get('/:id', async function(req, res, next)
 
 
 
-router.post('/login', async function(req, res, next) 
-{
+router.post('/login', async function (req, res, next) {
   let { username, password } = req.body;
 
   let user = await User.findOne({ where: { username: username } });
 
-  bcrypt.compare(password, user.password, function(err, result) {
-    if (result)
-    {
-      prepareResponse(res, 200, {success: true, user }, 'application/json');
+  bcrypt.compare(password, user.password, function (err, result) {
+    if (result) {
+      prepareResponse(res, 200, { success: true, user }, 'application/json');
     }
-    else 
-    {
+    else {
       prepareResponse(res, 500, { success: false }, 'application/json');
     }
   });
-
-//SIGNUP JWT
-router.post('/signup', function(req, res, next) 
-{
-  let { username, password, role } = req.body;
-
-  bcrypt.genSalt(saltRounds, function(err, salt) 
-  {
-    bcrypt.hash(password, salt, async function(err, hash) 
-    {
-        let new_user = await User.create({ username, 
-          password: hash, 
-          role, 
-          createdAt: new Date(),
-          updatedAt: new Date() });
-
-        prepareResponse(res, 200, { success: true }, 'application/json');
-    });
-  });
-});
 
 });
 
 
 //SIGN IN API WITH JWT USING COOKIES 
-router.post('/signin', function(req, res, next)
-{
-    const { username, password } = req.body;
+router.post('/signin', function (req, res, next) {
+  const { username, password } = req.body;
 
-    User.findOne({ where: {username: username} }).then(user =>
-    {
-        if (user)
-        {
-            bcrypt.compare(password, user.password).then(result =>
-            {
-                if (result)
-                {
-                    jwt.sign({id: user.username, createdAt: user.createdAt}, process.env.SECRET,
-                        {expiresIn: parseInt(process.env.EXPIRATION)},
+  User.findOne({ where: { username: username } }).then(user => {
+    if (user) {
+      bcrypt.compare(password, user.password).then(result => {
+        if (result) {
+          jwt.sign({ id: user.username, createdAt: user.createdAt }, process.env.SECRET,
+            { expiresIn: parseInt(process.env.EXPIRATION) },
 
-                        async function (error, token)
-                        {
-                            if (error)
-                            {
-                                const response = {
-                                    success: false,
-                                    message: "Some internal server error has occured while attempting to proceed " +
-                                        "with your request, please try again."
-                                };
+            async function (error, token) {
+              if (error) {
+                const response = {
+                  success: false,
+                  message: "Some internal server error has occured while attempting to proceed " +
+                    "with your request, please try again."
+                };
 
-                                prepareResponse(res, 500, response, 'application/json');
-                            }
-                            else 
-                            {
-                              await storeToken(res, token);
+                prepareResponse(res, 500, response, 'application/json');
+              }
+              else {
+                await storeToken(res, token);
 
-                            const current = {
-                                id: user.id,
-                                username: user.username,
-                                lastSignIn: user.lastSignIn,
-                               role: user.role
-                            };
+                const current = {
+                  id: user.id,
+                  username: user.username,
+                  lastSignIn: user.lastSignIn,
+                  role: user.role
+                };
 
-                            const response = {
-                                success: true,
-                                message: "You have signed in successfully.",
-                                user: current,
-                            };
+                const response = {
+                  success: true,
+                  message: "You have signed in successfully.",
+                  user: current,
+                };
 
-                            user.update({ lastSignIn: new Date()}, {})
-                                .then(() =>
-                                {
-                                    prepareResponse(res, 200, response, 'application/json');
-                                })
-                                .catch(() =>
-                                {
-                                    const response = {
-                                        success: false,
-                                        message:
-                                            "Some internal server error has occured while attempting to proceed "
-                                            + "with your request, please try again."
-                                    };
-
-                                    prepareResponse(res, 500, response, 'application/json');
-                                });
-                            }
-                        })
-                }
-                else
-                {
+                user.update({ lastSignIn: new Date() }, {})
+                  .then(() => {
+                    prepareResponse(res, 200, response, 'application/json');
+                  })
+                  .catch(() => {
                     const response = {
-                        success: false,
-                        message: "The password provided is incorrect, please try again with another password."
+                      success: false,
+                      message:
+                        "Some internal server error has occured while attempting to proceed "
+                        + "with your request, please try again."
                     };
 
                     prepareResponse(res, 500, response, 'application/json');
-                }
-            });
+                  });
+              }
+            })
         }
-        else
-        {
-            const response = {
-                success: false,
-                message: "No User was found with the provided username, please try again with another username."
-            };
+        else {
+          const response = {
+            success: false,
+            message: "The password provided is incorrect, please try again with another password."
+          };
 
-            prepareResponse(res, 500, response, 'application/json');
+          prepareResponse(res, 500, response, 'application/json');
         }
-    })
+      });
+    }
+    else {
+      const response = {
+        success: false,
+        message: "No User was found with the provided username, please try again with another username."
+      };
+
+      prepareResponse(res, 500, response, 'application/json');
+    }
+  })
 });
+
+//SIGNUP 
+router.post('/signup', function (req, res, next) {
+
+  let { username, password, role, email } = req.body;
+
+
+  bcrypt.genSalt(saltRounds, function (err, salt) {
+    bcrypt.hash(password, salt, async function (err, hash) {
+      let new_user = await User.create({
+        username,
+        password: hash,
+        role,
+        email,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+
+    //   jwt.sign({ email: req.body.email }, process.env.SECRET, { expiresIn: parseInt(process.env.EXPIRATION) },
+    //     function (err, token) {
+    //       if (err) {
+    //         console.log('Error occurred while generating token');
+    //         console.log(err);
+    //         return false;
+    //       }
+    //       else {
+    //         if (token != false) 
+    //         {
+    //           const response = {
+    //             success: true,
+    //             token,
+    //             message: "User created successfully."
+    //           };
+    //           prepareResponse(res, 200, response, 'application/json');
+    //         }
+    //       }
+    //     });
+
+    try 
+    {
+      const token = await jwt.sign({ email: req.body.email }, process.env.SECRET, 
+        { expiresIn: parseInt(process.env.EXPIRATION) });
+
+        const response = {
+                     success: true,
+                     token,
+                     message: "User created successfully."
+                   };
+
+        prepareResponse(res, 200, response, 'application/json');
+    }
+    catch(error)
+    {
+      prepareResponse(res, 500, { success: false }, 'application/json');
+    }
+    });
+  });
+});
+
+
+//LOGOUT
+router.get('/logout', (req, res, next) => {
+  try {
+    res.clearCookie("jwt");
+    console.log("logout successfully");
+
+    prepareResponse(res, 200, response, 'application/json');
+
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+//
+
+
 
 
 module.exports = router;
