@@ -1,0 +1,36 @@
+body {
+    padding: 10px;
+    max-width: 100%;
+}
+
+table {
+    margin: 0 auto;
+}
+
+.cell, p {
+    text-align: center;
+}
+
+p {
+    margin: 0 0 10px 0;
+}
+/* 
+ul {
+    margin-top: 0;
+} */
+
+.image {
+    width: 200px;
+    height: 100px;
+    margin: 0 auto;
+    display: block;
+}
+
+/* .wrapper {
+    margin: 0 auto;
+    display: table;
+} */
+/* 
+.text {
+    margin-top: 10px;
+} */

