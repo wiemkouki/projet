@@ -4,7 +4,7 @@ const { User } = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const storeToken = require('./auth/storeToken');
-const emailCheck = require('email-check');
+
 
 
 const saltRounds = 10;
@@ -161,7 +161,7 @@ router.post('/signup', function (req, res, next) {
       //       prepareResponse(res, 500, response, 'application/json');
       //   }
       //    else {
-            let new_user =  User.create({
+            let new_user = User.create({
               username,
               password: hash,
               role,

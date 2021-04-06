@@ -2,10 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const sequelize = require('sequelize');
 const http = require('http');
+var app = express();
 
 require('dotenv').config();
 
-const app = express();
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -45,7 +46,74 @@ app.use('/users', usersRouter);
 // app.use('/stock', stockRouter);
 // app.use('/sup_admin', sup_adminRouter);
 
-app.set('port', process.env.PORT || 3000);
+
+
+
+//////////////
+// const nodemailer = require('nodemailer');
+// const hbs = require('express-handlebars');
+// const log = console.log;
+
+// // Step 1
+// let transporter = nodemailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//         user: process.env.EMAIL,
+//         pass: process.env.PASSWORD  
+//     },
+
+// tls: {
+//   rejectUnauthorized: false
+// }
+// });
+
+// // Step 2
+// transporter.use('compile', hbs({
+//     viewEngine: 'express-handlebars',
+//     viewPath: './views/'
+// }));
+
+
+// // Step 3
+// let mailOptions = {
+//     from: 'rahma.kalai0@gmail.com', // TODO: email sender
+//     to: 'rahma.elkalai01@gmail.com', // TODO: email receiver
+//     subject: 'Email confirmation to login',
+//     text: 'Wooohooo it works!!',
+//     template: 'mail',
+//     context: {
+//         name: 'Daijara'
+//     } // send extra values to template
+// };
+
+// // Step 4
+// transporter.sendMail(mailOptions, (err, data) => {
+//     if (err) {
+//         return log('Error occurs' , err);
+//     }
+//     return log('Email sent!!!');
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//app.set('port', process.env.PORT || 3000);
 
 const server = http.createServer(app);
 
