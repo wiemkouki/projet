@@ -7,7 +7,7 @@ table {
     margin: 0 auto;
 }
 
-.cell, p {
+.cell, p, h3 {
     text-align: center;
 }
 

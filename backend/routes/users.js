@@ -246,22 +246,25 @@ router.post('/signup', function (req, res, next)
         { expiresIn: parseInt(process.env.EXPIRATION) });
 
         const emailSender = prepareEmailSending();
-   emailSender.send(
+        emailSender.send(
         {
             template: 'email',
             message: {
-              to: 'rahma.elkalai01@gmail.com',
+              to: 'rahma.kalai0@gmail.com',
                 attachments: [{
                     path: `${__dirname}/../emails/email/images/daijara.png`,
                     cid: 'logo'
-                }]
-            },
+                }],
+              //   html: `
+              //  <p>${process.env.CLIENT_URL}/signup/${token} </p> `
+              },
             locals: {
 
               username: username,
               password: password,
               role:role, 
-              email: email
+              email: email,
+              token 
 
             }
 
