@@ -4,7 +4,7 @@ const { User } = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const storeToken = require('./auth/storeToken');
-
+const emailCheck = require('email-check');
 
 
 const saltRounds = 10;
@@ -121,82 +121,93 @@ router.post('/signin', function (req, res, next) {
     }
   })
 });
+    // emailCheck(email).then(() => {
+      //   User.create(req.body).then(() => {
+      //     res.send(req.body);
+      //   })
+      //     .catch((error) =>
+      //       res.json({ serverErrorDublicateEmail: "The email address is already subscribed. Please try to use another one or simply Log in" }));
+      // })
+      // .catch((error) => {
+      //   res.json({ serverErrorEmailExistence: "The email address doesn't exist. Please try the valid one" });
+      // });
+
 
 //SIGNUP 
 router.post('/signup', function (req, res, next) {
-
   let { username, password, role, email } = req.body;
-
-
   bcrypt.genSalt(saltRounds, function (err, salt) {
     bcrypt.hash(password, salt, async function (err, hash) {
-      let new_user = await User.create({
-        username,
-        password: hash,
-        role,
-        email,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      });
+      User.findOne({
+        where: {
+          email: req.body.email
+        }
+      }).then(user => {
+        if (user) {
+          res.status(400).send({
+            message: "Failed! Email is already in use!"
+          });
+        }
+        else{
+          
+      // User.findOne({ where: { email: email } }).then(user => {
+      //   if (user) {
+          
+      //       const response = {
+      //         success: false,
+      //         message: "email exits ! "
+      //       }
 
-    //   jwt.sign({ email: req.body.email }, process.env.SECRET, { expiresIn: parseInt(process.env.EXPIRATION) },
-    //     function (err, token) {
-    //       if (err) {
-    //         console.log('Error occurred while generating token');
-    //         console.log(err);
-    //         return false;
-    //       }
-    //       else {
-    //         if (token != false) 
-    //         {
-    //           const response = {
-    //             success: true,
-    //             token,
-    //             message: "User created successfully."
-    //           };
-    //           prepareResponse(res, 200, response, 'application/json');
-    //         }
-    //       }
-    //     });
+      //       prepareResponse(res, 500, response, 'application/json');
+      //   }
+      //    else {
+            let new_user =  User.create({
+              username,
+              password: hash,
+              role,
+              email,
+              createdAt: new Date(),
+              updatedAt: new Date(),
+            });
+          
+            try {
+              const token =  jwt.sign({ email: req.body.email }, process.env.SECRET,
+                { expiresIn: parseInt(process.env.EXPIRATION) });
 
-    try 
-    {
-      const token = await jwt.sign({ email: req.body.email }, process.env.SECRET, 
-        { expiresIn: parseInt(process.env.EXPIRATION) });
+              const response = {
+                success: true,
+                token,
+                message: "User created successfully."
+              };
 
-        const response = {
-                     success: true,
-                     token,
-                     message: "User created successfully."
-                   };
-
-        prepareResponse(res, 200, response, 'application/json');
-    }
-    catch(error)
-    {
-      prepareResponse(res, 500, { success: false }, 'application/json');
-    }
+              prepareResponse(res, 200, response, 'application/json');
+            }
+            catch (error) {
+              prepareResponse(res, 500, { success: false }, 'application/json');
+            };
+        
+      }
+    
+     });
     });
-  });
-});
+   });
+ });
+module.exports = router;
+
 
 
 //LOGOUT
-router.get('/logout', (req, res, next) => {
-  try {
-    res.clearCookie("jwt");
-    console.log("logout successfully");
+// router.get('/logout', (req, res, next) => {
+//       try {
+//         res.clearCookie("jwt");
+//         console.log("logout successfully");
 
-    prepareResponse(res, 200, response, 'application/json');
+//         prepareResponse(res, 200, response, 'application/json');
 
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
-
-//
+//       } catch (error) {
+//         res.status(500).send(error);
+//       }
+//     });
 
 
-
-
-module.exports = router;
+  
