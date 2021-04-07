@@ -67,31 +67,6 @@ const prepareEmailSending = () =>
   
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //////////
 router.get('/', async function (req, res, next) {
   prepareResponse(res, 200, { success: true }, 'application/json');
@@ -288,6 +263,80 @@ router.post('/signup', function (req, res, next)
 });
 
 
+//Forget PWD 
+router.post('/resetpwd', function (req, res) 
+{
+
+// const {email } = req.body;
+// User.findOne({email}, (err,user)) {
+// if (err|| user){
+// return res.status(400).json({error: "famech user 3ndou email hedha"});
+// }
+
+ 
+User.findOne({
+  where: {
+    email: req.body.email
+  }
+}).then(user => {
+  if (user) {
+    res.status(400).send({
+      message: "No user with such email !!"
+    });
+  }
+  else{
+
+    try 
+    {
+      const token = await jwt.sign({ email: req.body.email }, process.env.RESET_PWD_KEY, 
+        { expiresIn: '20m' });
+
+
+    const emailSender = prepareEmailSending();
+        emailSender.send(
+        {
+            template: 'forgetpwd',
+            message: {
+              to: 'rahma.kalai0@gmail.com',
+                attachments: [{
+                    path: `${__dirname}/../emails/forgetpwd/images/daijara.png`,
+                    cid: 'logo'
+                }],
+                html: `
+               <p>${process.env.RESET_PWD_KEY}/resetpwd/${token} </p> `
+              },
+            locals: {
+
+              username: username,
+              token 
+
+            }
+
+          });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //LOGOUT
 router.get('/logout', (req, res, next) => {
   try {
@@ -300,10 +349,5 @@ router.get('/logout', (req, res, next) => {
     res.status(500).send(error);
   }
 });
-
-//
-
-
-
 
 module.exports = router;
