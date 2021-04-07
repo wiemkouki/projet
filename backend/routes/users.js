@@ -326,6 +326,29 @@ User.findOne({
 
 
 
+router.post('/reset-password', function (req, res) {
+  const email = req.body.email
+  User.findOne({
+    where: { email: req.body.email }, //checking if the email address sent by client is present in the db(valid)
+  }).then(user => {
+    try {
+      bcrypt.genSalt(saltRounds, function (err, salt) {
+        bcrypt.hash(user.password, salt, async function (err, hash) {
+          user.updateOne({
+            email: user.email,
+            password: hash,
+          })
+        });
+      });
+      res.render('/login')
+    }
+    catch (error) {
+      prepareResponse(res, 500, { success: false }, 'application/json');
+
+    };
+  });
+});
+
 
 
 
