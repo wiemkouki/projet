@@ -12,7 +12,7 @@
               <div class="panel-body">
                 <div class="text-center">
                   <h3><i class="fa fa-lock fa-4x"></i></h3>
-                  <h2 class="text-center">Mot de passe oublié?</h2>
+                  <h2 class="text-center">Réinitialiser  votre mot de passe</h2>
                   <p>Vous pouvez réinitialiser votre mot de passe ici.</p>
                   <div class="panel-body">
     
@@ -20,12 +20,16 @@
     
                       <div class="form-group">
                         <div class="input-group">
-                          <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
-                          <input id="email" name="email" placeholder="adresse Email" class="form-control"  type="email">
-                        </div>
+                         
+                        
+                          <input id="pwd" name="pwd" placeholder="nouveau mot de passe" class="form-control"  type="pwd">
+                          <br>
+                          <input id="cpwd" name="cpwd" placeholder="confirmer mot de passe" class="form-control"  type="cpwd">
+                        
+                    </div>
                       </div>
                       <div class="form-group">
-                        <input [routerLink]="'/forgotpwd'" name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Valider" type="submit">
+                        <input  name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Valider" type="submit">
                       </div>
                       
                       <input type="hidden" class="hide" name="token" id="token" value=""> 

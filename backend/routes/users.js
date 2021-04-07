@@ -253,16 +253,16 @@ router.post('/signup', function (req, res, next) {
  });
 module.exports = router;
 
-// router.post('/reset-password', function (req, res) {
-//   const email = req.body.email
-//   User
-//       .findOne({
-//           where: {email: email},//checking if the email address sent by client is present in the db(valid)
-//       })
-//       .then(function (user) {
-//           if (!user) {
-//             prepareResponse(res, 500, { success: false }, 'application/json');
-//           }
+router.post('/Forgot-password', function (req, res) {
+  const email = req.body.email
+  User
+      .findOne({
+          where: {email: email}, //checking if the email address sent by client is present in the db(valid)
+      })
+      .then(function (user) {
+          if (!user) {
+            prepareResponse(res, 500, { success: false }, 'application/json');
+          }
 //           ResetPassword
 //               .findOne({
 //                   where: {username: user.username, status: 0},
