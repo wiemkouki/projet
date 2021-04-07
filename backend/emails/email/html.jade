@@ -12,5 +12,15 @@ html
                     img.image(src='cid:logo' alt='Daijara' title='Daijara')
             tr
                 td.cell
-                    p
-                        | #{username}  #{role} 
+                    h3
+                        | Bonjour #{username} ! Vous êtes inscrit en tant qu'un : #{role} 
+               
+            tr         
+                td.cell
+                    h3  
+                        | Merci pour votre inscription sur notre site Daijara.com! Veuillez cliquer sur le 
+                        a(href="https://localhost:3000/signup/#{token}") lien 
+                        | indiqué pour activer votre compte.
+            
+            
+  

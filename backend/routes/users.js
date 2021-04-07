@@ -12,64 +12,66 @@ var path = require('path');
 const saltRounds = 10;
 
 const prepareResponse = (response, status, body, type) => {
-  //response.set('Content-Type', type);
+  response.set('Content-Type', type);
   response.status(status).send(body);
 };
 
-const prepareEmailSending = () => {
-  let transporter = nodemailer.createTransport({
-    host: "mail.aroundorder.com",
-    port: 465,
-    secure: true, // true for 465, false for other ports
-    auth: {
-      user: 'info@aroundorder.com',
-      pass: 'Transp0rt1!',
-    },
-    tls: {
-      rejectUnauthorized: false
-    }
-  });
-
-
-  const email = new Email(
-    {
-      message:
-      {
-        from: '"Daijara" <info@aroundorder.com>'
-      },
-
-      send: true,
-      transport: transporter,
-      views: {
-        options: {
-          extension: 'jade'
+const prepareEmailSending = () =>
+{
+    let transporter = nodemailer.createTransport({
+        host: "mail.aroundorder.com",
+        port: 465,
+        secure: true, // true for 465, false for other ports
+        auth: {
+            user: 'info@aroundorder.com',
+            pass: 'Transp0rt1!',
+        },
+        tls: {
+          rejectUnauthorized: false
         }
-      },
-      juice: true,
-      juiceSettings:
-      {
-        tableElements: ['TABLE']
-      },
-      juiceResources:
-      {
-        preserveImportant: true,
-        webResources:
-        {
-          relativeTo: path.join(__dirname, '..', 'emails', 'email'),
-          images: true
-        }
-      }
     });
 
-  return email;
-};
+
+        const email = new Email(
+            {
+                message:
+                    {
+                        from: '"Daijara" <info@aroundorder.com>'
+                    },
+             
+                send: true,
+                transport: transporter,
+                views: {
+                    options: {
+                        extension: 'jade'
+                    }
+                },
+                juice: true,
+                juiceSettings:
+                    {
+                        tableElements: ['TABLE']
+                    },
+                juiceResources:
+                    {
+                        preserveImportant: true,
+                        webResources:
+                            {
+                                relativeTo: path.join(__dirname, '..', 'emails', 'email'),
+                                images: true
+                            }
+                    }
+            });
+    
+        return email;
+    };
+  
 
 
-
+//////////
 router.get('/', async function (req, res, next) {
   prepareResponse(res, 200, { success: true }, 'application/json');
 });
-
+//////
 /* GET users listing. */
 router.get('/:id', async function (req, res, next) {
   let id = req.params.id;
@@ -81,7 +83,7 @@ router.get('/:id', async function (req, res, next) {
 
 
 
-
+////////////
 router.post('/login', async function (req, res, next) {
   let { username, password } = req.body;
 
@@ -101,13 +103,13 @@ router.post('/login', async function (req, res, next) {
 
 //SIGN IN API WITH JWT USING COOKIES 
 router.post('/signin', function (req, res, next) {
-  const { username, password, email } = req.body;
+  const { username, password } = req.body;
 
-  User.findOne({ where: { email: email } }).then(user => {
+  User.findOne({ where: { username: username } }).then(user => {
     if (user) {
       bcrypt.compare(password, user.password).then(result => {
         if (result) {
-          jwt.sign({ id: user.email, createdAt: user.createdAt }, process.env.SECRET,
+          jwt.sign({ id: user.username, createdAt: user.createdAt }, process.env.SECRET,
             { expiresIn: parseInt(process.env.EXPIRATION) },
 
             async function (error, token) {
@@ -174,121 +176,178 @@ router.post('/signin', function (req, res, next) {
   })
 });
 
-
-
 //SIGNUP 
-router.post('/signup', function (req, res, next) {
+router.post('/signup', function (req, res, next) 
+{
+  console.log("here");
+
   let { username, password, role, email } = req.body;
+
+
   bcrypt.genSalt(saltRounds, function (err, salt) {
     bcrypt.hash(password, salt, async function (err, hash) {
-      User.findOne({
-        where: {
-          email: req.body.email
-        }
-      }).then(user => {
-        if (user) {
-          res.status(400).send({
-            message: "Failed! Email is already in use!"
-          });
-        }
-        else {
+      let new_user = await User.create({
+        username,
+        password: hash,
+        role,
+        email,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
 
+    //   jwt.sign({ email: req.body.email }, process.env.SECRET, { expiresIn: parseInt(process.env.EXPIRATION) },
+    //     function (err, token) {
+    //       if (err) {
+    //         console.log('Error occurred while generating token');
+    //         console.log(err);
+    //         return false;
+    //       }
+    //       else {
+    //         if (token != false) 
+    //         {
+    //           const response = {
+    //             success: true,
+    //             token,
+    //             message: "User created successfully."
+    //           };
+    //           prepareResponse(res, 200, response, 'application/json');
+    //         }
+    //       }
+    //     });
 
-          let new_user = User.create({
-            username,
-            password: hash,
-            role,
-            email,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-          });
+    try 
+    {
+      const token = await jwt.sign({ email: req.body.email }, process.env.SECRET, 
+        { expiresIn: parseInt(process.env.EXPIRATION) });
 
-          try {
-            const token = jwt.sign({ email: req.body.email }, process.env.SECRET,
-              { expiresIn: parseInt(process.env.EXPIRATION) });
-
-            const emailSender = prepareEmailSending();
-            emailSender.send(
-              {
-                template: 'email',
-                message: {
-                  to: 'rahma.elkalai01@gmail.com',
-                  attachments: [{
+        const emailSender = prepareEmailSending();
+        emailSender.send(
+        {
+            template: 'email',
+            message: {
+              to: 'rahma.kalai0@gmail.com',
+                attachments: [{
                     path: `${__dirname}/../emails/email/images/daijara.png`,
                     cid: 'logo'
-                  }]
-                },
-                locals: {
+                }],
+              //   html: `
+              //  <p>${process.env.CLIENT_URL}/signup/${token} </p> `
+              },
+            locals: {
 
-                  username: username,
-                  password: password,
-                  role: role,
-                  email: email
+              username: username,
+              password: password,
+              role:role, 
+              email: email,
+              token 
 
-                }
+            }
 
+            
+        });
 
-              });
+        const response = {
+                     success: true,
+                     token,
+                     message: "User created successfully."
+                   };
 
-
-
-            const response = {
-              success: true,
-              token,
-              message: "User created successfully."
-            };
-
-            prepareResponse(res, 200, response, 'application/json');
-          }
-          catch (error) {
-            prepareResponse(res, 500, { success: false }, 'application/json');
-          };
-
-        }
-
-      });
+        prepareResponse(res, 200, response, 'application/json');
+    }
+    catch(error)
+    {
+      prepareResponse(res, 500, { success: false }, 'application/json');
+    }
     });
   });
 });
-module.exports = router;
+
+
+//Forget PWD 
+router.post('/resetpwd', function (req, res) 
+{
+
+// const {email } = req.body;
+// User.findOne({email}, (err,user)) {
+// if (err|| user){
+// return res.status(400).json({error: "famech user 3ndou email hedha"});
+// }
+
+ 
+User.findOne({
+  where: {
+    email: req.body.email
+  }
+}).then(user => {
+  if (user) {
+    res.status(400).send({
+      message: "No user with such email !!"
+    });
+  }
+  else{
+
+    try 
+    {
+      const token = await jwt.sign({ email: req.body.email }, process.env.RESET_PWD_KEY, 
+        { expiresIn: '20m' });
+
+
+    const emailSender = prepareEmailSending();
+        emailSender.send(
+        {
+            template: 'forgetpwd',
+            message: {
+              to: 'rahma.kalai0@gmail.com',
+                attachments: [{
+                    path: `${__dirname}/../emails/forgetpwd/images/daijara.png`,
+                    cid: 'logo'
+                }],
+                html: `
+               <p>${process.env.RESET_PWD_KEY}/resetpwd/${token} </p> `
+              },
+            locals: {
+
+              username: username,
+              token 
+
+            }
+
+          });
 
 
 
-router.post('/forgot-password', function (req, res) {
-   const email = req.body.email
-  User.findOne({
-    where: { email: req.body.email }, //checking if the email address sent by client is present in the db(valid)
-  }).then(user => {
-    try {
-      bcrypt.genSalt(saltRounds, function (err, salt) {
-        bcrypt.hash(user.password, salt, async function (err, hash) {
-          user.updateOne({
-            email: user.email,
-            password: hash,
-          })
-        });
-      });
-      res.render('/login')
-    }
-    catch (error) {
-      prepareResponse(res, 500, { success: false }, 'application/json');
 
-    };
-  });
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //LOGOUT
-// router.get('/logout', (req, res, next) => {
-//       try {
-//         res.clearCookie("jwt");
-//         console.log("logout successfully");
+router.get('/logout', (req, res, next) => {
+  try {
+    res.clearCookie("jwt");
+    console.log("logout successfully");
 
-//         prepareResponse(res, 200, response, 'application/json');
+    prepareResponse(res, 200, response, 'application/json');
 
-//       } catch (error) {
-//         res.status(500).send(error);
-//       }
-//     });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 
-
-
+module.exports = router;
