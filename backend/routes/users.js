@@ -268,7 +268,7 @@ router.post('/signup', function (req, res, next)
 //Forget PWD 
 router.post('/forgotpwd', function (req, res, next) 
 { 
-
+  let { username } = req.body;
 User.findOne({
   where: {
     email: req.body.email
@@ -294,7 +294,8 @@ User.findOne({
             //  <p>${process.env.RESET_PWD_KEY}/resetpwd/${token} </p> `
             },
           locals: {
-               token 
+               token ,
+               username
 
           }
       });

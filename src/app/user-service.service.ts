@@ -37,15 +37,16 @@ export class UserServiceService
         catchError(this.error)
       )
   }
+
   forgotPwd(data): Observable<any> {
-    let API_URL = this.api_prefix + "/users/reset-password";
+    let API_URL = this.api_prefix + "/users/resetpassword";
     return this.http.post(API_URL, data)
        .pipe(
          catchError(this.error)
        )
    }
    ResetPwd(data): Observable<any> {
-    let API_URL = this.api_prefix + "/users/forgotpwd/id";
+    let API_URL = this.api_prefix + "/users/forgotpwd";
     return this.http.post(API_URL, data)
        .pipe(
          catchError(this.error)
