@@ -267,15 +267,8 @@ router.post('/signup', function (req, res, next)
 
 //Forget PWD 
 router.post('/forgotpwd', function (req, res, next) 
-{
+{ 
 
-// const {email } = req.body;
-// User.findOne({email}, (err,user)) {
-// if (err|| user){
-// return res.status(400).json({error: "famech user 3ndou email hedha"});
-// }
-
- 
 User.findOne({
   where: {
     email: req.body.email
@@ -285,10 +278,9 @@ User.findOne({
   try 
   {
     const token =  jwt.sign({ email: req.body.email }, process.env.SECRET, 
-      { expiresIn: '20m' });
+      { expiresIn: '1H' });
 
-
-  const emailSender = prepareEmailSending();
+    const emailSender = prepareEmailSending();
       emailSender.send(
       {
           template: 'forgetpwd',
@@ -302,15 +294,14 @@ User.findOne({
             //  <p>${process.env.RESET_PWD_KEY}/resetpwd/${token} </p> `
             },
           locals: {
-
-            username: username,
-            token 
+               token 
 
           }
       });
+   
       const response = {
                    success: true,
-                   token,
+              
                    message: "Email sent!!"
                  };
 
@@ -318,15 +309,17 @@ User.findOne({
   }
   catch(error)
   {
+    console.log(error)
     prepareResponse(res, 500, {success: false} , 'application/json');
   }
 }
 });
+});
 
 
 
-
-router.post('/reset-password', function (req, res) {
+// RESET pwd
+router.post('/resetpassword', function (req, res) {
   const email = req.body.email
   User.findOne({
     where: { email: req.body.email }, //checking if the email address sent by client is present in the db(valid)
@@ -334,39 +327,22 @@ router.post('/reset-password', function (req, res) {
     try {
       bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(user.password, salt, async function (err, hash) {
-          user.updateOne({
+          user.update({
             email: user.email,
             password: hash,
-          })
+          }).then(user =>  prepareResponse(res, 200, { success: true }, 'application/json')).catch(error=> console.log(error))
         });
       });
-      res.render('/login')
+     
     }
-    catch (error) {
+    catch (error) 
+    {
+      console.log(error)
       prepareResponse(res, 500, { success: false }, 'application/json');
 
     };
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //LOGOUT
 router.get('/logout', (req, res, next) => {
@@ -380,5 +356,5 @@ router.get('/logout', (req, res, next) => {
     res.status(500).send(error);
   }
 });
-});
+
 module.exports = router;
