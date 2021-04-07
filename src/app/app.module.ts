@@ -20,6 +20,7 @@ import {FormsModule} from "@angular/forms";
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ProfilComponent } from './profil/profil.component';
 import { UserServiceService } from './user-service.service';
+import { ForgotPwdComponent } from './forgot-pwd/forgot-pwd.component';
 
 const Routes: Routes= [
 
@@ -27,7 +28,8 @@ const Routes: Routes= [
   {path:'cart',component: CartComponent},
   {path:'register',component: RegisterComponent},
   {path:'reset-password',component: ResetPasswordComponent},
-  {path:'profil',component: ProfilComponent}
+  {path:'profil',component: ProfilComponent},
+  {path:'forgotpwd',component: ForgotPwdComponent}
   ]
   
 @NgModule({
@@ -38,6 +40,7 @@ const Routes: Routes= [
     CartComponent,
     ResetPasswordComponent,
     ProfilComponent,
+    ForgotPwdComponent,
    
    
    
