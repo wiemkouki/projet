@@ -266,7 +266,7 @@ router.post('/signup', function (req, res, next)
 
 
 //Forget PWD 
-router.post('/resetpwd', function (req, res, next) 
+router.post('/forgotpwd', function (req, res, next) 
 {
 
 // const {email } = req.body;
