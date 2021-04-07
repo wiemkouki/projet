@@ -15,7 +15,7 @@ const prepareResponse = (response, status, body, type) => {
   response.set('Content-Type', type);
   response.status(status).send(body);
 };
-
+ 
 const prepareEmailSending = () =>
 {
     let transporter = nodemailer.createTransport({
@@ -30,8 +30,8 @@ const prepareEmailSending = () =>
           rejectUnauthorized: false
         }
     });
-
-
+ 
+ 
         const email = new Email(
             {
                 message:
@@ -65,6 +65,8 @@ const prepareEmailSending = () =>
         return email;
     };
   
+
+
 
 
 //////////
@@ -103,13 +105,13 @@ router.post('/login', async function (req, res, next) {
 
 //SIGN IN API WITH JWT USING COOKIES 
 router.post('/signin', function (req, res, next) {
-  const { username, password } = req.body;
+  const { username, password ,email } = req.body;
 
-  User.findOne({ where: { username: username } }).then(user => {
+  User.findOne({ where: { email: email } }).then(user => {
     if (user) {
       bcrypt.compare(password, user.password).then(result => {
         if (result) {
-          jwt.sign({ id: user.username, createdAt: user.createdAt }, process.env.SECRET,
+          jwt.sign({ id: user.email, createdAt: user.createdAt }, process.env.SECRET,
             { expiresIn: parseInt(process.env.EXPIRATION) },
 
             async function (error, token) {
@@ -264,7 +266,7 @@ router.post('/signup', function (req, res, next)
 
 
 //Forget PWD 
-router.post('/resetpwd', function (req, res) 
+router.post('/resetpwd', function (req, res, next) 
 {
 
 // const {email } = req.body;
@@ -279,41 +281,47 @@ User.findOne({
     email: req.body.email
   }
 }).then(user => {
-  if (user) {
-    res.status(400).send({
-      message: "No user with such email !!"
-    });
+  if(user) {
+  try 
+  {
+    const token =  jwt.sign({ email: req.body.email }, process.env.SECRET, 
+      { expiresIn: '20m' });
+
+
+  const emailSender = prepareEmailSending();
+      emailSender.send(
+      {
+          template: 'forgetpwd',
+          message: {
+            to: 'rahma.kalai0@gmail.com',
+              attachments: [{
+                  path: `${__dirname}/../emails/forgetpwd/images/daijara.png`,
+                  cid: 'logo'
+              }],
+            //   html: `
+            //  <p>${process.env.RESET_PWD_KEY}/resetpwd/${token} </p> `
+            },
+          locals: {
+
+            username: username,
+            token 
+
+          }
+      });
+      const response = {
+                   success: true,
+                   token,
+                   message: "Email sent!!"
+                 };
+
+      prepareResponse(res, 200, response, 'application/json');
   }
-  else{
-
-    try 
-    {
-      const token = await jwt.sign({ email: req.body.email }, process.env.RESET_PWD_KEY, 
-        { expiresIn: '20m' });
-
-
-    const emailSender = prepareEmailSending();
-        emailSender.send(
-        {
-            template: 'forgetpwd',
-            message: {
-              to: 'rahma.kalai0@gmail.com',
-                attachments: [{
-                    path: `${__dirname}/../emails/forgetpwd/images/daijara.png`,
-                    cid: 'logo'
-                }],
-                html: `
-               <p>${process.env.RESET_PWD_KEY}/resetpwd/${token} </p> `
-              },
-            locals: {
-
-              username: username,
-              token 
-
-            }
-
-          });
-
+  catch(error)
+  {
+    prepareResponse(res, 500, {success: false} , 'application/json');
+  }
+}
+});
 
 
 
@@ -349,5 +357,5 @@ router.get('/logout', (req, res, next) => {
     res.status(500).send(error);
   }
 });
-
+});
 module.exports = router;
