@@ -294,6 +294,7 @@ User.findOne({
             //  <p>${process.env.RESET_PWD_KEY}/resetpwd/${token} </p> `
             },
           locals: {
+            id : user.id,
                token ,
                username
 

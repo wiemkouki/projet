@@ -4,6 +4,7 @@ import { catchError } from 'rxjs/operators';
 import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { any } from 'sequelize/types/lib/operators';
 
+
 @Injectable({
   providedIn: 'root'
 })

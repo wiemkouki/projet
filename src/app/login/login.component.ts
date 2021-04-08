@@ -22,10 +22,12 @@ export class LoginComponent implements OnInit
       // this.products.push(data);
     });
   }
+   
   
   SignIn(){
     this.userService.SignIn(data).subscribe(function(data) {
       console.log(data);
+      
     }); }
   }
 
