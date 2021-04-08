@@ -10,16 +10,19 @@ import { any } from 'sequelize/types/lib/operators';
 })
 export class LoginComponent implements OnInit 
 {
-  public products: any=[];
+  public users: any=[];
   
 
   constructor(private userService: UserServiceService) 
-  {}
+  {
+console.log('welcome');
+this.SignIn();
+ }
 
   ngOnInit()
   {
     this.userService.showSuccess().subscribe(function(data) {
-      // this.products.push(data);
+      this.users.push(data);
     });
   }
    

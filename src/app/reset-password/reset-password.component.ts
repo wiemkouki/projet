@@ -22,7 +22,7 @@ export class ResetPasswordComponent implements OnInit {
   ResetPwd(){
     this.userService.ResetPwd(data).subscribe(function(data) {
       console.log(data);
-      this.router.navigate(['/forgotpwd '], { queryParams: { id:'/:id' } });
+      this.router.navigate(['/forgotpwd'], { queryParams: { id:'/:id' } });
     }); }
 }
 

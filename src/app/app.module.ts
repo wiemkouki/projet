@@ -29,7 +29,7 @@ const Routes: Routes= [
   {path:'register',component: RegisterComponent},
   {path:'reset-password',component: ResetPasswordComponent},
   {path:'profil',component: ProfilComponent},
-  {path:'forgotpwd',component: ForgotPwdComponent}
+  {path:'forgotpwd/:id',component: ForgotPwdComponent}
   ]
   
 @NgModule({
