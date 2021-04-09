@@ -15,56 +15,55 @@ const prepareResponse = (response, status, body, type) => {
   response.set('Content-Type', type);
   response.status(status).send(body);
 };
- 
-const prepareEmailSending = () =>
-{
-    let transporter = nodemailer.createTransport({
-        host: "mail.aroundorder.com",
-        port: 465,
-        secure: true, // true for 465, false for other ports
-        auth: {
-            user: 'info@aroundorder.com',
-            pass: 'Transp0rt1!',
-        },
-        tls: {
-          rejectUnauthorized: false
+
+const prepareEmailSending = () => {
+  let transporter = nodemailer.createTransport({
+    host: "mail.aroundorder.com",
+    port: 465,
+    secure: true, // true for 465, false for other ports
+    auth: {
+      user: 'info@aroundorder.com',
+      pass: 'Transp0rt1!',
+    },
+    tls: {
+      rejectUnauthorized: false
+    }
+  });
+
+
+  const email = new Email(
+    {
+      message:
+      {
+        from: '"Daijara" <info@aroundorder.com>'
+      },
+
+      send: true,
+      transport: transporter,
+      views: {
+        options: {
+          extension: 'jade'
         }
+      },
+      juice: true,
+      juiceSettings:
+      {
+        tableElements: ['TABLE']
+      },
+      juiceResources:
+      {
+        preserveImportant: true,
+        webResources:
+        {
+          relativeTo: path.join(__dirname, '..', 'emails', 'email'),
+          images: true
+        }
+      }
     });
- 
- 
-        const email = new Email(
-            {
-                message:
-                    {
-                        from: '"Daijara" <info@aroundorder.com>'
-                    },
-             
-                send: true,
-                transport: transporter,
-                views: {
-                    options: {
-                        extension: 'jade'
-                    }
-                },
-                juice: true,
-                juiceSettings:
-                    {
-                        tableElements: ['TABLE']
-                    },
-                juiceResources:
-                    {
-                        preserveImportant: true,
-                        webResources:
-                            {
-                                relativeTo: path.join(__dirname, '..', 'emails', 'email'),
-                                images: true
-                            }
-                    }
-            });
-    
-        return email;
-    };
-  
+
+  return email;
+};
+
 
 
 
@@ -103,9 +102,9 @@ router.post('/login', async function (req, res, next) {
 });
 
 
-//SIGN IN API WITH JWT USING COOKIES 
+//SIGN IN API WITH JWT USING COOKIES
 router.post('/signin', function (req, res, next) {
-  const { username, password ,email } = req.body;
+  const { username, password, email } = req.body;
 
   User.findOne({ where: { email: email } }).then(user => {
     if (user) {
@@ -178,185 +177,169 @@ router.post('/signin', function (req, res, next) {
   })
 });
 
-//SIGNUP 
-router.post('/signup', function (req, res, next) 
-{
-  console.log("here");
+//SIGNUP
+router.post('/signup', function (req, res, next) {
+  User.findOne({
+    where: {
+      email: req.body.email
+    }
+  }).then(user => {
+    if (user) {
+      const response = {
+        success: false,
+        message: "Email already exist !"
+      };
+      prepareResponse(res, 500, response, 'application/json')
 
-  let { username, password, role, email } = req.body;
+    } else {
 
+      let { username, password, role, email } = req.body;
+      bcrypt.genSalt(saltRounds, function (err, salt) {
+        bcrypt.hash(password, salt, async function (err, hash) {
+          let new_user = await User.create({
+            username,
+            password: hash,
+            role,
+            email,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          });
 
-  bcrypt.genSalt(saltRounds, function (err, salt) {
-    bcrypt.hash(password, salt, async function (err, hash) {
-      let new_user = await User.create({
-        username,
-        password: hash,
-        role,
-        email,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      });
+          try {
+            const token = await jwt.sign({ email: req.body.email }, process.env.SECRET,
+              { expiresIn: parseInt(process.env.EXPIRATION) });
 
-    //   jwt.sign({ email: req.body.email }, process.env.SECRET, { expiresIn: parseInt(process.env.EXPIRATION) },
-    //     function (err, token) {
-    //       if (err) {
-    //         console.log('Error occurred while generating token');
-    //         console.log(err);
-    //         return false;
-    //       }
-    //       else {
-    //         if (token != false) 
-    //         {
-    //           const response = {
-    //             success: true,
-    //             token,
-    //             message: "User created successfully."
-    //           };
-    //           prepareResponse(res, 200, response, 'application/json');
-    //         }
-    //       }
-    //     });
-
-    try 
-    {
-      const token = await jwt.sign({ email: req.body.email }, process.env.SECRET, 
-        { expiresIn: parseInt(process.env.EXPIRATION) });
-
-        const emailSender = prepareEmailSending();
-        emailSender.send(
-        {
-            template: 'email',
-            message: {
-              to: 'rahma.kalai0@gmail.com',
-                attachments: [{
+            const emailSender = prepareEmailSending();
+            emailSender.send(
+              {
+                template: 'email',
+                message: {
+                  to: 'rahma.kalai0@gmail.com',
+                  attachments: [{
                     path: `${__dirname}/../emails/email/images/daijara.png`,
                     cid: 'logo'
-                }],
-              //   html: `
-              //  <p>${process.env.CLIENT_URL}/signup/${token} </p> `
-              },
-            locals: {
+                  }],
+                  //   html: `
+                  //  <p>${process.env.CLIENT_URL}/signup/${token} </p> `
+                },
+                locals: {
 
-              username: username,
-              password: password,
-              role:role, 
-              email: email,
-              token 
+                  username: username,
+                  password: password,
+                  role: role,
+                  email: email,
+                  token
 
-            }
-
-            
-        });
-
-        const response = {
-                     success: true,
-                     token,
-                     message: "User created successfully."
-                   };
-
-        prepareResponse(res, 200, response, 'application/json');
-    }
-    catch(error)
-    {
-      prepareResponse(res, 500, { success: false }, 'application/json');
-    }
-    });
-  });
-});
+                }
 
 
-//Forget PWD 
-router.post('/forgotpwd', function (req, res, next) 
-{ 
-  let { username } = req.body;
-User.findOne({
-  where: {
-    email: req.body.email
-  }
-}).then(user => {
-  if(user) {
-  try 
-  {
-    const token =  jwt.sign({ email: req.body.email }, process.env.SECRET, 
-      { expiresIn: '1H' });
+              });
 
-    const emailSender = prepareEmailSending();
-      emailSender.send(
-      {
-          template: 'forgetpwd',
-          message: {
-            to: 'rahma.kalai0@gmail.com',
-              attachments: [{
-                  path: `${__dirname}/../emails/forgetpwd/images/daijara.png`,
-                  cid: 'logo'
-              }],
-            //   html: `
-            //  <p>${process.env.RESET_PWD_KEY}/resetpwd/${token} </p> `
-            },
-          locals: {
-            id : user.id,
-               token ,
-               username
-
+            const response = {
+              success: true,
+              token,
+              message: "User created successfully."
+            };
+            prepareResponse(res, 200, response, 'application/json');
           }
-      });
-   
-      const response = {
-                   success: true,
-              
-                   message: "Email sent!!"
-                 };
-
-      prepareResponse(res, 200, response, 'application/json');
-  }
-  catch(error)
-  {
-    console.log(error)
-    prepareResponse(res, 500, {success: false} , 'application/json');
-  }
-}
-});
-});
-
-
-
-// RESET pwd
-router.post('/resetpassword', function (req, res) {
-  const email = req.body.email
-  User.findOne({
-    where: { email: req.body.email }, //checking if the email address sent by client is present in the db(valid)
-  }).then(user => {
-    try {
-      bcrypt.genSalt(saltRounds, function (err, salt) {
-        bcrypt.hash(user.password, salt, async function (err, hash) {
-          user.update({
-            email: user.email,
-            password: hash,
-          }).then(user =>  prepareResponse(res, 200, { success: true }, 'application/json')).catch(error=> console.log(error))
+          catch (error) {
+            prepareResponse(res, 500, { success: false }, 'application/json');
+          }
         });
       });
-     
-    }
-    catch (error) 
-    {
-      console.log(error)
-      prepareResponse(res, 500, { success: false }, 'application/json');
-
     };
   });
-});
+ });
 
-//LOGOUT
-router.get('/logout', (req, res, next) => {
-  try {
-    res.clearCookie("jwt");
-    console.log("logout successfully");
 
-    prepareResponse(res, 200, response, 'application/json');
+  //Forget PWD
+  router.post('/forgotpwd', function (req, res, next) {
+    let { username } = req.body;
+    User.findOne({
+      where: {
+        email: req.body.email
+      }
+    }).then(user => {
+      if (user) {
+        try {
+          const token = jwt.sign({ email: req.body.email }, process.env.SECRET,
+            { expiresIn: '1H' });
 
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
+          const emailSender = prepareEmailSending();
+          emailSender.send(
+            {
+              template: 'forgetpwd',
+              message: {
+                to: 'rahma.kalai0@gmail.com',
+                attachments: [{
+                  path: `${__dirname}/../emails/forgetpwd/images/daijara.png`,
+                  cid: 'logo'
+                }],
+                //   html: `
+                //  <p>${process.env.RESET_PWD_KEY}/resetpwd/${token} </p> `
+              },
+              locals: {
+                id: user.id,
+                token,
+                username
 
-module.exports = router;
+              }
+            });
+
+          const response = {
+            success: true,
+
+            message: "Email sent!!"
+          };
+
+          prepareResponse(res, 200, response, 'application/json');
+        }
+        catch (error) {
+          console.log(error)
+          prepareResponse(res, 500, { success: false }, 'application/json');
+        }
+      }
+    });
+  });
+
+
+
+  // RESET pwd
+  router.post('/resetpassword', function (req, res) {
+    const email = req.body.email
+    User.findOne({
+      where: { email: req.body.email }, //checking if the email address sent by client is present in the db(valid)
+    }).then(user => {
+      try {
+        bcrypt.genSalt(saltRounds, function (err, salt) {
+          bcrypt.hash(user.password, salt, async function (err, hash) {
+            user.update({
+              email: user.email,
+              password: hash,
+            }).then(user => prepareResponse(res, 200, { success: true }, 'application/json')).catch(error => console.log(error))
+          });
+        });
+
+      }
+      catch (error) {
+        console.log(error)
+        prepareResponse(res, 500, { success: false }, 'application/json');
+
+      };
+    });
+  });
+
+  //LOGOUT
+  router.get('/logout', (req, res, next) => {
+    try {
+      res.clearCookie("jwt");
+      console.log("logout successfully");
+
+      prepareResponse(res, 200, response, 'application/json');
+
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
+
+  module.exports = router;
