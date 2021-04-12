@@ -15,7 +15,7 @@ const httpOptions = {
 })
 
 export class UserServiceService 
-{
+{ 
   api_prefix: string = "http://localhost:3000/users";
     constructor(private http: HttpClient) 
     {}
@@ -24,7 +24,10 @@ export class UserServiceService
     return this.http.post(this.api_prefix + '/signin', {
       email,
       password
-    }, httpOptions);
+    }, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      withCredentials: true
+    });
   }
     
 
@@ -42,6 +45,11 @@ export class UserServiceService
 
 
 
+  RequestReset(body): Observable<any> {
+    return this.http.post(this.api_prefix + '/resetpassword', body);
+  }
+
+ 
 
 
 
