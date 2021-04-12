@@ -41,7 +41,7 @@ const Routes: Routes= [
     ResetPasswordComponent,
     ProfilComponent,
     ForgotPwdComponent,
-   
+    RegisterComponent
    
    
     
