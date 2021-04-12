@@ -8,8 +8,13 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent implements OnInit {
+  form: any = {
+    email:null
+  }
+  errorMessage = '';
 
-  constructor( private route: ActivatedRoute, private userService: UserServiceService) { }
+
+  constructor( private router:Router , private route: ActivatedRoute, private userService: UserServiceService) { }
 
   ngOnInit(): void {
     this.userService.showSuccess().subscribe(function(data) {
@@ -19,17 +24,23 @@ export class ResetPasswordComponent implements OnInit {
       });
     });
   }
-  ResetPwd(){
-    this.userService.ResetPwd(data).subscribe(function(data) {
-      console.log(data);
-      this.router.navigate(['/forgotpwd'], { queryParams: { id:'/:id' } });
-    }); }
+ onSubmit(): void {
+
+    const { email } = this.form;
+
+    this.userService.ResetPwd(email).subscribe(
+      data => {
+      this.router.navigate(['/forgotpwd']);
+    }),
+    err => {
+      this.errorMessage = err.error.message;
+
+    }
+   }
 }
 
 
-function data(data: any) {
-throw new Error('Function not implemented.');
-}
+
 
 
 

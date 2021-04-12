@@ -3,6 +3,7 @@ import { UserServiceService } from '../user-service.service';
 import  { Observable } from 'rxjs';
 import { any } from 'sequelize/types/lib/operators';
 import { FormControl } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
@@ -12,36 +13,24 @@ import { FormControl } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-  name = new FormControl('');
-  usernametest: string
+
   form: any = {
     username: null,
     email: null,
     role:null,
     password: null
   };
-  isSuccessful = true;
+  isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
 
 
-  constructor(private userService: UserServiceService) { }
+  constructor(private userService: UserServiceService, private router:Router) { }
 
   ngOnInit(): void {
-    // this.userService.showSuccess().subscribe(function(data) {
-    //   // this.products.push(data);
-    // });
+
   }
-//   SignUp(){
-//     this.userService.signUp(data).subscribe(function(data) {
-//       console.log(data);
-//     }); }
-// }
 
-
-// function data(data: any) {
-// throw new Error('Function not implemented.');
-// }
 
 
 onSubmit(): void {
@@ -53,9 +42,11 @@ onSubmit(): void {
       console.log(data);
       this.isSuccessful = true;
       this.isSignUpFailed = false;
+      this.router.navigate(['/login'])
     },
     err => {
       this.errorMessage = err.error.message;
+      this.isSuccessful = false;
       this.isSignUpFailed = true;
     }
   );
