@@ -97,12 +97,12 @@
 
     <small class="text-muted">En cliquant sur le bouton `` S'inscrire '', vous confirmez que vous acceptez notre
 		Conditions d'utilisation et politique de confidentialité.</small>   
-
+		<div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+			Signup failed!<br />{{ errorMessage }}
+		  </div>  
 	                                  
 </form>
-<div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-	Signup failed!<br />{{ errorMessage }}
-  </div>    
+  
 <div class="alert alert-success" *ngIf="isSuccessful">
 	Your registration is successful!
   </div>

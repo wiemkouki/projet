@@ -45,10 +45,10 @@ export class RegisterComponent implements OnInit {
 
 
 onSubmit(): void {
-  console.log(this.usernametest)
+
   const { username, email, password,role } = this.form;
 
- /* this.userService.register(username, role,email, password).subscribe(
+  this.userService.register(username, email, password, role).subscribe(
     data => {
       console.log(data);
       this.isSuccessful = true;
@@ -58,7 +58,7 @@ onSubmit(): void {
       this.errorMessage = err.error.message;
       this.isSignUpFailed = true;
     }
-  );*/
+  );
 }
 }
 
