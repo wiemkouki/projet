@@ -84,23 +84,6 @@ router.get('/:id', async function (req, res, next) {
 
 
 
-////////////
-router.post('/login', async function (req, res, next) {
-  let { username, password } = req.body;
-
-  let user = await User.findOne({ where: { username: username } });
-
-  bcrypt.compare(password, user.password, function (err, result) {
-    if (result) {
-      prepareResponse(res, 200, { success: true, user }, 'application/json');
-    }
-    else {
-      prepareResponse(res, 500, { success: false }, 'application/json');
-    }
-  });
-
-});
-
 
 //SIGN IN API WITH JWT USING COOKIES
 router.post('/signin', function (req, res, next) {

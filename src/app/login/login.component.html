@@ -34,10 +34,10 @@
         <p style="text-align: center"></p>
         <input
         type="text"
-        name="username"
-        [(ngModel)]="form.username"
+        name="email"
+        [(ngModel)]="form.email"
         required
-        #username="ngModel"
+        #email="ngModel"
           class="form-control"
           placeholder="Email address"
 
@@ -45,9 +45,9 @@
         <div
           class="alert alert-danger"
           role="alert"
-          *ngIf="username.errors && f.submitted"
+          *ngIf="email.errors && f.submitted"
         >
-          Username is required!
+        email is required!
         </div>
         <input
         type="password"
@@ -72,7 +72,7 @@
       </div>
 
         <button
-          
+
           class="btn btn-success btn-block"
           type="submit"
         >
