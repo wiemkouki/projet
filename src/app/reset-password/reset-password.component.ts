@@ -28,9 +28,10 @@ export class ResetPasswordComponent implements OnInit {
 
     const { email } = this.form;
 
-    this.userService.ResetPwd(email).subscribe(
+    this.userService.reset(email).subscribe(
       data => {
-      this.router.navigate(['/forgotpwd']);
+     
+
     }),
     err => {
       this.errorMessage = err.error.message;
