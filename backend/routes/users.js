@@ -289,15 +289,13 @@ router.post('/signup', function (req, res, next) {
 
   // RESET pwd
   router.post('/resetpassword', function (req, res) {
-    const email = req.body.email
-    User.findOne({
-      where: { email: req.body.email }, //checking if the email address sent by client is present in the db(valid)
-    }).then(user => {
+    const id = req.body.id
+    User.findByPk(id).then(user => {
       try {
         bcrypt.genSalt(saltRounds, function (err, salt) {
-          bcrypt.hash(user.password, salt, async function (err, hash) {
+          bcrypt.hash( req.body.password, salt, async function (err, hash) {
             user.update({
-              email: user.email,
+           
               password: hash,
             }).then(user => prepareResponse(res, 200, { success: true }, 'application/json')).catch(error => console.log(error))
           });
