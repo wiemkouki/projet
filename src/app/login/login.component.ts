@@ -30,8 +30,6 @@ export class LoginComponent implements OnInit {
 
     this.userService.login(email, password).subscribe(
       data => {
-
-
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.router.navigate(['/profil'])

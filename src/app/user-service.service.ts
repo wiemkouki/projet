@@ -8,16 +8,11 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-
-
 @Injectable({
   providedIn: 'root'
 })
-
 export class UserServiceService {
   api_prefix: string = "http://localhost:3000/users";
-  // headers: HttpHeaders | { [header: string]: string | string[]; };
-  
   private headerrs = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http: HttpClient) { }
 
@@ -31,8 +26,6 @@ export class UserServiceService {
     });
   }
 
-
-
   register(username: string, email: string, password: string, role: string): Observable<any> {
     return this.http.post(this.api_prefix + '/signup', {
       username,
@@ -43,52 +36,17 @@ export class UserServiceService {
 
   }
 
-  SignIn(data): Observable<any> {
-    let API_URL = this.api_prefix + "/signin";
-    return this.http.post(API_URL, data)
-      .pipe(
-        catchError(this.error)
-      )
-  }
-
-  // Sign-up
-  signUp(data): Observable<any> {
-    let API_URL = this.api_prefix + "/users/signup";
-    return this.http.post(API_URL, data)
-      .pipe(
-        catchError(this.error)
-      )
-  }
-
-  forgotPwd(data): Observable<any> {
-    let API_URL = this.api_prefix + "/users/resetpassword";
-    return this.http.post(API_URL, data)
-      .pipe(
-        catchError(this.error)
-      )
-  }
   reset( email: string): Observable<any> {
     return this.http.post(this.api_prefix + '/forgotpwd', {
-
       email,
-
     }, httpOptions)
-
   }
 
-  // forgot( email: string , password:string): Observable<any> {
-  //   return this.http.post(this.api_prefix + '/resetpassword', {
-
-  //     email,password
-
-  //   }, httpOptions)
-
-  forgot(credentials: object) {
+  forgot(form: object) {
     const url = `${this.api_prefix}/resetpassword`;
-    return this.http.post(url, JSON.stringify(credentials), { headers: this.headerrs });
+    console.log(form);
+    return this.http.post(url, JSON.stringify(form), { headers: this.headerrs });
   }
-
-  
 
 
   // Handle Errors

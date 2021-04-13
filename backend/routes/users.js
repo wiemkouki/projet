@@ -289,13 +289,15 @@ router.post('/signup', function (req, res, next) {
 
   // RESET pwd
   router.post('/resetpassword', function (req, res) {
-    const id = req.body.id
-    User.findByPk(id).then(user => {
+    const id = req.body.id;
+    console.log(req.body);
+    User.findByPk(id).then(user =>
+      {
+
       try {
         bcrypt.genSalt(saltRounds, function (err, salt) {
           bcrypt.hash( req.body.password, salt, async function (err, hash) {
             user.update({
-           
               password: hash,
             }).then(user => prepareResponse(res, 200, { success: true }, 'application/json')).catch(error => console.log(error))
           });
