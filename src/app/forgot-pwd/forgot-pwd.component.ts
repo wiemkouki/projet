@@ -11,9 +11,9 @@ export class ForgotPwdComponent implements OnInit {
   constructor(private userService: UserServiceService) { }
 
   ngOnInit(): void {
-    this.userService.showSuccess().subscribe(function(data) {
-      // this.products.push(data);
-    });
+    // this.userService.showSuccess().subscribe(function(data) {
+    //   // this.products.push(data);
+    // });
   }
   Forgotpwd(){
     this.userService.forgotPwd(data).subscribe(function(data) {

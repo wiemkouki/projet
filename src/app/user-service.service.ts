@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { any } from 'sequelize/types/lib/operators';
 
 const httpOptions = {
@@ -14,13 +14,11 @@ const httpOptions = {
   providedIn: 'root'
 })
 
-export class UserServiceService 
-{ 
+export class UserServiceService {
   api_prefix: string = "http://localhost:3000/users";
-    constructor(private http: HttpClient) 
-    {}
-    
-    login(email: string, password: string): Observable<any> {
+  constructor(private http: HttpClient) { }
+
+  login(email: string, password: string): Observable<any> {
     return this.http.post(this.api_prefix + '/signin', {
       email,
       password
@@ -29,72 +27,31 @@ export class UserServiceService
       withCredentials: true
     });
   }
-    
 
 
-  register(username: string, email: string, password: string,role: string): Observable<any> {
+
+  register(username: string, email: string, password: string, role: string): Observable<any> {
     return this.http.post(this.api_prefix + '/signup', {
       username,
       email,
       role,
       password
-    }, httpOptions);
+    }, httpOptions)
+
   }
 
-
-
-
-
-  RequestReset(body): Observable<any> {
-    return this.http.post(this.api_prefix + '/resetpassword', body);
+  SignIn(data): Observable<any> {
+    let API_URL = this.api_prefix + "/signin";
+    return this.http.post(API_URL, data)
+      .pipe(
+        catchError(this.error)
+      )
   }
 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    showSuccess(): Observable<any>
-    {
-        return this.http.get(this.api_prefix + "/");
-    
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-    SignIn(data): Observable<any> {
-      let API_URL = this.api_prefix + "/signin";
-      return this.http.post(API_URL, data)
-        .pipe(
-          catchError(this.error)
-        )
-    }
-
-      // Sign-up
+  // Sign-up
   signUp(data): Observable<any> {
-   let API_URL = this.api_prefix + "/users/signup";
-   return this.http.post(API_URL, data)
+    let API_URL = this.api_prefix + "/users/signup";
+    return this.http.post(API_URL, data)
       .pipe(
         catchError(this.error)
       )
@@ -103,29 +60,28 @@ export class UserServiceService
   forgotPwd(data): Observable<any> {
     let API_URL = this.api_prefix + "/users/resetpassword";
     return this.http.post(API_URL, data)
-       .pipe(
-         catchError(this.error)
-       )
-   }
-   ResetPwd(data): Observable<any> {
-    let API_URL = this.api_prefix + "/users/forgotpwd";
-    return this.http.post(API_URL, data)
-       .pipe(
-         catchError(this.error)
-       )
-   }
-
-    
- // Handle Errors 
- error(error: HttpErrorResponse) {
-  let errorMessage = '';
-  if (error.error instanceof ErrorEvent) {
-    errorMessage = error.error.message;
-  } else {
-    errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      .pipe(
+        catchError(this.error)
+      )
   }
-  console.log(errorMessage);
-  return throwError(errorMessage);
-}
+  reset( email: string): Observable<any> {
+    return this.http.post(this.api_prefix + '/forgotpwd', {
 
+      email,
+
+    }, httpOptions)
+
+  }
+  // Handle Errors
+  error(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = error.error.message;
+    } else {
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
+    console.log(errorMessage);
+    return throwError(errorMessage);
+  }
+
+}

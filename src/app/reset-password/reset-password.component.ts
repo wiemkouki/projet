@@ -17,20 +17,20 @@ export class ResetPasswordComponent implements OnInit {
   constructor( private router:Router , private route: ActivatedRoute, private userService: UserServiceService) { }
 
   ngOnInit(): void {
-    this.userService.showSuccess().subscribe(function(data) {
-      // this.products.push(data);
-      this.route.queryParams.subscribe(params => {
-        this.name = params['name'];
-      });
-    });
+    // this.userService.showSuccess().subscribe(function(data) {
+    //   // this.products.push(data);
+    //   this.route.queryParams.subscribe(params => {
+    //     this.name = params['name'];
+    //   });
+    // });
   }
  onSubmit(): void {
 
     const { email } = this.form;
 
-    this.userService.ResetPwd(email).subscribe(
+    this.userService.reset(email).subscribe(
       data => {
-      this.router.navigate(['/forgotpwd']);
+
     }),
     err => {
       this.errorMessage = err.error.message;
