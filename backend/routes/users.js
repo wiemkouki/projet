@@ -311,6 +311,42 @@ router.post('/signup', function (req, res, next) {
       };
     });
   });
+///change
+ router.post('/changepwd', function (req, res) {
+    const { password, email } = req.body;
+    User.findOne({ where: { email: email } }).then(user =>
+      {
+        bcrypt.compare(password, user.password).then(result =>
+          {
+          if (result)
+          {
+            try {
+
+              bcrypt.genSalt(saltRounds, function (err, salt) {
+                bcrypt.hash( req.body.newpassword, salt, async function (err, hash) {
+                  user.update({
+                    password: hash,
+                  }).then(user => prepareResponse(res, 200, { success: true }, 'application/json')).catch(error => console.log(error))
+                });
+              });
+
+            }
+            catch (error) {
+              console.log(error)
+              prepareResponse(res, 500, { success: false }, 'application/json');
+
+            };
+
+          }
+          else
+          {
+            prepareResponse(res, 500, { success: false }, 'application/json');
+          }
+        });
+    })
+    .catch(error => console.log(error));
+  });
+
 
   //LOGOUT
   router.get('/logout', (req, res, next) => {

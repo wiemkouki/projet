@@ -27,13 +27,13 @@
 
 
                     <input formControlName="password" id="password" type="password" class="form-control"
-                    placeholder="Password " [(ngModel)]="resetpwd"
+                    placeholder="Password " [(ngModel)]="password"
                     >
                     <br>
                     <input  placeholder="Confirm Password "
                     name="confirmpassword"
                     type="password" class="form-control" formControlName="password_confirmation" id="password_confirmation"
-                    >
+                    [(ngModel)]="confirmPassword" >
 
                   </div>
                 </div>

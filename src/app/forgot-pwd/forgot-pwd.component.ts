@@ -10,31 +10,42 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 export class ForgotPwdComponent implements OnInit {
   form: FormGroup;
+  errorMessage = '';
+
   constructor(private userService: UserServiceService,
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder) {
-      this.form = formBuilder.group({
-        'reset_password_code': [''],
-        'password': ['', Validators.required],
-        'password_confirmation': ['', Validators.required]
-      });
+    this.form = formBuilder.group({
+      'reset_password_code': [''],
+      'password': ['', Validators.required],
+      'password_confirmation': ['', Validators.required]
+    });
   }
 
   ngOnInit(): void {
+}
 
-  }
-  resetpwd:string
+
+  password: string
+  confirmPassword: string
   onSubmit(form) {
-    console.log(this.resetpwd)
+    console.log(this.password)
+    console.log(this.confirmPassword)
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.userService.forgot({ id: params.id, password: this.resetpwd })
-            .subscribe(result => {
-              this.form.controls['reset_password_code'].setValue(params['code']);
-              this.router.navigate(['/login']);
-            });
+          if (this.password == this.confirmPassword) {
+            this.userService.forgot({ id: params.id, password: this.password })
+              .subscribe(result => {
+                this.form.controls['reset_password_code'].setValue(params['code']);
+                this.router.navigate(['/login']);
+              });
+          }else{
+            console.log("passwords does not match !")
+          }
+
+
 
         });
   }
