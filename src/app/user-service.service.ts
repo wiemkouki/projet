@@ -45,13 +45,23 @@ export class UserServiceService
 
 
 
-  RequestReset(body): Observable<any> {
-    return this.http.post(this.api_prefix + '/resetpassword', body);
-  }
 
  
+  reset( email: string): Observable<any> {
+    return this.http.post(this.api_prefix + '/forgotpwd', {
+    
+      email
+      
+    }, httpOptions);
+  }
 
 
+ 
+  forgot( email: string): Observable<any> {
+    return this.http.post(this.api_prefix + '/resetpassword', {
+    email
+    }, httpOptions);
+  }
 
 
 
@@ -75,45 +85,6 @@ export class UserServiceService
 
 
 
-
-
-
-
-
-
-
-
-    SignIn(data): Observable<any> {
-      let API_URL = this.api_prefix + "/signin";
-      return this.http.post(API_URL, data)
-        .pipe(
-          catchError(this.error)
-        )
-    }
-
-      // Sign-up
-  signUp(data): Observable<any> {
-   let API_URL = this.api_prefix + "/users/signup";
-   return this.http.post(API_URL, data)
-      .pipe(
-        catchError(this.error)
-      )
-  }
-
-  forgotPwd(data): Observable<any> {
-    let API_URL = this.api_prefix + "/users/resetpassword";
-    return this.http.post(API_URL, data)
-       .pipe(
-         catchError(this.error)
-       )
-   }
-   ResetPwd(data): Observable<any> {
-    let API_URL = this.api_prefix + "/users/forgotpwd";
-    return this.http.post(API_URL, data)
-       .pipe(
-         catchError(this.error)
-       )
-   }
 
     
  // Handle Errors 
