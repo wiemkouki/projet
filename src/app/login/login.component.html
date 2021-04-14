@@ -1,170 +1,118 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-    <title></title>
-  </head>
-  <body>
-    <div id="logreg-forms">
-      <form class="form-signin" *ngIf="!isLoggedIn"
-      name="form"
-      (ngSubmit)="f.form.valid && onSubmit()"
-      #f="ngForm"
-      novalidate>
-        <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">
-          Se connecter
-        </h1>
-        <div class="social-login">
-          <button class="btn facebook-btn social-btn" type="button">
-            <span
-              ><i class="fab fa-facebook-f"></i> Se connecter avec
-              Facebook</span
-            >
-          </button>
-          <button class="btn google-btn social-btn" type="button">
-            <span
-              ><i class="fab fa-google-plus-g"></i> Se connecter avec
-              Gmail</span
-            >
-          </button>
-        </div>
-        <p style="text-align: center"></p>
-        <input
-        type="text"
-        name="email"
-        [(ngModel)]="form.email"
-        required
-        #email="ngModel"
-          class="form-control"
-          placeholder="Email address"
 
-        />
-        <div
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+<div class="container">
+
+
+    <div class="omb_login">
+    	<h3 class="omb_authTitle">Login or <a href="/register">Sign up</a></h3>
+		<div class="row omb_row-sm-offset-3 omb_socialButtons">
+    	    <div class="col-xs-4 col-sm-2">
+		        <a href="#" class="btn btn-lg btn-block omb_btn-facebook">
+			        <i class="fa fa-facebook visible-xs"></i>
+			        <span class="hidden-xs">Facebook</span>
+		        </a>
+	        </div>
+        	<div class="col-xs-4 col-sm-2">
+		        <a href="#" class="btn btn-lg btn-block omb_btn-twitter">
+			        <i class="fa fa-twitter visible-xs"></i>
+			        <span class="hidden-xs">Twitter</span>
+		        </a>
+	        </div>
+        	<div class="col-xs-4 col-sm-2">
+		        <a href="#" class="btn btn-lg btn-block omb_btn-google">
+			        <i class="fa fa-google-plus visible-xs"></i>
+			        <span class="hidden-xs">Google+</span>
+		        </a>
+	        </div>
+		</div>
+
+		<div class="row omb_row-sm-offset-3 omb_loginOr">
+			<div class="col-xs-12 col-sm-6">
+				<hr class="omb_hrOr">
+				<span class="omb_spanOr">or</span>
+			</div>
+		</div>
+
+		<div class="row omb_row-sm-offset-3">
+			<div class="col-xs-12 col-sm-6">
+			    <form class="omb_loginForm" action="" autocomplete="off" method="POST" class="form-signin" *ngIf="!isLoggedIn"
+          name="form"
+          (ngSubmit)="f.form.valid && onSubmit()"
+          #f="ngForm"
+          novalidate>
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-user"></i></span>
+						<input  type="text"
+            name="email"
+            [(ngModel)]="form.email"
+            required
+            #email="ngModel"
+              class="form-control"
+              placeholder="Email address">
+
+					</div>
+          <div
           class="alert alert-danger"
           role="alert"
           *ngIf="email.errors && f.submitted"
         >
         Email is required!
         </div>
-        <input
-        type="password"
-        class="form-control"
-        name="password"
-        [(ngModel)]="form.password"
-        required
-        minlength="6"
-        #password="ngModel"
-         placeholder="Password"
+					<span class="help-block"></span>
 
-        />
-        <div
-        class="alert alert-danger"
-        role="alert"
-        *ngIf="password.errors && f.submitted"
-      >
-        <div *ngIf="password.errors.required">Password is required</div>
-        <div *ngIf="password.errors.minlength">
-          Password must be at least 6 characters
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+						<input type="password"
+            class="form-control"
+            name="password"
+            [(ngModel)]="form.password"
+            required
+            minlength="6"
+            #password="ngModel"
+             placeholder="Password">
+					</div>
+          <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="password.errors && f.submitted"
+        >
+          <div *ngIf="password.errors.required">Password is required</div>
+          <div *ngIf="password.errors.minlength">
+            Password must be at least 6 characters
+          </div>
         </div>
-      </div>
-
-        <button
-
-          class="btn btn-success btn-block"
-          type="submit"
-        >
-          <i class="fas fa-sign-in-alt"></i> Connexion
-        </button>
-
-        <a href="/reset-password" id="forgot_pswd">Mot de passe oublié ?</a>
-        <hr />
-        <!-- <p>Don't have an account!</p>  -->
-        <button
-          [routerLink]="'/register'"
-          class="btn btn-primary btn-block"
-          type="button"
-          id="btn-signup"
-        >
-          <i class="fas fa-user-plus"></i> Créer une compte
-        </button>
-      </form>
-
-      <form action="/reset/password/" class="form-reset">
-        <input
-          type="email"
-          id="resetEmail"
-          class="form-control"
-          placeholder="Email address"
-          required=""
-          autofocus=""
-        />
-        <button class="btn btn-primary btn-block" type="submit">
-          Nouvelle Mot de passe
-        </button>
-        <a href="#" id="cancel_reset"
-          ><i class="fas fa-angle-left"></i> Précéndent</a
-        >
-      </form>
-
-      <form action="/signup/" class="form-signup">
-        <div class="social-login">
-          <button class="btn facebook-btn social-btn" type="button">
-            <span><i class="fab fa-facebook-f"></i> Sign up with Facebook</span>
-          </button>
-        </div>
-        <div class="social-login">
-          <button class="btn google-btn social-btn" type="button">
-            <span><i class="fab fa-google-plus-g"></i> Sign up with Gmail</span>
-          </button>
+        <div class="row omb_row-sm-offset-3 omb_loginOr">
+          <div class="col-xs-12 col-sm-6">
+            <hr class="omb_hrOr">
+            <span class="omb_spanOr"></span>
+          </div>
         </div>
 
-        <p style="text-align: center">OR</p>
+					<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+				</form>
+			</div>
+    	</div>
+		<div class="row omb_row-sm-offset-3">
+			<div class="col-xs-12 col-sm-3">
+				<label class="checkbox">
+					<input type="checkbox" value="remember-me">Remember Me
+				</label>
+			</div>
+			<div class="col-xs-12 col-sm-3">
+				<p class="omb_forgotPwd">
+					<a href="/reset-password">Forgot password?</a>
+				</p>
+			</div>
+		</div>
+	</div>
 
-        <input
-          type="text"
-          id="user-name"
-          class="form-control"
-          placeholder="Full name"
-          required=""
-          autofocus=""
-        />
-        <input
-          type="email"
-          id="user-email"
-          class="form-control"
-          placeholder="Email address"
-          required
-          autofocus=""
-        />
-        <input
-          type="password"
-          id="user-pass"
-          class="form-control"
-          placeholder="Password"
-          required
-          autofocus=""
-        />
-        <input
-          type="password"
-          id="user-repeatpass"
-          class="form-control"
-          placeholder="Repeat Password"
-          required
-          autofocus=""
-        />
 
-        <button class="btn btn-primary btn-block" type="submit">
-          <i class="fas fa-user-plus"></i> Sign Up
-        </button>
 
-        <a href="#" id="cancel_signup"
-          ><i class="fas fa-angle-left"></i> Back</a
-        >
-      </form>
-      <br />
-    </div>
-  </body>
-</html>
+        </div>

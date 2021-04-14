@@ -348,6 +348,33 @@ router.post('/signup', function (req, res, next) {
   });
 
 
+
+
+  //UPDATE PROFIL
+router.put('/updateP',(req ,res, next) => {
+
+  const { password, email } = req.body;
+  User.findOne({ where: { email: email } }).then(user =>
+    {
+
+      user.update({
+        username,
+
+
+    
+        createdAt: new Date(),
+        updatedAt: new Date(),
+
+
+      })
+    });
+
+
+});
+
+
+
+
   //LOGOUT
   router.get('/logout', (req, res, next) => {
     try {
