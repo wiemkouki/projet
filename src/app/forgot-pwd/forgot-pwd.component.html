@@ -27,10 +27,10 @@
 
 
                     <input formControlName="password" id="password" type="password" class="form-control"
-                    placeholder="Password " [(ngModel)]="password"
+                    placeholder="Mot de passe " [(ngModel)]="password"
                     >
                     <br>
-                    <input  placeholder="Confirm Password "
+                    <input  placeholder="Confirmer Mot de passe "
                     name="confirmpassword"
                     type="password" class="form-control" formControlName="password_confirmation" id="password_confirmation"
                     [(ngModel)]="confirmPassword" >
@@ -38,10 +38,10 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <button [disabled]="form.invalid" type="submit" class="btn btn-primary btn-block">Confirm</button>
+                  <button [disabled]="form.invalid" type="submit" class="btn btn-primary btn-block">Confirmer</button>
                 </div>
                 <div class="form-group">
-                  <a [routerLink]="['/login']">Back to login.</a>
+                  <a [routerLink]="['/login']">Connexion</a>
               </div>
 
               </form>

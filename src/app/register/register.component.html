@@ -84,9 +84,9 @@
 		minlength="6"
 		#password="ngModel">
 		<div class="alert-danger" *ngIf="password.errors && f.submitted">
-			<div *ngIf="password.errors.required">Password is required</div>
+			<div *ngIf="password.errors.required">Mot de passe requis !</div>
 			<div *ngIf="password.errors.minlength">
-			  Password must be at least 6 characters
+        Le mot de passe doit être au moins de 6 caractères!
 			</div>
 		  </div>
 	</div> <!-- form-group end.// -->
@@ -99,16 +99,16 @@
     <small class="text-muted">En cliquant sur le bouton `` S'inscrire '', vous confirmez que vous acceptez notre
 		Conditions d'utilisation et politique de confidentialité.</small>
 		<div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-			Signup failed!<br />{{ errorMessage }}
+		Connexion échoué !<br />{{ errorMessage }}
 		  </div>
 
 </form>
 
 <div class="alert alert-success" *ngIf="isSuccessful">
-  Your registration is successful!
+  Votre inscription est réussie!
   </div>
 </article> <!-- card-body end .// -->
-<div class="border-top card-body text-center">Have an account? <a href="/login">Log In</a></div>
+<div class="border-top card-body text-center">avez-vous déjà un compte ? <a href="/login">Connexion</a></div>
 </div> <!-- card.// -->
 </div> <!-- col.//-->
 

@@ -32,7 +32,7 @@
     font-size: 10pt;
     font-weight: lighter;
     font-family:  Helvetica ;
-} 
+}
 
 label .somme-label {
     color: #EB692D;
@@ -48,11 +48,11 @@ label .somme-label {
     margin-right: auto;
     width: 760px ;
     height: 37px;
-    
+
 }
 .navbar-titles{
     font-weight: lighter;
-    
+
 }
 .navText{
     font-size: 8pt;
@@ -71,7 +71,7 @@ mat-icon {
 ;
 }
 footer{
-position: fixed;
+position:sticky;
 bottom: 0;
 left: 0;
 
