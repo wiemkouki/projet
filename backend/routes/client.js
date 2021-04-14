@@ -13,54 +13,34 @@ const prepareResponse = (response, status, body, type) =>
 router.get('/listClient', async function (req, res, next) {
   prepareResponse(res, 200, { success: true }, 'application/json');
 });
-
-
-// Create Client
-router.post('/createClient', async function (req, res, next) 
-{
-  let {nom,prenom,tel,email,adresse} = req.body;
-    
-      let new_client =  Client.create({
-        nom,
-        prenom,
-        tel,
-        email,
-        adresse,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      });
+///create
+router.post('/create', function (req, res, next) {
+  Client.findOne({
+    where: {
+      email: req.body.email
+    }
+ }).then(Client => {
+    if (Client) {
       const response = {
-        success: true,
-        token,
-        message: "User created successfully."
+        success: false,
+        message: "Email already exist !"
       };
+      prepareResponse(res, 500, response, 'application/json')
 
-prepareResponse(res, 200, response, 'application/json');});
+    } else {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//      try {
-//       const response = {
-//         success: true,
-//         token,
-//         message: "User created successfully."
-//       };
-
-// prepareResponse(res, 200, response, 'application/json');
-// }
-// catch(error)
-// {
-// prepareResponse(res, 500, { success: false }, 'application/json');
-// });
+      let { username, password, role, email } = req.body;
+      bcrypt.genSalt(saltRounds, function (err, salt) {
+        bcrypt.hash(password, salt, async function (err, hash) {
+          let new_user = await Client.create({
+            username,
+            password: hash,
+            role,
+            email,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        }
+      });
+    });
+  });
+  });

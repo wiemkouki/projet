@@ -52,9 +52,9 @@
 		#email="ngModel"
 		>
 		<div class="alert-danger" *ngIf="email.errors && f.submitted">
-			<div *ngIf="email.errors.required">Email is required</div>
+			<div *ngIf="email.errors.required">Adresse E-mail est requis !</div>
 			<div *ngIf="email.errors.email">
-			  Email must be a valid email address
+			  Adresse E-mail doit être valide 
 			</div>
 		  </div>
 		<small class="form-text text-muted">Nous ne partagerons jamais votre e-mail avec qui que ce soit.</small>
