@@ -17,6 +17,7 @@
 
   </mat-toolbar-row>
 </mat-toolbar>
+
 <mat-toolbar  color="secondary" >
 
     <div fxShow="true" fxHide.gt-sm="false">
@@ -27,9 +28,8 @@
 
 
     <div fxShow="true" fxHide.lt-md="true" >
-      <a mat-button [routerLink]="'/accounts'">
-        Tout nos produits </a>
-      <a mat-button [routerLink]="'/accounts'"> <img height="21,5px" width="21,5px" src="../assets/DaijaraBasicsIcon.png" alt=""> Daijara Basics </a>
+      <a mat-button [routerLink]="'/catalog'">Tout nos produits </a>
+      <a mat-button [routerLink]="'/catalog'"> <img height="21,5px" width="21,5px" src="../assets/DaijaraBasicsIcon.png" alt=""> Daijara Basics </a>
 
       <a mat-button [routerLink]="'/accounts'">  <img src="../assets//ElectrinquePhotoIcon.png" alt=""> Electronique et photo </a>
       <a mat-button [routerLink]="'/create-account'"> <img src="../assets/cuisineIcon.png" alt=""> Cuisine, Ménage et Salon </a>

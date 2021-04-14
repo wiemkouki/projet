@@ -22,6 +22,7 @@ import { ProfilComponent } from './profil/profil.component';
 import { UserServiceService } from './user-service.service';
 import { ForgotPwdComponent } from './forgot-pwd/forgot-pwd.component';
 import { ChangepwdComponent } from './changepwd/changepwd.component';
+import { CatalogComponent } from './catalog/catalog.component';
 
 const Routes: Routes= [
 
@@ -31,7 +32,8 @@ const Routes: Routes= [
   {path:'reset-password',component: ResetPasswordComponent},
   {path:'profil',component: ProfilComponent},
   {path:'forgotpwd/:id',component: ForgotPwdComponent},
-  {path:'changepwd',component: ChangepwdComponent}
+  {path:'changepwd',component: ChangepwdComponent},
+  {path:'catalog',component: CatalogComponent}
   ]
 
 @NgModule({
@@ -44,7 +46,8 @@ const Routes: Routes= [
     ProfilComponent,
     ForgotPwdComponent,
     RegisterComponent,
-    ChangepwdComponent
+    ChangepwdComponent,
+    CatalogComponent
 
 
 
