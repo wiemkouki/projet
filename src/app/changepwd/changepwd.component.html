@@ -1,0 +1,78 @@
+
+
+
+<div class="container">
+  <div class="row gutters">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="account-settings">
+            <div class="user-profile">
+              <div class="user-avatar">
+                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Maxwell Admin">
+              </div>
+              <h5 class="user-name">Yuki Hayashi</h5>
+              <h6 class="user-email">yuki@Maxwell.com</h6>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <h6 class="mb-3 text-primary">Changer Mot de Passe</h6>
+            </div>
+
+
+            </div>
+
+
+            <form id="change-form" autocomplete="off" class="form" method="post"  autocomplete="off"
+            name="form"
+            novalidate (ngSubmit)="onSubmit(form)" [formGroup]="form">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" >
+              <div class="form-group">
+                <label>Mot de passe </label>
+                <input name="Currentpassword"
+                type="password" class="form-control" formControlName="Currentpassword" id="Currentpassword"
+                [(ngModel)]="Currentpassword" placeholder="Nouveau Mot de passe">
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+              <div class="form-group">
+                <label for="Newpassword">Nouveau Mot de passe</label>
+                <input formControlName="Newpassword" id="password" type="password" class="form-control"
+                [(ngModel)]="Newpassword" placeholder="Nouveau Mot de passe">
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+              <div class="form-group">
+                <label for="phone">Confirmer Nouveau Mot de passe </label>
+                <input name="Confirmpassword"
+                type="password" class="form-control" formControlName="Confirmpassword" id="password_confirmation"
+                [(ngModel)]="Confirmpassword" placeholder="Confirmer Nouveau Mot de passe">
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+
+          <div class="row gutters">
+
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="text-right">
+                <button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
+                <button type="button" id="submit" name="submit" class="btn btn-primary">Update</button>
+              </div>
+            </div>
+          </div>
+        </div>
+            </form>
+      </div>
+    </div>
+  </div>
+  </div>
+

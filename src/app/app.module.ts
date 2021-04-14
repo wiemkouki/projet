@@ -21,6 +21,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { ProfilComponent } from './profil/profil.component';
 import { UserServiceService } from './user-service.service';
 import { ForgotPwdComponent } from './forgot-pwd/forgot-pwd.component';
+import { ChangepwdComponent } from './changepwd/changepwd.component';
 
 const Routes: Routes= [
 
@@ -29,9 +30,10 @@ const Routes: Routes= [
   {path:'register',component: RegisterComponent},
   {path:'reset-password',component: ResetPasswordComponent},
   {path:'profil',component: ProfilComponent},
-  {path:'forgotpwd/:id',component: ForgotPwdComponent}
+  {path:'forgotpwd/:id',component: ForgotPwdComponent},
+  {path:'changepwd',component: ChangepwdComponent}
   ]
-  
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,13 +43,14 @@ const Routes: Routes= [
     ResetPasswordComponent,
     ProfilComponent,
     ForgotPwdComponent,
-    RegisterComponent
-   
-   
-    
+    RegisterComponent,
+    ChangepwdComponent
+
+
+
   ],
   imports: [
-    
+
     BrowserModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
@@ -56,14 +59,14 @@ const Routes: Routes= [
     MatListModule,
     MatButtonModule,
     WavesModule,
-    ButtonsModule, 
-    IconsModule, 
+    ButtonsModule,
+    IconsModule,
     MatIconModule,
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forRoot(Routes),
     FormsModule,
-    
+
 
 
   ],
