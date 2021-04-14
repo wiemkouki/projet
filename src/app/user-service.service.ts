@@ -49,20 +49,18 @@ export class UserServiceService {
   }
 
 
-  // change(form: object) {
-  //   const url = `${this.api_prefix}/change`;
-  //   console.log(form);
-  //   return this.http.post(url, JSON.stringify(form), { headers: this.headerrs });
-  // }
-  change(password: string): Observable<any> {
-    return this.http.post(this.api_prefix + '/changepwd', {
-
-
-
-      password
-    }, httpOptions)
-
+  change(form: object) {
+    const url = `${this.api_prefix}/change`;
+    console.log(form);
+    return this.http.post(url, JSON.stringify(form), { headers: this.headerrs });
   }
+  // change(email: string ,newpassword: string): Observable<any> {
+  //   return this.http.post(this.api_prefix + '/changepwd', {
+  //     email,
+  //     newpassword
+  //   }, httpOptions)
+
+  // }
 
 
   // Handle Errors
