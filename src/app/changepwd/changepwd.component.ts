@@ -16,7 +16,7 @@ export class ChangepwdComponent implements OnInit {
     private formBuilder: FormBuilder,) {
     this.form = formBuilder.group({
       'reset_password_code': [''],
-      'Currentpassword': ['', Validators.required],
+      'password': ['', Validators.required],
       'Newpassword': ['', Validators.required],
       'Confirmpassword': ['', Validators.required]
     });
@@ -24,16 +24,15 @@ export class ChangepwdComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  Currentpassword: string
-  Confirmpassword: string
+  password: string
   Newpassword: string
-
+  Confirmpassword: string
 
 
   onSubmit(form) {
     console.log(this.Newpassword)
     console.log(this.Confirmpassword)
-   
+
     this.route.params
       .subscribe(
         (params: Params) => {
