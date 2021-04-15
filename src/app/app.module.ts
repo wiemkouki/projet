@@ -32,7 +32,7 @@ const Routes: Routes= [
   {path:'reset-password',component: ResetPasswordComponent},
   {path:'profil',component: ProfilComponent},
   {path:'forgotpwd/:id',component: ForgotPwdComponent},
-  {path:'changepwd',component: ChangepwdComponent},
+  {path:'changepwd/:id',component: ChangepwdComponent},
   {path:'catalog',component: CatalogComponent}
   ]
 

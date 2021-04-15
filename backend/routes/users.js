@@ -313,8 +313,8 @@ router.post('/signup', function (req, res, next) {
   });
 ///change
  router.post('/changepwd', function (req, res) {
-    const { password, email } = req.body;
-    User.findOne({ where: { email: email } }).then(user =>
+    const { password , id} = req.body;
+    User.findByPk(id).then(user =>
       {
         bcrypt.compare(password, user.password).then(result =>
           {
@@ -361,7 +361,7 @@ router.put('/updateP',(req ,res, next) => {
         username,
 
 
-    
+
         createdAt: new Date(),
         updatedAt: new Date(),
 

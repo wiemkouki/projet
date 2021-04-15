@@ -29,14 +29,16 @@ export class ChangepwdComponent implements OnInit {
   Newpassword: string
 
 
+
   onSubmit(form) {
     console.log(this.Newpassword)
     console.log(this.Confirmpassword)
+   
     this.route.params
       .subscribe(
         (params: Params) => {
           if (this.Newpassword == this.Confirmpassword) {
-            this.userService.change({ Newpassword: this.Newpassword })
+            this.userService.change({ id: params.id ,Newpassword: this.Newpassword })
               .subscribe(result => {
                 this.form.controls['reset_password_code'].setValue(params['code']);
                 this.router.navigate(['/profil']);
