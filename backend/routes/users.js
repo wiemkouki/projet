@@ -70,10 +70,12 @@ const prepareEmailSending = () => {
 
 //////////
 router.get('/', async function (req, res, next) {
+
+
   prepareResponse(res, 200, { success: true }, 'application/json');
 });
 //////
-/* GET users listing. */
+/* GET user listing. */
 router.get('/:id', async function (req, res, next) {
   let id = req.params.id;
 
@@ -82,9 +84,75 @@ router.get('/:id', async function (req, res, next) {
   prepareResponse(res, 200, user, 'application/json');
 });
 
+//GET ALL USERS
+
+router.get('/getAll', function(req, res, next)
+{
+    User.findAll({ attributes: ['id','username', 'email'] })
+        .then(User =>
+        {
+
+            prepareResponse(res, 200,  { success: true }, 'application/json');
+        })
+        .catch(error =>
+        {
+            const response = {
+                success: false,
+                message: "Some internal server error has occured while attempting to proceed " +
+                    "with your request, please try again."
+            };
+
+            prepareResponse(res, 500, response, 'application/json');
+        })
+});
+//update USER DONE
 
 
+router.post('/updateUser', function (req, res) {
+  const id = req.body.id;
+  console.log(req.body);
+  User.findByPk(id).then(user =>
+    {
 
+    try {
+      let { username, password, role, email } = req.body;
+      bcrypt.genSalt(saltRounds, function (err, salt) {
+        bcrypt.hash( req.body.password, salt, async function (err, hash) {
+          user.update({
+            username,
+            password: hash,
+            role,
+            email,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          }).then(user => prepareResponse(res, 200, { success: true }, 'application/json')).catch(error => console.log(error))
+        });
+      });
+
+    }
+    catch (error) {
+      console.log(error)
+      prepareResponse(res, 500, { success: false }, 'application/json');
+
+    };
+  });
+});
+//DELETE USER
+
+router.delete('/delete/:id', function (req, res) {
+  let id = req.params.id;
+  User.findByPk(id).then(User =>
+    {
+    try {
+         prepareResponse(res, 200, { success: true }, 'application/json')
+    }
+    catch (error) {
+      console.log(error)
+      prepareResponse(res, 500, { success: false }, 'application/json');
+
+    };
+  });
+});
 //SIGN IN API WITH JWT USING COOKIES
 router.post('/signin', function (req, res, next) {
   const { username, password, email } = req.body;
@@ -258,8 +326,7 @@ router.post('/signup', function (req, res, next) {
                   path: `${__dirname}/../emails/forgetpwd/images/daijara.png`,
                   cid: 'logo'
                 }],
-                //   html: `
-                //  <p>${process.env.RESET_PWD_KEY}/resetpwd/${token} </p> `
+
               },
               locals: {
                 id: user.id,
@@ -312,21 +379,25 @@ router.post('/signup', function (req, res, next) {
     });
   });
 ///change
- router.post('/changepwd', function (req, res) {
-    const { password , id} = req.body;
+ router.post('/changepwd/:id', function (req, res) {
+    const { password  } = req.body;
+// const id = req.params.id;
+let id = req.params.id;
     User.findByPk(id).then(user =>
       {
+        token = jwt.sign({ id : user.id }, process.env.SECRET,
+          { expiresIn: '1H' });
+
         bcrypt.compare(password, user.password).then(result =>
           {
           if (result)
           {
             try {
-
               bcrypt.genSalt(saltRounds, function (err, salt) {
                 bcrypt.hash( req.body.newpassword, salt, async function (err, hash) {
                   user.update({
-                    password: hash,
-                  }).then(user => prepareResponse(res, 200, { success: true }, 'application/json')).catch(error => console.log(error))
+                    newpassword: hash,
+                  }).then(user => prepareResponse(res, 200,   { success: true }, 'application/json')).catch(error => console.log(error))
                 });
               });
 

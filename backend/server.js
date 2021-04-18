@@ -6,7 +6,15 @@
 
 // server.listen(process.env.PORT || 3000);
 
-
+router.delete('/delete/:id', function (req, res) {
+  let id = req.params.id;
+  const account = db[id]
+ if (!account){
+   return res.status(400).json({error:"user not found!"});
+ }
+ delete db[id]
+return res.status(204)
+});
 // ////////////
 // const nodemailer = require('nodemailer');
 // const hbs = require('nodemailer-handlebars');
@@ -16,7 +24,7 @@
 // let transporter = nodemailer.createTransport({
 //     service: 'gmail',
 //     auth: {
-//         user: process.env.EMAIL || 'wiem.kouki@esen.tn', // TODO: your gmail account 
+//         user: process.env.EMAIL || 'wiem.kouki@esen.tn', // TODO: your gmail account
 //         pass: process.env.PASSWORD || '07481019' // TODO: your gmail password
 //     }
 // });

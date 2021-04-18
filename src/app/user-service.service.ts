@@ -3,6 +3,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { any } from 'sequelize/types/lib/operators';
+import { param } from 'express-validator';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -54,12 +55,11 @@ export class UserServiceService {
     console.log(form);
     return this.http.post(url, JSON.stringify(form), { headers: this.headerrs });
   }
-  // change(email: string ,newpassword: string): Observable<any> {
+  // change(id: any ,newpassword: string): Observable<any> {
   //   return this.http.post(this.api_prefix + '/changepwd', {
-  //     email,
+  //     id,
   //     newpassword
   //   }, httpOptions)
-
   // }
 
 
