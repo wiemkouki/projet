@@ -17,15 +17,21 @@ import { CartComponent } from './cart/cart.component';
 import { RegisterComponent } from './register/register.component';
 import { Routes , RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
+
+import { FacebookLoginProvider, SocialLoginModule, SocialAuthServiceConfig,GoogleLoginProvider } from 'angularx-social-login';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ProfilComponent } from './profil/profil.component';
 import { UserServiceService } from './user-service.service';
 import { ForgotPwdComponent } from './forgot-pwd/forgot-pwd.component';
 import { ChangepwdComponent } from './changepwd/changepwd.component';
 import { CatalogComponent } from './catalog/catalog.component';
-
+import { TestComponent } from './test/test.component';
+import { AdmindashComponent } from './admindash/admindash.component';
+import { CategorieComponent } from './categorie/categorie.component';
 const Routes: Routes= [
-
+  {path:'admindash',  component:AdmindashComponent } ,
+  {path:'categorie',component:CategorieComponent} ,
+  
   {path:'login',component: LoginComponent},
   {path:'cart',component: CartComponent},
   {path:'register',component: RegisterComponent},
@@ -33,8 +39,9 @@ const Routes: Routes= [
   {path:'profil',component: ProfilComponent},
   {path:'forgotpwd/:id',component: ForgotPwdComponent},
   {path:'changepwd/:id',component: ChangepwdComponent},
-  {path:'catalog',component: CatalogComponent}
-  ]
+  {path:'catalog',component: CatalogComponent},
+  {path:'test',component:  TestComponent}
+]
 
 @NgModule({
   declarations: [
@@ -47,13 +54,16 @@ const Routes: Routes= [
     ForgotPwdComponent,
     RegisterComponent,
     ChangepwdComponent,
-    CatalogComponent
+    CatalogComponent,
+    TestComponent,
+    AdmindashComponent,
+    CategorieComponent
 
 
 
   ],
   imports: [
-
+   
     BrowserModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
@@ -69,11 +79,30 @@ const Routes: Routes= [
     ReactiveFormsModule,
     RouterModule.forRoot(Routes),
     FormsModule,
+    SocialLoginModule
 
 
 
   ],
-  providers: [UserServiceService],
-  bootstrap: [AppComponent]
+  providers: [UserServiceService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+    {
+      id: GoogleLoginProvider.PROVIDER_ID,
+      provider: new GoogleLoginProvider(
+        '975189348983-n9bq8niid4t71uqq6lppg3g97gurdjak.apps.googleusercontent.com'
+      )
+    },
+    {
+      id: FacebookLoginProvider.PROVIDER_ID,
+      provider: new FacebookLoginProvider('1155701404843582')
+    }
+  ]
+} as SocialAuthServiceConfig,
+}
+  ], bootstrap: [AppComponent]
 })
 export class AppModule { }

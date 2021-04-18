@@ -15,25 +15,25 @@
 <div class="container">
   <div class="omb_login">
     <h3 class="omb_authTitle">
-      Connexion ou <a href="/register">S'inscrire</a>
+      Connexion ou <a  [routerLink]="'/register'">S'inscrire</a>
     </h3>
     <div class="row omb_row-sm-offset-3 omb_socialButtons">
-      <div class="col-xs-4 col-sm-2">
-        <a href="#" class="btn btn-lg btn-block omb_btn-facebook">
-          <i class="fa fa-facebook visible-xs"></i>
-          <span class="hidden-xs">Facebook</span>
+      <div   class="col-xs-4 col-sm-2">
+        <a  class="btn btn-lg btn-block omb_btn-facebook"  >
+          <i class="fa fa-facebook visible-xs" ></i>
+          <span class="hidden-xs" (click)="loginWithFacebook()">Facebook</span>
         </a>
       </div>
       <div class="col-xs-4 col-sm-2">
-        <a href="#" class="btn btn-lg btn-block omb_btn-twitter">
+        <a  class="btn btn-lg btn-block omb_btn-twitter">
           <i class="fa fa-twitter visible-xs"></i>
           <span class="hidden-xs">Twitter</span>
         </a>
       </div>
       <div class="col-xs-4 col-sm-2">
-        <a href="#" class="btn btn-lg btn-block omb_btn-google">
+        <a class="btn btn-lg btn-block omb_btn-google">
           <i class="fa fa-google-plus visible-xs"></i>
-          <span class="hidden-xs">Gmail</span>
+          <span class="hidden-xs"(click)="loginWithGoogle()" >Gmail</span>
         </a>
       </div>
     </div>
@@ -69,6 +69,7 @@
               #email="ngModel"
               class="form-control"
               placeholder=" Adresse E-mail"
+        
             />
           </div>
           <div
@@ -123,7 +124,7 @@
       </div>
       <div class="col-xs-12 col-sm-3">
         <p class="omb_forgotPwd">
-          <a href="/reset-password">Mot de passe oublié ?</a>
+          <a  [routerLink]="'/reset-password'">Mot de passe oublié ?</a>
         </p>
       </div>
     </div>
