@@ -35,9 +35,10 @@ seq.authenticate()
     });
 
 var usersRouter = require('./routes/users');
-
+var clientRouter = require('./routes/client');
 app.use('/users', usersRouter);
-// app.use('/client', clientRouter);
+app.use('/client', clientRouter);
+
 // app.use('/admin', adminRouter);
 // app.use('/categorie', categorieRouter);
 // app.use('/commande', commandeRouter);

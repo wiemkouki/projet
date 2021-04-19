@@ -7,6 +7,7 @@ const storeToken = require('./auth/storeToken');
 const nodemailer = require("nodemailer");
 var Email = require('email-templates');
 var path = require('path');
+const db = require("../models");
 
 
 const saltRounds = 10;
@@ -69,11 +70,11 @@ const prepareEmailSending = () => {
 
 
 //////////
-router.get('/', async function (req, res, next) {
+// router.get('/', async function (req, res, next) {
 
 
-  prepareResponse(res, 200, { success: true }, 'application/json');
-});
+//   prepareResponse(res, 200, { success: true }, 'application/json');
+// });
 //////
 /* GET user listing. */
 router.get('/:id', async function (req, res, next) {
@@ -86,13 +87,12 @@ router.get('/:id', async function (req, res, next) {
 
 //GET ALL USERS
 
-router.get('/getAll', function(req, res, next)
+router.get('/getAll', async function(req, res, next)
 {
-    User.findAll({ attributes: ['id','username', 'email'] })
+   let user =  await User.findAll({ attributes: ['id','username', 'email'] })
         .then(User =>
         {
-
-            prepareResponse(res, 200,  { success: true }, 'application/json');
+            prepareResponse(res, 200, user,  { success: true }, 'application/json');
         })
         .catch(error =>
         {
@@ -144,6 +144,7 @@ router.delete('/delete/:id', function (req, res) {
   User.findByPk(id).then(User =>
     {
     try {
+         User.destroy(id)
          prepareResponse(res, 200, { success: true }, 'application/json')
     }
     catch (error) {
@@ -153,6 +154,8 @@ router.delete('/delete/:id', function (req, res) {
     };
   });
 });
+
+
 //SIGN IN API WITH JWT USING COOKIES
 router.post('/signin', function (req, res, next) {
   const { username, password, email } = req.body;
