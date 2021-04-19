@@ -14,7 +14,7 @@ module.exports = {
       onUpdate: 'restrict',
       onDelete: 'restrict'
     },{
-      after: 'id' /* after option is only supported by MySQL */
+      after: 'id' 
     });
   },
 

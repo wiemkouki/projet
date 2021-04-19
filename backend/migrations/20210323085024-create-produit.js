@@ -16,21 +16,10 @@ module.exports = {
           model: 'commandes',
           key: 'id'
         },
-     
+
         onUpdate: 'restrict',
         onDelete: 'restrict' },
 
-      //    id_images_produit:
-      // {
-      //   type: Sequelize.INTEGER,
-      //     allowNull: false,
-      //     references: {
-      //         model: 'images_produits',
-      //         key: 'id'
-      //       },
-       
-      //       onUpdate: 'restrict',
-      //       onDelete: 'restrict' },
 
         id_panier:
         {
@@ -40,10 +29,10 @@ module.exports = {
             model: 'paniers',
             key: 'id'
           },
-     
+
           onUpdate: 'restrict',
           onDelete: 'restrict' },
-      
+
       libelle: {
         type: Sequelize.STRING
       },
