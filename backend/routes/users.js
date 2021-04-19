@@ -77,7 +77,7 @@ const prepareEmailSending = () => {
 // });
 //////
 /* GET user listing. */
-router.get('/:id', async function (req, res, next) {
+router.get('/getUser/:id', async function (req, res, next) {
   let id = req.params.id;
 
   const user = await User.findByPk(id);
@@ -87,12 +87,12 @@ router.get('/:id', async function (req, res, next) {
 
 //GET ALL USERS
 
-router.get('/getAll', async function(req, res, next)
+router.get('/getAll', function(req, res, next)
 {
-   let user =  await User.findAll({ attributes: ['id','username', 'email'] })
-        .then(User =>
+   User.findAll({ attributes: ['id','username', 'email'] })
+        .then(users =>
         {
-            prepareResponse(res, 200, user,  { success: true }, 'application/json');
+            prepareResponse(res, 200, users, 'application/json');
         })
         .catch(error =>
         {
@@ -382,15 +382,11 @@ router.post('/signup', function (req, res, next) {
     });
   });
 ///change
- router.post('/changepwd/:id', function (req, res) {
+ router.post('/changepwd', function (req, res) {
     const { password  } = req.body;
-// const id = req.params.id;
-let id = req.params.id;
+     let id = req.params.id;
     User.findByPk(id).then(user =>
       {
-        token = jwt.sign({ id : user.id }, process.env.SECRET,
-          { expiresIn: '1H' });
-
         bcrypt.compare(password, user.password).then(result =>
           {
           if (result)
@@ -408,9 +404,7 @@ let id = req.params.id;
             catch (error) {
               console.log(error)
               prepareResponse(res, 500, { success: false }, 'application/json');
-
             };
-
           }
           else
           {
@@ -420,34 +414,6 @@ let id = req.params.id;
     })
     .catch(error => console.log(error));
   });
-
-
-
-
-  //UPDATE PROFIL
-router.put('/updateP',(req ,res, next) => {
-
-  const { password, email } = req.body;
-  User.findOne({ where: { email: email } }).then(user =>
-    {
-
-      user.update({
-        username,
-
-
-
-        createdAt: new Date(),
-        updatedAt: new Date(),
-
-
-      })
-    });
-
-
-});
-
-
-
 
   //LOGOUT
   router.get('/logout', (req, res, next) => {

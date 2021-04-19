@@ -41,12 +41,22 @@ module.exports = (sequelize, DataTypes) => {
           references: {
             model: 'clients',
             key: 'id'},
-        }},
+        },
+
+        id_produit:
+        {
+          type: DataTypes.INTEGER,
+          allowNull: false, foreignKey: true,
+          references: {
+            model: 'produits',
+            key: 'id'},
+        }
+      },
 
         {
         sequelize,
-        modelName: 'Commande', 
-    
+        modelName: 'Commande',
+
          });
   return Commande;
 };

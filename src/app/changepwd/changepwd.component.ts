@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { UserServiceService } from '../user-service.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { param } from 'express-validator';
 @Component({
   selector: 'app-changepwd',
   templateUrl: './changepwd.component.html',
@@ -30,14 +31,18 @@ export class ChangepwdComponent implements OnInit {
 
 
   onSubmit(form) {
+
     console.log(this.Newpassword)
     console.log(this.Confirmpassword)
-console.log()
     this.route.params
       .subscribe(
         (params: Params) => {
           if (this.Newpassword == this.Confirmpassword) {
-            this.userService.change({ id: params.id ,password: this.Newpassword })
+
+            // localStorage.setItem('id', JSON.stringify(Params.id));
+            localStorage.getItem('id');
+
+            this.userService.change({password: this.Newpassword })
               .subscribe(result => {
                 this.form.controls['reset_password_code'].setValue(params['code']);
                 this.router.navigate(['/profil']);

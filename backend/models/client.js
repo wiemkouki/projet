@@ -4,7 +4,7 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Client extends Model {
-  
+
     static associate(models) {
       Client.hasMany(models.Commande, { foreignKey: 'id_commande', as: 'commande' });
       Client.hasOne(models.Paniers, { foreignKey: 'id_panier', as: 'panier' });
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         references: {
             model: 'Commandes',
             key: 'id'
-        },},  
+        },},
     id_panier:
     {
         type: DataTypes.INTEGER,
@@ -32,9 +32,9 @@ module.exports = (sequelize, DataTypes) => {
             model: 'Paniers',
             key: 'id'
         },
-       
+
      }
-  }, 
+  },
   {
     sequelize,
     modelName: 'Client',

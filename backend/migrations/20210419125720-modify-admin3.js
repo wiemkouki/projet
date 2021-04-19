@@ -1,28 +1,24 @@
 'use strict';
 
 module.exports = {
-  up: (queryInterface, Sequelize) =>
-  {
-    return queryInterface.addColumn('clients',
-     'id_panier', {
+  up: async (queryInterface, Sequelize) => {
+    return queryInterface.addColumn('admins', 'id_categorie', {
       type: Sequelize.INTEGER,
       allowNull: false,
       foreignKey:true,
       references: {
-        model: 'paniers',
+        model: 'categories',
         key: 'id'
       },
       onUpdate: 'restrict',
       onDelete: 'restrict'
-    },
-
-    {
+    },{
       after: 'id' /* after option is only supported by MySQL */
     });
+
   },
 
-  down: (queryInterface, Sequelize) =>
-  {
-    return queryInterface.removeColumn('clients','id_panier' );
+  down: async (queryInterface, Sequelize) => {
+    return queryInterface.removeColumn('admins', 'id_categorie');
   }
 };

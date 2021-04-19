@@ -37,6 +37,8 @@ onSubmit(): void {
 
   const { username, email, password,role } = this.form;
 
+ 
+
   this.userService.register(username, email, password, role).subscribe(
     data => {
       console.log(data);

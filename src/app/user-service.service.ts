@@ -51,7 +51,7 @@ export class UserServiceService {
 
 
   change(form: object) {
-    const url = `${this.api_prefix}/changepwd/:id`;
+    const url = `${this.api_prefix}/changepwd/`;
     console.log(form);
     return this.http.post(url, JSON.stringify(form), { headers: this.headerrs });
   }

@@ -31,14 +31,14 @@ import { CategorieComponent } from './categorie/categorie.component';
 const Routes: Routes= [
   {path:'admindash',  component:AdmindashComponent } ,
   {path:'categorie',component:CategorieComponent} ,
-  
+
   {path:'login',component: LoginComponent},
   {path:'cart',component: CartComponent},
   {path:'register',component: RegisterComponent},
   {path:'reset-password',component: ResetPasswordComponent},
   {path:'profil',component: ProfilComponent},
   {path:'forgotpwd/:id',component: ForgotPwdComponent},
-  {path:'changepwd/:id',component: ChangepwdComponent},
+  {path:'changepwd',component: ChangepwdComponent},
   {path:'catalog',component: CatalogComponent},
   {path:'test',component:  TestComponent}
 ]
@@ -63,7 +63,7 @@ const Routes: Routes= [
 
   ],
   imports: [
-   
+
     BrowserModule,
     FlexLayoutModule,
     BrowserAnimationsModule,

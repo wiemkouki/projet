@@ -11,19 +11,19 @@
 	<h4 class="card-title mt-2">Inscrivez vous</h4>
 </header>
 <article class="card-body">
-<form *ngIf="!isSuccessful" 
+<form *ngIf="!isSuccessful"
       name="form"
       (ngSubmit)="f.form.valid && onSubmit()"
       #f="ngForm"
       novalidate>
 	  <!-- <div class="login_wrapper" > -->
 		<!-- <div class="row" >
-			<div class="col-lg-6 col-md-6 col-xs-12 col-sm-6" > 
-				<a  class="btn btn-primary facebook" (click)="loginWithFacebook()"> 
+			<div class="col-lg-6 col-md-6 col-xs-12 col-sm-6" >
+				<a  class="btn btn-primary facebook" (click)="loginWithFacebook()">
 					<span> S'inscrire avec Facebook</span> <i class="fa fa-facebook"></i> </a> </div>
 			<div class="col-lg-6 col-md-6 col-xs-12 col-sm-6"> <a  class="btn btn-primary google-plus" (click)="loginWithGoogle()"> S'inscrire avec Google <i class="fa fa-google-plus"></i> </a> </div>
 		</div> </div> -->
-	<div class="form-row" *ngIf="isLoggedin === true">
+	<div class="form-row" >
 		<div class="col form-group">
 			<label>Nom & Prénom</label>
 		  	<input placeholder=""  type="text"
@@ -34,7 +34,7 @@
 			  minlength="3"
 			  maxlength="50"
 			  #username="ngModel"
-			  
+
 			>
 			  <div class="alert-danger" *ngIf="username.errors && f.submitted">
 				<div *ngIf="username.errors.required">Username is required</div>
@@ -62,7 +62,7 @@
 		<div class="alert-danger" *ngIf="email.errors && f.submitted">
 			<div *ngIf="email.errors.required">Adresse E-mail est requis !</div>
 			<div *ngIf="email.errors.email">
-			  Adresse E-mail doit être valide 
+			  Adresse E-mail doit être valide
 			</div>
 		  </div>
 		<small class="form-text text-muted">Nous ne partagerons jamais votre e-mail avec qui que ce soit.</small>

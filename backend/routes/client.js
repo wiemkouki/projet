@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const { client } = require("../models");
-
+const { Client } = require("../models");
 
 const prepareResponse = (response, status, body, type) => {
   console.log(body);
@@ -22,8 +21,8 @@ router.get("/:id", async function (req, res, next) {
 });
 // create client
 router.post("/create", function (req, res, next) {
-  client
-    .findOne({
+  Client
+    .findOne({ attributes: ['id'],
       where: {
         email: req.body.email,
       },
@@ -36,13 +35,15 @@ router.post("/create", function (req, res, next) {
         };
         prepareResponse(res, 500, response, "application/json");
       } else {
-        let { nom, prenom, tel, email, adresse } = req.body;
-        client.create({
+        let { nom, prenom, tel, email, adresse , id_commande , id_panier} = req.body;
+        Client.create({
           nom,
           prenom,
           tel,
           email,
           adresse,
+          id_commande,
+          id_panier,
           createdAt: new Date(),
           updatedAt: new Date(),
         });
