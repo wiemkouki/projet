@@ -107,7 +107,7 @@ router.post("/updateC", function (req, res) {
     }
   });
 });
-//DELETE USER
+//DELETE CLIENT
 
 router.delete("/delete/:id", function (req, res) {
   let id = req.params.id;
