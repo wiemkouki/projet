@@ -17,18 +17,12 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     adresse: DataTypes.STRING,
     is_deleted:DataTypes.BOOLEAN,
-    id_commande:
-    {
-        type: DataTypes.INTEGER,
-        allowNull: false, foreignKey: true,
-        references: {
-            model: 'Commandes',
-            key: 'id'
-        },},
+  
     id_panier:
     {
         type: DataTypes.INTEGER,
-        allowNull: false, foreignKey: true,
+        allowNull: true,
+        foreignKey: true,
         references: {
             model: 'Paniers',
             key: 'id'

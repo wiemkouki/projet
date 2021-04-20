@@ -277,8 +277,7 @@ router.post('/signup', function (req, res, next) {
                     path: `${__dirname}/../emails/email/images/daijara.png`,
                     cid: 'logo'
                   }],
-                  //   html: `
-                  //  <p>${process.env.CLIENT_URL}/signup/${token} </p> `
+
                 },
                 locals: {
 
@@ -384,13 +383,14 @@ router.post('/signup', function (req, res, next) {
     });
   });
 ///change
- router.post('/changepwd', function (req, res) {
-    const { password  } = req.body;
+ router.post('/changepwd/:id', function (req, res) {
+    const { password } = req.body;
      let id = req.params.id;
     User.findByPk(id).then(user =>
       {
         bcrypt.compare(password, user.password).then(result =>
           {
+            console.log(result);
           if (result)
           {
             try {
