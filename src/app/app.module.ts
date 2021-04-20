@@ -38,7 +38,6 @@ const Routes: Routes= [
   {path:'admindash',  component:AdmindashComponent } ,
   {path:'categorie',component:CategorieComponent} ,
 
- 
   {path:'login',component: LoginComponent},
   {path:'cart',component: CartComponent},
   {path:'register',component: RegisterComponent},
