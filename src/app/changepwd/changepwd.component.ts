@@ -39,10 +39,10 @@ export class ChangepwdComponent implements OnInit {
         (params: Params) => {
           if (this.Newpassword == this.Confirmpassword) {
 
-            // localStorage.setItem('id', JSON.stringify(Params.id));
+            localStorage.setItem('id', '4');
             localStorage.getItem('id');
 
-            this.userService.change({password: this.Newpassword })
+            this.userService.change(localStorage.getItem('id'), { newpassword: this.Newpassword , password: this.password})
               .subscribe(result => {
                 this.form.controls['reset_password_code'].setValue(params['code']);
                 this.router.navigate(['/profil']);
