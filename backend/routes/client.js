@@ -7,15 +7,12 @@ const prepareResponse = (response, status, body, type) => {
   response.set("Content-Type", type);
   response.status(status).send(body);
 };
-// Client list
-router.get("/listClient", async function (req, res, next) {
-  prepareResponse(res, 200, { success: true }, "application/json");
-});
+
 ///get client
-router.get("/:id", async function (req, res, next) {
+router.get("/getClient/:id", async function (req, res, next) {
   let id = req.params.id;
 
-  const client = await client.findByPk(id);
+  const client = await Client.findByPk(id);
 
   prepareResponse(res, 200, client, "application/json");
 });
@@ -44,6 +41,7 @@ router.post("/create", function (req, res, next) {
           adresse,
           id_commande,
           id_panier,
+          is_deleted: false,
           createdAt: new Date(),
           updatedAt: new Date(),
         });
@@ -58,8 +56,8 @@ router.post("/create", function (req, res, next) {
 });
 //get ALL CLient
 
-router.get("/", function (req, res, next) {
-  client
+router.get("/getAll", function (req, res, next) {
+  Client
     .findAll({ attributes: ["nom", "prenom", "email", "tel"] })
     .then((client) => {
       prepareResponse(res, 200, client, { success: true }, "application/json");
@@ -80,22 +78,21 @@ router.get("/", function (req, res, next) {
 router.post("/updateC", function (req, res) {
   const id = req.body.id;
   console.log(req.body);
-  client.findByPk(id).then((client) => {
+  Client.findByPk(id).then((Client) => {
     try {
       let { nom, prenom, tel, email, adresse } = req.body;
       bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(req.body.password, salt, async function (err, hash) {
-          client
+          Client
             .update({
               nom,
               prenom,
               tel,
               email,
               adresse,
-              createdAt: new Date(),
               updatedAt: new Date(),
             })
-            .then((client) =>
+            .then((Client) =>
               prepareResponse(res, 200, { success: true }, "application/json")
             )
             .catch((error) => console.log(error));
@@ -109,11 +106,13 @@ router.post("/updateC", function (req, res) {
 });
 //DELETE CLIENT
 
-router.delete("/delete/:id", function (req, res) {
+router.post("/delete/:id", function (req, res) {
   let id = req.params.id;
   client.findByPk(id).then((User) => {
     try {
-      client.destroy(id)
+      client.update({
+        is_deleted:true,
+      })
       prepareResponse(res, 200, { success: true }, "application/json");
     } catch (error) {
       console.log(error);

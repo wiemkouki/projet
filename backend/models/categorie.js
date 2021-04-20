@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   categorie.init({
     nom_cat: DataTypes.STRING,
     famille: DataTypes.STRING,
+    is_deleted:DataTypes.BOOLEAN,
     id_sous_categorie:
     {
         type: DataTypes.INTEGER,

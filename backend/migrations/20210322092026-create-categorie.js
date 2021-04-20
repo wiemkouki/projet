@@ -8,13 +8,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-   
-     
+
+
       nom_cat: {
         type: Sequelize.STRING
       },
       famille: {
         type: Sequelize.STRING
+      },
+      is_deleted:{
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

@@ -11,15 +11,16 @@ module.exports = (sequelize, DataTypes) => {
       // User.belongsToMany(Project, { through: UserProject });
 
     }
-  
+
   };
- 
+
     Admin.init({
       nom_boutique: DataTypes.STRING,
       tel: DataTypes.INTEGER,
       email: DataTypes.STRING,
       adresse: DataTypes.STRING,
       logo: DataTypes.STRING,
+      is_deleted:DataTypes.BOOLEAN,
       id_commande:
       {
         type: DataTypes.INTEGER,

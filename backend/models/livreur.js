@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Livreur.init({
     permis: DataTypes.STRING,
     cin: DataTypes.INTEGER,
+    is_deleted:DataTypes.BOOLEAN,
     id_commande:
     {
       type: DataTypes.INTEGER,

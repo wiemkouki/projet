@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   doc_justificatifs.init({
     libelle: DataTypes.STRING,
     url_doc: DataTypes.STRING,
+    is_deleted:DataTypes.BOOLEAN,
     id_livreur:
     {
       type: DataTypes.INTEGER,

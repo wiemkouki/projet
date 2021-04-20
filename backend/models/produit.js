@@ -19,8 +19,9 @@ module.exports = (sequelize, DataTypes) => {
     prix: DataTypes.INTEGER,
     max_rating: DataTypes.INTEGER,
     disponible: DataTypes.STRING,
-    is_deleted :DataTypes.INTEGER,
-    
+    is_deleted :DataTypes.BOOLEAN,
+
+
     id_commande:
     {
       type: DataTypes.INTEGER,

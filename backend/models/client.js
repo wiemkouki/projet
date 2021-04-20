@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     tel: DataTypes.INTEGER,
     email: DataTypes.STRING,
     adresse: DataTypes.STRING,
+    is_deleted:DataTypes.BOOLEAN,
     id_commande:
     {
         type: DataTypes.INTEGER,

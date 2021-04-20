@@ -16,11 +16,14 @@ module.exports = {
               model: 'produits',
               key: 'id'
             },
-       
+
             onUpdate: 'restrict',
             onDelete: 'restrict' },
       url: {
         type: Sequelize.STRING
+      },
+      is_deleted:{
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

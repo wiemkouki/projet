@@ -43,7 +43,6 @@ app.use('/categorie', categorieRouter);
 
 
 
-
 // app.use('/admin', adminRouter);
 // app.use('/commande', commandeRouter);
 // app.use('/doc_justificatifs', doc_justificatifsRouter);

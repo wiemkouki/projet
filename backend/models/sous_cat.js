@@ -4,7 +4,7 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Sous_cat extends Model {
-   
+
     static associate(models) {
       Sous_cat.belongsTo(models.categorie, { foreignKey: 'id_categorie', as: 'categorie' });
     }
@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-     
+
   id_categorie:
     {
         type: DataTypes.INTEGER,
@@ -24,7 +24,14 @@ module.exports = (sequelize, DataTypes) => {
         references: {
             model: 'categories',
             key: 'id'
-        },},},
+        },},
+
+
+
+        is_deleted :DataTypes.BOOLEAN,
+
+
+      },
 
       {
           sequelize,

@@ -17,6 +17,9 @@ module.exports = {
         key: 'id'
 
     },
+    is_deleted:{
+      type: Sequelize.BOOLEAN
+    },
 
     onUpdate: 'restrict',
     onDelete: 'restrict' },

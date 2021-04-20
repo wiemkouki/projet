@@ -16,10 +16,14 @@ module.exports = {
             model: 'categories',
             key: 'id'
           },
-     
+
           onUpdate: 'restrict',
           onDelete: 'restrict' },
-    
+          
+          is_deleted:{
+            type: Sequelize.BOOLEAN
+          },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -48,6 +48,9 @@ module.exports = {
       disponible: {
         type: Sequelize.STRING
       },
+      is_deleted:{
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

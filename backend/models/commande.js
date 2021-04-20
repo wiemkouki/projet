@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     quantite: DataTypes.INTEGER,
     status: DataTypes.STRING,
     adresse_livraison: DataTypes.STRING,
+    is_deleted:DataTypes.BOOLEAN,
     id_livreur:
     { type: DataTypes.INTEGER,
       allowNull: false, foreignKey: true,

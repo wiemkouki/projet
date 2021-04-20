@@ -16,10 +16,10 @@ module.exports = {
       //         model: 'produits',
       //         key: 'id'
       //       },
-       
+
       //       onUpdate: 'restrict',
       //       onDelete: 'restrict' },
-            
+
       caract_principale: {
         type: Sequelize.STRING
       },
@@ -34,6 +34,9 @@ module.exports = {
       },
       matiere: {
         type: Sequelize.STRING
+      },
+      is_deleted:{
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

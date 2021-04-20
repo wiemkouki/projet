@@ -123,6 +123,7 @@ router.post('/updateUser', function (req, res) {
             password: hash,
             role,
             email,
+
             createdAt: new Date(),
             updatedAt: new Date(),
           }).then(user => prepareResponse(res, 200, { success: true }, 'application/json')).catch(error => console.log(error))
@@ -139,12 +140,15 @@ router.post('/updateUser', function (req, res) {
 });
 //DELETE USER
 
-router.delete('/delete/:id', function (req, res) {
+router.post('/delete/:id', function (req, res) {
   let id = req.params.id;
   User.findByPk(id).then(User =>
     {
     try {
-         User.destroy(id)
+         User.update({
+           is_deleted:true,
+
+         })
          prepareResponse(res, 200, { success: true }, 'application/json')
     }
     catch (error) {
@@ -230,7 +234,6 @@ router.post('/signin', function (req, res, next) {
     }
   })
 });
-
 //SIGNUP
 router.post('/signup', function (req, res, next) {
   User.findOne({
@@ -247,7 +250,7 @@ router.post('/signup', function (req, res, next) {
 
     } else {
 
-      let { username, password, role, email } = req.body;
+      let { username, password, role, email,is_deleted } = req.body;
       bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(password, salt, async function (err, hash) {
           let new_user = await User.create({
@@ -255,6 +258,7 @@ router.post('/signup', function (req, res, next) {
             password: hash,
             role,
             email,
+            is_deleted: false,
             createdAt: new Date(),
             updatedAt: new Date(),
           });
@@ -285,8 +289,6 @@ router.post('/signup', function (req, res, next) {
                   token
 
                 }
-
-
               });
 
             const response = {

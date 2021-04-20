@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     couleur: DataTypes.STRING,
     modele: DataTypes.STRING,
     matiere: DataTypes.STRING,
+    is_deleted:DataTypes.BOOLEAN,
     id_produit:
       {
         type: DataTypes.INTEGER,
