@@ -11,6 +11,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      is_deleted:{
+        type: Sequelize.BOOLEAN
+      },
 
       nom_boutique: {
         type: Sequelize.STRING
@@ -35,7 +38,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-     
+
    });
   },
   down: async (queryInterface, Sequelize) => {

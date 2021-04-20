@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Panier.init({
+
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -35,7 +36,9 @@ module.exports = (sequelize, DataTypes) => {
       model: 'produits',
       key: 'id_produit'
     },},
+    is_deleted:DataTypes.BOOLEAN,
   },
+
     {
       sequelize,
       modelName: 'Paniers',

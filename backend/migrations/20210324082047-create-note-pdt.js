@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      
+
       id_produit:
       {
         type: Sequelize.INTEGER,
@@ -17,12 +17,15 @@ module.exports = {
           model: 'produits',
           key: 'id'
         },
-     
+
         onUpdate: 'restrict',
         onDelete: 'restrict' },
-        
+
       rating: {
         type: Sequelize.INTEGER
+      },
+      is_deleted:{
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

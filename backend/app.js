@@ -36,11 +36,14 @@ seq.authenticate()
 
 var usersRouter = require('./routes/users');
 var clientRouter = require('./routes/client');
+var categorieRouter = require('./routes/categorie');
 app.use('/users', usersRouter);
 app.use('/client', clientRouter);
+app.use('/categorie', categorieRouter);
+
+
 
 // app.use('/admin', adminRouter);
-// app.use('/categorie', categorieRouter);
 // app.use('/commande', commandeRouter);
 // app.use('/doc_justificatifs', doc_justificatifsRouter);
 // app.use('/fiche_tech', fiche_techRouter);

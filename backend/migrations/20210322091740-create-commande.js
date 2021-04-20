@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-  
+
       prix: {
         type: Sequelize.INTEGER
       },
@@ -23,6 +23,9 @@ module.exports = {
       },
       adresse_livraison: {
         type: Sequelize.STRING
+      },
+      is_deleted:{
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

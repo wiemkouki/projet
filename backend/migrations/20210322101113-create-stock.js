@@ -16,11 +16,14 @@ module.exports = {
           model: 'admins',
           key: 'id'
         },
-     
+
         onUpdate: 'restrict',
         onDelete: 'restrict' },
       description: {
         type: Sequelize.STRING
+      },
+      is_deleted:{
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
