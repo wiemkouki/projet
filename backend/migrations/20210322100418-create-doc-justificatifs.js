@@ -15,9 +15,21 @@ module.exports = {
       references: {
         model: 'Livreurs',
         key: 'id'
-     
+
     },
-     
+
+    onUpdate: 'restrict',
+    onDelete: 'restrict' },
+    id_admin:
+    {
+      type: Sequelize.INTEGER,
+      allowNull: false, foreignKey: true,
+      references: {
+        model: 'Admins',
+        key: 'id'
+
+    },
+
     onUpdate: 'restrict',
     onDelete: 'restrict' },
 
@@ -29,7 +41,7 @@ module.exports = {
           model: 'sup_admins',
           key: 'id'
         },
-     
+
         onUpdate: 'restrict',
         onDelete: 'restrict' },
       libelle: {

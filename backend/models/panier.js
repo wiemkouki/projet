@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER,
-  
+
     },
     id_client:
     {
@@ -26,6 +26,15 @@ module.exports = (sequelize, DataTypes) => {
         model: 'clients',
         key: 'id_client'
       },},
+
+  id_produit:
+  {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'produits',
+      key: 'id_produit'
+    },},
   },
     {
       sequelize,

@@ -15,9 +15,12 @@ module.exports = (sequelize, DataTypes) => {
   };
   Produit.init({
     nom_p: DataTypes.STRING,
+    marque: DataTypes.STRING,
     prix: DataTypes.INTEGER,
     max_rating: DataTypes.INTEGER,
     disponible: DataTypes.STRING,
+    is_deleted :DataTypes.INTEGER,
+    
     id_commande:
     {
       type: DataTypes.INTEGER,
@@ -32,6 +35,24 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false, foreignKey: true,
         references: {
           model: 'notePdts',
+          key: 'id'
+        },
+      },
+      id_panier:
+      {
+        type: DataTypes.INTEGER,
+        allowNull: false, foreignKey: true,
+        references: {
+          model: 'paniers',
+          key: 'id'
+        },
+      },
+      id_stock:
+      {
+        type: DataTypes.INTEGER,
+        allowNull: false, foreignKey: true,
+        references: {
+          model: 'stocks',
           key: 'id'
         },
       }

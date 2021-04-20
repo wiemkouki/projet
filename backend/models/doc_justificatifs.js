@@ -29,11 +29,21 @@ module.exports = (sequelize, DataTypes) => {
           model: 'sup_admins',
           key: 'id'
         },
-  }},
+  },
+  id_admin:
+  {
+    type: DataTypes.INTEGER,
+    allowNull: false, foreignKey: true,
+    references: {
+      model: 'Admins',
+      key: 'id'
+    },
+},
+},
     {
       sequelize,
       modelName: 'doc_justificatifs',
-    
+
   });
   return doc_justificatifs;
 };

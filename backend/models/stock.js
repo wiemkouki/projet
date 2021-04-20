@@ -27,7 +27,19 @@ module.exports = (sequelize, DataTypes) => {
       },
       onUpdate: 'restrict',
       onDelete: 'restrict'
-    }},
+    },
+    id_produit:
+    {
+      type: DataTypes.INTEGER,
+      allowNull: false, foreignKey: true,
+      references: {
+        model: 'produits',
+        key: 'id'
+      },
+      onUpdate: 'restrict',
+      onDelete: 'restrict'
+    },
+  },
     {
     sequelize,
     modelName: 'stock',
