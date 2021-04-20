@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterModule,ActivatedRoute, Routes } from '@angular/router';
 
 @Component({
   selector: 'app-admindash',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdmindashComponent implements OnInit {
 
-  constructor() { }
+
+  constructor( private router:Router,private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
   }
+
+showCategorie(){
+ this.router.navigate(['/categorie'] , {relativeTo: this.route});
+}
+
 
 }

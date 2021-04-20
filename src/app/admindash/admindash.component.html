@@ -23,7 +23,6 @@
           </ul>
           <!--  search form end -->
         </div>
-  
         <div class="top-nav notification-row">
           <!-- notificatoin dropdown start-->
           <ul class="nav pull-right top-menu">
@@ -32,7 +31,7 @@
            
             <!-- task notificatoin end -->
             <!-- inbox notificatoin start-->
-           
+          
             <!-- inbox notificatoin end -->
             <!-- alert notification start-->
             <li id="alert_notificatoin_bar" class="dropdown">
@@ -75,34 +74,43 @@
                                   </a>
                 </li>
                 <li>
-                  <a>See all notifications</a>
+                  <a href="#">See all notifications</a>
                 </li>
               </ul>
             </li>
             <!-- alert notification end-->
             <!-- user login dropdown start-->
             <li class="dropdown">
-              <a data-toggle="dropdown" class="dropdown-toggle" >
-                              
-                             
-                             
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                              <span class="profile-ava">
+                                  <img alt="" src="img/avatar1_small.jpg">
+                              </span>
+                              <span class="username">Administrateur</span>
+                              <b class="caret"></b>
                           </a>
               <ul class="dropdown-menu extended logout">
                 <div class="log-arrow-up"></div>
                 <li class="eborder-top">
-                  <a><i class="icon_profile"></i> My Profile</a>
+                  <a href="#"><i class="icon_profile"></i> My Profile</a>
                 </li>
                 <li>
-                  <a><i class="icon_mail_alt"></i> My Inbox</a>
+                  <a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
                 </li>
                 <li>
                   <a href="#"><i class="icon_clock_alt"></i> Timeline</a>
                 </li>
-               
+                <li>
+                  <a href="#"><i class="icon_chat_alt"></i> Chats</a>
+                </li>
                 <li>
                   <a href="login.html"><i class="icon_key_alt"></i> Log Out</a>
                 </li>
-               
+                <li>
+                  <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
+                </li>
+                <li>
+                  <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
+                </li>
               </ul>
             </li>
             <!-- user login dropdown end -->
@@ -129,6 +137,7 @@
                             <span>Paramétres</span>
                             <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
+                        
               <ul class="sub">
                 <li class="nav-item" routerLinkActive ="active">
                     <a class="nav-link" [routerLink]="'/categorie'" >
@@ -248,7 +257,7 @@
   
   
         <div class="container-fluid">
-            <router-outlet></router-outlet>
+          <router-outlet></router-outlet>
         </div>
   
           <!-- Today status end -->
