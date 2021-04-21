@@ -249,23 +249,27 @@ router.post('/signup', function (req, res, next) {
       prepareResponse(res, 500, response, 'application/json')
 
     } else {
+      const token = jwt.sign({ email: req.body.email }, process.env.SECRET,
+        { expiresIn: parseInt(process.env.EXPIRATION) });
 
-      let { username, password, role, email,is_deleted } = req.body;
+      let { username, password, role, email } = req.body;
+
       bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(password, salt, async function (err, hash) {
           let new_user = await User.create({
             username,
             password: hash,
             role,
+            token,
             email,
+            is_active:false,
             is_deleted: false,
             createdAt: new Date(),
             updatedAt: new Date(),
           });
 
           try {
-            const token = await jwt.sign({ email: req.body.email }, process.env.SECRET,
-              { expiresIn: parseInt(process.env.EXPIRATION) });
+
 
             const emailSender = prepareEmailSending();
             emailSender.send(

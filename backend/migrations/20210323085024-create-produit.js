@@ -8,20 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-     
 
 
-      id_fiche_tech:
-        {
-          type: Sequelize.INTEGER,
-          allowNull: true,
-          references: {
-            model: 'fiche_teches',
-            key: 'id'
-          },
 
-          onUpdate: 'restrict',
-          onDelete: 'restrict' },
 
       libelle: {
         type: Sequelize.STRING
@@ -41,6 +30,18 @@ module.exports = {
       is_deleted:{
         type: Sequelize.BOOLEAN
       },
+
+      id_fiche_tech:
+        {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+          references: {
+            model: 'fiche_teches',
+            key: 'id'
+          },
+
+          onUpdate: 'restrict',
+          onDelete: 'restrict' },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

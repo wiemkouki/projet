@@ -11,9 +11,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      is_deleted:{
-        type: Sequelize.BOOLEAN
-      },
 
       nom_boutique: {
         type: Sequelize.STRING
@@ -30,17 +27,10 @@ module.exports = {
       logo: {
         type: Sequelize.STRING
       },
-      // id_user:
-      // {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: true,
-      //   references: {
-      //     model: 'User',
-      //     key: 'id'
-      //   },
+      is_deleted:{
+        type: Sequelize.BOOLEAN
+      },
 
-      //   onUpdate: 'restrict',
-      //   onDelete: 'restrict' },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

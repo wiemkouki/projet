@@ -8,7 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-       id_produit:
+
+      url: {
+        type: Sequelize.STRING
+      },
+      is_deleted:{
+        type: Sequelize.BOOLEAN
+      },
+      id_produit:
       {
         type: Sequelize.INTEGER,
           allowNull: false,
@@ -19,12 +26,6 @@ module.exports = {
 
             onUpdate: 'restrict',
             onDelete: 'restrict' },
-      url: {
-        type: Sequelize.STRING
-      },
-      is_deleted:{
-        type: Sequelize.BOOLEAN
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

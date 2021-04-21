@@ -8,6 +8,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+
+      libelle: {
+        type: Sequelize.STRING
+      },
+      url_doc: {
+        type: Sequelize.STRING
+      },
       is_deleted: {
         type: Sequelize.BOOLEAN
       },
@@ -22,12 +29,6 @@ module.exports = {
 
         onUpdate: 'restrict',
         onDelete: 'restrict'
-      },
-      libelle: {
-        type: Sequelize.STRING
-      },
-      url_doc: {
-        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

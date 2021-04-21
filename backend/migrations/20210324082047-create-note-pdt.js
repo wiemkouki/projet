@@ -8,6 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+
+
+      rating: {
+        type: Sequelize.INTEGER
+      },
+      is_deleted:{
+        type: Sequelize.BOOLEAN
+      },
       id_client:
       {
         type: Sequelize.INTEGER,
@@ -31,13 +39,6 @@ module.exports = {
 
         onUpdate: 'restrict',
         onDelete: 'restrict' },
-
-      rating: {
-        type: Sequelize.INTEGER
-      },
-      is_deleted:{
-        type: Sequelize.BOOLEAN
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -8,16 +8,17 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
+      email: {
         type: Sequelize.STRING
       },
       password: {
         type: Sequelize.STRING
       },
-      email: {
+
+      role: {
         type: Sequelize.STRING
       },
-      role: {
+      token: {
         type: Sequelize.STRING
       },
       is_deleted:{
