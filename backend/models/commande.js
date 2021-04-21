@@ -8,8 +8,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Commande.belongsTo(models.Livreurs, { foreignKey: 'id_livreur', as: 'livreur' });
       Commande.belongsTo(models.Client, { foreignKey: 'id_client', as: 'client' });
-      Commande.hasMany(models.Produit, { foreignKey: 'id_produit', as: 'Produit' });
-      Commande.belongsToMany(models.Admin, { foreignKey: 'id_admin', as: 'admin' });
+      Commande.belongsToMany(models.Produit, { foreignKey: 'id_produit', as: 'Produit' });
+      Commande.hasMany(models.Admin, { foreignKey: 'id_admin', as: 'Admin' });
+
 
     }
   };

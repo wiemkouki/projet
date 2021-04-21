@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
         model: 'fiche_teches',
         key: 'id'
       },
-    },  
+    },
   },
     {
       sequelize,

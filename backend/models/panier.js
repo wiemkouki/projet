@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id_client'
       },},
 
- 
+
     is_deleted:DataTypes.BOOLEAN,
   },
 
