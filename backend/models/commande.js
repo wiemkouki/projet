@@ -8,7 +8,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Commande.belongsTo(models.Livreurs, { foreignKey: 'id_livreur', as: 'livreur' });
       Commande.belongsTo(models.Client, { foreignKey: 'id_client', as: 'client' });
-      //Commande.belongsToMany(models.Admin, { foreignKey: 'id_admin', as: 'admin' });
+      Commande.hasMany(models.Produit, { foreignKey: 'id_produit', as: 'Produit' });
+      Commande.belongsToMany(models.Admin, { foreignKey: 'id_admin', as: 'admin' });
+
     }
   };
   Commande.init({
@@ -17,47 +19,31 @@ module.exports = (sequelize, DataTypes) => {
     quantite: DataTypes.INTEGER,
     status: DataTypes.STRING,
     adresse_livraison: DataTypes.STRING,
-    is_deleted:DataTypes.BOOLEAN,
+    is_deleted: DataTypes.BOOLEAN,
+
     id_livreur:
-    { type: DataTypes.INTEGER,
-      allowNull: false, foreignKey: true,
+    {
+      type: DataTypes.INTEGER,
+      allowNull: true, foreignKey: true,
       references: {
         model: 'Livreurs',
         key: 'id'
-      }},
-
-      id_admin:
-      {
-        type: DataTypes.INTEGER,
-        allowNull: false, foreignKey: true,
-        references: {
-          model: 'Admins',
-          key: 'id'}
+      }
+    },
+    id_client:
+    {
+      type: DataTypes.INTEGER,
+      allowNull: true, foreignKey: true,
+      references: {
+        model: 'clients',
+        key: 'id'
       },
+    },
+  },
+    {
+      sequelize,
+      modelName: 'Commande',
 
-        id_client:
-        {
-          type: DataTypes.INTEGER,
-          allowNull: false, foreignKey: true,
-          references: {
-            model: 'clients',
-            key: 'id'},
-        },
-
-        id_produit:
-        {
-          type: DataTypes.INTEGER,
-          allowNull: false, foreignKey: true,
-          references: {
-            model: 'produits',
-            key: 'id'},
-        }
-      },
-
-        {
-        sequelize,
-        modelName: 'Commande',
-
-         });
+    });
   return Commande;
 };

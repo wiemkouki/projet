@@ -9,39 +9,29 @@ module.exports = (sequelize, DataTypes) => {
 
       Livreur.hasMany(models.Commande, { foreignKey: 'id_commande', as: 'commande' });
       Livreur.hasMany(models.doc_justificatifs, { foreignKey: 'id_doc_justificatifs', as: 'doc_justificatifs' });
+      Livreur.belongsTo(models.User, { foreignKey: 'id_user', as: 'user' });
+
     }
   };
 
 
   Livreur.init({
+    nom:DataTypes.STRING,
+    tel:DataTypes.INTEGER,
+    email:DataTypes.STRING,
+    adresse:DataTypes.STRING,
     permis: DataTypes.STRING,
     cin: DataTypes.INTEGER,
-    is_deleted:DataTypes.BOOLEAN,
-    id_commande:
+    is_deleted:DataTypes.BOOLEAN, 
+    id_user:
     {
-      type: DataTypes.INTEGER,
-      allowNull: false, foreignKey: true,
-      references: {
-        model: 'commandes',
-        key: 'id'
-      },},
-      id_doc_justificatifs:
-    {
-      type: DataTypes.INTEGER,
-      allowNull: false, foreignKey: true,
-      references: {
-        model: 'doc_justificatifs',
-        key: 'id'
-      },
-   },
-   id_admin:
-   {
-     type: DataTypes.INTEGER,
-     allowNull: false, foreignKey: true,
-     references: {
-       model: 'Admins',
-       key: 'id'}
-   },
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'User',
+            key: 'id'
+        },},
+ 
   },
     {
     sequelize,

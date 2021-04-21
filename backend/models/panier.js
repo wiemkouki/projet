@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       Panier.belongsTo(models.Client, { foreignKey: 'id_client', as: 'client' });
+      Panier.hasMany(models.Produit, { foreignKey: 'id_produit', as: 'produit' });
 
     }
   };
@@ -28,14 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id_client'
       },},
 
-  id_produit:
-  {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'produits',
-      key: 'id_produit'
-    },},
+ 
     is_deleted:DataTypes.BOOLEAN,
   },
 

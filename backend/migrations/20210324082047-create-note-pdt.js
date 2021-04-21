@@ -8,6 +8,17 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      id_client:
+      {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Client',
+          key: 'id'
+        },
+
+        onUpdate: 'restrict',
+        onDelete: 'restrict' },
 
       id_produit:
       {

@@ -10,7 +10,9 @@ module.exports = (sequelize, DataTypes) => {
       Produit.hasMany(models.notePdt, { foreignKey: 'id_notePdt', as: 'doc_notePdt' });
       Produit.hasMany(models.Commande, { foreignKey: 'id_commande', as: 'commande' });
       Produit.hasMany(models.images_produit, { foreignKey: 'id_images_produit', as: 'images_produit' });
-
+      Produit.hasMany(models.Panier, { foreignKey: 'id_panier', as: 'panier' });
+      Produit.hasOne(models.fiche_tech, { foreignKey: 'id_fiche_tech', as: 'fiche_tech' });
+      Produit.belongsTo(models.fiche_tech, { foreignKey: 'id_fiche_tech', as: 'fiche_tech' });
     }
   };
   Produit.init({
@@ -20,44 +22,15 @@ module.exports = (sequelize, DataTypes) => {
     max_rating: DataTypes.INTEGER,
     disponible: DataTypes.STRING,
     is_deleted :DataTypes.BOOLEAN,
-
-
-    id_commande:
+    id_fiche_tech:
     {
       type: DataTypes.INTEGER,
-      allowNull: false, foreignKey: true,
+      allowNull: true, foreignKey: true,
       references: {
-        model: 'commandes',
+        model: 'fiche_teches',
         key: 'id'
       },
-      id_notePdt:
-      {
-        type: DataTypes.INTEGER,
-        allowNull: false, foreignKey: true,
-        references: {
-          model: 'notePdts',
-          key: 'id'
-        },
-      },
-      id_panier:
-      {
-        type: DataTypes.INTEGER,
-        allowNull: false, foreignKey: true,
-        references: {
-          model: 'paniers',
-          key: 'id'
-        },
-      },
-      id_stock:
-      {
-        type: DataTypes.INTEGER,
-        allowNull: false, foreignKey: true,
-        references: {
-          model: 'stocks',
-          key: 'id'
-        },
-      }
-    }
+    },  
   },
     {
       sequelize,

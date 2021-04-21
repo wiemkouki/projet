@@ -6,10 +6,11 @@ module.exports = (sequelize, DataTypes) => {
   class Admin extends Model {
 
     static associate(models) {
-      //Admin.belongsToMany(models.Commande, { foreignKey: 'id_commande', as: 'commande' });
+      Admin.hasMany(models.Commande, { foreignKey: 'id_commande', as: 'commande' });
       Admin.hasMany(models.stock, { foreignKey: 'id_stock', as: 'stock' });
-      // User.belongsToMany(Project, { through: UserProject });
-
+      Admin.belongsTo(models.User, { foreignKey: 'id_user', as: 'user' });
+      
+     
     }
 
   };
@@ -21,25 +22,16 @@ module.exports = (sequelize, DataTypes) => {
       adresse: DataTypes.STRING,
       logo: DataTypes.STRING,
       is_deleted:DataTypes.BOOLEAN,
-      id_commande:
-      {
+      id_user:
+    {
         type: DataTypes.INTEGER,
-        allowNull: false, foreignKey: true,
+        allowNull: false,
         references: {
-          model: 'Commande',
-          key: 'id'
-        },
-      },
-        id_stock:
-        {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-          foreignKey: true,
-          references: {
-            model: 'Stocks',
+            model: 'User',
             key: 'id'
-          },
-        }},
+        },},
+      
+        },
         {
           sequelize: sequelize,
           modelName: 'Admin',

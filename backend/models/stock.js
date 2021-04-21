@@ -6,8 +6,12 @@ module.exports = (sequelize, DataTypes) => {
   class stock extends Model {
 
     static associate(models) {
-      stock.belongsTo(models.Admin, { foreignKey: 'id_admin', as: 'admin' });
-    }
+      
+    stock.belongsTo(models.Admin, { foreignKey: 'id_admin', as: 'admin' });
+    stock.hasMany(models.Produit, { foreignKey: 'id_produit', as: 'produit' });
+
+  
+  }
   };
   stock.init({
     id: {
@@ -28,17 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'restrict',
       onDelete: 'restrict'
     },
-    id_produit:
-    {
-      type: DataTypes.INTEGER,
-      allowNull: false, foreignKey: true,
-      references: {
-        model: 'produits',
-        key: 'id'
-      },
-      onUpdate: 'restrict',
-      onDelete: 'restrict'
-    },
+  
   },
     {
     sequelize,

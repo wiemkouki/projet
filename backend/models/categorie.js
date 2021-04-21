@@ -7,16 +7,26 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       categorie.hasMany(models.Sous_cat, { foreignKey: 'id_sous_categorie', as: 'sous_cat' });
+      categorie.belongsTo(models.Sup_admin, { foreignKey: 'id_sup_admin', as: 'sup_admin' });
     }
   };
   categorie.init({
     nom_cat: DataTypes.STRING,
     famille: DataTypes.STRING,
     is_deleted:DataTypes.BOOLEAN,
+    id_sup_admin:
+    {
+      type: DataTypes.INTEGER,
+      allowNull: false, foreignKey: true,
+      references: {
+        model: 'sup_admins',
+        key: 'id'
+      },
+    },
     id_sous_categorie:
     {
         type: DataTypes.INTEGER,
-        allowNull: false, foreignKey: true,
+        allowNull: true, foreignKey: true,
         references: {
             model: 'sous_cats',
             key: 'id'

@@ -8,34 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_livreur:
-    {
-      type: Sequelize.INTEGER,
-      allowNull: false, foreignKey: true,
-      references: {
-        model: 'Livreurs',
-        key: 'id'
-
-    },
-    is_deleted:{
-      type: Sequelize.BOOLEAN
-    },
-
-    onUpdate: 'restrict',
-    onDelete: 'restrict' },
-    id_admin:
-    {
-      type: Sequelize.INTEGER,
-      allowNull: false, foreignKey: true,
-      references: {
-        model: 'Admins',
-        key: 'id'
-
-    },
-
-    onUpdate: 'restrict',
-    onDelete: 'restrict' },
-
+      is_deleted: {
+        type: Sequelize.BOOLEAN
+      },
       id_sup_admin:
       {
         type: Sequelize.INTEGER,
@@ -46,7 +21,8 @@ module.exports = {
         },
 
         onUpdate: 'restrict',
-        onDelete: 'restrict' },
+        onDelete: 'restrict'
+      },
       libelle: {
         type: Sequelize.STRING
       },
@@ -61,7 +37,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-     } );
+    });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('doc_justificatifs');

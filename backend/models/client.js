@@ -8,6 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Client.hasMany(models.Commande, { foreignKey: 'id_commande', as: 'commande' });
       Client.hasOne(models.Paniers, { foreignKey: 'id_panier', as: 'panier' });
+      Client.belongsTo(models.User, { foreignKey: 'id_user', as: 'user' });
+      Client.hasMany(models.notePdt, { foreignKey: 'id_notePdt', as: 'doc_notePdt' });
     }
   };
   Client.init({
@@ -17,7 +19,14 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     adresse: DataTypes.STRING,
     is_deleted:DataTypes.BOOLEAN,
-  
+    id_user:
+    {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'User',
+            key: 'id'
+        },},
     id_panier:
     {
         type: DataTypes.INTEGER,

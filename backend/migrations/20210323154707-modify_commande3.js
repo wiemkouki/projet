@@ -5,7 +5,7 @@ module.exports = {
   {
     return queryInterface.addColumn('commandes', 'id_livreurs', {
       type: Sequelize.INTEGER,
-      allowNull: false,
+      allowNull: true,
       foreignKey:true,
       references: {
         model: 'livreurs',

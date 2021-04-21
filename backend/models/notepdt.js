@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
 
       notePdt.belongsTo(models.Produit, { foreignKey: 'id_produit', as: 'produit' });
-
+      notePdt.hasMany(models.Client, { foreignKey: 'id_client', as: 'client' });
     }
   };
 
@@ -16,6 +16,17 @@ module.exports = (sequelize, DataTypes) => {
   notePdt.init({
     permis: DataTypes.STRING,
     cin: DataTypes.INTEGER,
+    id_client:
+      {
+        type: DataTypes.INTEGER,
+        allowNull: false, foreignKey: true,
+        references: {
+          model: 'Client',
+          key: 'id'
+        },
+        onUpdate: 'restrict',
+        onDelete: 'restrict'
+      },
     id_produit:
     {
       type: DataTypes.INTEGER,

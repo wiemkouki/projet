@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     id_produit:
     {
       type: DataTypes.INTEGER,
+      allowNull: false, foreignKey: true,
       references: {
         model: 'produits',
         key: 'id'

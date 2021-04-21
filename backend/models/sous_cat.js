@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-
-  id_categorie:
+    nom_ss_cat: DataTypes.STRING,
+    id_categorie:
     {
         type: DataTypes.INTEGER,
         allowNull: false,

@@ -9,7 +9,22 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-    
+      nom: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      tel:{
+        type: Sequelize.INTEGER, 
+        allowNull: false
+      },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      adresse: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
         permis: {
           type: Sequelize.STRING,
           allowNull: false
@@ -18,6 +33,17 @@ module.exports = {
           type: Sequelize.INTEGER, 
           allowNull: false
         },
+        id_user:
+        {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+          references: {
+            model: 'User',
+            key: 'id'
+          },
+
+          onUpdate: 'restrict',
+          onDelete: 'restrict' },
         createdAt: {
           allowNull: false,
           type: Sequelize.DATE

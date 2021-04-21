@@ -8,25 +8,15 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_commande:
-      {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'commandes',
-          key: 'id'
-        },
-
-        onUpdate: 'restrict',
-        onDelete: 'restrict' },
+     
 
 
-        id_panier:
+      id_fiche_tech:
         {
           type: Sequelize.INTEGER,
-          allowNull: false,
+          allowNull: true,
           references: {
-            model: 'paniers',
+            model: 'fiche_teches',
             key: 'id'
           },
 

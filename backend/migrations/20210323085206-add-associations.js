@@ -5,7 +5,7 @@ module.exports = {
   {
     return queryInterface.addColumn('categories', 'id_sous_categories', {
       type: Sequelize.INTEGER,
-      allowNull: false,
+      allowNull: true,
       foreignKey:true,
       references: {
         model: 'sous_cats',
