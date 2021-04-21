@@ -17,39 +17,14 @@ module.exports = {
       tel: {
         type: Sequelize.INTEGER
       },
-      email: {
-        type: Sequelize.STRING
-      },
+
       adresse: {
         type: Sequelize.STRING
       },
       is_deleted:{
         type: Sequelize.BOOLEAN
-      }, 
-      // id_user:
-      // {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: true,
-      //   references: {
-      //     model: 'User',
-      //     key: 'id'
-      //   },
-
-      //   onUpdate: 'restrict',
-      //   onDelete: 'restrict' },
-
-        // id_notePdt:
-        // {
-        //   type: Sequelize.INTEGER,
-        //   allowNull: true,
-        //   references: {
-        //     model: 'notePdt',
-        //     key: 'id'
-        //   },
-  
-        //   onUpdate: 'restrict',
-        //   onDelete: 'restrict' },
-  
+      },
+   
           createdAt: {
             allowNull: false,
             type: Sequelize.DATE

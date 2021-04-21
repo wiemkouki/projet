@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
       Admin.hasMany(models.Commande, { foreignKey: 'id_commande', as: 'commande' });
       Admin.hasMany(models.stock, { foreignKey: 'id_stock', as: 'stock' });
       Admin.belongsTo(models.User, { foreignKey: 'id_user', as: 'user' });
-      
-     
+
+
     }
 
   };
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     Admin.init({
       nom_boutique: DataTypes.STRING,
       tel: DataTypes.INTEGER,
-      email: DataTypes.STRING,
+
       adresse: DataTypes.STRING,
       logo: DataTypes.STRING,
       is_deleted:DataTypes.BOOLEAN,
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
             model: 'User',
             key: 'id'
         },},
-      
+
         },
         {
           sequelize: sequelize,

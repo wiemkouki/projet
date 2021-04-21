@@ -14,13 +14,10 @@ module.exports = {
         allowNull: false
       },
       tel:{
-        type: Sequelize.INTEGER, 
+        type: Sequelize.INTEGER,
         allowNull: false
       },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
+
       adresse: {
         type: Sequelize.STRING,
         allowNull: false
@@ -30,7 +27,7 @@ module.exports = {
           allowNull: false
         },
         cin: {
-          type: Sequelize.INTEGER, 
+          type: Sequelize.INTEGER,
           allowNull: false
         },
         // id_user:

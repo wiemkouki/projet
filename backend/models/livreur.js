@@ -18,11 +18,10 @@ module.exports = (sequelize, DataTypes) => {
   Livreur.init({
     nom:DataTypes.STRING,
     tel:DataTypes.INTEGER,
-    email:DataTypes.STRING,
     adresse:DataTypes.STRING,
     permis: DataTypes.STRING,
     cin: DataTypes.INTEGER,
-    is_deleted:DataTypes.BOOLEAN, 
+    is_deleted:DataTypes.BOOLEAN,
     id_user:
     {
         type: DataTypes.INTEGER,
@@ -31,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
             model: 'User',
             key: 'id'
         },},
- 
+
   },
     {
     sequelize,
