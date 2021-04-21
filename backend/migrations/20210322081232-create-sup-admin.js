@@ -10,17 +10,17 @@ module.exports = {
     
      
       },
-      id_user:
-      {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        references: {
-          model: 'User',
-          key: 'id'
-        },
+      // id_user:
+      // {
+      //   type: Sequelize.INTEGER,
+      //   allowNull: true,
+      //   references: {
+      //     model: 'User',
+      //     key: 'id'
+      //   },
 
-        onUpdate: 'restrict',
-        onDelete: 'restrict' },
+      //   onUpdate: 'restrict',
+      //   onDelete: 'restrict' },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
