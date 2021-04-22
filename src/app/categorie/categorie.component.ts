@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -9,25 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategorieComponent implements OnInit {
 
-  public data = [
-    {name: 'Ajay', email: 'therichpost@gmail.com', website:'therichpost.com'},
-    {name: 'Jas', email: 'therichpost@gmail.com', website:'therichpost.com'},
-    {name: 'therichpost', email: 'therichpost@gmail.com', website:'therichpost.com'},
-    {name: 'therichpost', email: 'therichpost@gmail.com', website:'therichpost.com'},
-    {name: 'Jas', email: 'therichpost@gmail.com', website:'therichpost.com'},
-    {name: 'therichpost', email: 'therichpost@gmail.com', website:'therichpost.com'},
-    {name: 'therichpost', email: 'therichpost@gmail.com', website:'therichpost.com'},
-    {name: 'Jas', email: 'therichpost@gmail.com', website:'therichpost.com'},
-    {name: 'therichpost', email: 'therichpost@gmail.com', website:'therichpost.com'},
-    {name: 'therichpost', email: 'therichpost@gmail.com', website:'therichpost.com'},
-  ];
-dtOptions: any = {};
-ngOnInit(){
-  this.dtOptions = {
+   title = 'datatables';
+  dtOptions: DataTables.Settings = {};
+  users;
+   
+  constructor(private http: HttpClient) { }
+   
+  ngOnInit(): void {
+    this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
-    lengthMenu : [5, 10, 25],
       processing: true
     };
-}
+   
+    this.http.get('http://localhost:3000/users/getAll')
+      .subscribe(users => {
+        this.users = users;
+    });
+   
+  }
+   
 }

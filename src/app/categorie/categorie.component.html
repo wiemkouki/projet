@@ -1,16 +1,23 @@
-<table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions">
+
+<table datatable [dtOptions]="dtOptions" class="table table-striped table-bordered table-sm row-border hover">
   <thead>
     <tr>
-      <th>Name</th>
+      <th>ID</th>
       <th>Email</th>
-      <th>Website</th>
+      <th>Role</th>
+      <th>CreatedAt</th>
+      <th>UpdatedAt</th>
+      
     </tr>
   </thead>
   <tbody>
-   <tr *ngFor="let group of data">
-         <td>{{group.name}}</td>
-         <td>{{group.email}}</td>
-         <td>{{group.website}}</td>
-     </tr>
+    <tr *ngFor="let user of users">
+      <td>{{ user.id }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.role }}</td>
+      <td>{{ user.createdAt }}</td>
+      <td>{{ user.updatedAt }}</td>
+
+    </tr>
   </tbody>
 </table>

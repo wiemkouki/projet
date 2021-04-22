@@ -9,6 +9,7 @@ import { CrudService } from './crud.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  show = true;
   title = 'daijara';
   menuItems: MenuItem[] =[
     {
