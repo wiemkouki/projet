@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const { User } = require("../models");
-const { Livreur } = require("../models");
+const { User, Livreurs, Client, Admin, Sup_admin } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const storeToken = require("./auth/storeToken");
@@ -407,24 +406,64 @@ router.post("/changepwd/:id", function (req, res) {
 //CONFIRM ACCOUNT
 router.get("/confirm/:token", (req, res) => {
   const token = req.params.token;
-  User.findByPk(token)
-    .then((user) => {
+  User.findOne({ where: { token: req.params.token } })
+    .then(async function (user) {
       if (user) {
-        if (user.role == 'Livreur') {
-          // let { id_user } = req.params;
-          const new_liv = Livreur.create({
-            id_user,
+        if (user.role == "Livreur") {
+          const new_liv = await Livreurs.create({
+            id_user: user.id,
             token,
             createdAt: new Date(),
             updatedAt: new Date(),
           });
-          user.update({
-            is_active: true,
-          });
-          prepareResponse(res, 200, new_liv, "application/json");
-
-          res.redirect("/profil");
+          user
+            .update({
+              is_active: true,
+            })
+            .then((user) => res.redirect("http://localhost:4200/profil"))
+            .catch(error);
         }
+      } else if (user.role == "Admin") {
+        const new_admin = await Admin.create({
+          id_user: user.id,
+          token,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
+        user
+          .update({
+            is_active: true,
+          })
+          .then((user) => res.redirect("http://localhost:4200/admindash"))
+          .catch((error) => console.log(error));
+      } else if (user.role == "Client") {
+        const new_clt = await Client.create({
+          id_user: user.id,
+          token,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
+
+        user
+          .update({
+            is_active: true,
+          })
+          .then((user) => res.redirect("http://localhost:4200/profil"))
+          .catch(error);
+      } else if (user.role == "Sup_admin") {
+        const new_ad = await Sup_admin.create({
+          id_user: user.id,
+          token,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
+
+        user
+          .update({
+            is_active: true,
+          })
+          .then((user) => res.redirect("http://localhost:4200/admindash"))
+          .catch(error);
       } else {
         const response = {
           success: false,
@@ -433,7 +472,7 @@ router.get("/confirm/:token", (req, res) => {
         prepareResponse(res, 500, response, "application/json");
       }
     })
-    .catch((error) => console.log(error));
+    .catch((error)=> console.log(error));
 });
 
 //LOGOUT
