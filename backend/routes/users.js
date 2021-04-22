@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const { User } = require("../models");
+const { Livreur } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const storeToken = require("./auth/storeToken");
@@ -403,21 +404,36 @@ router.post("/changepwd/:id", function (req, res) {
     })
     .catch((error) => console.log(error));
 });
-//confirm
-router.get("/confirm/:token", (req, res, next) => {
-  const { role } = req.body;
-  let token = req.params.token;
-  const tokenn = req.query.token;
+//CONFIRM ACCOUNT
+router.get("/confirm/:token", (req, res) => {
+  const token = req.params.token;
+  User.findByPk(token)
+    .then((user) => {
+      if (user) {
+        if (user.role == 'Livreur') {
+          // let { id_user } = req.params;
+          const new_liv = Livreur.create({
+            id_user,
+            token,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          });
+          user.update({
+            is_active: true,
+          });
+          prepareResponse(res, 200, new_liv, "application/json");
 
-  try {
-
-
-    prepareResponse(res, 200, response, "application/json");
-  } catch (error) {
-    res.status(500).send(error);
-  }
-
-
+          res.redirect("/profil");
+        }
+      } else {
+        const response = {
+          success: false,
+          message: "user not found !!",
+        };
+        prepareResponse(res, 500, response, "application/json");
+      }
+    })
+    .catch((error) => console.log(error));
 });
 
 //LOGOUT
