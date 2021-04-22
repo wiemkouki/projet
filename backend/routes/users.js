@@ -423,7 +423,7 @@ router.get("/confirm/:token", (req, res) => {
             .then((user) => res.redirect("http://localhost:4200/profil"))
             .catch(error);
         }
-      } else if (user.role == "Admin") {
+       else if (user.role == "Admin") {
         const new_admin = await Admin.create({
           id_user: user.id,
           token,
@@ -471,8 +471,10 @@ router.get("/confirm/:token", (req, res) => {
         };
         prepareResponse(res, 500, response, "application/json");
       }
+    }
     })
-    .catch((error)=> console.log(error));
+
+    .catch((error) => console.log(error));
 });
 
 //LOGOUT
