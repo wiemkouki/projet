@@ -719,16 +719,17 @@ ul.sidebar-menu li.active a, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:fo
     background: #2A2F46;
 
     color: #fff;
+/* 
+    display: block; */
+/* 
+    border-radius: 4px;
 
-    display: block;
-
-    /*border-radius: 4px;
-
-    -webkit-border-radius: 4px;*/
+    -webkit-border-radius: 4px; */
 
     -webkit-transition: all 0.3s ease;
+    
 
-    -moz-transition: all 0.3s ease;
+    -moz-transition: all 0.55s ease;
 
     -o-transition: all 0.3s ease;
 

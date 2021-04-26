@@ -13,6 +13,7 @@ export class CategorieComponent implements OnInit {
    title = 'datatables';
   dtOptions: DataTables.Settings = {};
   users;
+  dtElement: any;
    
   constructor(private http: HttpClient) { }
    
@@ -27,7 +28,11 @@ export class CategorieComponent implements OnInit {
       .subscribe(users => {
         this.users = users;
     });
+    
    
   }
-   
+ 
+
+
+
 }
