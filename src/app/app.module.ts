@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatToolbarModule } from "@angular/material/toolbar";
-import {MatSidenavModule } from "@angular/material/sidenav";
-import {MatListModule } from "@angular/material/list";
-import {MatIconModule } from "@angular/material/icon";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatListModule } from "@angular/material/list";
+import { MatIconModule } from "@angular/material/icon";
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,10 +19,10 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CartComponent } from './cart/cart.component';
 import { RegisterComponent } from './register/register.component';
-import { Routes , RouterModule} from "@angular/router";
-import {FormsModule} from "@angular/forms";
-import {DataTablesModule} from 'angular-datatables';
-import { FacebookLoginProvider, SocialLoginModule, SocialAuthServiceConfig,GoogleLoginProvider } from 'angularx-social-login';
+import { Routes, RouterModule } from "@angular/router";
+import { FormsModule } from "@angular/forms";
+import { DataTablesModule } from 'angular-datatables';
+import { FacebookLoginProvider, SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ProfilComponent } from './profil/profil.component';
 import { UserServiceService } from './user-service.service';
@@ -34,19 +34,19 @@ import { AdmindashComponent } from './admindash/admindash.component';
 import { CategorieComponent } from './categorie/categorie.component';
 
 
-const Routes: Routes= [
-  {path:'admindash',  component:AdmindashComponent } ,
-  {path:'categorie',component:CategorieComponent} ,
+const Routes: Routes = [
+  { path: '', component: CatalogComponent },
+  { path: 'admin', component: AdmindashComponent },
+  { path: 'categorie', component: CategorieComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'cart', component: CartComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'profil', component: ProfilComponent },
+  { path: 'forgotpwd/:id', component: ForgotPwdComponent },
+  { path: 'changepwd', component: ChangepwdComponent },
 
-  {path:'login',component: LoginComponent},
-  {path:'cart',component: CartComponent},
-  {path:'register',component: RegisterComponent},
-  {path:'reset-password',component: ResetPasswordComponent},
-  {path:'profil',component: ProfilComponent},
-  {path:'forgotpwd/:id',component: ForgotPwdComponent},
-  {path:'changepwd',component: ChangepwdComponent},
-  {path:'catalog',component: CatalogComponent},
-  {path:'test',component:  TestComponent}
+  { path: 'test', component: TestComponent }
 ]
 
 @NgModule({
@@ -64,8 +64,8 @@ const Routes: Routes= [
     TestComponent,
     AdmindashComponent,
     CategorieComponent,
-   
-   
+
+
 
 
 
@@ -104,19 +104,19 @@ const Routes: Routes= [
       useValue: {
         autoLogin: false,
         providers: [
-    {
-      id: GoogleLoginProvider.PROVIDER_ID,
-      provider: new GoogleLoginProvider(
-        '975189348983-n9bq8niid4t71uqq6lppg3g97gurdjak.apps.googleusercontent.com'
-      )
-    },
-    {
-      id: FacebookLoginProvider.PROVIDER_ID,
-      provider: new FacebookLoginProvider('1155701404843582')
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '975189348983-n9bq8niid4t71uqq6lppg3g97gurdjak.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('1155701404843582')
+          }
+        ]
+      } as SocialAuthServiceConfig,
     }
-  ]
-} as SocialAuthServiceConfig,
-}
   ], bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -76,7 +76,7 @@ router.get("/getUser/:id", async function (req, res, next) {
 //GET ALL USERS
 
 router.get("/getAll", function (req, res, next) {
-  User.findAll({ attributes: ["id", "username", "email"] })
+  User.findAll({ attributes: ["id", "email","role","createdAt", "updatedAt"] })
     .then((users) => {
       prepareResponse(res, 200, users, "application/json");
     })

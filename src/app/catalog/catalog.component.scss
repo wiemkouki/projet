@@ -268,3 +268,98 @@
 .product-grid9:hover .add-to-cart{opacity:1;bottom:0}
 @media only screen and (max-width:990px){.product-grid9{margin-bottom:30px}
 }
+.mat-toolbar.mat-primary {
+    background-color: #2A2F46;
+    margin-bottom: 0px;
+    ;
+}
+.mat-toolbar.mat-secondary {
+    background-color: #1A1A1A;
+    margin-top: 0px;
+    margin-bottom: 60px;
+
+
+}
+.mat-toolbar.mat-primary .mat-button{
+    color: #FFFFFF ;
+    font-size: 8pt;
+    font-weight: bold;
+    font-family:  Helvetica ;
+}
+.mat-toolbar.mat-secondary .mat-button{
+    color: #FFFFFF ;
+    font-size: 10pt;
+    font-weight: lighter;
+    font-family:  Helvetica ;
+}
+.mat-toolbar.mat-footerColor{
+    background-color: #EB692D;
+}
+.mat-toolbar.mat-footerColor .mat-button{
+    margin-left: auto;
+    margin-right: auto;
+    color: #FFFFFF ;
+    font-size: 10pt;
+    font-weight: lighter;
+    font-family:  Helvetica ;
+}
+
+label .somme-label {
+    color: #EB692D;
+    margin-left: auto;
+    margin-right: auto;
+}
+.mat-toolbar.mat-footerColor a.nav-link{
+    text-decoration: none;
+}
+
+.input-group{
+    margin-left: auto ;
+    margin-right: auto;
+    width: 760px ;
+    height: 37px;
+
+}
+.navbar-titles{
+    font-weight: lighter;
+
+}
+.navText{
+    font-size: 8pt;
+    font-family:  Helvetica;
+    font-weight: lighter;
+}
+mat-icon {
+    color: #EB692D;
+}
+.icons-footer{
+    margin-right: 25%;
+    font-weight: none;
+}
+.flag-footer{
+    margin-left: -10%;
+;
+}
+footer{
+    position: relative;
+bottom: 0;
+left: 0;
+
+width: 100%;
+}
+select{
+    background: transparent;
+    color: white;
+    border: 1px solid #1A1A1A;
+}
+.footer-title{
+    color: white;
+    font-weight: bolder;
+
+}
+.ul-liste{
+color: #E6E6E6;
+list-style-type:none;
+}
+h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
+
