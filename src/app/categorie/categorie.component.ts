@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -9,13 +10,16 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./categorie.component.scss']
 })
 export class CategorieComponent implements OnInit {
+  closeResult: string;
+
+
 
    title = 'datatables';
   dtOptions: DataTables.Settings = {};
   users;
   dtElement: any;
    
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private modalService: NgbModal) { }
    
   ngOnInit(): void {
     this.dtOptions = {
@@ -31,7 +35,22 @@ export class CategorieComponent implements OnInit {
     
    
   }
- 
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
 
 
 

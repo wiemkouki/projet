@@ -22,9 +22,28 @@
       <td>{{ user.role }}</td>
       <td>{{ user.createdAt }}</td>
       <td>{{ user.updatedAt }}</td>
-      <td><button class="btn btn-success btn-sm">Add</button> </td>
-      <td><button class="btn btn-danger btn-sm">Delete</button> </td>
 
+      <td><button class="btn btn-success btn-sm" (click)="open(mymodal)">Add</button> </td>
+      <td><button class="btn btn-danger btn-sm" (click)="open(mymodal)">Delete</button> </td>
+      <ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add client </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    le client est un caca!
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+  </div>
+</ng-template>
+
+
+      
+     
+      
 
     </tr>
   </tbody>

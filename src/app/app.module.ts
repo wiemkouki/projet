@@ -33,6 +33,7 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { TestComponent } from './test/test.component';
 import { AdmindashComponent } from './admindash/admindash.component';
 import { CategorieComponent } from './categorie/categorie.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 const Routes: Routes = [
@@ -96,7 +97,9 @@ const Routes: Routes = [
     MatInputModule,
     MatButtonModule,
     MatInputModule,
-    NgxPopper
+    NgxPopper,
+    NgbModule
+
 
   ],
   providers: [UserServiceService,
