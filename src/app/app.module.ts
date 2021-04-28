@@ -34,11 +34,18 @@ import { TestComponent } from './test/test.component';
 import { AdmindashComponent } from './admindash/admindash.component';
 import { CategorieComponent } from './categorie/categorie.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { CrudClientComponent } from './admindash/crud-client/crud-client.component';
+
+import { CrudUserComponent } from './Admindash/crud-user/crud-user.component';
+
 
 
 const Routes: Routes = [
   { path: '', component: CatalogComponent },
-  { path: 'admin', component: AdmindashComponent },
+  { path: 'admin', component: AdmindashComponent}, 
+
+  { path: 'users', component: CrudUserComponent },
+  { path: 'client', component: CrudClientComponent },
   { path: 'categorie', component: CategorieComponent },
   { path: 'login', component: LoginComponent },
   { path: 'cart', component: CartComponent },
@@ -66,6 +73,10 @@ const Routes: Routes = [
     TestComponent,
     AdmindashComponent,
     CategorieComponent,
+    CrudClientComponent,
+   
+    CrudUserComponent,
+  
 
 
 

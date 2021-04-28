@@ -1,4 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -285,3 +287,6 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Importing Bootstrap SCSS file. */
+// @import '~bootstrap/scss/bootstrap';

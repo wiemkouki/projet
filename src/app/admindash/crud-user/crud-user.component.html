@@ -1,0 +1,86 @@
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet"
+  type="text/css" />
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script> -->
+<!-- <div class="container"></div> -->
+<table datatable [dtOptions]="dtOptions"  class="table table-bordered table-striped">
+  <thead>
+
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>CreatedAt</th>
+      <th>UpdatedAt</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td><span>{{ user.id }}</span></td>
+
+      <td><span>{{ user.email }}</span></td>
+      <td><span>{{ user.role }}</span></td>
+      <td><span>{{ user.createdAt }}</span></td>
+      <td><span>{{ user.updatedAt }}</span></td>
+
+      <td><button class="btn btn-info " (click)="openDetails(contentDetails, user)"> <i class="fa fa-search"></i>Details</button> </td>
+      <td><button class="btn btn-warning">
+          <i class="fa fa-edit"></i>Edit</button> </td>
+      <td><button class="btn  btn-danger " (click)="openDelete(contentDelete, user)">
+          <i class="fa fa-remove"></i>Delete</button> </td>
+
+
+      <ng-template #contentDetails let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Details</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+         
+          <form>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <div class="input-group">
+                <input id="email" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="role">Role</label>
+              <div class="input-group">
+                <input id="role" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="createdAt" for="dateOfBirth">CreatedAt</label>
+              <div class="input-group">
+               
+                <input  id="created" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+                </div>
+              </div>
+              </div>
+
+            <div class="form-group">
+              <label for="updatedAt" for="dateOfBirth">UpdatedAt</label>
+              <div class="input-group">
+                  <input  id="updated" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+                  </div>
+                </div>
+              </div>
+           
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+        </div>
+      </ng-template>
+
+    </tr>
+  </tbody>
+</table>

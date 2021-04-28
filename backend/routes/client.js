@@ -19,9 +19,9 @@ router.get("/getClient/:id", async function (req, res, next) {
 // create client
 router.post("/create", function (req, res, next) {
   Client
-    .findOne({ attributes: ['id'],
+    .findOne({ attributes: ['nom'],
       where: {
-        email: req.body.email,
+        nom: req.body.nom,
       },
     })
     .then((client) => {
