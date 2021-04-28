@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserServiceService } from '../user-service.service';
+import { UserServiceService } from '../services/user-service.service';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SocialAuthService, FacebookLoginProvider, GoogleLoginProvider,SocialUser } from 'angularx-social-login';
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   socialUser: SocialUser;
   isLoggedin: boolean = null;
-  
+
   form: any = {
     email: null,
     password: null,
@@ -26,17 +26,17 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
 
 
-  constructor(private userService: UserServiceService, private router: Router,  
-    private formBuilder: FormBuilder, 
-    private socialAuthService: SocialAuthService) { 
+  constructor(private userService: UserServiceService, private router: Router,
+    private formBuilder: FormBuilder,
+    private socialAuthService: SocialAuthService) {
       console.log(this.isLoggedin)
     }
 
   ngOnInit(): void { this.loginForm = this.formBuilder.group({
     email: ['', Validators.required],
     password: ['', Validators.required]
-  });    
-  
+  });
+
   this.socialAuthService.authState.subscribe((user) => {
     this.socialUser = user;
     this.isLoggedin = (user != null);

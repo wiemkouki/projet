@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserServiceService } from '../user-service.service';
+import { UserServiceService } from '../services/user-service.service';
 
 import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 @Component({
@@ -23,10 +23,10 @@ export class ResetPasswordComponent implements OnInit {
     //     this.name = params['name'];
     //   });
     // });
-  
+
   }
  onSubmit(): void {
- 
+
     const { email } = this.form;
 
     this.userService.reset(email).subscribe(

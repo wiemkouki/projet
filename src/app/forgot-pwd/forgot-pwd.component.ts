@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserServiceService } from '../user-service.service';
+import { UserServiceService } from '../services/user-service.service';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -32,7 +32,7 @@ export class ForgotPwdComponent implements OnInit {
   onSubmit(form) {
     console.log(this.password)
     console.log(this.confirmPassword)
-    this.route.params
+    this.route.paramMap
       .subscribe(
         (params: Params) => {
           if (this.password == this.confirmPassword) {

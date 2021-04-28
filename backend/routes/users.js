@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const { User, Livreurs, Client, Admin, Sup_admin } = require("../models");
+const { User, Livreurs,Client, Admin, Sup_admin } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const storeToken = require("./auth/storeToken");
@@ -98,12 +98,12 @@ router.post("/updateUser", function (req, res) {
   console.log(req.body);
   User.findByPk(id).then((user) => {
     try {
-      let { username, password, role, email } = req.body;
+      let {  password, role, email } = req.body;
       bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(req.body.password, salt, async function (err, hash) {
           user
             .update({
-              username,
+         
               password: hash,
               role,
               email,
@@ -413,6 +413,7 @@ router.get("/confirm/:token", (req, res) => {
           const new_liv = await Livreurs.create({
             id_user: user.id,
             token,
+            is_deleted: false,
             createdAt: new Date(),
             updatedAt: new Date(),
           });
@@ -423,10 +424,11 @@ router.get("/confirm/:token", (req, res) => {
             .then((user) => res.redirect("http://localhost:4200/profil"))
             .catch(error);
         }
-       else if (user.role == "Admin") {
+       else if (user.role == "Administrateur") {
         const new_admin = await Admin.create({
           id_user: user.id,
           token,
+          is_deleted: false,
           createdAt: new Date(),
           updatedAt: new Date(),
         });
@@ -434,12 +436,14 @@ router.get("/confirm/:token", (req, res) => {
           .update({
             is_active: true,
           })
-          .then((user) => res.redirect("http://localhost:4200/admindash"))
+          .then((user) => res.redirect("http://localhost:4200/admin"))
           .catch((error) => console.log(error));
-      } else if (user.role == "Client") {
+      }
+      else if (user.role == "Client") {
         const new_clt = await Client.create({
           id_user: user.id,
           token,
+          is_deleted: false,
           createdAt: new Date(),
           updatedAt: new Date(),
         });
@@ -450,10 +454,12 @@ router.get("/confirm/:token", (req, res) => {
           })
           .then((user) => res.redirect("http://localhost:4200/profil"))
           .catch(error);
-      } else if (user.role == "Sup_admin") {
+      }
+      else if (user.role == "Sup_administrateur") {
         const new_ad = await Sup_admin.create({
           id_user: user.id,
           token,
+          is_deleted: false,
           createdAt: new Date(),
           updatedAt: new Date(),
         });
@@ -462,9 +468,10 @@ router.get("/confirm/:token", (req, res) => {
           .update({
             is_active: true,
           })
-          .then((user) => res.redirect("http://localhost:4200/admindash"))
+          .then((user) => res.redirect("http://localhost:4200/admin"))
           .catch(error);
-      } else {
+      }
+      else {
         const response = {
           success: false,
           message: "user not found !!",

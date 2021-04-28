@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserServiceService } from '../user-service.service';
+import { UserServiceService } from '../services/user-service.service';
 import  { Observable } from 'rxjs';
 import { any } from 'sequelize/types/lib/operators';
 import { FormControl } from '@angular/forms';
@@ -37,7 +37,7 @@ onSubmit(): void {
 
   const { username, email, password,role } = this.form;
 
- 
+
 
   this.userService.register(username, email, password, role).subscribe(
     data => {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MenuItem } from './menu-item';
-import { CrudService } from './crud.service'; 
+import { CrudService } from './services/crud.service';
 
 @Component({
   selector: 'app-root',
@@ -50,4 +50,3 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
   }
 }
- 

@@ -26,7 +26,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { FacebookLoginProvider, SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ProfilComponent } from './profil/profil.component';
-import { UserServiceService } from './user-service.service';
+import { UserServiceService } from './services/user-service.service';
 import { ForgotPwdComponent } from './forgot-pwd/forgot-pwd.component';
 import { ChangepwdComponent } from './changepwd/changepwd.component';
 import { CatalogComponent } from './catalog/catalog.component';

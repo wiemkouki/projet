@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     nom: DataTypes.STRING,
     prenom: DataTypes.STRING,
     tel: DataTypes.INTEGER,
-    
+
     adresse: DataTypes.STRING,
     is_deleted:DataTypes.BOOLEAN,
     id_user:
@@ -34,6 +34,17 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: true,
         references: {
             model: 'Paniers',
+            key: 'id'
+        },
+
+     },
+     id_notePdt:
+    {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        foreignKey: true,
+        references: {
+            model: 'notePdt',
             key: 'id'
         },
 
