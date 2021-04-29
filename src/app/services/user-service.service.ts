@@ -45,12 +45,13 @@ export class UserServiceService {
 
 
 
-//  get( id:string , role:string , email: string): Observable<any> {
-//     return this.http.post(this.api_prefix + '/getAll', {
-//       id,email,role
-//     }, httpOptions)
-//   }
-
+ updateUser(){
+  this.http.get('http://localhost:3000/users/updateUser')
+ .subscribe( response => {
+   console.log(response);
+  
+ });
+ }
 
   forgot(form: object) {
     const url = `${this.api_prefix}/resetpassword`;

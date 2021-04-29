@@ -55,7 +55,7 @@ const Routes: Routes = [
   { path: 'forgotpwd/:id', component: ForgotPwdComponent },
   { path: 'changepwd', component: ChangepwdComponent },
 
-  { path: 'test', component: TestComponent }
+  { path: 'testt', component: TestComponent }
 ]
 
 @NgModule({
@@ -76,6 +76,7 @@ const Routes: Routes = [
     CrudClientComponent,
    
     CrudUserComponent,
+   
   
 
 
