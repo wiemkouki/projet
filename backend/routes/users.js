@@ -7,7 +7,7 @@ const storeToken = require("./auth/storeToken");
 const nodemailer = require("nodemailer");
 var Email = require("email-templates");
 var path = require("path");
-const db = require("../models");
+
 
 const saltRounds = 10;
 
@@ -388,7 +388,7 @@ router.post("/changepwd/:id", function (req, res) {
                         "application/json"
                       )
                     )
-                    .catch((error) => console.log(error));
+                    .catch((error) );
                 }
               );
             });
@@ -413,7 +413,7 @@ router.get("/confirm/:token", (req, res) => {
           const new_liv = await Livreurs.create({
             id_user: user.id,
             token,
-       
+
             createdAt: new Date(),
             updatedAt: new Date(),
           });

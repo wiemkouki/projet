@@ -38,17 +38,16 @@ module.exports = (sequelize, DataTypes) => {
         },
 
      },
-     id_notePdt:
-    {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        foreignKey: true,
-        references: {
-            model: 'notePdt',
-            key: 'id'
-        },
-
-     }
+    //  id_notePdt:
+    // {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: true,
+    //     foreignKey: true,
+    //     references: {
+    //         model: 'notePdt',
+    //         key: 'id'
+    //     },
+    //  }
   },
   {
     sequelize,
