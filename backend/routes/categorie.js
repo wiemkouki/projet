@@ -1,12 +1,12 @@
 var express = require("express");
 var router = express.Router();
-const { Categorie } = require("../models");
+const { categorie} = require("../models");
 
 //GET ONE
 router.get("/getCat/:id", async function (req, res, next) {
   let id = req.params.id;
 
-  const categorie = await Categorie.findByPk(id);
+  const categorie = await categorie.findByPk(id);
 
   prepareResponse(res, 200, categorie, "application/json");
 });
@@ -14,9 +14,10 @@ router.get("/getCat/:id", async function (req, res, next) {
 //GET ALL
 
 router.get("/getAll", function (req, res, next) {
-  Categorie.findAll({ attributes: ["id", "nom_cat", "famille"] })
-    .then((cat) => {
-      prepareResponse(res, 200, cat, "application/json");
+  categorie
+  .findAll({ attributes: ["id", "nom_cat", "famille","createdAt", "updatedAt"] })
+    .then((categorie) => {
+      prepareResponse(res, 200, categorie, "application/json");
     })
     .catch((error) => {
       const response = {
@@ -26,21 +27,20 @@ router.get("/getAll", function (req, res, next) {
           "with your request, please try again.",
       };
 
-      prepareResponse(res, 500, response, "application/json");
+      // prepareResponse(res, 500, response, "application/json");
     });
 });
 
 //CREATE CATEGORIE
-router.post("/create", function (req, res, next) {
-  Categorie.findAll({ attributes: ["id", "nom_cat", "famille"] })
-
+router.post("/createCat", function (req, res, next) {
+  categorie
     .findOne({
       attributes: ["nom_cat"],
       where: {
         nom_cat: req.body.nom_cat,
       },
     })
-    .then((categorie) => {
+    .then(async function (categorie) {
       if (categorie) {
         const response = {
           success: false,
@@ -48,32 +48,32 @@ router.post("/create", function (req, res, next) {
         };
         prepareResponse(res, 500, response, "application/json");
       } else {
-        let { nom_cat, famille, id_sous_cat } = req.body;
-        Categorie.create({
+        // let { nom_cat, famille} = req.body;
+        let new_cat = await categorie.create({
           nom_cat,
           famille,
-          id_sous_cat,
+          is_deleted: false,
           createdAt: new Date(),
           updatedAt: new Date(),
         });
-        const response = {
-          success: true,
 
+          const response = {
+          success: true,
           message: "CATEGORIE created successfully.",
         };
         prepareResponse(res, 200, response, "application/json");
       }
-    });
+    }).catch((error) => console.log(error));
 });
 //UPDATE CATEGORIE
 router.post("/updateC", function (req, res) {
   const id = req.body.id;
   console.log(req.body);
-  Categorie.findByPk(id).then((Categorie) => {
+  categorie.findByPk(id).then((categorie) => {
     try {
       let { nom_cat, famille } = req.body;
 
-      Categorie.update({
+      categorie.update({
         nom_cat,
         famille,
         updatedAt: new Date(),
@@ -92,9 +92,9 @@ router.post("/updateC", function (req, res) {
 
 router.post("/delete/:id", function (req, res) {
   let id = req.params.id;
-  Categorie.findByPk(id).then((Categorie) => {
+  categorie.findByPk(id).then((categorie) => {
     try {
-      Categorie.update({
+      categorie.update({
         is_deleted: true,
       });
       prepareResponse(res, 200, { success: true }, "application/json");

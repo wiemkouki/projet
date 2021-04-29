@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     token:DataTypes.STRING,
     is_active :DataTypes.BOOLEAN,
     is_deleted :DataTypes.BOOLEAN,
+
   }, {
     sequelize,
     modelName: 'User',
