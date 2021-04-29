@@ -14,24 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     nom_cat: DataTypes.STRING,
     famille: DataTypes.STRING,
     is_deleted:DataTypes.BOOLEAN,
-    id_sup_admin:
-    {
-      type: DataTypes.INTEGER,
-      allowNull: false, foreignKey: true,
-      references: {
-        model: 'sup_admins',
-        key: 'id'
-      },
     },
-    id_sous_categorie:
-    {
-        type: DataTypes.INTEGER,
-        allowNull: true, foreignKey: true,
-        references: {
-            model: 'sous_cats',
-            key: 'id'
-        },
-  }},
     { sequelize,
     modelName: 'categorie',
   });

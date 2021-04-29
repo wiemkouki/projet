@@ -32,10 +32,7 @@ router.get("/getAll", function (req, res, next) {
 
 //CREATE CATEGORIE
 router.post("/create", function (req, res, next) {
-  Categorie.findAll({ attributes: ["id", "nom_cat", "famille"] })
-
-    .findOne({
-      attributes: ["nom_cat"],
+Categorie.findOne({ attributes: ['nom_cat'],
       where: {
         nom_cat: req.body.nom_cat,
       },
@@ -52,7 +49,6 @@ router.post("/create", function (req, res, next) {
         Categorie.create({
           nom_cat,
           famille,
-          id_sous_cat,
           createdAt: new Date(),
           updatedAt: new Date(),
         });

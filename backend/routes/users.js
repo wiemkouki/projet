@@ -103,7 +103,7 @@ router.post("/updateUser", function (req, res) {
         bcrypt.hash(req.body.password, salt, async function (err, hash) {
           user
             .update({
-         
+
               password: hash,
               role,
               email,
@@ -413,7 +413,7 @@ router.get("/confirm/:token", (req, res) => {
           const new_liv = await Livreurs.create({
             id_user: user.id,
             token,
-            is_deleted: false,
+       
             createdAt: new Date(),
             updatedAt: new Date(),
           });
