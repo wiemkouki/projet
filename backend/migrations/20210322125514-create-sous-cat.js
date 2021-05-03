@@ -22,7 +22,7 @@ module.exports = {
 
           onUpdate: 'restrict',
           onDelete: 'restrict' },
-          
+
           is_deleted:{
             type: Sequelize.BOOLEAN
           },

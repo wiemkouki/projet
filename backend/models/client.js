@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       is_deleted: DataTypes.BOOLEAN,
       id_user: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: "User",
           key: "id",

@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
 const { Client } = require("../models");
-const bcrypt = require("bcrypt");
 
 const saltRounds = 10;
 const prepareResponse = (response, status, body, type) => {
@@ -25,35 +24,36 @@ router.post("/create", function (req, res, next) {
     where: {
       nom: req.body.nom,
     },
-  }).then((client) => {
-    if (client) {
-      const response = {
-        success: false,
-        message: "client already exist !",
-      };
-      prepareResponse(res, 500, response, "application/json");
-    } else {
-      let {nom,prenom,tel, email,adresse, id_commande, id_panier,} = req.body;
-      Client.create({
-        nom,
-        prenom,
-        tel,
-        email,
-        adresse,
-        id_commande,
-        id_panier,
-        is_deleted: false,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      });
-      const response = {
-        success: true,
-
-        message: "client created successfully.",
-      };
-      prepareResponse(res, 200, response, "application/json");
-    }
-  });
+  })
+    .then( async function (client) {
+      if (client) {
+        const response = {
+          success: false,
+          message: "client already exist !",
+        };
+        prepareResponse(res, 500, response, "application/json");
+      } else {
+        let { nom, prenom, tel, email, adresse, id_user, id_panier } = req.body;
+        let new_clt = await Client.create({
+          nom,
+          prenom,
+          tel,
+          email,
+          adresse,
+          id_panier,
+          id_user,
+          is_deleted: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
+        const response = {
+          success: true,
+          message: "client created successfully.",
+        };
+        prepareResponse(res, 200, response, "application/json");
+      }
+    })
+    .catch((error) => console.log(error));
 });
 //get ALL CLient
 
@@ -79,24 +79,49 @@ router.post("/updateC/:id", function (req, res) {
   console.log(req.body);
   Client.findByPk(id).then((Client) => {
     let { nom, prenom, tel, adresse } = req.body;
-        Client.update({
-          nom,
-          prenom,
-          tel,
-          adresse,
-          updatedAt: new Date(),
-        })
-          .then((client) =>
-            prepareResponse(res, 200, client , "application/json"))
-          .catch((error) => {
-            const response = {
-              success: false,
-              message:
-                "Some internal server error has occured while attempting to proceed " +
-                "with your request, please try again.",
-            };
-            prepareResponse(res, 500, response, "application/json");
-     });
+    Client.update({
+      nom,
+      prenom,
+      tel,
+      adresse,
+      updatedAt: new Date(),
+    })
+      .then((client) => prepareResponse(res, 200, client, "application/json"))
+      .catch((error) => {
+        const response = {
+          success: false,
+          message:
+            "Some internal server error has occured while attempting to proceed " +
+            "with your request, please try again.",
+        };
+        prepareResponse(res, 500, response, "application/json");
+      });
+  });
+});
+
+router.post("/updateUser", function (req, res) {
+  const id = req.body.id;
+  console.log(req.body);
+  Client.findByPk(id).then((user) => {
+    try {
+      let { password, role, email } = req.body;
+
+      Client.update({
+        password: hash,
+        role,
+        email,
+
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      })
+        .then((user) =>
+          prepareResponse(res, 200, { success: true }, "application/json")
+        )
+        .catch((error) => console.log(error));
+    } catch (error) {
+      console.log(error);
+      prepareResponse(res, 500, { success: false }, "application/json");
+    }
   });
 });
 //DELETE CLIENT

@@ -13,11 +13,11 @@ router.get("/getCat/:id", async function (req, res, next) {
 
 //GET ALL
 
-router.get("/getAll", function (req, res, next) {
+router.get("/getAllC", function (req, res, next) {
   categorie
-  .findAll({ attributes: ["id", "nom_cat", "famille","createdAt", "updatedAt"] })
-    .then((categorie) => {
-      prepareResponse(res, 200, categorie, "application/json");
+  .findAll({ attributes: ["id", "nom_cat", "famille"] })
+    .then((categories) => {
+      prepareResponse(res, 200, categories, "application/json");
     })
     .catch((error) => {
       const response = {
@@ -26,8 +26,6 @@ router.get("/getAll", function (req, res, next) {
           "Some internal server error has occured while attempting to proceed " +
           "with your request, please try again.",
       };
-
-      // prepareResponse(res, 500, response, "application/json");
     });
 });
 
@@ -40,49 +38,47 @@ router.post("/createCat", function (req, res, next) {
         nom_cat: req.body.nom_cat,
       },
     })
-    .then(async function (cat) {
+    .then( function (cat) {
       if (cat) {
         const response = {
           success: false,
           message: "CATEGORIE already exist !",
         };
-        prepareResponse(res, 500, response, "application/json");
+        // prepareResponse(res, 500, response, "application/json");
       } else {
         let { nom_cat, famille} = req.body;
-        let new_cat = await categorie.create({
+        categorie.create({
           nom_cat,
           famille,
           is_deleted: false,
           createdAt: new Date(),
           updatedAt: new Date(),
         });
-
           const response = {
           success: true,
           message: "CATEGORIE created successfully.",
         }
         prepareResponse(res, 200, response, "application/json");
       }
-    }).catch((error));
+    }).catch((error)=> console.log(error));
 });
 //UPDATE CATEGORIE
 router.post("/updateC/:id", function (req, res) {
 
   let id = req.params.id;
   console.log(req.body);
-  categorie.findByPk(id).then((cat) => {
+  categorie.findByPk(id).then((categorie) => {
     try {
       let { nom_cat, famille } = req.body;
 
-      categorie.update({
-        nom_cat,
-        famille,
-        updatedAt: new Date(),
-      })
-        .then((cat) =>
-          prepareResponse(res, 200, cat, "application/json")
-        )
-        .catch((error));
+      categorie
+        .update({
+          nom_cat,
+          famille,
+          updatedAt: new Date(),
+        })
+        .then((cat) => prepareResponse(res, 200, cat, "application/json"))
+        .catch(error);
     } catch (error) {
       console.log(error);
       prepareResponse(res, 500, { success: false }, "application/json");
