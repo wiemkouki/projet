@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 export class User {
   constructor(
-    // public id: number,
+    public id: number,
     public email: string,
     public role: string,
     public createdAt: string,
@@ -18,12 +20,17 @@ export class User {
   styleUrls: ['./crud-user.component.scss']
 })
 export class CrudUserComponent implements OnInit {
+ 
+  editProfileForm: FormGroup;
+
+
+
   closeResult: string;
   title = 'datatables';
  dtOptions: DataTables.Settings = {};
  users;
  dtElement: any;
-  constructor(private http: HttpClient,private modalService: NgbModal 
+  constructor(private fb: FormBuilder, private http: HttpClient,private modalService: NgbModal 
 ) { }
 
   ngOnInit(): void {
@@ -34,6 +41,21 @@ export class CrudUserComponent implements OnInit {
   }
   this.getUsers()
 
+  this.editProfileForm = this.fb.group({
+    id: [''],
+    email: [''],
+    role: [''],
+    createdAt: [''],
+    updatedAt: ['']
+   });
+   this.UpdateUsers()
+}
+UpdateUsers(){
+  this.http.get('http://localhost:3000/users/updateUser')
+ .subscribe( response => {
+   console.log(response);
+  
+ });
 }
 getUsers(){
   this.http.get('http://localhost:3000/users/getAll')
@@ -41,6 +63,8 @@ getUsers(){
    console.log(response);
    this.users = response;
  });
+
+
  }
 //  openDelete(targetModal, user: User) {
 //   deleteId = user.id;
@@ -49,6 +73,24 @@ getUsers(){
 //     size: 'lg'
 //   });
 // }
+openModal(targetModal, user) {
+  this.modalService.open(targetModal, {
+   centered: true,
+   backdrop: 'static'
+  });
+ 
+  this.editProfileForm.patchValue({
+   firstname: user.firstname,
+   lastname: user.lastname,
+   username: user.username,
+   email: user.email
+  });
+ }
+ onSubmit() {
+  this.modalService.dismissAll();
+  console.log("res:", this.editProfileForm.getRawValue());
+ }
+
 
 openDetails(targetModal, users: User) {
   this.modalService.open(targetModal, {
@@ -63,8 +105,22 @@ openDetails(targetModal, users: User) {
 
 }
 
-open(content) {
-  this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+// openEdit(targetModal, users: User) {
+//   this.modalService.open(targetModal, {
+//     backdrop: 'static',
+//     size: 'lg'
+//   });
+//   this.editForm.patchValue( {
+//     id: users.id, 
+//     email: users.email,
+//     role: users.role,
+//     createdAt: users.createdAt,
+//     updatedAt: users.updatedAt
+//   });
+// }
+
+open(content,) {
+  this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'} ).result.then((result) => {
     this.closeResult = `Closed with: ${result}`;
   }, (reason) => {
     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -82,6 +138,8 @@ if (reason === ModalDismissReasons.ESC) {
 
 
 
+
+
 }
 
 
@@ -93,4 +151,8 @@ if (reason === ModalDismissReasons.ESC) {
 
 
 
+
+function centered(content: any, arg1: { ariaLabelledBy: string; }, centered: any, arg3: boolean) {
+  throw new Error('Function not implemented.');
+}
 
