@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const { categorie} = require("../models");
+const { categorie  } = require("../models");
 
 //GET ONE
 router.get("/getCat/:id", async function (req, res, next) {
@@ -40,15 +40,15 @@ router.post("/createCat", function (req, res, next) {
         nom_cat: req.body.nom_cat,
       },
     })
-    .then(async function (categorie) {
-      if (categorie) {
+    .then(async function (cat) {
+      if (cat) {
         const response = {
           success: false,
           message: "CATEGORIE already exist !",
         };
         prepareResponse(res, 500, response, "application/json");
       } else {
-        // let { nom_cat, famille} = req.body;
+        let { nom_cat, famille} = req.body;
         let new_cat = await categorie.create({
           nom_cat,
           famille,
@@ -60,16 +60,17 @@ router.post("/createCat", function (req, res, next) {
           const response = {
           success: true,
           message: "CATEGORIE created successfully.",
-        };
+        }
         prepareResponse(res, 200, response, "application/json");
       }
-    }).catch((error) => console.log(error));
+    }).catch((error));
 });
 //UPDATE CATEGORIE
-router.post("/updateC", function (req, res) {
-  const id = req.body.id;
+router.post("/updateC/:id", function (req, res) {
+
+  let id = req.params.id;
   console.log(req.body);
-  categorie.findByPk(id).then((categorie) => {
+  categorie.findByPk(id).then((cat) => {
     try {
       let { nom_cat, famille } = req.body;
 
@@ -78,10 +79,10 @@ router.post("/updateC", function (req, res) {
         famille,
         updatedAt: new Date(),
       })
-        .then((categorie) =>
-          prepareResponse(res, 200, categorie, "application/json")
+        .then((cat) =>
+          prepareResponse(res, 200, cat, "application/json")
         )
-        .catch((error) => console.log(error));
+        .catch((error));
     } catch (error) {
       console.log(error);
       prepareResponse(res, 500, { success: false }, "application/json");

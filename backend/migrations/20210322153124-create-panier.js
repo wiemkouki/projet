@@ -7,12 +7,12 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
-    
+
       },
       id_client:
     {
       type: Sequelize.INTEGER,
-      allowNull: false,
+      allowNull: true,
       foreignKey:true,
       references: {
         model: 'clients',
@@ -21,7 +21,7 @@ module.exports = {
       onUpdate: 'restrict',
       onDelete: 'restrict' },
 
-      
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
