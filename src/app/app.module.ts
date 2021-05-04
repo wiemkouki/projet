@@ -45,7 +45,8 @@ const Routes: Routes = [
   { path: 'admin', component: AdmindashComponent}, 
 
   { path: 'users', component: CrudUserComponent },
-  { path: 'client', component: CrudClientComponent },
+  { path: 'clients', component: CrudClientComponent },
+  
   { path: 'categorie', component: CategorieComponent },
   { path: 'login', component: LoginComponent },
   { path: 'cart', component: CartComponent },

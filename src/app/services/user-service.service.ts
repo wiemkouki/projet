@@ -53,6 +53,12 @@ export class UserServiceService {
  });
  }
 
+
+deleteUser(id: number): Observable<any>{
+  return this.http.get(`http://localhost:3000/users/delete/${id}`);
+ }
+
+
   forgot(form: object) {
     const url = `${this.api_prefix}/resetpassword`;
     console.log(form);

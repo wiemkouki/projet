@@ -2,17 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { UserServiceService } from '../../services/user-service.service';
 
 export class User {
-  constructor(
+ constructor(
     public id: number,
     public email: string,
     public role: string,
     public createdAt: string,
     public updatedAt: string
-  ) {
-  }
+  ) {} 
 }
+
 
 @Component({
   selector: 'app-crud-user',
@@ -20,17 +21,17 @@ export class User {
   styleUrls: ['./crud-user.component.scss']
 })
 export class CrudUserComponent implements OnInit {
- 
-  editProfileForm: FormGroup;
 
-
-
+editProfileForm: FormGroup;
   closeResult: string;
   title = 'datatables';
  dtOptions: DataTables.Settings = {};
  users;
  dtElement: any;
-  constructor(private fb: FormBuilder, private http: HttpClient,private modalService: NgbModal 
+  deleteID: string;
+  httpClient: any;
+  constructor(private fb: FormBuilder, private http: HttpClient,private modalService: NgbModal ,
+  private userService: UserServiceService
 ) { }
 
   ngOnInit(): void {
@@ -39,8 +40,9 @@ export class CrudUserComponent implements OnInit {
       pageLength: 4,
       processing: true
   }
+  // this.onDelete(user:User)
   this.getUsers()
-
+  
   this.editProfileForm = this.fb.group({
     id: [''],
     email: [''],
@@ -49,7 +51,10 @@ export class CrudUserComponent implements OnInit {
     updatedAt: ['']
    });
    this.UpdateUsers()
+
+  //  this.onDelete();
 }
+
 UpdateUsers(){
   this.http.get('http://localhost:3000/users/updateUser')
  .subscribe( response => {
@@ -64,15 +69,26 @@ getUsers(){
    this.users = response;
  });
 
-
  }
-//  openDelete(targetModal, user: User) {
-//   deleteId = user.id;
-//   this.modalService.open(targetModal, {
-//     backdrop: 'static',
-//     size: 'lg'
-//   });
-// }
+ openDelete(targetModal, id: string) {
+  this.deleteID = id;
+  this.modalService.open(targetModal, {
+    backdrop: 'static',
+    size: 'lg'
+  });
+}
+
+onDelete() {
+console.log(this.deleteID)
+  this.userService.deleteUser(parseInt(this.deleteID))
+    .subscribe((response) => {
+      console.log(response);
+      this.users = response;
+      // this.ngOnInit();
+      this.modalService.dismissAll();
+    });
+}
+
 openModal(targetModal, user) {
   this.modalService.open(targetModal, {
    centered: true,
@@ -80,10 +96,9 @@ openModal(targetModal, user) {
   });
  
   this.editProfileForm.patchValue({
-   firstname: user.firstname,
-   lastname: user.lastname,
-   username: user.username,
-   email: user.email
+   email: user.email,
+   role: user.role,
+  
   });
  }
  onSubmit() {
@@ -136,10 +151,6 @@ if (reason === ModalDismissReasons.ESC) {
 }
 }
 
-
-
-
-
 }
 
 
@@ -152,7 +163,4 @@ if (reason === ModalDismissReasons.ESC) {
 
 
 
-function centered(content: any, arg1: { ariaLabelledBy: string; }, centered: any, arg3: boolean) {
-  throw new Error('Function not implemented.');
-}
 

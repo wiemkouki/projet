@@ -125,11 +125,11 @@ router.post("/updateUser", function (req, res) {
 });
 //DELETE USER
 
-router.post("/delete/:id", function (req, res) {
+router.get("/delete/:id", function (req, res) {
   let id = req.params.id;
-  User.findByPk(id).then((User) => {
+  User.findByPk(id).then((user) => {
     try {
-      User.update({
+      user.update({
         is_deleted: true,
       });
       prepareResponse(res, 200, { success: true }, "application/json");
