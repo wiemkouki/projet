@@ -1,7 +1,7 @@
 <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet"
   type="text/css" /> -->
 <!-- <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script> -->
-<div class="container" *ngIf="!users.is_deleted">
+<div class="container" *ngIf="!is_deleted" >
   <table datatable [dtOptions]="dtOptions" class=" table table-striped" >
     <thead>
 
@@ -34,7 +34,7 @@
             <i class="fa fa-remove"></i>Delete</button> </td>
 
 
-            
+
         <td><button class="btn btn-primary btn-rounded " (click)="openDetails(contentDetails, user)"> <i
               class="fa fa-search"></i> Details</button> </td>
 
