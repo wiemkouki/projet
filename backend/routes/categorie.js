@@ -2,6 +2,12 @@ var express = require("express");
 var router = express.Router();
 const { categorie  } = require("../models");
 
+
+
+const prepareResponse = (response, status, body, type) => {
+  response.set("Content-Type", type);
+  response.status(status).send(body);
+};
 //GET ONE
 router.get("/getCat/:id", async function (req, res, next) {
   let id = req.params.id;

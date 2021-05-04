@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { UserServiceService } from '../services/user-service.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { param } from 'express-validator';
+
 @Component({
   selector: 'app-changepwd',
   templateUrl: './changepwd.component.html',
