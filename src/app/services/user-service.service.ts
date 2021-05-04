@@ -45,13 +45,9 @@ export class UserServiceService {
 
 
 
- updateUser(){
-  this.http.get('http://localhost:3000/users/updateUser')
- .subscribe( response => {
-   console.log(response);
-  
- });
- }
+//  updateUser(): Observable<any>{
+//  return this.http.post('http://localhost:3000/users/updateUser');
+//  }
 
 
 deleteUser(id: number): Observable<any>{
@@ -65,6 +61,10 @@ deleteUser(id: number): Observable<any>{
     return this.http.post(url, JSON.stringify(form), { headers: this.headerrs });
   }
 
+  updateUser() {
+    const url = `${this.api_prefix}/updateUser`;
+    return this.http.post(url, { headers: this.headerrs });
+  }
 
   change(id: String, form: object) {
     const url = `${this.api_prefix}/changepwd/${id}`;

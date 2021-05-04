@@ -1,7 +1,7 @@
 <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet"
   type="text/css" /> -->
 <!-- <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script> -->
-<div class="container" *ngIf="!users.is_deleted">
+<div class="container">
   <table datatable [dtOptions]="dtOptions" class=" table table-striped" >
     <thead>
 
@@ -19,7 +19,6 @@
     <tbody>
       <tr *ngFor="let user of users">
         <td><span>{{ user.id }}</span></td>
-
         <td><span>{{ user.email }}</span></td>
         <td><span>{{ user.role }}</span></td>
         <!-- <td><span>{{ user.createdAt }}</span></td>
@@ -96,9 +95,6 @@
 </ng-template>
 
 
-
-
-
 <ng-template #editProfileModal let-modal>
   <div class="modal-header">
     <h5 class="modal-title" id="editProfileLabel">Edit User</h5>
@@ -108,7 +104,13 @@
   </div>
 
   <div class="modal-body">
-    <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="editProfileForm" (click)="onSubmit()">
+      <div class="form-group row">
+        <label for="id" class="col-sm-4 col-form-label">ID</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" formControlName="id" id="id">
+        </div>
+      </div>
       <div class="form-group row">
         <label for="email" class="col-sm-4 col-form-label">Email</label>
         <div class="col-sm-8">

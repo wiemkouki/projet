@@ -29,18 +29,17 @@ editProfileForm: FormGroup;
  users;
  dtElement: any;
   deleteID: string;
+  editID:string;
   httpClient: any;
-  constructor(private fb: FormBuilder, private http: HttpClient,private modalService: NgbModal ,
-  private userService: UserServiceService
-) { }
+  constructor(private fb: FormBuilder, private http: HttpClient,private modalService: NgbModal ,private userService: UserServiceService) { }
 
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 4,
+      pageLength: 5,
       processing: true
   }
-  // this.onDelete(user:User)
+//Affichage users
   this.getUsers()
   
   this.editProfileForm = this.fb.group({
@@ -50,18 +49,11 @@ editProfileForm: FormGroup;
     createdAt: [''],
     updatedAt: ['']
    });
-   this.UpdateUsers()
-
-  //  this.onDelete();
-}
-
-UpdateUsers(){
-  this.http.get('http://localhost:3000/users/updateUser')
- .subscribe( response => {
-   console.log(response);
   
- });
 }
+
+
+//Affichage users
 getUsers(){
   this.http.get('http://localhost:3000/users/getAll')
  .subscribe( response => {
@@ -70,6 +62,38 @@ getUsers(){
  });
 
  }
+
+
+//bouton Edit
+
+
+openModal(targetModal, user) {
+  this.modalService.open(targetModal, {
+   centered: true,
+   backdrop: 'static'
+  });
+  this.editProfileForm.patchValue({
+    id:user.id,
+   email: user.email,
+   role: user.role,
+  });
+ }
+ 
+ onSubmit() {
+  // console.log(this.editID)
+  this.userService.updateUser()
+    .subscribe((response) => {
+      console.log(response);
+      this.users = response;
+       this.ngOnInit();
+    this.modalService.dismissAll();
+});
+  console.log("res:", this.editProfileForm.getRawValue());
+ }
+ 
+
+ 
+//bouton Delete
  openDelete(targetModal, id: string) {
   this.deleteID = id;
   this.modalService.open(targetModal, {
@@ -89,24 +113,10 @@ console.log(this.deleteID)
     });
 }
 
-openModal(targetModal, user) {
-  this.modalService.open(targetModal, {
-   centered: true,
-   backdrop: 'static'
-  });
- 
-  this.editProfileForm.patchValue({
-   email: user.email,
-   role: user.role,
-  
-  });
- }
- onSubmit() {
-  this.modalService.dismissAll();
-  console.log("res:", this.editProfileForm.getRawValue());
- }
 
 
+
+//bouton Details
 openDetails(targetModal, users: User) {
   this.modalService.open(targetModal, {
    centered: true,
@@ -134,7 +144,7 @@ openDetails(targetModal, users: User) {
 //   });
 // }
 
-open(content,) {
+open(content) {
   this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'} ).result.then((result) => {
     this.closeResult = `Closed with: ${result}`;
   }, (reason) => {

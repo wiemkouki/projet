@@ -103,11 +103,9 @@ router.post("/updateUser", function (req, res) {
         bcrypt.hash(req.body.password, salt, async function (err, hash) {
           user
             .update({
-
               password: hash,
               role,
               email,
-
               createdAt: new Date(),
               updatedAt: new Date(),
             })

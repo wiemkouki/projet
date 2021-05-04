@@ -32,14 +32,14 @@ export class TestComponent {
     this.setForm()
   }
  
-  onSubmit() {
-    if (this.editForm.invalid || this.isLoading) {
-      return;
-    }
+  // onSubmit() {
+  //   if (this.editForm.invalid || this.isLoading) {
+  //     return;
+  //   }
    
-    this.isLoading = true;
-    this.userService.updateUser()
-  }
+  //   this.isLoading = true;
+  //   this.userService.updateUser()
+  // }
  
   get editFormData() { return this.editForm.controls; }
  
