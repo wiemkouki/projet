@@ -77,9 +77,9 @@ router.get("/getAll", function (req, res, next) {
 router.post("/updateC/:id", function (req, res) {
   let id = req.params.id;
   console.log(req.body);
-  Client.findByPk(id).then((Client) => {
+  Client.findByPk(id).then((client) => {
     let { nom, prenom, tel, adresse } = req.body;
-    Client.update({
+    client.update({
       nom,
       prenom,
       tel,
@@ -99,31 +99,32 @@ router.post("/updateC/:id", function (req, res) {
   });
 });
 
-router.post("/updateUser", function (req, res) {
-  const id = req.body.id;
-  console.log(req.body);
-  Client.findByPk(id).then((user) => {
-    try {
-      let { password, role, email } = req.body;
+// router.post("/updateC", function (req, res) {
+//   const id = req.body.id;
+//   console.log(req.body);
+//   Client.findByPk(id).then((clt) => {
+//     try {
+//       let { password, role, email } = req.body;
 
-      Client.update({
-        password: hash,
-        role,
-        email,
+//       clt.update({
+//         password: hash,
+//         role,
+//         email,
 
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      })
-        .then((user) =>
-          prepareResponse(res, 200, { success: true }, "application/json")
-        )
-        .catch((error) => console.log(error));
-    } catch (error) {
-      console.log(error);
-      prepareResponse(res, 500, { success: false }, "application/json");
-    }
-  });
-});
+//         createdAt: new Date(),
+//         updatedAt: new Date(),
+//       })
+//         .then((clt) =>
+//           prepareResponse(res, 200, { success: true }, "application/json")
+//         )
+//         .catch((error) => console.log(error));
+//     } catch (error) {
+//       console.log(error);
+//       prepareResponse(res, 500, { success: false }, "application/json");
+//     }
+//   });
+// });
+
 //DELETE CLIENT
 
 router.post("/delete/:id", function (req, res) {

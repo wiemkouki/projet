@@ -58,12 +58,6 @@ const prepareEmailSending = () => {
   return email;
 };
 
-//////////
-// router.get('/', async function (req, res, next) {
-
-//   prepareResponse(res, 200, { success: true }, 'application/json');
-// });
-//////
 /* GET user listing. */
 router.get("/getUser/:id", async function (req, res, next) {
   let id = req.params.id;

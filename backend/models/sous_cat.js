@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Sous_cat extends Model {
 
     static associate(models) {
-      Sous_cat.belongsTo(models.categorie, { foreignKey: 'id_categorie', as: 'categorie' });
+      Sous_cat.belongsTo(models.categorie, { foreignKey: 'id_cat', as: 'categorie' });
     }
   };
   Sous_cat.init({
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
     },
     nom_ss_cat: DataTypes.STRING,
-    id_categorie:
+    id_cat:
     {
         type: DataTypes.INTEGER,
         allowNull: false,
