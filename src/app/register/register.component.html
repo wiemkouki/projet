@@ -52,7 +52,7 @@
 <div class="card">
 <header class="card-header">
 
-	<h4 class="card-title mt-2">Inscrivez vous ici !!</h4>
+	<h4 class="card-title mt-2">Inscrivez vous!</h4>
 </header>
 <article class="card-body">
 <form *ngIf="!isSuccessful"
@@ -76,7 +76,7 @@
 
 	</div> <!-- form-row end.// -->
 	<div class="form-group">
-		<label class="text-muted"> Adresse E-mail</label>
+		<label class="text-muteed"> Adresse E-mail</label>
 		<input  placeholder="" type="email"
 		class="form-control"
 		name="email"
@@ -96,8 +96,8 @@
 
 
 
-	<div class="form-group">
-		<label class="text-muted">Créer votre mot de passe</label>
+	<div class="form-group ">
+		<label class="text-muteed">Créer votre mot de passe</label>
 	    <input  type="password"
 		class="form-control"
 		name="password"
@@ -113,7 +113,7 @@
 		  </div>
 	</div> <!-- form-group end.// -->
 	<div class="form-group col-md-6">
-		<label class="text-muted">Role</label>
+		<label class="text-muteed">Role</label>
 
 		<select id="role" class="form-control"
 		name="role"
@@ -145,7 +145,7 @@
   Votre inscription est réussie!
   </div>
 </article> <!-- card-body end .// -->
-<div class="border-top card-body text-center">avez-vous déjà un compte ? <a [routerLink]="'/login'">Connexion</a></div>
+<div class="border-top card-body text-center me">avez-vous déjà un compte ? <a [routerLink]="'/login'">Connexion</a></div>
 </div> <!-- card.// -->
 </div> <!-- col.//-->
 
@@ -287,13 +287,13 @@
       <mat-toolbar color="footerColor"  >
 
 
-          <a mat-button [routerLink]="'/accounts'">  Nos conditions </a>
-          <a mat-button [routerLink]="'/create-account'"> Protection des données </a>
-          <a mat-button [routerLink]="'/contacts'">Imprimer </a>
-          <a mat-button [routerLink]="'/create-contact'"> Remarque sur les cookies</a>
-          <a mat-button [routerLink]="'/activities'"> Remarques sur la publicité ciblée par centres d'intérét  </a>
-          <a mat-button [routerLink]="'/create-activity'"> Copyright © diajara 2021  </a>
-          <a mat-button [routerLink]="'/create-activity'">  Powered by TunaFanya </a>
+          <a mat-button>  Nos conditions </a>
+          <a mat-button> Protection des données </a>
+          <a mat-button>Imprimer </a>
+          <a mat-button> Remarque sur les cookies</a>
+          <a mat-button> Remarques sur la publicité ciblée par centres d'intérét  </a>
+          <a mat-button> Copyright © diajara 2021  </a>
+          <a mat-button>  Powered by TunaFanya </a>
 
      </mat-toolbar>
     <!-- Copyright -->

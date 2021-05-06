@@ -10,7 +10,8 @@ export class User {
     public email: string,
     public role: string,
     public createdAt: string,
-    public updatedAt: string
+    public updatedAt: string,
+    public is_deleted :boolean
   ) {} 
 }
 
@@ -28,6 +29,8 @@ editProfileForm: FormGroup;
  dtOptions: DataTables.Settings = {};
  users;
  dtElement: any;
+
+ is_deleted: boolean = false;
   deleteID: string;
   editID:string;
   httpClient: any;
@@ -102,14 +105,17 @@ openModal(targetModal, user) {
   });
 }
 
-onDelete() {
+onDelete(is_deleted: boolean) {
 console.log(this.deleteID)
   this.userService.deleteUser(parseInt(this.deleteID))
     .subscribe((response) => {
       console.log(response);
       this.users = response;
+      is_deleted=true;
+      // this.show=false;
       // this.ngOnInit();
       this.modalService.dismissAll();
+
     });
 }
 
