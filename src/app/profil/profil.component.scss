@@ -1,5 +1,6 @@
-body{margin-top:20px;
-  color: #bcd0f7;
+body{
+    margin-top:20px;
+    color: #bcd0f7;
       background: white;
       
   }
@@ -23,10 +24,17 @@ body{margin-top:20px;
       margin: 0 0 0.5rem 0;
   }
   .account-settings .user-profile h6.user-email {
-      margin: 0;
-      font-size: 0.8rem;
-      font-weight: 400;
-  }
+      margin: 0; font-size: 12px;
+    //   font-size: 0.8rem;
+    //   font-weight: 400;
+}
+.nom{
+    color:rgb(104, 112, 119);
+}
+.aboutt{
+    font-size: 12px;
+    text-align: center;
+}
   .account-settings .about {
       margin: 1rem 0 0 0;
       font-size: 0.8rem;
@@ -41,6 +49,18 @@ body{margin-top:20px;
       margin-bottom:   0em;
       margin-top: 0px;
   }
+  .form-groupp{
+    font-weight: normal;
+    font-size: 12px;
+    margin-bottom: 20px;
+    outline: none !important; 
+  }
+  .primary{
+    font-size: 14px;
+    color: black;
+    font-weight:bold;
+  }
+
   .form-control {
       border: 1px solid #596280;
       -webkit-border-radius: 2px;
@@ -48,8 +68,22 @@ body{margin-top:20px;
       border-radius: 2px;
       font-size: .825rem;
       background: white;
-      color: #bcd0f7;
+      color: rgb(63, 65, 66);
+      min-height: 47px;
+      box-shadow: none;
+      font-size: 12px;
+  
   }
+
+
+
+
+
+
+
+
+
+  
   .mat-toolbar.mat-primary {
     background-color: #2A2F46;
     margin-bottom: 0px;
