@@ -54,9 +54,8 @@ export class CrudUserComponent implements OnInit {
       createdAt: [''],
       updatedAt: ['']
     });
-    this.UpdateUsers()
 
-  }
+
   
   this.editProfileForm = this.fb.group({
     id: [''],
@@ -146,26 +145,8 @@ openDetails(targetModal, users: User) {
   document.getElementById('role').setAttribute('value', users.role);
   document.getElementById('created').setAttribute('value', users.createdAt);
   document.getElementById('updated').setAttribute('value', users.updatedAt);
-
-  openModal(targetModal, user) {
-    this.modalService.open(targetModal, {
-      centered: true,
-      backdrop: 'static'
-    });
-
-// openEdit(targetModal, users: User) {
-//   this.modalService.open(targetModal, {
-//     backdrop: 'static',
-//     size: 'lg'
-//   });
-//   this.editForm.patchValue( {
-//     id: users.id, 
-//     email: users.email,
-//     role: users.role,
-//     createdAt: users.createdAt,
-//     updatedAt: users.updatedAt
-//   });
-// }
+}
+ 
 
 open(content) {
   this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'} ).result.then((result) => {
