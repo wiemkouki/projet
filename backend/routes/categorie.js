@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const { categorie  } = require("../models");
-
+const bodyParser = require ('body-parser');
 
 
 const prepareResponse = (response, status, body, type) => {
@@ -10,11 +10,12 @@ const prepareResponse = (response, status, body, type) => {
 };
 //GET ONE
 router.get("/getCat/:id", async function (req, res, next) {
+
   let id = req.params.id;
 
-  const categorie = await categorie.findByPk(id);
+  const cat = await categorie.findByPk(id);
 
-  prepareResponse(res, 200, categorie, "application/json");
+  prepareResponse(res, 200, cat, "application/json");
 });
 
 //GET ALL
@@ -46,11 +47,11 @@ router.post("/createCat", function (req, res, next) {
     })
     .then( function (cat) {
       if (cat) {
-        const response = {
+        const resp = {
           success: false,
           message: "CATEGORIE already exist !",
-        };
-        // prepareResponse(res, 500, response, "application/json");
+        }
+        prepareResponse(res, 500, resp ,"application/json");
       } else {
         let { nom_cat, famille} = req.body;
         categorie.create({
@@ -73,11 +74,11 @@ router.post("/updateC/:id", function (req, res) {
 
   let id = req.params.id;
   console.log(req.body);
-  categorie.findByPk(id).then((categorie) => {
+  categorie.findByPk(id).then((cat) => {
     try {
       let { nom_cat, famille } = req.body;
 
-      categorie
+      cat
         .update({
           nom_cat,
           famille,
@@ -93,7 +94,7 @@ router.post("/updateC/:id", function (req, res) {
 });
 //DELETE CATEGORIE
 
-router.post("/delete/:id", function (req, res) {
+router.get("/delete/:id", function (req, res) {
   let id = req.params.id;
   categorie.findByPk(id).then((categorie) => {
     try {

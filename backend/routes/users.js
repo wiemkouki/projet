@@ -58,12 +58,6 @@ const prepareEmailSending = () => {
   return email;
 };
 
-//////////
-// router.get('/', async function (req, res, next) {
-
-//   prepareResponse(res, 200, { success: true }, 'application/json');
-// });
-//////
 /* GET user listing. */
 router.get("/getUser/:id", async function (req, res, next) {
   let id = req.params.id;
@@ -76,7 +70,7 @@ router.get("/getUser/:id", async function (req, res, next) {
 //GET ALL USERS
 
 router.get("/getAll", function (req, res, next) {
-  User.findAll({ attributes: ["id", "email","role","createdAt", "updatedAt"] })
+  User.findAll({ attributes: ["id", "email","role","is_deleted","createdAt", "updatedAt"] })
     .then((users) => {
       prepareResponse(res, 200, users, "application/json");
     })

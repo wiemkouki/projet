@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UserServiceService } from '../../services/user-service.service';
 
 export class User {
- constructor(
+  constructor(
     public id: number,
     public email: string,
     public role: string,
+    public is_deleted: boolean,
     public createdAt: string,
     public updatedAt: string,
-    public is_deleted :boolean
+  
   ) {} 
 }
 
@@ -23,7 +24,8 @@ export class User {
 })
 export class CrudUserComponent implements OnInit {
 
-editProfileForm: FormGroup;
+
+  editProfileForm: FormGroup;
   closeResult: string;
   title = 'datatables';
  dtOptions: DataTables.Settings = {};
@@ -41,9 +43,20 @@ editProfileForm: FormGroup;
       pagingType: 'full_numbers',
       pageLength: 5,
       processing: true
+    }
+
+    this.getUsers()
+
+    this.editProfileForm = this.fb.group({
+      id: [''],
+      email: [''],
+      role: [''],
+      createdAt: [''],
+      updatedAt: ['']
+    });
+    this.UpdateUsers()
+
   }
-//Affichage users
-  this.getUsers()
   
   this.editProfileForm = this.fb.group({
     id: [''],
@@ -117,7 +130,7 @@ console.log(this.deleteID)
       this.modalService.dismissAll();
 
     });
-}
+  }
 
 
 
@@ -134,7 +147,11 @@ openDetails(targetModal, users: User) {
   document.getElementById('created').setAttribute('value', users.createdAt);
   document.getElementById('updated').setAttribute('value', users.updatedAt);
 
-}
+  openModal(targetModal, user) {
+    this.modalService.open(targetModal, {
+      centered: true,
+      backdrop: 'static'
+    });
 
 // openEdit(targetModal, users: User) {
 //   this.modalService.open(targetModal, {

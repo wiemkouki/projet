@@ -37,16 +37,15 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CrudClientComponent } from './admindash/crud-client/crud-client.component';
 
 import { CrudUserComponent } from './Admindash/crud-user/crud-user.component';
-
-
+import {AuthService} from './services/auth.service';
+import {AdminGuard} from './admin.guard';
 
 const Routes: Routes = [
   { path: '', component: CatalogComponent },
-  { path: 'admin', component: AdmindashComponent}, 
 
+  { path: 'admin', component: AdmindashComponent , canActivate: [AdminGuard]},
   { path: 'users', component: CrudUserComponent },
   { path: 'clients', component: CrudClientComponent },
-  
   { path: 'categorie', component: CategorieComponent },
   { path: 'login', component: LoginComponent },
   { path: 'cart', component: CartComponent },
@@ -75,10 +74,10 @@ const Routes: Routes = [
     AdmindashComponent,
     CategorieComponent,
     CrudClientComponent,
-   
+
     CrudUserComponent,
-   
-  
+
+
 
 
 
@@ -86,6 +85,8 @@ const Routes: Routes = [
 
   ],
   imports: [
+
+
 
     BrowserModule,
     FlexLayoutModule,
