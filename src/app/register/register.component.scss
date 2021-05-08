@@ -10,6 +10,17 @@
 
 
 }
+.b {
+    float: left;
+    width: 22%;
+    padding: 10px;
+    // background: #6c6e6e;
+    color: white;
+    font-size: 16px;
+    // border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor:default;
+  }
 .mat-toolbar.mat-primary .mat-button{
     color: #FFFFFF ;
     font-size: 8pt;
@@ -68,13 +79,15 @@ label .somme-label {
 
     outline: none !important; 
 }
-.input-group{
-    margin-left: auto ;
-    margin-right: auto;
-    width: 760px ;
-    height: 37px;
 
-}
+    .input-group{
+        margin-left: auto ;
+        margin-right: auto;
+        width: 760px ;
+        height: 37px;
+    
+    }
+
 .navbar-titles{
     font-weight: lighter;
 

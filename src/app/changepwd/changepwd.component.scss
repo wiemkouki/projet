@@ -10,6 +10,17 @@ body{margin-top:20px;
   .account-settings .user-profile .user-avatar {
       margin: 0 0 1rem 0;
   }
+  .b {
+    float: left;
+    width: 10%;
+    padding: 7px;
+    // background: #6c6e6e;
+    color: white;
+    font-size: 16px;
+    // border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor:default;
+  }
   .account-settings .user-profile .user-avatar img {
       width: 90px;
       height: 90px;

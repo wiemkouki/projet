@@ -280,6 +280,7 @@
 
 
 }
+
 .mat-toolbar.mat-primary .mat-button{
     color: #FFFFFF ;
     font-size: 8pt;
@@ -313,13 +314,17 @@ label .somme-label {
 .mat-toolbar.mat-footerColor a.nav-link{
     text-decoration: none;
 }
-
+.form-control {
+  min-height: 36px;
+  box-shadow: none;
+  border-color: #ddd;
+}
 .input-group{
     margin-left: auto ;
     margin-top: 0;
     margin-right: auto;
-    width: 760px ;
-    height: 37px;
+    width: 790px ;
+    height: 50px;
 
 }
 .navbar-titles{
@@ -363,7 +368,7 @@ select{
 color: #E6E6E6;
 list-style-type:none;
 }
-h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
+h3.h3{text-align:left;margin:1em;text-transform:capitalize;font-size:1.7em;}
 
 // Custom utility classes
 $spacer: 5px;
@@ -1015,4 +1020,19 @@ a[aria-expanded=true] .fa-plus {
   border-right: 27px solid white;
   &:nth-child(3) {top: 20px;}
 }
+
+
+.b {
+  float: left;
+  width: 9%;
+  padding: 25px;
+  // background: #6c6e6e;
+  color: white;
+  font-size: 12px;
+  // border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor:default;
+}
+
+
 }

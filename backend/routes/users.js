@@ -70,6 +70,7 @@ router.get("/getUser/:id", async function (req, res, next) {
 //GET ALL USERS
 
 router.get("/getAll", function (req, res, next) {
+  
   User.findAll({ attributes: ["id", "email","role","is_deleted","createdAt", "updatedAt"] })
     .then((users) => {
       prepareResponse(res, 200, users, "application/json");
@@ -249,7 +250,7 @@ router.post("/signup", function (req, res, next) {
             emailSender.send({
               template: "email",
               message: {
-                to: "rahma.kalai0@gmail.com",
+                to: "wiemk08@gmail.com",
                 attachments: [
                   {
                     path: `${__dirname}/../emails/email/images/daijara.png`,
