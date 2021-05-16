@@ -32,10 +32,7 @@ import { ChangepwdComponent } from './changepwd/changepwd.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { TestComponent } from './test/test.component';
 import { AdmindashComponent } from './admindash/admindash.component';
-import { CategorieComponent } from './categorie/categorie.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { CrudClientComponent } from './admindash/crud-client/crud-client.component';
-
 import { CrudUserComponent } from './Admindash/crud-user/crud-user.component';
 import {AuthService} from './services/auth.service';
 import {AdminGuard} from './admin.guard';
@@ -48,14 +45,18 @@ import { Prod5Component } from './product/prod5/prod5.component';
 import { Prod6Component } from './product/prod6/prod6.component';
 import { Prod7Component } from './product/prod7/prod7.component';
 import { Prod8Component } from './product/prod8/prod8.component';
+import { CrudCategorieComponent } from './admindash/crud-categorie/crud-categorie.component';
+import { CrudSScatComponent } from './admindash/crud-sscat/crud-sscat.component';
+import { CmdeComponent } from './admindash/cmde/cmde.component';
 
 const Routes: Routes = [
   { path: '', component: CatalogComponent },
   { path: 'test', component: TestComponent },
   { path: 'admin', component: AdmindashComponent },
   { path: 'users', component: CrudUserComponent },
-  { path: 'clients', component: CrudClientComponent },
-  { path: 'categorie', component: CategorieComponent },
+  { path: 'categorie', component: CrudCategorieComponent },
+  { path: 'ss_categorie', component: CrudSScatComponent },
+  { path: 'cmde', component: CmdeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'cart', component: CartComponent },
   { path: 'register', component: RegisterComponent },
@@ -90,8 +91,8 @@ const Routes: Routes = [
     CatalogComponent,
     TestComponent,
     AdmindashComponent,
-    CategorieComponent,
-    CrudClientComponent,
+
+
 
     CrudUserComponent,
 
@@ -112,6 +113,12 @@ const Routes: Routes = [
     Prod7Component,
 
     Prod8Component,
+
+    CrudCategorieComponent,
+
+    CrudSScatComponent,
+
+    CmdeComponent,
 
 
 

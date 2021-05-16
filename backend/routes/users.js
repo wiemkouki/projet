@@ -70,8 +70,11 @@ router.get("/getUser/:id", async function (req, res, next) {
 //GET ALL USERS
 
 router.get("/getAll", function (req, res, next) {
-  
-  User.findAll({ attributes: ["id", "email","role","is_deleted","createdAt", "updatedAt"] })
+  User.findAll({
+    where: {
+      is_deleted: 0
+    }
+  })
     .then((users) => {
       prepareResponse(res, 200, users, "application/json");
     })
@@ -97,7 +100,7 @@ router.post("/updateUser", function (req, res) {
       bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(req.body.password, salt, async function (err, hash) {
           user
-            .update({
+            .Update({
               password: hash,
               role,
               email,
@@ -105,9 +108,9 @@ router.post("/updateUser", function (req, res) {
               updatedAt: new Date(),
             })
             .then((user) =>
-              prepareResponse(res, 200, { success: true }, "application/json")
+              prepareResponse(res, 200,user, "application/json")
             )
-            .catch((error) => console.log(error));
+            .catch((err) => console.log(err));
         });
       });
     } catch (error) {

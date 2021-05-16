@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const { Client } = require("../models");
-
+const { User, Livreurs,Client, Admin, Sup_admin } = require("../models");
 const saltRounds = 10;
 const prepareResponse = (response, status, body, type) => {
   console.log(body);
@@ -58,9 +57,13 @@ router.post("/create", function (req, res, next) {
 //get ALL CLient
 
 router.get("/getAll", function (req, res, next) {
-  Client.findAll({ attributes: ["nom", "prenom", "email", "tel"] })
+  Client.findAll({
+    where: {
+      is_deleted: 0
+    }
+  })
     .then((client) => {
-      prepareResponse(res, 200, client, { success: true }, "application/json");
+      prepareResponse(res, 200, client, "application/json");
     })
     .catch((error) => {
       const response = {

@@ -56,7 +56,7 @@ router.post("/createP", function (req, res, next) {
 router.get("/getAll", function (req, res, next) {
   Produits.findAll({ attributes: ["nom", "prenom", "email", "tel","createdAt", "updatedAt"] })
     .then((produit) => {
-      prepareResponse(res, 200, produit, { success: true }, "application/json");
+      prepareResponse(res, 200, produit, "application/json");
     })
     .catch((error) => {
       const response = {
