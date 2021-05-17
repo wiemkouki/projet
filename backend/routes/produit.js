@@ -33,8 +33,9 @@ router.post("/createP",  function (req, res, next) {
       };
       prepareResponse(res, 500, response, "application/json");
     } else {
-      let { libelle,marque,prix,max_rating,disponible,} = req.body;
+      let { id,libelle,marque,prix,max_rating,disponible,} = req.body;
   Produit.create({
+    id,
       libelle,
         marque,
         prix,
@@ -80,7 +81,7 @@ router.put("/updateP/:id", function (req, res) {
       let { libelle,marque,prix,max_rating,disponible } = req.body;
        Produit.update({
        libelle,
-        marque,
+      marque,
         prix,
         max_rating,
         disponible,
@@ -99,9 +100,9 @@ router.put("/updateP/:id", function (req, res) {
 
 router.post("/delete/:id", function (req, res) {
   let id = req.params.id;
-  Produit.findByPk(id).then((User) => {
+  Produit.findByPk(id).then((produits) => {
     try {
-      Produit.update({
+      produits.update({
         is_deleted: true,
       });
       prepareResponse(res, 200, { success: true }, "application/json");

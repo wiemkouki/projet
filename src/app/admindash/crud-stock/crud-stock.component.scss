@@ -5,6 +5,10 @@
   table .btn{
     font-size: 12px;
   }
+  .btn1{
+    font-size: 50px;
+
+  }
   form{
     margin-top: 10px;
   }
@@ -12,13 +16,15 @@
     background-color: #ce6534 ;
 }
 body {
-	color: #566787;
-	background: #f5f5f5;
-	font-family: 'Varela Round', sans-serif;
-	font-size: 13px;
-}
+    font: 90%/1.45em "Helvetica Neue", HelveticaNeue, Verdana, Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #fff;
+  }
+  
 .table {
-    margin: 30px 0;
+    margin: 5px 0;
 }
 .table-wrapper {
 	background: #fff;

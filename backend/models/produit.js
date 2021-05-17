@@ -15,6 +15,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Produit.init({
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+    },
     libelle: DataTypes.STRING,
     marque: DataTypes.STRING,
     prix: DataTypes.INTEGER,

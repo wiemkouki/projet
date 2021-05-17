@@ -55,15 +55,6 @@ export class CrudUserComponent implements OnInit {
       updatedAt: ['']
     });
 
-
-  
-  this.editProfileForm = this.fb.group({
-    id: [''],
-    email: [''],
-    role: [''],
-    createdAt: [''],
-    updatedAt: ['']
-   });
   
 }
 
