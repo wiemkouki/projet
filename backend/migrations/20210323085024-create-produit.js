@@ -9,9 +9,6 @@ module.exports = {
         type: Sequelize.INTEGER
       },
 
-
-
-
       libelle: {
         type: Sequelize.STRING
       },
@@ -31,17 +28,6 @@ module.exports = {
         type: Sequelize.BOOLEAN
       },
 
-      id_fiche_tech:
-        {
-          type: Sequelize.INTEGER,
-          allowNull: true,
-          references: {
-            model: 'fiche_teches',
-            key: 'id'
-          },
-
-          onUpdate: 'restrict',
-          onDelete: 'restrict' },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

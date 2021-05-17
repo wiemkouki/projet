@@ -11,17 +11,7 @@ module.exports = {
       nom_ss_cat: {
         type: Sequelize.STRING
       },
-      id_categorie:
-    {
-      type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'categories',
-            key: 'id'
-          },
-
-          onUpdate: 'restrict',
-          onDelete: 'restrict' },
+     
 
           is_deleted:{
             type: Sequelize.BOOLEAN

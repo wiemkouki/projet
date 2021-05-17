@@ -8,37 +8,38 @@ const prepareResponse = (response, status, body, type) => {
   response.status(status).send(body);
 };
 
-///get Produit
-// router.get("/getPdt/:id", async function (req, res, next) {
-//   let id = req.params.id;
+//get Produit
+router.get("/getPdt/:id", async function (req, res, next) {
+  let id = req.params.id;
 
-//   const produit = await Produit.findByPk(id);
+  const produit = await Produit.findByPk(id);
 
-//   prepareResponse(res, 200, produit, "application/json");
-// });
+  prepareResponse(res, 200, produit, "application/json");
+});
 // create Produit
-router.post("/createP", function (req, res, next) {
-  Produit.findOne({
-    attributes: ["libelle"],
+router.post("/createP",  function (req, res, next) {
+  Produit.findOne(
+    {
+    attributes: ['libelle'],
     where: {
       libelle: req.body.libelle,
     },
-  }).then((pdt) => {
+  }
+  ).then((pdt) => {
     if (pdt) {
       const response = {
         success: false,
         message: "Produit already exist !",
       };
-      prepareResponse(req, 500, response, "application/json");
+      prepareResponse(res, 500, response, "application/json");
     } else {
       let { libelle,marque,prix,max_rating,disponible,} = req.body;
-      Produit.create({
-        libelle,
+  Produit.create({
+      libelle,
         marque,
         prix,
         max_rating,
         disponible,
-        id_fiche_tech,
         is_deleted: false,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -54,7 +55,7 @@ router.post("/createP", function (req, res, next) {
 //get ALL Produit
 
 router.get("/getAll", function (req, res, next) {
-  Produits.findAll({ attributes: ["nom", "prenom", "email", "tel","createdAt", "updatedAt"] })
+  Produit.findAll({ attributes: ["libelle", "marque", "prix", "max_rating","disponible","createdAt", "updatedAt"] })
     .then((produit) => {
       prepareResponse(res, 200, produit, "application/json");
     })
@@ -71,33 +72,28 @@ router.get("/getAll", function (req, res, next) {
 });
 //UPDATE
 
-router.post("/updateC", function (req, res) {
+router.put("/updateP/:id", function (req, res) {
   const id = req.body.id;
   console.log(req.body);
-  Produit.findByPk(id).then((Produit) => {
+  Produit.findByPk(id).then((pdt) => {
     try {
-      let { nom, prenom, tel, email, adresse } = req.body;
-      bcrypt.genSalt(saltRounds, function (err, salt) {
-        bcrypt.hash(req.body.password, salt, async function (err, hash) {
-          Produit.update({
-            nom,
-            prenom,
-            tel,
-            email,
-            adresse,
-            updatedAt: new Date(),
-          })
-            .then((Produit) =>
+      let { libelle,marque,prix,max_rating,disponible } = req.body;
+       Produit.update({
+       libelle,
+        marque,
+        prix,
+        max_rating,
+        disponible,
+        updatedAt: new Date() })
+            .then((pdt) =>
               prepareResponse(res, 200, { success: true }, "application/json")
             )
             .catch((error) => console.log(error));
-        });
-      });
-    } catch (error) {
+   }catch (error) {
       console.log(error);
       prepareResponse(res, 500, { success: false }, "application/json");
-    }
-  });
+  }
+});
 });
 //DELETE Produit
 

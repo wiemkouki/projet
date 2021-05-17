@@ -15,21 +15,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Produit.init({
-    nom_p: DataTypes.STRING,
+    libelle: DataTypes.STRING,
     marque: DataTypes.STRING,
     prix: DataTypes.INTEGER,
     max_rating: DataTypes.INTEGER,
     disponible: DataTypes.STRING,
     is_deleted :DataTypes.BOOLEAN,
-    id_fiche_tech:
-    {
-      type: DataTypes.INTEGER,
-      allowNull: true, foreignKey: true,
-      references: {
-        model: 'fiche_teches',
-        key: 'id'
-      },
-    },
+
   },
     {
       sequelize,

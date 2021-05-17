@@ -16,44 +16,7 @@ router.get("/getClient/:id", async function (req, res, next) {
 
   prepareResponse(res, 200, client, "application/json");
 });
-// create client
-router.post("/create", function (req, res, next) {
-  Client.findOne({
-    attributes: ["nom"],
-    where: {
-      nom: req.body.nom,
-    },
-  })
-    .then( async function (client) {
-      if (client) {
-        const response = {
-          success: false,
-          message: "client already exist !",
-        };
-        prepareResponse(res, 500, response, "application/json");
-      } else {
-        let { nom, prenom, tel, email, adresse, id_user, id_panier } = req.body;
-        let new_clt = await Client.create({
-          nom,
-          prenom,
-          tel,
-          email,
-          adresse,
-          id_panier,
-          id_user,
-          is_deleted: false,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        });
-        const response = {
-          success: true,
-          message: "client created successfully.",
-        };
-        prepareResponse(res, 200, response, "application/json");
-      }
-    })
-    .catch((error) => console.log(error));
-});
+
 //get ALL CLient
 
 router.get("/getAll", function (req, res, next) {
