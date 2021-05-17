@@ -23,13 +23,13 @@ router.post("/createP", function (req, res, next) {
     where: {
       libelle: req.body.libelle,
     },
-  }).then((produit) => {
-    if (produit) {
+  }).then((pdt) => {
+    if (pdt) {
       const response = {
         success: false,
         message: "Produit already exist !",
       };
-      prepareResponse(res, 500, response, "application/json");
+      prepareResponse(req, 500, response, "application/json");
     } else {
       let { libelle,marque,prix,max_rating,disponible,} = req.body;
       Produit.create({

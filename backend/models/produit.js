@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
       Produit.hasMany(models.Commande, { foreignKey: 'id_commande', as: 'commande' });
       Produit.hasMany(models.images_produit, { foreignKey: 'id_images_produit', as: 'images_produit' });
       Produit.hasMany(models.Paniers, { foreignKey: 'id_panier', as: 'panier' });
-      Produit.hasOne(models.fiche_teches, { foreignKey: 'id_fiche_tech', as: 'fiche_tech' });
-      Produit.belongsTo(models.fiche_teches, { foreignKey: 'id_fiche_tech', as: 'fiche_teches' });
+      Produit.hasOne(models.fiche_teches, { foreignKey: 'id_fiche_tech', as: 'fiche_teches' });
+      // Produit.belongsTo(models.fiche_teches, { foreignKey: 'id_fiche_tech', as: 'fiche_teches' });
     }
   };
   Produit.init({

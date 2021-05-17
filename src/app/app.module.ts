@@ -45,7 +45,7 @@ import { Prod5Component } from './product/prod5/prod5.component';
 import { Prod6Component } from './product/prod6/prod6.component';
 import { Prod7Component } from './product/prod7/prod7.component';
 import { Prod8Component } from './product/prod8/prod8.component';
-import { CrudCategorieComponent } from './admindash/crud-categorie/crud-categorie.component';
+
 import { CrudSScatComponent } from './admindash/crud-sscat/crud-sscat.component';
 import { CmdeComponent } from './admindash/cmde/cmde.component';
 
@@ -54,7 +54,7 @@ const Routes: Routes = [
   { path: 'test', component: TestComponent },
   { path: 'admin', component: AdmindashComponent },
   { path: 'users', component: CrudUserComponent },
-  { path: 'categorie', component: CrudCategorieComponent },
+
   { path: 'ss_categorie', component: CrudSScatComponent },
   { path: 'cmde', component: CmdeComponent },
   { path: 'login', component: LoginComponent },
@@ -114,7 +114,7 @@ const Routes: Routes = [
 
     Prod8Component,
 
-    CrudCategorieComponent,
+
 
     CrudSScatComponent,
 
