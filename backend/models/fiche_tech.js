@@ -17,10 +17,9 @@ module.exports = (sequelize, DataTypes) => {
     modele: DataTypes.STRING,
     matiere: DataTypes.STRING,
     is_deleted:DataTypes.BOOLEAN,
-    id_produit:
-      {
-        type: DataTypes.INTEGER,
-        allowNull: false, foreignKey: true,
+    id_produits:
+      {type: DataTypes.INTEGER,
+        allowNull: true, foreignKey: true,
         references: {
           model: 'produits',
           key: 'id'

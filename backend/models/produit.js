@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       Produit.hasMany(models.images_produit, { foreignKey: 'id_images_produit', as: 'images_produit' });
       Produit.hasMany(models.Paniers, { foreignKey: 'id_panier', as: 'panier' });
       Produit.hasOne(models.fiche_teches, { foreignKey: 'id_fiche_tech', as: 'fiche_teches' });
-      // Produit.belongsTo(models.fiche_teches, { foreignKey: 'id_fiche_tech', as: 'fiche_teches' });
+
     }
   };
   Produit.init({
