@@ -72,20 +72,19 @@ router.get("/getAll", function (req, res, next) {
 });
 //UPDATE
 
-router.put("/updateP/:id", function (req, res) {
-  const id = req.body.id;
-  console.log(req.body);
-  Produit.findByPk(id).then((pdt) => {
+router.put("/updateP/:id/", function (req, res) {
+  let id=req.params.id;
+  Produit.findByPk(id).then((pdt) => {attributes: ['id', 'name', 'email']
     try {
       let { libelle,marque,prix,max_rating,disponible } = req.body;
-       Produit.update({
+      Produit.update({
        libelle,
         marque,
         prix,
         max_rating,
         disponible,
         updatedAt: new Date() })
-            .then((pdt) =>
+            .then((pdt_n) =>
               prepareResponse(res, 200, { success: true }, "application/json")
             )
             .catch((error) => console.log(error));

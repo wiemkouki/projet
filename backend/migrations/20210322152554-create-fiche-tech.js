@@ -8,17 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      // id_produit:
-      // {
-      //   type: Sequelize.INTEGER,
-      //     allowNull: false,
-      //     references: {
-      //         model: 'produits',
-      //         key: 'id'
-      //       },
-
-      //       onUpdate: 'restrict',
-      //       onDelete: 'restrict' },
 
       caract_principale: {
         type: Sequelize.STRING
