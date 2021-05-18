@@ -75,7 +75,7 @@ router.get("/getAll", function (req, res, next) {
 
 router.put("/updateP/:id/", function (req, res) {
   let id=req.params.id;
-  Produit.findByPk(id).then((pdt) => {attributes: ['libelle','marque','prix','max_rating','disponible']
+  Produit.findByPk(id, {attributes:["id"]}).then((pdt) => {attributes: ['libelle','marque','prix','max_rating','disponible']
     try {
       let { libelle,marque,prix,max_rating,disponible } = req.body;
       pdt.update({

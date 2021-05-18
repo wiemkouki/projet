@@ -43,7 +43,7 @@ router.get("/getAll", function (req, res, next) {
 router.post("/updateC/:id", function (req, res) {
   let id = req.params.id;
   console.log(req.body);
-  Client.findByPk(id).then((client) => {
+  Client.findByPk(id, {attributes:["id"]}).then((client) => {
     let { nom, prenom, tel, adresse } = req.body;
     client.update({
       nom,
