@@ -1,0 +1,164 @@
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+    
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="js/index.js"></script>
+
+
+<div class="container">
+    <table datatable [dtOptions]="dtOptions" class="table table-striped table-bordered" cellspacing="0" width="100%">
+      <thead>
+  
+        <tr>
+  
+  
+          <th>Libelle</th>
+          <th>Marque</th>
+          <th>Prix</th>
+          <th>Max rating</th>
+          <th>Disponible</th>
+          <th colspan="3" width="20%">
+            Action
+          </th>
+      
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let produit of produits">
+      
+          <td><span>{{ produit.libelle }}</span></td>
+          <td><span>{{ produit.marque }}</span></td>
+          <td><span>{{ produit.prix }}</span></td>
+          <td><span>{{ produit.max_rating }}</span></td>
+          <td><span>{{ produit.disponible }}</span></td>
+     
+  
+          <td><button class="btn btn-success btn-rounded">
+              <i class="fa fa-edit"></i></button> </td>
+  
+  
+          <td><button class="btn btn-danger  btn-rounded " (click)="openDelete(contentDelete, produits.id)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+          </svg>
+              <i class="bi bi-trash"></i></button> </td>
+  
+  
+  
+          <td><button class="btn btn-primary btn-rounded"  (click)="openDetails(contentDetails, produit)">
+               <i class="fa fa-search"></i></button> </td>
+  
+        </tr>
+      </tbody>
+  
+    </table>
+  
+  </div>
+
+
+
+
+  <ng-template #contentDetails let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">product's Details</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+  
+  
+      <form>
+        
+ 
+        <div class="form-group">
+          <label for="libelle">libelle</label>
+          <div class="input-group">
+            <input id="libelle" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="marque">marque</label>
+          <div class="input-group">
+            <input id="marque" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label for="prix">prix</label>
+            <div class="input-group">
+              <input id="prix" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="max_rating">max_rating</label>
+            <div class="input-group">
+              <input id="max_rating" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="disponible">disponible</label>
+            <div class="input-group">
+              <input id="disponible" class="form-control">
+            </div>
+          </div>
+
+
+        <div class="form-group">
+          <label for="createdAt" for="dateOfBirth">CreatedAt</label>
+          <div class="input-group">
+  
+            <input id="created" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+        
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="updatedAt" for="dateOfBirth">UpdatedAt</label>
+          <div class="input-group">
+            <input id="updated" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+            <!-- <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+            </div> -->
+          </div>
+        </div>
+  
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div>
+  </ng-template>
+
+
+  <ng-template #contentDelete let-modal >
+    <div class="modal-header">
+      <h4 class="modal-title">Confirm Delete</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h2>Are you sure you want to delete this record.</h2>
+      <div class="border text-center" >
+        <button data-dismiss="modal" class="btn btn-danger" *ngIf="!is_deleted" (click)="onDelete()">Yes, Delete!</button>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+    </div>
+  </ng-template>
+
+
+
+
+
+
+
+
+
+
