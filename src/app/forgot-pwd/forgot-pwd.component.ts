@@ -35,8 +35,10 @@ export class ForgotPwdComponent implements OnInit {
     this.route.paramMap
       .subscribe(
         (params: Params) => {
-          if (this.password == this.confirmPassword) {
-            this.userService.forgot({ id: params.id, password: this.password })
+          if (this.password == this.confirmPassword)
+          {
+            console.log(params);
+            this.userService.forgot({ id: params.params.id, password: this.password })
               .subscribe(result => {
                 this.form.controls['reset_password_code'].setValue(params['code']);
                 this.router.navigate(['/login']);

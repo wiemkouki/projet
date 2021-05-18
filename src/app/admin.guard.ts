@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import {AuthService} from './services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
 export class AdminGuard implements CanActivate {
-constructor(private auth :AuthService){}
+constructor(private auth :AuthService,private router: Router){}
   canActivate(
     route: ActivatedRouteSnapshot,
 
@@ -15,7 +15,7 @@ constructor(private auth :AuthService){}
       if (this.auth.isLoggedIn()){  return true;
   }
   window.alert('You don\'t have permission to view this page');
-  return false;
+  return this.router.parseUrl("/login");
 }
 
 }
