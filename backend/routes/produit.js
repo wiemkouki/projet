@@ -56,7 +56,13 @@ router.post("/createP",  function (req, res, next) {
 //get ALL Produit
 
 router.get("/getAll", function (req, res, next) {
-  Produit.findAll({ attributes: ["libelle", "marque", "prix", "max_rating","disponible","createdAt", "updatedAt"] })
+  Produit.findAll({ attributes: ["id","libelle", "marque", "prix", "max_rating","disponible","createdAt", "updatedAt"], 
+  where: {
+    is_deleted: 0
+  } }
+  
+   
+  )
     .then((produit) => {
       prepareResponse(res, 200, produit, "application/json");
     })
@@ -73,12 +79,15 @@ router.get("/getAll", function (req, res, next) {
 });
 //UPDATE
 
-router.put("/updateP/:id/", function (req, res) {
+router.put("/updateP/:id", function (req, res) {
   let id=req.params.id;
-  Produit.findByPk(id, {attributes:["id"]}).then((pdt) => {attributes: ['libelle','marque','prix','max_rating','disponible']
+  Produit.findByPk(id, 
+     {attributes:["id"]})
+  .then((pdt) => {
     try {
-      let { libelle,marque,prix,max_rating,disponible } = req.body;
+      let { id,libelle,marque,prix,max_rating,disponible } = req.body;
       pdt.update({
+        id,
         libelle,
         marque,
         prix,
@@ -102,7 +111,7 @@ router.get("/delete/:id", function (req, res) {
   Produit.findByPk(id,{attributes:["id"]}).then((produits) => {
     try {
       produits.update({
-        is_deleted: true,
+        is_deleted: true
       });
       prepareResponse(res, 200, { success: true }, "application/json");
     } catch (error) {

@@ -54,13 +54,23 @@ deleteUser(id: number): Observable<any>{
   return this.http.get(`http://localhost:3000/users/delete/${id}`);
  }
 
- deleteProduct(id: number): Observable<any>{
-  return this.http.get(`http://localhost:3000/produit/delete/${id}`);
- }
-//  updateProduct(id: number): Observable<any>{
-//   return this.http.post(`http://localhost:3000/produit/updateP/${id}`);
-//  }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
   forgot(form: object) {
     const url = `${this.api_prefix}/resetpassword`;
     console.log(form);

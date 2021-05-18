@@ -1,12 +1,12 @@
 
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { UserServiceService } from '../../services/user-service.service';
+import { ProductService } from '../../services/product.service';
 export class Produit {
   constructor(
-    public id: number,
+    public id: string,
     public libelle: string,
     public marque: string,
     public prix: string,
@@ -23,17 +23,17 @@ export class Produit {
 })
 export class CrudStockComponent implements OnInit {
   
-  editProfileForm: FormGroup;
+  editForm: FormGroup;
   closeResult: string;
   title = 'angulardatatables';
   dtOptions: DataTables.Settings = {};
   produits;
   datatable: any;
-  editID:string;
+  editID:string;  deleteId: string;
   dtElement: any;
   is_deleted: boolean = false;
-  deleteID: string;
-  constructor(private fb: FormBuilder, private http: HttpClient, private modalService: NgbModal, private userService: UserServiceService) { }
+ 
+  constructor(private fb: FormBuilder, private http: HttpClient, private modalService: NgbModal, private productService: ProductService) { }
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -42,12 +42,14 @@ export class CrudStockComponent implements OnInit {
       processing: true
     }
     this.getProduit()
-
+   
 
     //edit
-    this.editProfileForm = this.fb.group({
+    this.editForm = this.fb.group({
+      id: [''],
       libelle: [''],
       marque: [''],
+      prix: [''],
       max_rating: [''],
       disponible: [''],
      
@@ -73,7 +75,8 @@ openModal(targetModal, produits) {
    centered: true,
    backdrop: 'static'
   });
-  this.editProfileForm.patchValue({
+  this.editForm.patchValue({
+
     libelle:produits.libelle,
     marque: produits.marque,
     prix: produits.prix,
@@ -82,18 +85,18 @@ openModal(targetModal, produits) {
   
   });
  }
- 
-//  onSubmit() {
-  // console.log(this.editID)
-//   this.userService.updateProduct()
-//     .subscribe((response) => {
-//       console.log(response);
-//       this.produits = response;
-//        this.ngOnInit();
-//     this.modalService.dismissAll();
-// });
-//   console.log("res:", this.editProfileForm.getRawValue());
-//  }
+
+ onSubmiT() {
+  console.log(this.editID)
+  this.productService.updateProduct(parseInt(this.editID))
+    .subscribe((response) => {
+      console.log(response);
+      this.produits = response;
+       this.ngOnInit();
+    this.modalService.dismissAll();
+});
+  // console.log("res:", this.editForm.getRawValue());
+ }
 
 
 
@@ -102,7 +105,7 @@ openModal(targetModal, produits) {
 
   //bouton Delete
   openDelete(targetModal, id: string) {
-    this.deleteID = id;
+    this.deleteId = id;
     this.modalService.open(targetModal, {
       backdrop: 'static',
       size: 'lg'
@@ -110,15 +113,14 @@ openModal(targetModal, produits) {
   }
 
   onDelete(is_deleted: boolean) {
-    console.log(this.deleteID)
-    this.userService.deleteProduct(parseInt(this.deleteID))
+    console.log(this.deleteId)
+    this.productService.deleteProduct(this.deleteId)
       .subscribe((response) => {
         console.log(response);
         this.produits = response;
         is_deleted = true;
         // this.ngOnInit();
         this.modalService.dismissAll();
-
       });
   }
 
@@ -135,7 +137,7 @@ openModal(targetModal, produits) {
       backdrop: 'static',
       size: 'lg'
     });
-   
+    document.getElementById('id').setAttribute('value', produits.id);
     document.getElementById('libelle').setAttribute('value', produits.libelle);
     document.getElementById('marque').setAttribute('value', produits.marque);
     document.getElementById('prix').setAttribute('value', produits.prix);
@@ -149,16 +151,64 @@ openModal(targetModal, produits) {
 
 
 
+//edit
+  openEdit(targetModal, produits: Produit) {
+    this.modalService.open(targetModal, {
+      centered: true,
+      backdrop: 'static',
+      size: 'lg'
+    });
+    this.editForm.patchValue({
+      id:produits.id,
+      libelle:produits.libelle,
+      marque: produits.marque,
+      prix: produits.prix,
+      max_rating:produits.max_rating,
+      disponible: produits.disponible,
+    
+    });
+  
+  }
+
+  onSave() {
+    const editURL = 'http://localhost:3000/produit/updateP/' + this.editForm.value.id ;
+    console.log(this.editForm.value);
+    this.http.put(editURL, this.editForm.value)
+      .subscribe((results) => {
+        this.ngOnInit();
+        this.modalService.dismissAll();
+      });
+  }
 
 
+
+
+
+
+
+
+
+
+
+
+//add
+onSubmit(f: NgForm) {
+  const url = 'http://localhost:3000/produit/createP';
+  this.http.post(url, f.value)
+    .subscribe((result) => {
+      this.ngOnInit(); //reload the table
+    });
+  this.modalService.dismissAll(); //dismiss the modal
+}
 
   open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+  
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -168,7 +218,6 @@ openModal(targetModal, produits) {
       return `with: ${reason}`;
     }
   }
-
 
 
 }
