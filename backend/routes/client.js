@@ -45,7 +45,7 @@ router.post("/updateC/:id", function (req, res) {
   console.log(req.body);
   Client.findByPk(id).then((client) => {
     let { nom, prenom, tel, adresse } = req.body;
-    Client.update({
+    client.update({
       nom,
       prenom,
       tel,

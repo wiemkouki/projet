@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
 
-      notePdt.belongsTo(models.Produit, { foreignKey: 'id_produit', as: 'produit' });
-      notePdt.hasMany(models.Client, { foreignKey: 'id_client', as: 'client' });
+      // notePdt.belongsTo(models.Produit, { foreignKey: 'id_produit', as: 'produit' });
+      // notePdt.hasMany(models.Client, { foreignKey: 'id_client', as: 'client' });
     }
   };
 

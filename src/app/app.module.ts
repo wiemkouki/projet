@@ -47,13 +47,13 @@ import { Prod7Component } from './product/prod7/prod7.component';
 import { Prod8Component } from './product/prod8/prod8.component';
 import { CrudSScatComponent } from './admindash/crud-sscat/crud-sscat.component';
 import { CmdeComponent } from './admindash/cmde/cmde.component';
-import { CrudStockComponent } from './admindash/crud-stock/crud-stock.component';
+// import { CrudStockComponent } from './admindash/crud-stock/crud-stock.component';
 const Routes: Routes = [
   { path: '', component: CatalogComponent },
   { path: 'test', component: TestComponent },
   { path: 'admin', component: AdmindashComponent },
   { path: 'users', component: CrudUserComponent },
-  { path: 'stock', component: CrudStockComponent },
+  // { path: 'stock', component: CrudStockComponent },
   { path: 'ss_categorie', component: CrudSScatComponent },
   { path: 'cmde', component: CmdeComponent },
   { path: 'login', component: LoginComponent },
@@ -119,7 +119,7 @@ const Routes: Routes = [
 
     CmdeComponent,
 
-    CrudStockComponent
+    // CrudStockComponent
 
 
 

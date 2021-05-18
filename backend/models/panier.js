@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   class Panier extends Model {
 
     static associate(models) {
-      Panier.belongsTo(models.Client, { foreignKey: 'id_client', as: 'client' });
-      Panier.hasMany(models.Produit, { foreignKey: 'id_produit', as: 'produit' });
+      // Panier.belongsTo(models.Client, { foreignKey: 'id_client', as: 'client' });
+      // Panier.hasMany(models.Produit, { foreignKey: 'id_produit', as: 'produit' });
 
     }
   };

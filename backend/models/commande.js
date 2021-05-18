@@ -7,14 +7,14 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "id_livreur",
         as: "livreur",
       });
-      Commande.belongsTo(models.Client, {
-        foreignKey: "id_client",
-        as: "client",
-      });
-      Commande.hasMany(models.Produit, {
-        foreignKey: "id_produit",
-        as: "Produit",
-      });
+      // Commande.belongsTo(models.Client, {
+      //   foreignKey: "id_client",
+      //   as: "client",
+      // });
+      // Commande.hasMany(models.Produit, {
+      //   foreignKey: "id_produit",
+      //   as: "Produit",
+      //  });
       Commande.hasMany(models.Admin, { foreignKey: "id_admin", as: "Admin" });
     }
   }

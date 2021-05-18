@@ -75,17 +75,17 @@ router.get("/getAll", function (req, res, next) {
 
 router.put("/updateP/:id/", function (req, res) {
   let id=req.params.id;
-  Produit.findByPk(id).then((pdt) => {attributes: ['id', 'name', 'email']
+  Produit.findByPk(id).then((pdt) => {attributes: ['libelle','marque','prix','max_rating','disponible']
     try {
       let { libelle,marque,prix,max_rating,disponible } = req.body;
-      Produit.update({
-       libelle,
-      marque,
+      pdt.update({
+        libelle,
+        marque,
         prix,
         max_rating,
         disponible,
         updatedAt: new Date() })
-            .then((pdt_n) =>
+            .then((pdt) =>
               prepareResponse(res, 200, { success: true }, "application/json")
             )
             .catch((error) => console.log(error));
