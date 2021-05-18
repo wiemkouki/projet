@@ -65,37 +65,13 @@ router.post("/updateC/:id", function (req, res) {
   });
 });
 
-// router.post("/updateC", function (req, res) {
-//   const id = req.body.id;
-//   console.log(req.body);
-//   Client.findByPk(id).then((clt) => {
-//     try {
-//       let { password, role, email } = req.body;
-
-//       clt.update({
-//         password: hash,
-//         role,
-//         email,
-
-//         createdAt: new Date(),
-//         updatedAt: new Date(),
-//       })
-//         .then((clt) =>
-//           prepareResponse(res, 200, { success: true }, "application/json")
-//         )
-//         .catch((error) => console.log(error));
-//     } catch (error) {
-//       console.log(error);
-//       prepareResponse(res, 500, { success: false }, "application/json");
-//     }
-//   });
-// });
 
 //DELETE CLIENT
 
-router.post("/delete/:id", function (req, res) {
+router.get("/delete/:id", function (req, res) {
   let id = req.params.id;
-  client.findByPk(id).then((User) => {
+
+  Client.findByPk(id,{attributes:["id"]}).then((client) => {
     try {
       client.update({
         is_deleted: true,

@@ -337,7 +337,7 @@ router.post("/forgotpwd", function (req, res, next) {
 router.post("/resetpassword", function (req, res) {
   const id = req.body.id;
   console.log(req.body);
-  User.findByPk(id).then((user) => {
+  User.findByPk(id,{attributes:["id"]}).then((user) => {
     try {
       bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(req.body.password, salt, async function (err, hash) {
@@ -361,7 +361,7 @@ router.post("/resetpassword", function (req, res) {
 router.post("/changepwd/:id", function (req, res) {
   const { password } = req.body;
   let id = req.params.id;
-  User.findByPk(id)
+  User.findByPk(id,{attributes:["id"]})
     .then((user) => {
       bcrypt.compare(password, user.password).then((result) => {
         console.log(result);

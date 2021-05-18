@@ -97,9 +97,9 @@ router.put("/updateP/:id/", function (req, res) {
 });
 //DELETE Produit
 
-router.post("/delete/:id", function (req, res) {
+router.get("/delete/:id", function (req, res) {
   let id = req.params.id;
-  Produit.findByPk(id).then((produits) => {
+  Produit.findByPk(id,{attributes:["id"]}).then((produits) => {
     try {
       produits.update({
         is_deleted: true,
