@@ -28,12 +28,13 @@ body{
     //   font-size: 0.8rem;
     //   font-weight: 400;
 }
-.nom{
-    color:rgb(104, 112, 119);
-}
+// .nom{
+//     color:rgb(104, 112, 119);
+// }
 .aboutt{
-    font-size: 12px;
+    font-size: 15px;
     text-align: center;
+    
 }
   .account-settings .about {
       margin: 1rem 0 0 0;
@@ -52,7 +53,7 @@ body{
   .b {
     float: left;
     width: 10%;
-    padding: 7px;
+    padding: 2px;
     // background: #6c6e6e;
     color: white;
     font-size: 16px;
@@ -60,7 +61,7 @@ body{
     border-left: none; /* Prevent double borders */
     cursor:default;
   }
-  .form-groupp{
+  .form-group{
     font-weight: normal;
     font-size: 12px;
     margin-bottom: 20px;
@@ -88,6 +89,20 @@ body{
 
 
 
+  .form {
+    border: 1px solid #596280;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    font-size: .100rem;
+    width: 760px;
+    background: white;
+    color: rgb(63, 65, 66);
+    min-height: 36px;
+    box-shadow: none;
+    font-size: 12px;
+
+}
 
 
 
@@ -98,7 +113,7 @@ body{
   .mat-toolbar.mat-primary {
     background-color: #2A2F46;
     margin-bottom: 0px;
-    ;
+
 }
 .mat-toolbar.mat-secondary {
     background-color: #1A1A1A;
@@ -168,11 +183,11 @@ mat-icon {
 ;
 }
 footer{
-position:relative;
+position: relative;
 bottom: 0;
 left: 0;
-margin-top: 0px;
 width: 100%;
+clear: both;
 }
 select{
     background: transparent;
@@ -190,3 +205,22 @@ list-style-type:none;
 }
 h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 
+.b {
+    float: left;
+    width: 5%;
+    padding: 5px;
+    // background: #6c6e6e;
+    color: white;
+    font-size: 16px;
+    // border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor:default;
+  }
+
+  .btnn {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    background-color: #eee;
+  }

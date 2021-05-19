@@ -13,7 +13,7 @@ import { SocialAuthService, FacebookLoginProvider, GoogleLoginProvider,SocialUse
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  socialUser: SocialUser;
+  user: SocialUser;
   isLoggedin: boolean = null;
 
   form: any = {
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private userService: UserServiceService, private router: Router,
     private formBuilder: FormBuilder,
-    private socialAuthService: SocialAuthService) {
+    private authService: SocialAuthService) {
       console.log(this.isLoggedin)
     }
 
@@ -37,10 +37,10 @@ export class LoginComponent implements OnInit {
     password: ['', Validators.required]
   });
 
-  this.socialAuthService.authState.subscribe((user) => {
-    this.socialUser = user;
+  this.authService.authState.subscribe((user) => {
+    this.user = user;
     this.isLoggedin = (user != null);
-    console.log(this.socialUser);
+    console.log(this.user);
   });
   }
 
@@ -65,18 +65,20 @@ export class LoginComponent implements OnInit {
     window.location.reload();
   }
   loginWithFacebook(): void {
-    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.router.navigate(['/profil'])
   }
 
   signOut(): void {
-    this.socialAuthService.signOut();
+    this.authService.signOut();
   }
   loginWithGoogle(): void {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.router.navigate(['/profil'])
   }
 
   logOut(): void {
-    this.socialAuthService.signOut();
+    this.authService.signOut();
   }
 
 }

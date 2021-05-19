@@ -10,6 +10,16 @@ body{margin-top:20px;
   .account-settings .user-profile .user-avatar {
       margin: 0 0 1rem 0;
   }
+//   .email{
+//       font-size: 5px;
+//   }
+.btnn {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    background-color: #eee;
+  }
   .b {
     float: left;
     width: 10%;
@@ -48,6 +58,9 @@ body{margin-top:20px;
       border-radius: 5px;
       border: 0;
       margin-bottom: 1rem;
+  }
+  .primary{
+    font-size: 0.8rem;
   }
   .form-control {
       border: 1px solid #596280;
