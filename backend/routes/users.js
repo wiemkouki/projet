@@ -90,26 +90,23 @@ router.get("/getAll", function (req, res, next) {
 });
 //update USER DONE
 
-router.post("/updateUser", function (req, res) {
-  const id = req.body.id;
-  console.log(req.body);
-  User.findByPk(id).then((user) => {
+router.put("/updateUser/:id", function (req, res) {
+  let id = req.params.id;
+  // console.log(req.body);
+  User.findByPk(id, 
+    {attributes:["id"]}).then((users) => {
     try {
-      let { password, role, email } = req.body;
-      bcrypt.genSalt(saltRounds, function (err, salt) {
-        bcrypt.hash(req.body.password, salt, async function (err, hash) {
-          user
-            .Update({
-              password: hash,
+      let { role, email } = req.body;
+       users.update({
+              
               role,
               email,
               createdAt: new Date(),
               updatedAt: new Date(),
             })
-            .then((user) => prepareResponse(res, 200, user, "application/json"))
-            .catch((err) => console.log(err));
-        });
-      });
+            .then((users) => prepareResponse(res, 200, { success: true }, "application/json"))
+            .catch((error) => console.log(error));
+      
     } catch (error) {
       console.log(error);
       prepareResponse(res, 500, { success: false }, "application/json");

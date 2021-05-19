@@ -21,7 +21,7 @@
       <td><span>{{ user.updatedAt }}</span></td> -->
 
 
-        <td><button class="btn btn-warning" (click)="openModal(editProfileModal, user)">
+        <td><button class="btn btn-warning" (click)="openEdit(contentEdit, user)">
             <i class="fa fa-edit"></i></button> </td>
 
 
@@ -94,7 +94,7 @@
 </ng-template>
 
 
-<ng-template #editProfileModal let-modal>
+<!-- <ng-template #editProfileModal let-modal>
   <div class="modal-header">
     <h5 class="modal-title" id="editProfileLabel">Edit User</h5>
     <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
@@ -130,8 +130,44 @@
       </div>
     </form>
   </div>
-</ng-template>
+</ng-template> -->
 
+<ng-template #contentEdit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" >Edit product</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="editForm" novalidate>
+      <div class="form-group">
+        <label for="id">ID</label>
+        <div class="input-group">
+          <input  class="form-control" formControlName="id">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <div class="input-group">
+          <input  class="form-control" formControlName="email">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="role">Role</label>
+        <div class="input-group">
+          <input  class="form-control" formControlName="role">
+        </div>
+      </div>
+      <div class="border text-center"> 
+        <button data-dismiss="modal" class="btn btn-info" (click)="onSave()" >Save Changes</button> 
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+  </div>
+</ng-template>
 
 <ng-template #contentDelete let-modal >
   <div class="modal-header">

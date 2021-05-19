@@ -25,7 +25,7 @@ export class User {
 export class CrudUserComponent implements OnInit {
 
 
-  editProfileForm: FormGroup;
+  editForm: FormGroup;
   closeResult: string;
   title = 'datatables';
  dtOptions: DataTables.Settings = {};
@@ -47,7 +47,7 @@ export class CrudUserComponent implements OnInit {
 
     this.getUsers()
 
-    this.editProfileForm = this.fb.group({
+    this.editForm = this.fb.group({
       id: [''],
       email: [''],
       role: [''],
@@ -73,32 +73,6 @@ getUsers(){
 //bouton Edit
 
 
-openModal(targetModal, user) {
-  this.modalService.open(targetModal, {
-   centered: true,
-   backdrop: 'static'
-  });
-  this.editProfileForm.patchValue({
-    id:user.id,
-   email: user.email,
-   role: user.role,
-  });
- }
- 
- onSubmit() {
-  // console.log(this.editID)
-  this.userService.updateUser()
-    .subscribe((response) => {
-      console.log(response);
-      this.users = response;
-       this.ngOnInit();
-    this.modalService.dismissAll();
-});
-  console.log("res:", this.editProfileForm.getRawValue());
- }
- 
-
- 
 //bouton Delete
  openDelete(targetModal, id: string) {
   this.deleteID = id;
@@ -138,7 +112,30 @@ openDetails(targetModal, users: User) {
   document.getElementById('updated').setAttribute('value', users.updatedAt);
 }
  
+///edit
+  openEdit(targetModal, users: User) {
+    this.modalService.open(targetModal, {
+      centered: true,
+      backdrop: 'static',
+      size: 'lg'
+    });
+    this.editForm.patchValue({
+      id:users.id,
+      email:users.email,
+      role: users.role
+    });
+  
+  }
 
+  onSave() {
+    const editURL = 'http://localhost:3000/users/updateUser/' + this.editForm.value.id ;
+    console.log(this.editForm.value);
+    this.http.put(editURL, this.editForm.value)
+      .subscribe((results) => {
+        this.ngOnInit();
+        this.modalService.dismissAll();
+      });
+  }
 open(content) {
   this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'} ).result.then((result) => {
     this.closeResult = `Closed with: ${result}`;
