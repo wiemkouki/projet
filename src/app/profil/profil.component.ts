@@ -12,25 +12,39 @@ import { SocialUser } from "angularx-social-login";
   styleUrls: ['./profil.component.scss']
 })
 export class ProfilComponent implements OnInit {
-  user: SocialUser;
-  loggedIn: boolean;
-  email:string;
+ 
 
+
+  user: SocialUser;
+  loginForm: FormGroup;
+  form: any = {
+    authToken:null,
+    id:null,
+    email: null,
+    photoUrl: null,
+    name: null,
+    firstname: null
+  };
   constructor(private userService: UserServiceService ,
     private router: Router,
-    private authService: SocialAuthService) {
-
-
-    }
+    private authService: SocialAuthService,  private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      authToken: ['', Validators.required],
+      id: ['', Validators.required],
+      email: ['', Validators.required],
+      photoUrl: ['', Validators.required],
+      name: ['', Validators.required],
+      firstname: ['', Validators.required],
+    });
     this.authService.authState.subscribe((user) => {
-      console.log(user)
       this.user = user;
-      this.loggedIn = (user != null);
+    
+      console.log(this.user);
     });
   }
-
+ 
   }
 
 

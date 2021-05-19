@@ -31,7 +31,7 @@
     "angular-material": "^1.2.2",
     "angular-nicescroll": "0.0.0",
     "angular-popper": "^2.0.1",
-    "angularx-social-login": "^3.5.5",
+    "angularx-social-login": "^3.5.7",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",

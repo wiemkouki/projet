@@ -3,8 +3,8 @@
   <mat-toolbar-row>
     <img src="../assets/daijaraIcon.png" width=" 118,327px" alt="">
     <div fxShow="true" fxHide.lt-md="true"  class="input-group">
-      <input  type="text" class="form-control" placeholder="Tout nos catégories">
-      <button type="submit"><i class="fa fa-search b"></i></button>
+      <input  type="text" class="form" placeholder="Tout nos catégories">
+      <!-- <button type="submit" class=" b"><i class="fa fa-search"></i></button> -->
       <!-- <div class="input-group-append">
         <button class="btn btn-secondary" type="button">
           <i class="fa fa-search"></i>
@@ -22,7 +22,7 @@
 
 <mat-toolbar  color="secondary" >
 
-    <div fxShow="true" fxHide.gt-sm="false">
+    <div fxShow="true" fxHide.gt-sm="true">
     <button mat-icon-button  >
       <mat-icon [routerLink]="'/catalog'">menu</mat-icon>
     </button>
@@ -52,14 +52,18 @@
         <div class="card-body">
           <div class="account-settings">
             <div class="user-profile">
-              <div class="user-avatar">
-                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Maxwell Admin">
+              <div>
+                <!-- <img class="brochure-poster" [src]="brochure.imageUrl" /> -->
+                <!-- <img src="{{ user.photoUrl }}"> -->
+                <img src="{{ user.photoUrl }}&access_token={{user.authToken}}" width="140px" >
+                 <!-- <img id="photoUrl" class="photoUrl" [src]="user.photoUrl"  width="140px">  -->
               </div>
-              <h5 class="user-name">Yuki Hayashi</h5>
-              <h6 class="user-email">yuki@Maxwell.com</h6>
+              
+              <!-- <h5 class="name">{{ user.name }}</h5>
+              <h6 class="email">{{ user.email }}</h6> -->
             </div>
             <div class="aboutt">
-              <a  [routerLink]="'/changepwd'" >Modifier Mot de passe</a>
+              <a  [routerLink]="'/changepwd'"  style="color: #f08d5f" >Modifier Mot de passe</a>
 
 
             </div>
@@ -72,64 +76,59 @@
         <div class="card-body">
           <div class="row gutters">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 " >
-              <h6 class="primary">Informations personelles</h6>
+              <h6 class="primary" style="color: #2A2F46">Informations personelles</h6>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
               <div class="form-group">
-                <label for="fullName" class="nom">Nom & Prénom</label>
-                <input type="text" class="form-control" id="fullName" placeholder="Nom & Prénom">
+                <label for="name" class="name">Nom & Prénom</label>
+                <input type="text" class="form-control btnn" id="name" placeholder="Nom & Prénom" value="{{ user.name }}">
               </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
               <div class="form-group">
-                <label for="eMail" class="nom">E-mail</label>
-                <input type="email" class="form-control" id="eMail" placeholder="E-mail">
+                <label for="email" class="email">E-mail</label>
+                <input type="email" class="form-control btnn" id="email" placeholder="E-mail" value="{{ user.email }}">
               </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
               <div class="form-group">
-                <label for="phone" class="nom">Portable</label>
-                <input type="text" class="form-control" id="phone" placeholder="Enter votre numero portable">
+                <label for="phone" class="nom">Téléphone</label>
+                <input type="text" class="form-control btnn" id="phone" placeholder="Enter votre numero portable">
               </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-              <div class="form-group">
+              <div class="form-groupp">
                 <label for="website" class="nom">Adresse complet</label>
-                <input type="url" class="form-control" id="website" placeholder="Adresse complet ">
+                <input type="url" class="form-control btnn" id="website" placeholder="Adresse complet ">
               </div>
             </div>
           </div>
 
-           <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+         <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
               <div class="form-group">
                 <label for="Street">Street</label>
-                <input type="name" class="form-control" id="Street" placeholder="Enter Street">
+                <input type="name" class="form-control btnn" id="Street" placeholder="Enter Street">
               </div>
-            </div> -->
-           <!--  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            </div>  -->
+           <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
               <div class="form-group">
                 <label for="ciTy">City</label>
-                <input type="name" class="form-control" id="ciTy" placeholder="Enter City">
+                <input type="name" class="form-control btnn" id="ciTy" placeholder="Enter City">
               </div>
-            </div>
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            </div> -->
+            <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
               <div class="form-group">
                 <label for="sTate">State</label>
-                <input type="text" class="form-control" id="sTate" placeholder="Enter State">
+                <input type="text" class="form-control btnn" id="sTate" placeholder="Enter State">
               </div>
             </div>
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-              <div class="form-group">
-                <label for="zIp">Zip Code</label>
-                <input type="text" class="form-control" id="zIp" placeholder="Zip Code">
-              </div>
-            </div>
-          </div> -->
+        -->
+          </div>
           <div class="row gutters">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
               <div class="text-right">
-                <button type="button" id="submit" name="submit" class="btn btn-secondary">Annuler</button>
-                <button type="button" id="submit" name="submit" class="btn btn-primary">Modifier</button>
+                <button type="button" id="submit" name="submit" class="btn btn-secondary button">Annuler</button>
+                <button type="button" id="submit" name="submit" class="btn btn-outline-warning button">Modifier</button>
               </div>
             </div>
           </div>
@@ -137,136 +136,6 @@
       </div>
     </div>
   </div>
-  </div>
-
- <!-- Footer -->
- <footer fxShow="false" fxHide.gt-sm="true" class="page-footer font-small unique-color-dark">
-
-  <div class="icons-flag-container" style="background-color: #1A1A1A; height: 70px;">
-
-      <!-- Grid row-->
-      <div class="row py-4 d-flex align-items-center">
-
-        <div class="col-md-6 col-lg-7 text-center text-md-right">
-
-            <div class="icons-footer">
-              <a mat-button [routerLink]="'/accounts'"><img src="../assets/twitter-16.png" class="fb-icon" alt=""> </a>
-              <a mat-button [routerLink]="'/create-account'"><img src="../assets/message-16.png" class="tw-icon" alt=""> </a>
-              <a mat-button [routerLink]="'/create-contact'"><img src="../assets/instagram-16.png"  class="gplus-icon" alt=""> </a>
-              <a mat-button [routerLink]="'/activities'"> <img src="../assets/facebook-16.png"  class="li-icon" alt=""> </a>
-              <a mat-button [routerLink]="'/create-activity'">   <img src="../assets/linkedin-2-16.png"  class="ins-icon" alt=""> </a>
-            </div>
-              </div>
-              <div class="flag-footer">
-                  <img width="20px" height="20px" src="../assets/tunisia.png" alt="">
-             <select name="" id=""> <option value="">Tunisie</option><option value="">France</option></select>
-               <select name="" id=""><option value="">Français</option></select>
-
-        </div>
-      </div>
-  </div>
-
-  <!-- Footer Links -->
-  <div   style="background-color: #2A2F46; margin-top: -1.5%; ">
-
-    <!-- Grid row -->
-    <div class="row mt-3">
-
-      <!-- Grid column -->
-
-      <div class="col-md-2 col-lg-3 col-xl-2 mx-auto mb-4">
 
 
-        <!-- Content -->
-        <div>
-
-          <ul class="ul-liste" >
-            <li>        <img src="../assets/daijaraIcon.png" width="70,162 px" alt="">
-            </li>
-            <li> <label class="footer-title"> Via Daijara</label></li>
-         <li> Carrières chez Daijara</li>
-         <li>à propos de nous</li>
-         <li> imprimer </li>
-        </ul></div>
-
-
-      </div>
-      <!-- Grid column -->
-
-      <!-- Grid column -->
-      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-       <div>
-        <!-- Links -->
-        <ul class="ul-liste" >
-<br>
-          <li>        <label class="footer-title"> Gagnez de l'argent avec Daijara</label>
-          </li>
-          <li> Programme d'affiliation</li>
-          <li>Expédié par Daijara</li>
-          <li>Prime par le vendeur </li>
-          <li>Faites la promotion de vos produits</li>
-          <li>Publiez votre livre avec nous
-          </li>
-         </ul>
-        </div>
-
-
-
-      </div>
-      <!-- Grid column -->
-
-      <!-- Grid column -->
-      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-
-        <!-- Links -->
-        <div>
-          <!-- Links -->
-
-          <ul class="ul-liste" >
-<br>
-            <li>    <label class="footer-title"> Modes de paiement Daijara
-            </label>      </li>
-            <li> Shopping avec des points</li>
-            <li>Cartes de crédit </li>
-            <li>Pièces justificatives </li>
-            <li>Facture mensuelle</li>
-            <li>Prélèvement automatique </li>
-            <li>Chargez mon compte Daijara </li>
-           </ul>
-          </div>
-
-
-
-      </div>
-      <!-- Grid column -->
-
-      <!-- Grid column -->
-      <div class="col-md-5 col-lg-4 col-xl-4 mx-auto mb-md-0 mb-4">
-
-        <!-- Links -->
-        <div>
-          <!-- Links -->
-          <ul class="ul-liste" >
-            <li><a  mat-button style="color:  #EB692D; font-weight: bold; font-family:  Helvetica;" href=""> Qui sommes nous ? </a> <a mat-button style="color:  #FFFFFF; font-weight: bold; font-family:  Helvetica;" href=""> Plan du site </a> <a mat-button style="color:  #FFFFFF; font-weight: bold; font-family:  Helvetica;" href="">Applis Daijara </a></li>
-            <li><label class="footer-title"> Nous vous aidons</label></li>
-            <li>Daijara et COVID-19</li>
-            <li>Suivre la livraison</li>
-            <li>Expédition et disponibilité</li>
-            <li>Retour et remplacement</li>
-            <li>Mon contenu et mes appareils</li>
-            <li>Application</li>
-            <li>Assistant Daijara </li>
-            <li>Service Clients</li>
-           </ul></div>
-      </div>
-
-    </div>
-    <!-- Grid row -->
-
-  </div>
-  <!-- Footer Links -->
-
-
-
-</footer>
-<!-- Footer -->
+ 
