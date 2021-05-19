@@ -52,9 +52,12 @@ import { EditComponent } from './profil/edit/edit.component';
 const Routes: Routes = [
   { path: '', component: CatalogComponent },
   { path: 'test', component: TestComponent },
-  { path: 'admin', component: AdmindashComponent  },
-  { path: 'users', component: CrudUserComponent },
-  { path: 'stock', component: CrudStockComponent },
+  { path: 'admin', component: AdmindashComponent ,
+  children: [
+    { path: 'users', component: CrudUserComponent },
+    { path: 'stock', component: CrudStockComponent }]   },
+
+  ,
   { path: 'ss_categorie', component: CrudSScatComponent },
   { path: 'cmde', component: CmdeComponent },
   { path: 'login', component: LoginComponent },
