@@ -467,7 +467,14 @@ router.get("/confirm/:token", (req, res) => {
 
     .catch((error) => console.log(error));
 });
+router.get("/test", async function (req, res, next) {
+  let id = req.params.id;
 
+  const user = await User.findByPk(id)
+  
+
+  prepareResponse(res, 200, user, "application/json");
+});
 //LOGOUT
 router.get("/logout", (req, res, next) => {
   try {

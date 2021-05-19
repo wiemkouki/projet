@@ -48,6 +48,7 @@ import { Prod8Component } from './product/prod8/prod8.component';
 import { CrudSScatComponent } from './admindash/crud-sscat/crud-sscat.component';
 import { CmdeComponent } from './admindash/cmde/cmde.component';
 import { CrudStockComponent } from './admindash/crud-stock/crud-stock.component';
+import { EditComponent } from './profil/edit/edit.component';
 const Routes: Routes = [
   { path: '', component: CatalogComponent },
   { path: 'test', component: TestComponent },
@@ -60,7 +61,8 @@ const Routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  { path: 'profil', component: ProfilComponent },
+  { path: 'profil', component: ProfilComponent ,children: [
+    {  path: 'edit' ,component:EditComponent }] },
   { path: 'forgotpwd/:id', component: ForgotPwdComponent },
   { path: 'changepwd', component: ChangepwdComponent },
   { path: 'prod1', component: Prod1Component },
@@ -119,7 +121,9 @@ const Routes: Routes = [
 
     CmdeComponent,
 
-    CrudStockComponent
+    CrudStockComponent,
+
+    EditComponent
 
 
 
