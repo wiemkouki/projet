@@ -64,7 +64,7 @@ export class ChangepwdComponent implements OnInit {
         (params: Params) => {
           if (this.Newpassword == this.Confirmpassword) {
 
-            localStorage.setItem('id', '4');
+            localStorage.setItem('id', '1');
             localStorage.getItem('id');
 
             this.userService.change(localStorage.getItem('id'), { newpassword: this.Newpassword , password: this.password})

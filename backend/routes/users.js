@@ -1,13 +1,12 @@
 var express = require("express");
 var router = express.Router();
-const { User, Livreurs,Client, Admin, Sup_admin } = require("../models");
+const { User, Livreurs, Client, Admin, Sup_admin } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const storeToken = require("./auth/storeToken");
 const nodemailer = require("nodemailer");
 var Email = require("email-templates");
 var path = require("path");
-
 
 const saltRounds = 10;
 
@@ -72,8 +71,8 @@ router.get("/getUser/:id", async function (req, res, next) {
 router.get("/getAll", function (req, res, next) {
   User.findAll({
     where: {
-      is_deleted: 0
-    }
+      is_deleted: 0,
+    },
   })
     .then((users) => {
       prepareResponse(res, 200, users, "application/json");
@@ -96,7 +95,7 @@ router.post("/updateUser", function (req, res) {
   console.log(req.body);
   User.findByPk(id).then((user) => {
     try {
-      let {  password, role, email } = req.body;
+      let { password, role, email } = req.body;
       bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(req.body.password, salt, async function (err, hash) {
           user
@@ -107,9 +106,7 @@ router.post("/updateUser", function (req, res) {
               createdAt: new Date(),
               updatedAt: new Date(),
             })
-            .then((user) =>
-              prepareResponse(res, 200,user, "application/json")
-            )
+            .then((user) => prepareResponse(res, 200, user, "application/json"))
             .catch((err) => console.log(err));
         });
       });
@@ -337,7 +334,8 @@ router.post("/forgotpwd", function (req, res, next) {
 router.post("/resetpassword", function (req, res) {
   const id = req.body.id;
   console.log(req.body);
-  User.findByPk(id,{attributes:["id"]}).then((user) => {
+  User.findByPk(id,  { attributes: ["id"] }).then((user) => {
+    console.log(user);
     try {
       bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(req.body.password, salt, async function (err, hash) {
@@ -361,30 +359,24 @@ router.post("/resetpassword", function (req, res) {
 router.post("/changepwd/:id", function (req, res) {
   const { password } = req.body;
   let id = req.params.id;
-  User.findByPk(id,{attributes:["id"]})
+  User.findByPk(id)
     .then((user) => {
       bcrypt.compare(password, user.password).then((result) => {
         console.log(result);
         if (result) {
           try {
             bcrypt.genSalt(saltRounds, function (err, salt) {
-              bcrypt.hash(
-                req.body.newpassword,
-                salt,
-                async function (err, hash) {
-                  user
-                    .update({
-                      newpassword: hash,
+              bcrypt.hash( req.body.newpassword,salt,async function (err, hash) {
+                  user.update({
+                      password: hash,
                     })
                     .then((user) =>
-                      prepareResponse(
-                        res,
-                        200,
-                        { success: true },
-                        "application/json"
-                      )
+                      prepareResponse(res,200,{ success: true },"application/json")
                     )
-                    .catch((error) );
+                    .catch((error) =>
+                    {
+                      console.log(error);
+                    });
                 }
               );
             });
@@ -419,62 +411,58 @@ router.get("/confirm/:token", (req, res) => {
             })
             .then((user) => res.redirect("http://localhost:4200/profil"))
             .catch(error);
+        } else if (user.role == "Administrateur") {
+          const new_admin = await Admin.create({
+            id_user: user.id,
+            token,
+            is_deleted: false,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          });
+          user
+            .update({
+              is_active: true,
+            })
+            .then((user) => res.redirect("http://localhost:4200/admin"))
+            .catch((error) => console.log(error));
+        } else if (user.role == "Client") {
+          const new_clt = await Client.create({
+            id_user: user.id,
+            token,
+            is_deleted: false,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          });
+
+          user
+            .update({
+              is_active: true,
+            })
+            .then((user) => res.redirect("http://localhost:4200/profil"))
+            .catch(error);
+        } else if (user.role == "Sup_administrateur") {
+          const new_ad = await Sup_admin.create({
+            id_user: user.id,
+            token,
+            is_deleted: false,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          });
+
+          user
+            .update({
+              is_active: true,
+            })
+            .then((user) => res.redirect("http://localhost:4200/admin"))
+            .catch(error);
+        } else {
+          const response = {
+            success: false,
+            message: "user not found !!",
+          };
+          prepareResponse(res, 500, response, "application/json");
         }
-       else if (user.role == "Administrateur") {
-        const new_admin = await Admin.create({
-          id_user: user.id,
-          token,
-          is_deleted: false,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        });
-        user
-          .update({
-            is_active: true,
-          })
-          .then((user) => res.redirect("http://localhost:4200/admin"))
-          .catch((error) => console.log(error));
       }
-      else if (user.role == "Client") {
-        const new_clt = await Client.create({
-          id_user: user.id,
-          token,
-          is_deleted: false,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        });
-
-        user
-          .update({
-            is_active: true,
-          })
-          .then((user) => res.redirect("http://localhost:4200/profil"))
-          .catch(error);
-      }
-      else if (user.role == "Sup_administrateur") {
-        const new_ad = await Sup_admin.create({
-          id_user: user.id,
-          token,
-          is_deleted: false,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        });
-
-        user
-          .update({
-            is_active: true,
-          })
-          .then((user) => res.redirect("http://localhost:4200/admin"))
-          .catch(error);
-      }
-      else {
-        const response = {
-          success: false,
-          message: "user not found !!",
-        };
-        prepareResponse(res, 500, response, "application/json");
-      }
-    }
     })
 
     .catch((error) => console.log(error));

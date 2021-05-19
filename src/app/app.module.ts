@@ -51,7 +51,7 @@ import { CrudStockComponent } from './admindash/crud-stock/crud-stock.component'
 const Routes: Routes = [
   { path: '', component: CatalogComponent },
   { path: 'test', component: TestComponent },
-  { path: 'admin', component: AdmindashComponent },
+  { path: 'admin', component: AdmindashComponent  },
   { path: 'users', component: CrudUserComponent },
   { path: 'stock', component: CrudStockComponent },
   { path: 'ss_categorie', component: CrudSScatComponent },
