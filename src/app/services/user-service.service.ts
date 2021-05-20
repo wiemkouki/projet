@@ -14,7 +14,6 @@ const httpOptions = {
 })
 export class UserServiceService {
   api_prefix: string = "http://localhost:3000/users";
-  api_prefixx: string = "http://localhost:3000/client";
   private headerrs = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http: HttpClient) { }
 
@@ -50,9 +49,6 @@ export class UserServiceService {
 //  return this.http.post('http://localhost:3000/users/updateUser');
 //  }
 
-getClient(id) : Observable<any> {
-  return this.http.get(`http://localhost:3000/client/getClient/${id}`);
-}
 
 deleteUser(id: number): Observable<any>{
   return this.http.get(`http://localhost:3000/users/delete/${id}`);
@@ -74,7 +70,7 @@ deleteUser(id: number): Observable<any>{
 
 
 
-
+ 
   forgot(form: object) {
     const url = `${this.api_prefix}/resetpassword`;
     console.log(form);

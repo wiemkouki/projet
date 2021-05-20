@@ -33,6 +33,9 @@ export class ChangepwdComponent implements OnInit {
       'Newpassword': ['', Validators.required],
       'Confirmpassword': ['', Validators.required]
     });
+
+
+    this.user = new SocialUser();
   }
 
   ngOnInit(): void {
