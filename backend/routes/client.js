@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const { User, Livreurs,Client, Admin, Sup_admin } = require("../models");
+const { Client } = require("../models");
 const saltRounds = 10;
 const prepareResponse = (response, status, body, type) => {
   console.log(body);
@@ -12,7 +12,7 @@ const prepareResponse = (response, status, body, type) => {
 router.get("/getClient/:id", async function (req, res, next) {
   let id = req.params.id;
 
-  const client = await Client.findByPk(id);
+  const client = await Client.findByPk(id,{attributes:["id","nom","role"]});
 
   prepareResponse(res, 200, client, "application/json");
 });

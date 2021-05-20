@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UserServiceService } from '../../services/user-service.service';
+import { Subject } from 'rxjs';
 
 export class User {
   constructor(
@@ -12,8 +13,8 @@ export class User {
     public is_deleted: boolean,
     public createdAt: string,
     public updatedAt: string,
-  
-  ) {} 
+
+  ) {}
 }
 
 
@@ -29,7 +30,8 @@ export class CrudUserComponent implements OnInit {
   closeResult: string;
   title = 'datatables';
  dtOptions: DataTables.Settings = {};
- users;
+ dtTrigger: Subject<any> = new Subject<any>();
+ users = [];
  dtElement: any;
 
  is_deleted: boolean = false;
@@ -41,7 +43,7 @@ export class CrudUserComponent implements OnInit {
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 2,
       processing: true
     }
 
@@ -55,7 +57,7 @@ export class CrudUserComponent implements OnInit {
       updatedAt: ['']
     });
 
-  
+
 }
 
 
@@ -64,7 +66,8 @@ getUsers(){
   this.http.get('http://localhost:3000/users/getAll')
  .subscribe( response => {
    console.log(response);
-   this.users = response;
+   this.users = response as any;
+   this.dtTrigger.next();
  });
 
  }
@@ -111,7 +114,7 @@ openDetails(targetModal, users: User) {
   document.getElementById('created').setAttribute('value', users.createdAt);
   document.getElementById('updated').setAttribute('value', users.updatedAt);
 }
- 
+
 ///edit
   openEdit(targetModal, users: User) {
     this.modalService.open(targetModal, {
@@ -124,7 +127,7 @@ openDetails(targetModal, users: User) {
       email:users.email,
       role: users.role
     });
-  
+
   }
 
   onSave() {
@@ -151,6 +154,11 @@ if (reason === ModalDismissReasons.ESC) {
 } else {
   return  `with: ${reason}`;
 }
+}
+
+ngOnDestroy(): void {
+  // Do not forget to unsubscribe the event
+  this.dtTrigger.unsubscribe();
 }
 
 }

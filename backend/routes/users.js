@@ -61,7 +61,7 @@ const prepareEmailSending = () => {
 router.get("/getUser/:id", async function (req, res, next) {
   let id = req.params.id;
 
-  const user = await User.findByPk(id);
+  const user = await User.findByPk(id , {attributes:["id","email","role"]});
 
   prepareResponse(res, 200, user, "application/json");
 });
@@ -93,12 +93,12 @@ router.get("/getAll", function (req, res, next) {
 router.put("/updateUser/:id", function (req, res) {
   let id = req.params.id;
   // console.log(req.body);
-  User.findByPk(id, 
+  User.findByPk(id,
     {attributes:["id"]}).then((users) => {
     try {
       let { role, email } = req.body;
        users.update({
-              
+
               role,
               email,
               createdAt: new Date(),
@@ -106,7 +106,7 @@ router.put("/updateUser/:id", function (req, res) {
             })
             .then((users) => prepareResponse(res, 200, { success: true }, "application/json"))
             .catch((error) => console.log(error));
-      
+
     } catch (error) {
       console.log(error);
       prepareResponse(res, 500, { success: false }, "application/json");
@@ -464,11 +464,42 @@ router.get("/confirm/:token", (req, res) => {
 
     .catch((error) => console.log(error));
 });
-router.get("/test", async function (req, res, next) {
+router.get("/test/:id", async function (req, res, next) {
   let id = req.params.id;
-
   const user = await User.findByPk(id)
-  
+  .then(async function (user) {
+    if (user) {
+
+      if (user.role == "Livreur") {
+        (user) => res.redirect("http://localhost:4200/profil");
+        prepareResponse(res, 200, {success: true}, "application/json");
+
+      } else if (user.role == "Administrateur") {
+        (user) => res.redirect("http://localhost:4200/admin");
+        prepareResponse(res, 200, {success: true}, "application/json");
+
+
+      } else if (user.role == "Client") {
+        (user) => res.redirect("http://localhost:4200/profil");
+        prepareResponse(res, 200, {success: true}, "application/json");
+
+
+      } else if (user.role == "Sup_administrateur") {
+        (user) => res.redirect("http://localhost:4200/admin");
+        prepareResponse(res, 200, {success: true}, "application/json");
+
+      } else {
+        const response = {
+          success: false,
+          message: "user not found !!",
+        };
+        prepareResponse(res, 500, response, "application/json");
+      }
+    }
+  })
+
+  .catch((error) => console.log(error));
+
 
   prepareResponse(res, 200, user, "application/json");
 });

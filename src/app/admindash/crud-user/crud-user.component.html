@@ -45,7 +45,7 @@
 <ng-template #contentDetails let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">User's Details</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <button type="button" class="close" aria-label="Close"  aria-hidden="true" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -159,8 +159,8 @@
           <input  class="form-control" formControlName="role">
         </div>
       </div>
-      <div class="border text-center"> 
-        <button data-dismiss="modal" class="btn btn-info" (click)="onSave()" >Save Changes</button> 
+      <div class="border text-center">
+        <button data-dismiss="modal" class="btn btn-info" (click)="onSave()" >Save Changes</button>
       </div>
     </form>
   </div>
