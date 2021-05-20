@@ -46,7 +46,7 @@ import { Prod6Component } from './product/prod6/prod6.component';
 import { Prod7Component } from './product/prod7/prod7.component';
 import { Prod8Component } from './product/prod8/prod8.component';
 
-import { CrudSScatComponent } from './admindash/crud-sscat/crud-sscat.component';
+import { CrudSScatComponent } from './admindash/crud-categorie/crud-sscat/crud-sscat.component';
 import { CmdeComponent } from './admindash/cmde/cmde.component';
 import { CrudStockComponent } from './admindash/crud-stock/crud-stock.component';
 import { EditComponent } from './profil/edit/edit.component';
@@ -65,13 +65,10 @@ const Routes: Routes = [
      children: [
       { path: 'ss_categorie', component: CrudSScatComponent },
       ]},
-     
-     
-    ]
-  },
 
-  
-  
+      
+    ]},
+
   { path: 'login', component: LoginComponent },
   { path: 'cart', component: CartComponent },
   { path: 'register', component: RegisterComponent },

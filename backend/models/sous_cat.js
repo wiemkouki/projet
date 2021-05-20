@@ -17,14 +17,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
     },
     nom_ss_cat: DataTypes.STRING,
-    id_cat:
-    {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'categories',
-            key: 'id'
-        },},
+    // id_cat:
+    // {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: false,
+    //     references: {
+    //         model: 'categories',
+    //         key: 'id'
+    //     },},
 
 
 
