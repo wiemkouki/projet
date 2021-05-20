@@ -74,7 +74,8 @@ router.post("/updateC/:id", function (req, res) {
 
   let id = req.params.id;
   console.log(req.body);
-  categorie.findByPk(id).then((cat) => {
+  categorie.findByPk(id, 
+    {attributes:["id"]}).then((cat) => {
     try {
       let { nom_cat, famille } = req.body;
 

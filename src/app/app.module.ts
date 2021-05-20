@@ -32,10 +32,10 @@ import { ChangepwdComponent } from './changepwd/changepwd.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { TestComponent } from './test/test.component';
 import { AdmindashComponent } from './admindash/admindash.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CrudUserComponent } from './Admindash/crud-user/crud-user.component';
-import {AuthService} from './services/auth.service';
-import {AdminGuard} from './admin.guard';
+import { AuthService } from './services/auth.service';
+import { AdminGuard } from './admin.guard';
 import { ProductComponent } from './product/product.component';
 import { Prod1Component } from './product/prod1/prod1.component';
 import { Prod2Component } from './product/prod2/prod2.component';
@@ -45,26 +45,41 @@ import { Prod5Component } from './product/prod5/prod5.component';
 import { Prod6Component } from './product/prod6/prod6.component';
 import { Prod7Component } from './product/prod7/prod7.component';
 import { Prod8Component } from './product/prod8/prod8.component';
+
 import { CrudSScatComponent } from './admindash/crud-sscat/crud-sscat.component';
 import { CmdeComponent } from './admindash/cmde/cmde.component';
 import { CrudStockComponent } from './admindash/crud-stock/crud-stock.component';
 import { EditComponent } from './profil/edit/edit.component';
+import { CrudCategorieComponent } from './admindash/crud-categorie/crud-categorie.component';
 const Routes: Routes = [
   { path: '', component: CatalogComponent },
   { path: 'test', component: TestComponent },
-  { path: 'admin', component: AdmindashComponent ,
-   children: [
-    { path: 'users', component: CrudUserComponent },
-    { path: 'stock', component: CrudStockComponent }]   },
+  {
+    path: 'admin', component: AdmindashComponent,
+    children: [
+      { path: 'users', component: CrudUserComponent },
+      { path: 'stock', component: CrudStockComponent },
+      { path: 'cmde', component: CmdeComponent },
 
-  { path: 'ss_categorie', component: CrudSScatComponent },
-  { path: 'cmde', component: CmdeComponent },
+      { path: 'categorie', component: CrudCategorieComponent,
+     children: [
+      { path: 'ss_categorie', component: CrudSScatComponent },
+      ]},
+     
+     
+    ]
+  },
+
+  
+  
   { path: 'login', component: LoginComponent },
   { path: 'cart', component: CartComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  { path: 'profil', component: ProfilComponent ,children: [
-    {  path: 'edit' ,component:EditComponent }] },
+  {
+    path: 'profil', component: ProfilComponent, children: [
+      { path: 'edit', component: EditComponent }]
+  },
   { path: 'forgotpwd/:id', component: ForgotPwdComponent },
   { path: 'changepwd', component: ChangepwdComponent },
   { path: 'prod1', component: Prod1Component },
@@ -94,48 +109,27 @@ const Routes: Routes = [
     CatalogComponent,
     TestComponent,
     AdmindashComponent,
-
-
-
     CrudUserComponent,
-
     ProductComponent,
-
     Prod1Component,
-
     Prod2Component,
-
     Prod3Component,
-
     Prod4Component,
-
     Prod5Component,
-
     Prod6Component,
-
     Prod7Component,
-
     Prod8Component,
-
-
-
     CrudSScatComponent,
-
     CmdeComponent,
-
     CrudStockComponent,
-
-    EditComponent
-
+    EditComponent,
+    CrudCategorieComponent
 
 
 
 
   ],
   imports: [
-
-
-
     BrowserModule,
     FlexLayoutModule,
     BrowserAnimationsModule,

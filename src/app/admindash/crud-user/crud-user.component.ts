@@ -41,8 +41,9 @@ export class CrudUserComponent implements OnInit {
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
-      processing: true
+      pageLength: 2,
+
+      // processing: true
     }
 
     this.getUsers()

@@ -25,9 +25,11 @@ export class ProfilComponent implements OnInit {
     name: null,
     firstname: null
   };
-  constructor(private userService: UserServiceService ,
-    private router: Router,
-    private authService: SocialAuthService,  private formBuilder: FormBuilder) { }
+  constructor(private userService: UserServiceService, private router: Router, 
+    private authService: SocialAuthService,  private formBuilder: FormBuilder) 
+    { 
+      this.user = new SocialUser();
+    }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
