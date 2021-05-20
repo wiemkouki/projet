@@ -12,7 +12,7 @@ const prepareResponse = (response, status, body, type) => {
 router.get("/getClient/:id", async function (req, res, next) {
   let id = req.params.id;
 
-  const client = await Client.findByPk(id,{attributes:["id","nom","role"]});
+  const client = await Client.findByPk(id,{attributes:["id","nom","prenom","tel","adresse"]});
 
   prepareResponse(res, 200, client, "application/json");
 });
