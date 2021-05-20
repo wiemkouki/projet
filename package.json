@@ -70,6 +70,7 @@
     "@angular/compiler-cli": "~10.2.4",
     "@types/datatables.net": "^1.10.19",
     "@types/datatables.net-buttons": "^1.4.5",
+    "@types/ej.web.all": "^19.1.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/jquery": "^3.5.5",
