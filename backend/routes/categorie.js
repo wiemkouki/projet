@@ -22,7 +22,12 @@ router.get("/getCat/:id", async function (req, res, next) {
 
 router.get("/getAllC", function (req, res, next) {
   categorie
-  .findAll({ attributes: ["id", "nom_cat", "famille"] })
+  .findAll({ attributes: ["id", "nom_cat", "famille"],
+  where: {
+    is_deleted: 0
+  } }
+
+)
     .then((categories) => {
       prepareResponse(res, 200, categories, "application/json");
     })
@@ -70,23 +75,22 @@ router.post("/createCat", function (req, res, next) {
     }).catch((error)=> console.log(error));
 });
 //UPDATE CATEGORIE
-router.post("/updateC/:id", function (req, res) {
+router.put("/updateC/:id", function (req, res) {
 
   let id = req.params.id;
-  console.log(req.body);
+
   categorie.findByPk(id, 
-    {attributes:["id"]}).then((cat) => {
+    {attributes:["id"]})
+    .then((cat) => {
     try {
       let { nom_cat, famille } = req.body;
-
-      cat
-        .update({
+      cat.update({
           nom_cat,
           famille,
           updatedAt: new Date(),
         })
-        .then((cat) => prepareResponse(res, 200, cat, "application/json"))
-        .catch(error);
+        .then((cat) => prepareResponse(res, 200,{ success: true }, "application/json"))
+        .catch((error) => console.log(error));
     } catch (error) {
       console.log(error);
       prepareResponse(res, 500, { success: false }, "application/json");
@@ -97,9 +101,10 @@ router.post("/updateC/:id", function (req, res) {
 
 router.get("/delete/:id", function (req, res) {
   let id = req.params.id;
-  categorie.findByPk(id).then((categorie) => {
+  categorie.findByPk(id
+    ,{attributes:["id"]}).then((cat) => {
     try {
-      categorie.update({
+      cat.update({
         is_deleted: true,
       });
       prepareResponse(res, 200, { success: true }, "application/json");

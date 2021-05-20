@@ -38,7 +38,7 @@ var usersRouter = require('./routes/users');
 var clientRouter = require('./routes/client');
 var categorieRouter = require('./routes/categorie');
 var produitRouter = require('./routes/produit');
-// var adminRouter = require('./routes/admin');
+var sous_catRouter = require('./routes/sous_cat');
 app.use('/users', usersRouter);
 app.use('/client', clientRouter);
 app.use('/categorie', categorieRouter);
@@ -51,7 +51,7 @@ app.use('/produit', produitRouter);
 // app.use('/fiche_tech', fiche_techRouter);
 // app.use('/livreur', livreurRouter);
 // app.use('/panier', panierRouter);
-// app.use('/sous_cat', sous_catRouter);
+app.use('/sous_cat', sous_catRouter);
 // app.use('/stock', stockRouter);
 // app.use('/sup_admin', sup_adminRouter);
 

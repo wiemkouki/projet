@@ -2,26 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { CategorieService } from '../../services/categorie.service';
-export class categorie {
+import { CategorieService } from '../../../services/categorie.service';
+export class Sous_cat {
   constructor(
     public id: string,
-    public nom_cat: string,
-    public famille: string,
+    public nom_ss_cat: string,
     public is_deleted: boolean,
     public createdAt: string,
     public updatedAt: string,
   
   ) {} 
 }
-
 @Component({
-  selector: 'app-crud-categorie',
-  templateUrl: './crud-categorie.component.html',
-  styleUrls: ['./crud-categorie.component.scss']
+  selector: 'app-crud-sscat',
+  templateUrl: './crud-sscat.component.html',
+  styleUrls: ['./crud-sscat.component.scss']
 })
-export class CrudCategorieComponent implements OnInit {
-
+export class CrudSScatComponent implements OnInit {
   editForm: FormGroup;
   closeResult: string;
   title = 'datatables';
@@ -42,25 +39,22 @@ export class CrudCategorieComponent implements OnInit {
 
       // processing: true
     }
-
-    this.getCategorie()
+    this.getssCategorie()
 
     this.editForm = this.fb.group({
       id: [''],
-      nom_cat: [''],
-      famille: [''],
+      nom_ss_cat: [''],
       createdAt: [''],
       updatedAt: ['']
     });
 
+
   }
 
 
-
-
 //Affichage users
-getCategorie(){
-  this.http.get('http://localhost:3000/categorie/getAllC')
+getssCategorie(){
+  this.http.get('http://localhost:3000/sous_cat/getAll')
  .subscribe( response => {
    console.log(response);
    this.categories = response;
@@ -68,17 +62,15 @@ getCategorie(){
 
  }
 
-
  //bouton Detail
- openDetails(targetModal, categories: categorie) {
+ openDetails(targetModal, categories: Sous_cat) {
   this.modalService.open(targetModal, {
     centered: true,
     backdrop: 'static',
     size: 'lg'
   });
   document.getElementById('id').setAttribute('value', categories.id);
-  document.getElementById('nom_cat').setAttribute('value', categories.nom_cat);
-  document.getElementById('famille').setAttribute('value', categories.famille);
+  document.getElementById('nom_ss_cat').setAttribute('value', categories.nom_ss_cat);
   document.getElementById('created').setAttribute('value', categories.createdAt);
   document.getElementById('updated').setAttribute('value', categories.updatedAt);
  
@@ -97,7 +89,7 @@ openDelete(targetModal, id: string) {
 
 onDelete(is_deleted: boolean) {
   console.log(this.deleteID)
-  this.categorieService.deleteCat(this.deleteID)
+  this.categorieService.deletessCat(this.deleteID)
     .subscribe((response) => {
       console.log(response);
       this.categories = response;
@@ -109,7 +101,7 @@ onDelete(is_deleted: boolean) {
 
 
 //edit
-openEdit(targetModal, categories: categorie) {
+openEdit(targetModal, categories: Sous_cat) {
   this.modalService.open(targetModal, {
     centered: true,
     backdrop: 'static',
@@ -117,16 +109,13 @@ openEdit(targetModal, categories: categorie) {
   });
   this.editForm.patchValue({
     id:categories.id,
-    nom_cat:categories.nom_cat,
-    famille: categories.famille,
-   
-  
+    nom_ss_cat:categories.nom_ss_cat
   });
 
 }
 
 onSave() {
-  const editURL = 'http://localhost:3000/categorie/updateC/' + this.editForm.value.id ;
+  const editURL = 'http://localhost:3000/sous_cat/update/' + this.editForm.value.id ;
   console.log(this.editForm.value);
   this.http.put(editURL, this.editForm.value)
     .subscribe((results) => {
@@ -136,20 +125,9 @@ onSave() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 //add
 onSubmit(f: NgForm) {
-  const url = 'http://localhost:3000/categorie/createCat';
+  const url = 'http://localhost:3000/sous_cat/create';
   this.http.post(url, f.value)
     .subscribe((result) => {
       this.ngOnInit(); //reload the table
@@ -174,6 +152,7 @@ onSubmit(f: NgForm) {
       return `with: ${reason}`;
     }
   }
+
 
 
 

@@ -1,7 +1,12 @@
+<div class="container">
+
+
+
 <div class="border">
-    <button class="btn btn-md btn-outline-primary" (click)="open(content)">
-      <i class="fa fa-product"></i>Add new categorie</button>
-  </div>
+  <button class="btn btn-md btn-outline-primary" (click)="open(content)">
+    <i class="fa fa-product"></i>Add sub Categorie</button>
+</div>
+
 
 
 <table datatable [dtOptions]="dtOptions" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -9,8 +14,8 @@
  
        <tr>
          <th>ID</th>
-         <th>Nom catégorie</th>
-         <th>Famille</th>
+         <th>Nom sous catégorie</th>
+        
          <!-- <th>CreatedAt</th>
          <th>UpdatedAt</th> -->
          <th colspan="3" width="6%">
@@ -21,8 +26,8 @@
      <tbody>
        <tr *ngFor="let categorie of categories">
          <td><span>{{ categorie.id }}</span></td>
-         <td><span>{{ categorie.nom_cat }}</span></td>
-         <td><span>{{ categorie.famille }}</span></td>
+         <td><span>{{ categorie.nom_ss_cat }}</span></td>
+     
          <!-- <td><span>{{ user.createdAt }}</span></td>
        <td><span>{{ user.updatedAt }}</span></td> -->
  
@@ -46,10 +51,10 @@
      </tbody>
  
    </table>
-   <router-outlet></router-outlet>
+  </div>
    <ng-template #content let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">New categorie</h4>
+      <h4 class="modal-title" id="modal-basic-title">Add sub categorie</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -63,17 +68,17 @@
           </div>
         </div> -->
         <div class="form-group">
-          <label for="nom_cat">Nom catégorie</label>
+          <label for="nom_ss_cat">Nom sous catégorie</label>
           <div class="input-group">
-            <input id="nom_cat" class="form-control" name="nom_cat" ngModel>
+            <input id="nom_cat" class="form-control" name="nom_ss_cat" ngModel>
           </div>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="famille">Famille</label>
           <div class="input-group">
             <input id="famille" class="form-control" name="famille" ngModel>
           </div>
-        </div>
+        </div> -->
       
         <div class="border text-center">
           <button data-dismiss="modal" class="btn btn-info">Submit</button>
@@ -85,7 +90,8 @@
     </div>
   </ng-template>
 
-  
+
+
   <ng-template #contentDelete let-modal >
     <div class="modal-header">
       <h4 class="modal-title">Confirm Delete</h4>
@@ -105,8 +111,6 @@
   </ng-template>
 
 
-
-  
   <ng-template #contentDetails let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">Categorie's Details</h4>
@@ -124,17 +128,12 @@
         </div>
  
         <div class="form-group">
-          <label for="nom_cat">Nom catégorie</label>
+          <label for="nom_ss_cat">Nom sous catégorie</label>
           <div class="input-group">
-            <input id="nom_cat" class="form-control">
+            <input id="nom_ss_cat" class="form-control">
           </div>
         </div>
-        <div class="form-group">
-          <label for="famille">Famille</label>
-          <div class="input-group">
-            <input id="famille" class="form-control">
-          </div>
-        </div>
+        
         <div class="form-group">
           <label for="created" for="dateOfBirth">CreatedAt</label>
           <div class="input-group">
@@ -161,6 +160,8 @@
     </div>
   </ng-template>
 
+
+  
   <ng-template #contentEdit let-modal>
     <div class="modal-header">
       <h4 class="modal-title" >Edit Catégorie </h4>
