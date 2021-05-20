@@ -44,7 +44,12 @@ export class CrudUserComponent implements OnInit {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 2,
+<<<<<<< HEAD
       processing: true
+=======
+
+      // processing: true
+>>>>>>> dd3077221bceef4007deac1e16cffdf5201e2a3b
     }
 
     this.getUsers()
@@ -73,6 +78,7 @@ getUsers(){
  }
 
 
+//bouton Edit
 
 
 //bouton Delete

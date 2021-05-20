@@ -32,7 +32,7 @@ export class ForgotPwdComponent implements OnInit {
   onSubmit(form) {
     console.log(this.password)
     console.log(this.confirmPassword)
-    this.route.params
+    this.route.paramMap
       .subscribe(
         (params: Params) => {
           if (this.password == this.confirmPassword)
