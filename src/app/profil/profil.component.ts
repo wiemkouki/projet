@@ -45,25 +45,25 @@ export class ProfilComponent implements OnInit {
 
       console.log(this.user);
     });
-
-
-   this.activatedRoute.paramMap.subscribe(
-      (p: ParamMap) => {
-        this.userService.getClient(p.get('id')).subscribe(
-          (client : Client) => {
-            this.client = client;
-          },
-          (error) => {
-            console.log("Error with getClient");
-          }
-        )
-      },
-
-      (error) => {
-        console.log("Error with paramMap");
-      }
-    )
   }
+
+  //  this.activatedRoute.paramMap.subscribe(
+  //     (p: ParamMap) => {
+  //       this.userService.getClient(p.get('id')).subscribe(
+  //         (client : Client) => {
+  //           this.client = client;
+  //         },
+  //         (error) => {
+  //           console.log("Error with getClient");
+  //         }
+  //       )
+  //     },
+
+  //     (error) => {
+  //       console.log("Error with paramMap");
+  //     }
+  //   )
+  // }
   //afficher user
 // getClient(id){
 //   this.http.get(`http://localhost:3000/client/getClient/${id}`)
