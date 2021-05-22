@@ -13,7 +13,7 @@ router.get("/getCat/:id", async function (req, res, next) {
 
   let id = req.params.id;
 
-  const cat = await categorie.findByPk(id);
+  const cat = await categorie.findByPk(id, {attributes: [ "nom_cat", "famille","createdAt","updatedAt"]} );
 
   prepareResponse(res, 200, cat, "application/json");
 });
@@ -79,7 +79,7 @@ router.put("/updateC/:id", function (req, res) {
 
   let id = req.params.id;
 
-  categorie.findByPk(id, 
+  categorie.findByPk(id,
     {attributes:["id"]})
     .then((cat) => {
     try {
