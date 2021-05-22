@@ -72,7 +72,7 @@ router.get("/getssCat/:id", async function (req, res, next) {
       }).catch((error)=> console.log(error));
   });
   //UPDATE CATEGORIE
-  router.post("/update/:id", function (req, res) {
+  router.put("/update/:id", function (req, res) {
 
     let id = req.params.id;
     Sous_cat.findByPk(id, 
@@ -87,7 +87,7 @@ router.get("/getssCat/:id", async function (req, res, next) {
             updatedAt: new Date(),
           })
           .then((cat) => prepareResponse(res, 200, cat, "application/json"))
-          .catch(error);
+          .catch((error) => console.log(error));
       } catch (error) {
         console.log(error);
         prepareResponse(res, 500, { success: false }, "application/json");
