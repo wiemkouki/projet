@@ -98,7 +98,8 @@ router.get("/getssCat/:id", async function (req, res, next) {
   
   router.get("/delete/:id", function (req, res) {
     let id = req.params.id;
-    Sous_cat.findByPk(id).then((ss_cat) => {
+    Sous_cat.findByPk(id,
+      {attributes:["id"]}).then((ss_cat) => {
       try {
         ss_cat.update({
           is_deleted: true,
