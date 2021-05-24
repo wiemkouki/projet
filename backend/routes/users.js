@@ -139,7 +139,7 @@ router.post("/signin", function (req, res, next) {
       bcrypt.compare(password, user.password).then((result) => {
         if (result) {
           jwt.sign(
-            { id: user.email, createdAt: user.createdAt },
+            { id: user.email, createdAt: user.createdAt, role: user.role },
             process.env.SECRET,
             { expiresIn: parseInt(process.env.EXPIRATION) },
 
@@ -158,15 +158,17 @@ router.post("/signin", function (req, res, next) {
 
                 const current = {
                   id: user.id,
-                  username: user.username,
+                 email: user.email,
                   lastSignIn: user.lastSignIn,
                   role: user.role,
+
                 };
 
                 const response = {
                   success: true,
                   message: "You have signed in successfully.",
                   user: current,
+                  token:token
                 };
 
                 user

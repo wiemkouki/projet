@@ -3,6 +3,19 @@ import { UserServiceService } from '../services/user-service.service';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SocialAuthService, FacebookLoginProvider, GoogleLoginProvider,SocialUser } from 'angularx-social-login';
+export class User {
+  constructor(
+    public id: number,
+    public email: string,
+    public role: string,
+    public token :string,
+    public is_deleted: boolean,
+    public createdAt: string,
+    public updatedAt: string,
+
+  ) {}
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,6 +25,7 @@ import { SocialAuthService, FacebookLoginProvider, GoogleLoginProvider,SocialUse
 
 export class LoginComponent implements OnInit {
 
+  
   loginForm: FormGroup;
   user: SocialUser;
   isLoggedin: boolean = null;
@@ -46,10 +60,11 @@ export class LoginComponent implements OnInit {
 
 
   onSubmit(): void {
-    const { email, password } = this.form;
+    const { email, password  } = this.form;
 
     this.userService.login(email, password).subscribe(
       data => {
+        localStorage.getItem(token.role);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.router.navigate(['/profil'])
