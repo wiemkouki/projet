@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
 
 
   form: any = {
-    username: null,
+   
     email: null,
     role:null,
     password: null

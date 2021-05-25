@@ -50,6 +50,15 @@ export class UserServiceService {
     }, httpOptions)
   }
 
+  update(username: string, email: string, password: string, role: string): Observable<any> {
+    return this.http.post(this.api_prefix + '/signup', {
+      username,
+      email,
+      role,
+      password
+    }, httpOptions)
+
+  }
 
 
 
@@ -91,7 +100,7 @@ deleteUser(id: number): Observable<any>{
 
 
 
- 
+
   forgot(form: object) {
     const url = `${this.api_prefix}/resetpassword`;
     console.log(form);

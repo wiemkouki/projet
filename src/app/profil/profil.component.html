@@ -55,9 +55,9 @@
                 <!-- <img class="brochure-poster" [src]="brochure.imageUrl" /> -->
                 <!-- <img src="{{ user.photoUrl }}"> -->
                 <img src="{{ user.photoUrl }}&access_token={{user.authToken}}" width="140px" >
-                 <img id="photoUrl" class="photoUrl" [src]="user.photoUrl"  width="140px"> 
+                 <img id="photoUrl" class="photoUrl" [src]="user.photoUrl"  width="140px">
               </div>
-              
+
               <!-- <h5 class="name">{{ user.name }}</h5>
               <h6 class="email">{{ user.email }}</h6> -->
             </div>
@@ -127,7 +127,7 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
               <div class="text-right">
                 <button type="button" id="submit" name="submit" class="btn btn-secondary button">Annuler</button>
-                <button type="button" id="submit" name="submit" class="btn btn-outline-warning button">Modifier</button>
+                <button type="button" id="submit" name="submit" class="btn btn-outline-warning button"[routerLink]="'/profil/edit'">Modifier</button>
               </div>
             </div>
           </div>
@@ -137,4 +137,3 @@
   </div>
 
 
- 

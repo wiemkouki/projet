@@ -408,7 +408,7 @@ router.get("/confirm/:token", (req, res) => {
             .update({
               is_active: true,
             })
-            .then((user) => res.redirect("http://localhost:4200/profil"))
+            .then((user) => res.redirect("http://localhost:4200/pfL"))
             .catch(error);
         } else if (user.role == "Administrateur") {
           const new_admin = await Admin.create({
@@ -525,7 +525,7 @@ router.post("/save", (req, res) => {
  res.status(201).json({
   message: 'user created successfuly!'
 })
-  
+
 
 });
 

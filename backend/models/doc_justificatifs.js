@@ -24,12 +24,13 @@ module.exports = (sequelize, DataTypes) => {
       url_doc: DataTypes.STRING,
       is_deleted: DataTypes.BOOLEAN,
 
-      id_sup_admin: {
+
+      id_livreur: {
         type: DataTypes.INTEGER,
         allowNull: false,
         foreignKey: true,
         references: {
-          model: "sup_admins",
+          model: " Livreur",
           key: "id",
         },
       },

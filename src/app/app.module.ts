@@ -50,8 +50,11 @@ import { CrudSScatComponent } from './admindash/crud-categorie/crud-sscat/crud-s
 import { CmdeComponent } from './admindash/cmde/cmde.component';
 import { CrudStockComponent } from './admindash/crud-stock/crud-stock.component';
 import { EditComponent } from './profil/edit/edit.component';
+
 import { CrudCategorieComponent } from './admindash/crud-categorie/crud-categorie.component';
 import { ProfilLivreurComponent } from './profil_livreur/profil-livreur.component';
+import { EditLivComponent } from './profil_livreur/edit-liv/edit-liv.component';
+
 const Routes: Routes = [
   { path: '', component: CatalogComponent },
   { path: 'test', component: TestComponent },
@@ -77,6 +80,10 @@ const Routes: Routes = [
   {
     path: 'profil', component: ProfilComponent, children: [
       { path: 'edit', component: EditComponent }]
+  },
+  {
+    path: 'pfL', component: ProfilLivreurComponent, children: [
+      { path: 'editL', component: EditLivComponent }]
   },
   { path: 'forgotpwd/:id', component: ForgotPwdComponent },
   { path: 'changepwd', component: ChangepwdComponent },
@@ -122,7 +129,8 @@ const Routes: Routes = [
     CrudStockComponent,
     EditComponent,
     CrudCategorieComponent,
-    ProfilLivreurComponent
+    ProfilLivreurComponent,
+    EditLivComponent
 
 
 
