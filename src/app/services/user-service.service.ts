@@ -43,11 +43,32 @@ export class UserServiceService {
     }, httpOptions)
   }
 
+  Save(user): Observable<any> {
+    return this.http
+    .post(this.api_prefix + '/save', {
+      user,
+    }, httpOptions)
+  }
 
 
-//  updateUser(): Observable<any>{
-//  return this.http.post('http://localhost:3000/users/updateUser');
-//  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 deleteUser(id: number): Observable<any>{

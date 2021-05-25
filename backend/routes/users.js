@@ -517,4 +517,24 @@ router.get("/logout", (req, res, next) => {
   }
 });
 
+
+//SAVE info fb
+router.post("/save", (req, res) => {
+  const email = req.body.email;
+ let query = "INSERT INTO Users email "
+ res.status(201).json({
+  message: 'user created successfuly!'
+})
+  
+
+});
+
+
+
+
+
+
+
+
+
 module.exports = router;

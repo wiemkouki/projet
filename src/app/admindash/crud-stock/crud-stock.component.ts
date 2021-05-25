@@ -14,7 +14,10 @@ export class Produit {
     public disponible: string,
     public is_deleted: boolean,
     public createdAt: string,
-    public updatedAt: string) { }
+    public updatedAt: string) {
+
+      
+     }
 }
 @Component({
   selector: 'app-crud-stock',

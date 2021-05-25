@@ -12,9 +12,6 @@ import { SocialUser } from "angularx-social-login";
   styleUrls: ['./profil.component.scss']
 })
 export class ProfilComponent implements OnInit {
- 
-
-
   user: SocialUser;
   loginForm: FormGroup;
   form: any = {
@@ -25,6 +22,7 @@ export class ProfilComponent implements OnInit {
     name: null,
     firstname: null
   };
+  http: any;
   constructor(private userService: UserServiceService, private router: Router, 
     private authService: SocialAuthService,  private formBuilder: FormBuilder) 
     { 
@@ -45,7 +43,12 @@ export class ProfilComponent implements OnInit {
     
       console.log(this.user);
     });
+
+
+
+    
   }
+
 
   //  this.activatedRoute.paramMap.subscribe(
   //     (p: ParamMap) => {
@@ -64,16 +67,9 @@ export class ProfilComponent implements OnInit {
   //     }
   //   )
   // }
-  //afficher user
-// getClient(id){
-//   this.http.get(`http://localhost:3000/client/getClient/${id}`)
-//  .subscribe( response => {
-//    console.log(response);
-//    this.client = response as any;
 
-//  });
 
-//  }
+
 
   }
 

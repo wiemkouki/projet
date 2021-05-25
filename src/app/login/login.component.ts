@@ -3,6 +3,7 @@ import { UserServiceService } from '../services/user-service.service';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SocialAuthService, FacebookLoginProvider, GoogleLoginProvider,SocialUser } from 'angularx-social-login';
+import { HttpClient } from '@angular/common/http';
 export class User {
   constructor(
     public id: number,
@@ -42,7 +43,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private userService: UserServiceService, private router: Router,
     private formBuilder: FormBuilder,
-    private authService: SocialAuthService) {
+    private authService: SocialAuthService
+    , private http: HttpClient) {
       console.log(this.isLoggedin)
     }
 
@@ -56,6 +58,10 @@ export class LoginComponent implements OnInit {
     this.isLoggedin = (user != null);
     console.log(this.user);
   });
+
+
+
+  // this.onSave()
   }
 
 
@@ -64,7 +70,7 @@ export class LoginComponent implements OnInit {
 
     this.userService.login(email, password).subscribe(
       data => {
-        localStorage.getItem(token.role);
+        // localStorage.getItem(token.role);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.router.navigate(['/profil'])
@@ -96,6 +102,27 @@ export class LoginComponent implements OnInit {
     this.authService.signOut();
   }
 
+
+
+
+
+
+
+
+  
+  //Inserer email bd
+  onSave(user) {
+    this.userService.Save(user)
+      .subscribe(response => {
+        console.log(response);
+        this.user = response;
+        this.ngOnInit();
+      });
+
+  }
+
+
+  
 }
 
 
