@@ -24,6 +24,9 @@ module.exports = {
       disponible: {
         type: Sequelize.STRING
       },
+      image: {
+        type: Sequelize.STRING
+      },
       is_deleted:{
         type: Sequelize.BOOLEAN
       },

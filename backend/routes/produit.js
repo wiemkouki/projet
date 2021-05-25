@@ -2,11 +2,73 @@ var express = require("express");
 var router = express.Router();
 const { Produit } = require("../models");
 
+
+// require('dotenv').config();
+// var dbConfig = require('./config/config');
+
+// const seq = new sequelize(
+//     dbConfig.development.database,
+//     dbConfig.development.username,
+//     dbConfig.development.password,
+//     {
+//         host: dbConfig.development.host,
+//         dialect: dbConfig.development.dialect
+//     });
+
 const prepareResponse = (response, status, body, type) => {
   console.log(body);
   response.set("Content-Type", type);
   response.status(status).send(body);
 };
+
+
+
+
+/* GET ALL PRODUCTS */
+router.get('/getAllp', function (req, res) {       // Sending Page Query Parameter is mandatory http://localhost:3636/api/products?page=1
+  let page = (req.query.page !== undefined && req.query.page !== 0) ? req.query.page : 1;
+  const limit = (req.query.limit !== undefined && req.query.limit !== 0) ? req.query.limit : 10;   // set limit of items per page
+  let startValue;
+  let endValue;
+  if (page > 0) {
+      startValue = (page * limit) - limit;     // 0, 10, 20, 30
+      endValue = page * limit;                  // 10, 20, 30, 40
+  } else {
+      startValue = 0;
+      endValue = 10;
+  }
+  seq.table('produits as p')
+     
+      .withFields([
+          'p.libelle ',
+          'p.marque',
+          'p.prix',
+          'p.max_rating',
+          'p.disponible',
+          'p.image',
+          'p.id'
+      ])
+      .slice(startValue, endValue)
+      .sort({id: .1})
+      .getAll()
+      .then(prods => {
+          if (prods.length > 0) {
+              res.status(200).json({
+                  count: prods.length,
+                  products: prods
+              });
+          } else {
+              res.json({message: "No products found"});
+          }
+      })
+      .catch(err => console.log(err));
+});
+
+
+
+
+
+
 
 //get Produit
 router.get("/getPdt/:id", async function (req, res, next) {
@@ -77,6 +139,9 @@ router.get("/getAll", function (req, res, next) {
       prepareResponse(res, 500, response, "application/json");
     });
 });
+
+
+
 //UPDATE
 
 router.put("/updateP/:id", function (req, res) {

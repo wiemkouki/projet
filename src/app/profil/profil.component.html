@@ -55,14 +55,14 @@
                 <!-- <img class="brochure-poster" [src]="brochure.imageUrl" /> -->
                 <!-- <img src="{{ user.photoUrl }}"> -->
                 <img src="{{ user.photoUrl }}&access_token={{user.authToken}}" width="140px" >
-                 <!-- <img id="photoUrl" class="photoUrl" [src]="user.photoUrl"  width="140px">  -->
+                 <img id="photoUrl" class="photoUrl" [src]="user.photoUrl"  width="140px"> 
               </div>
               
               <!-- <h5 class="name">{{ user.name }}</h5>
               <h6 class="email">{{ user.email }}</h6> -->
             </div>
             <div class="aboutt">
-              <a  [routerLink]="'/changepwd'"  style="color: #f08d5f" >Modifier Mot de passe</a>
+              <a  [routerLink]="'/changepwd'"  style="color: #f08d5f"  >Modifier Mot de passe</a>
 
 
             </div>
