@@ -26,7 +26,7 @@ export class User {
 
 export class LoginComponent implements OnInit {
 
-  
+
   loginForm: FormGroup;
   user: SocialUser;
   isLoggedin: boolean = null;
@@ -109,20 +109,20 @@ export class LoginComponent implements OnInit {
 
 
 
-  
+
   //Inserer email bd
-  onSave(user) {
-    this.userService.Save(user)
-      .subscribe(response => {
-        console.log(response);
-        this.user = response;
-        this.ngOnInit();
-      });
+  // onSave(user) {
+  //   this.userService.Save(user)
+  //     .subscribe(response => {
+  //       console.log(response);
+  //       this.user = response;
+  //       this.ngOnInit();
+  //     });
 
-  }
+  // }
 
 
-  
+
 }
 
 

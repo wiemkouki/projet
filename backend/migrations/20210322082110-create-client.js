@@ -8,12 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nom: {
+      name: {
         type: Sequelize.STRING
       },
-      prenom: {
-        type: Sequelize.STRING
-      },
+
       tel: {
         type: Sequelize.INTEGER
       },
@@ -21,10 +19,14 @@ module.exports = {
       adresse: {
         type: Sequelize.STRING
       },
+
+      avatar: {
+        type: Sequelize.STRING
+      },
       is_deleted:{
         type: Sequelize.BOOLEAN
       },
-   
+
           createdAt: {
             allowNull: false,
             type: Sequelize.DATE

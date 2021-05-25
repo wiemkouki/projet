@@ -24,7 +24,7 @@ module.exports = {
       disponible: {
         type: Sequelize.STRING
       },
-      image: {
+      avatar: {
         type: Sequelize.STRING
       },
       is_deleted:{
