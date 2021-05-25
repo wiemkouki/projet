@@ -24,9 +24,7 @@ module.exports = {
       matiere: {
         type: Sequelize.STRING
       },
-      is_deleted:{
-        type: Sequelize.BOOLEAN
-      },
+     
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -15,15 +15,16 @@ module.exports = {
       url_doc: {
         type: Sequelize.STRING
       },
-      is_deleted: {
+      is_valide: {
         type: Sequelize.BOOLEAN
       },
-      id_sup_admin:
+      id_livreur:
       {
         type: Sequelize.INTEGER,
-        allowNull: false, foreignKey: true,
+        allowNull: false,
+         foreignKey: true,
         references: {
-          model: 'sup_admins',
+          model: 'Livreurs',
           key: 'id'
         },
 
