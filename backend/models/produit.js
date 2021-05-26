@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       Produit.hasMany(models.notePdt, { foreignKey: 'id_notePdt', as: 'doc_notePdt' });
+      Produit.belongsTo(models.categorie, { foreignKey: 'id_categorie', as: 'categorie' });
       Produit.hasMany(models.Commande, { foreignKey: 'id_commande', as: 'commande' });
       Produit.hasMany(models.images_produit, { foreignKey: 'id_images_produit', as: 'images_produit' });
       Produit.hasMany(models.Paniers, { foreignKey: 'id_panier', as: 'panier' });
@@ -25,9 +26,18 @@ module.exports = (sequelize, DataTypes) => {
     marque: DataTypes.STRING,
     prix: DataTypes.INTEGER,
     max_rating: DataTypes.INTEGER,
-    disponible: DataTypes.STRING,
+    description: DataTypes.STRING,
     avatar: DataTypes.STRING,
     is_deleted :DataTypes.BOOLEAN,
+    id_categorie: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      foreignKey: true,
+      references: {
+        model: "categorie",
+        key: "id",
+      },
+    },
 
   },
     {

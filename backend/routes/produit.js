@@ -1,19 +1,10 @@
 var express = require("express");
 var router = express.Router();
-const { Produit } = require("../models");
+const { Produit,categorie } = require("../models");
+const sequelize = require('sequelize');
 
+const  db = {};
 
-// require('dotenv').config();
-// var dbConfig = require('./config/config');
-
-// const seq = new sequelize(
-//     dbConfig.development.database,
-//     dbConfig.development.username,
-//     dbConfig.development.password,
-//     {
-//         host: dbConfig.development.host,
-//         dialect: dbConfig.development.dialect
-//     });
 
 const prepareResponse = (response, status, body, type) => {
   console.log(body);
@@ -22,50 +13,45 @@ const prepareResponse = (response, status, body, type) => {
 };
 
 
-
-
 /* GET ALL PRODUCTS */
-router.get('/getAllp', function (req, res) {       // Sending Page Query Parameter is mandatory http://localhost:3636/api/products?page=1
-  let page = (req.query.page !== undefined && req.query.page !== 0) ? req.query.page : 1;
-  const limit = (req.query.limit !== undefined && req.query.limit !== 0) ? req.query.limit : 10;   // set limit of items per page
-  let startValue;
-  let endValue;
-  if (page > 0) {
-      startValue = (page * limit) - limit;     // 0, 10, 20, 30
-      endValue = page * limit;                  // 10, 20, 30, 40
-  } else {
-      startValue = 0;
-      endValue = 10;
-  }
-  seq.table('produits as p')
-     
-      .withFields([
-          'p.libelle ',
-          'p.marque',
-          'p.prix',
-          'p.max_rating',
-          'p.disponible',
-          'p.image',
-          'p.id'
-      ])
-      .slice(startValue, endValue)
-      .sort({id: .1})
-      .getAll()
-      .then(prods => {
-          if (prods.length > 0) {
-              res.status(200).json({
-                  count: prods.length,
-                  products: prods
-              });
-          } else {
-              res.json({message: "No products found"});
-          }
-      })
-      .catch(err => console.log(err));
-});
+// router.get('/getAllp', function (req, res) {       // Sending Page Query Parameter is mandatory http://localhost:3636/api/products?page=1
+//   let page = (req.query.page !== undefined && req.query.page !== 0) ? req.query.page : 1;
+//   const limit = (req.query.limit !== undefined && req.query.limit !== 0) ? req.query.limit : 10;   // set limit of items per page
+//   let startValue;
+//   let endValue;
+//   if (page > 0) {
+//       startValue = (page * limit) - limit;     // 0, 10, 20, 30
+//       endValue = page * limit;                  // 10, 20, 30, 40
+//   } else {
+//       startValue = 0;
+//       endValue = 10;
+//   }
+//   db.table('produits as p')
 
-
-
+//       .withFields([
+//           'p.libelle ',
+//           'p.marque',
+//           'p.prix',
+//           'p.max_rating',
+//           'p.disponible',
+//           'p.image',
+//           'p.id'
+//       ])
+//       .slice(startValue, endValue)
+//       .sort({id: .1})
+//       .getAll()
+//       .then(prods => {
+//           if (prods.length > 0) {
+//               res.status(200).json({
+//                   count: prods.length,
+//                   products: prods
+//               });
+//           } else {
+//               res.json({message: "No products found"});
+//           }
+//       })
+//       .catch(err => console.log(err));
+// });
 
 
 
@@ -73,8 +59,12 @@ router.get('/getAllp', function (req, res) {       // Sending Page Query Paramet
 //get Produit
 router.get("/getPdt/:id", async function (req, res, next) {
   let id = req.params.id;
-
-  const produit = await Produit.findByPk(id);
+  const produit = await Produit.findByPk(id,
+    { attributes: ["id","libelle", "marque", "prix", "max_rating","disponible","createdAt",
+    "updatedAt"],
+  include: [{ model: categorie, attributes: ['id'], as: 'categorie'}],
+ }
+ );
 
   prepareResponse(res, 200, produit, "application/json");
 });
@@ -118,12 +108,12 @@ router.post("/createP",  function (req, res, next) {
 //get ALL Produit
 
 router.get("/getAll", function (req, res, next) {
-  Produit.findAll({ attributes: ["id","libelle", "marque", "prix", "max_rating","disponible","createdAt", "updatedAt"], 
+  Produit.findAll({ attributes: ["id","libelle", "marque", "prix", "max_rating","disponible","createdAt", "updatedAt"],
   where: {
     is_deleted: 0
   } }
-  
-   
+
+
   )
     .then((produit) => {
       prepareResponse(res, 200, produit, "application/json");
@@ -146,7 +136,7 @@ router.get("/getAll", function (req, res, next) {
 
 router.put("/updateP/:id", function (req, res) {
   let id=req.params.id;
-  Produit.findByPk(id, 
+  Produit.findByPk(id,
      {attributes:["id"]})
   .then((pdt) => {
     try {

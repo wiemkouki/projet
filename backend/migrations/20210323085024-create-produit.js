@@ -21,7 +21,7 @@ module.exports = {
       max_rating: {
         type: Sequelize.INTEGER
       },
-      disponible: {
+      description: {
         type: Sequelize.STRING
       },
       avatar: {

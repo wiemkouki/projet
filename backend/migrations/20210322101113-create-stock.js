@@ -8,26 +8,21 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      description: {
+      quantite: {
         type: Sequelize.STRING
       },
-      id_admin:
+      id_produit:
       {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'admins',
+          model: 'Produit',
           key: 'id'
         },
 
         onUpdate: 'restrict',
         onDelete: 'restrict' },
-      description: {
-        type: Sequelize.STRING
-      },
-      is_deleted:{
-        type: Sequelize.BOOLEAN
-      },
+   
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
