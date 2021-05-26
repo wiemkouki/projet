@@ -2,12 +2,12 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.addColumn('Produits', 'id_categorie', {
+    return queryInterface.addColumn('stocks', 'id_produit', {
       type: Sequelize.INTEGER,
       allowNull: true,
       foreignKey:true,
       references: {
-        model: 'Categories',
+        model: 'Produits',
         key: 'id'
       },
       onUpdate: 'restrict',
@@ -19,6 +19,6 @@ module.exports = {
 
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.removeColumn('Produits', 'id_categorie');
+    return queryInterface.removeColumn('stocks', 'id_produit');
   }
 };

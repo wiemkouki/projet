@@ -11,12 +11,12 @@ export class Produit {
     public marque: string,
     public prix: string,
     public max_rating: string,
-    public disponible: string,
+    public description: string,
     public is_deleted: boolean,
     public createdAt: string,
     public updatedAt: string) {
 
-      
+
      }
 }
 @Component({
@@ -25,7 +25,7 @@ export class Produit {
   styleUrls: ['./crud-stock.component.scss']
 })
 export class CrudStockComponent implements OnInit {
-  
+
   editForm: FormGroup;
   closeResult: string;
   title = 'angulardatatables';
@@ -35,7 +35,7 @@ export class CrudStockComponent implements OnInit {
   editID:string;  deleteId: string;
   dtElement: any;
   is_deleted: boolean = false;
- 
+
   constructor(private fb: FormBuilder, private http: HttpClient, private modalService: NgbModal, private productService: ProductService) { }
 
   ngOnInit(): void {
@@ -45,7 +45,7 @@ export class CrudStockComponent implements OnInit {
       processing: true
     }
     this.getProduit()
-   
+
 
     //edit
     this.editForm = this.fb.group({
@@ -54,8 +54,8 @@ export class CrudStockComponent implements OnInit {
       marque: [''],
       prix: [''],
       max_rating: [''],
-      disponible: [''],
-     
+      description: [''],
+
     });
   }
 
@@ -85,7 +85,7 @@ export class CrudStockComponent implements OnInit {
 //     prix: produits.prix,
 //     max_rating:produits.max_rating,
 //     disponible: produits.disponible,
-  
+
 //   });
 //  }
 
@@ -122,16 +122,10 @@ export class CrudStockComponent implements OnInit {
         console.log(response);
         this.produits = response;
         is_deleted = true;
-        // this.ngOnInit();
+  
         this.modalService.dismissAll();
       });
   }
-
-
-
-
-
-
 
   //bouton Detail
   openDetails(targetModal, produits: Produit) {
@@ -145,7 +139,7 @@ export class CrudStockComponent implements OnInit {
     document.getElementById('marque').setAttribute('value', produits.marque);
     document.getElementById('prix').setAttribute('value', produits.prix);
     document.getElementById('max_rating').setAttribute('value', produits.max_rating);
-    document.getElementById('disponible').setAttribute('value', produits.disponible);
+    document.getElementById('description').setAttribute('value', produits.description);
     document.getElementById('created').setAttribute('value', produits.createdAt);
     document.getElementById('updated').setAttribute('value', produits.updatedAt);
   }
@@ -167,10 +161,10 @@ export class CrudStockComponent implements OnInit {
       marque: produits.marque,
       prix: produits.prix,
       max_rating:produits.max_rating,
-      disponible: produits.disponible,
-    
+      description: produits.description,
+
     });
-  
+
   }
 
   onSave() {
@@ -182,16 +176,6 @@ export class CrudStockComponent implements OnInit {
         this.modalService.dismissAll();
       });
   }
-
-
-
-
-
-
-
-
-
-
 
 
 //add
@@ -211,7 +195,7 @@ onSubmit(f: NgForm) {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
-  
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';

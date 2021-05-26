@@ -30,6 +30,7 @@ module.exports = {
       is_deleted:{
         type: Sequelize.BOOLEAN
       },
+     
 
       createdAt: {
         allowNull: false,

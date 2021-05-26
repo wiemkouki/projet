@@ -60,7 +60,7 @@ const prepareResponse = (response, status, body, type) => {
 router.get("/getPdt/:id", async function (req, res, next) {
   let id = req.params.id;
   const produit = await Produit.findByPk(id,
-    { attributes: ["id","libelle", "marque", "prix", "max_rating","disponible","createdAt",
+    { attributes: ["id","libelle", "marque", "prix", "max_rating","description","createdAt",
     "updatedAt"],
   include: [{ model: categorie, attributes: ['id'], as: 'categorie'}],
  }
@@ -85,14 +85,14 @@ router.post("/createP",  function (req, res, next) {
       };
       prepareResponse(res, 500, response, "application/json");
     } else {
-      let { id,libelle,marque,prix,max_rating,disponible,} = req.body;
+      let { id,libelle,marque,prix,max_rating,description,} = req.body;
   Produit.create({
     id,
       libelle,
         marque,
         prix,
         max_rating,
-        disponible,
+        description,
         is_deleted: false,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -108,7 +108,7 @@ router.post("/createP",  function (req, res, next) {
 //get ALL Produit
 
 router.get("/getAll", function (req, res, next) {
-  Produit.findAll({ attributes: ["id","libelle", "marque", "prix", "max_rating","disponible","createdAt", "updatedAt"],
+  Produit.findAll({ attributes: ["id","libelle", "marque", "prix", "max_rating","description","createdAt", "updatedAt"],
   where: {
     is_deleted: 0
   } }
@@ -140,14 +140,14 @@ router.put("/updateP/:id", function (req, res) {
      {attributes:["id"]})
   .then((pdt) => {
     try {
-      let { id,libelle,marque,prix,max_rating,disponible } = req.body;
+      let { id,libelle,marque,prix,max_rating,description } = req.body;
       pdt.update({
         id,
         libelle,
         marque,
         prix,
         max_rating,
-        disponible,
+        description,
         updatedAt: new Date() })
             .then((pdt) =>
               prepareResponse(res, 200, { success: true }, "application/json")

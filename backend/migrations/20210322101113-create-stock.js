@@ -11,18 +11,8 @@ module.exports = {
       quantite: {
         type: Sequelize.STRING
       },
-      id_produit:
-      {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Produit',
-          key: 'id'
-        },
+      
 
-        onUpdate: 'restrict',
-        onDelete: 'restrict' },
-   
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

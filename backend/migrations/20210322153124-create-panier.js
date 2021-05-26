@@ -21,18 +21,10 @@ module.exports = {
       onUpdate: 'restrict',
       onDelete: 'restrict' },
 
-      id_produit:
-      {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        foreignKey:true,
-        references: {
-          model: 'Produit',
-          key: ' id_produit'
+
+        quantite:{
+          type: Sequelize.STRING
         },
-        onUpdate: 'restrict',
-        onDelete: 'restrict' },
-        quantite: DataTypes.STRING,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
