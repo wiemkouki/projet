@@ -13,17 +13,24 @@ export class EditComponent implements OnInit {
   isLoggedin: boolean = null;
 
   form: any = {
-    email: null,
-    password: null,
+   name: null,
+    tel: null,
+    adresse: null,
+   avatar: null,
   };
-  isLoggedIn = false;
-  isLoginFailed = false;
+
   errorMessage = '';
   roles: string[] = [];
   constructor(private userService: UserServiceService, private router: Router,
     private formBuilder: FormBuilder, private http: HttpClient) { }
 
   ngOnInit(): void {
-  }
+    this.editForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      tel: ['', Validators.required],
+      adresse: ['', Validators.required],
+      avatar: ['', Validators.required]
+  });
 
+}
 }
