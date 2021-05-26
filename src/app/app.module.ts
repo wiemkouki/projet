@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import {FileUploadModule} from 'ng2-file-upload';
 import { AppComponent } from './app.component';
 import { NgxPopper } from 'angular-popper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
@@ -54,8 +56,11 @@ import { EditComponent } from './profil/edit/edit.component';
 import { CrudCategorieComponent } from './admindash/crud-categorie/crud-categorie.component';
 import { ProfilLivreurComponent } from './profil_livreur/profil-livreur.component';
 import { EditLivComponent } from './profil_livreur/edit-liv/edit-liv.component';
+import { LivreurdashComponent } from './livreurdash/livreurdash.component';
+import { UploadFilesComponent } from './livreurdash/upload-files/upload-files.component';
 
 const Routes: Routes = [
+ 
   { path: '', component: CatalogComponent },
   { path: 'test', component: TestComponent },
   {
@@ -85,6 +90,14 @@ const Routes: Routes = [
     path: 'pfL', component: ProfilLivreurComponent, children: [
       { path: 'editL', component: EditLivComponent }]
   },
+  { path: 'liv', component: LivreurdashComponent, children: [
+    { path: 'upload', component: UploadFilesComponent }] 
+  },
+
+
+
+
+
   { path: 'forgotpwd/:id', component: ForgotPwdComponent },
   { path: 'changepwd', component: ChangepwdComponent },
   { path: 'prod1', component: Prod1Component },
@@ -130,7 +143,9 @@ const Routes: Routes = [
     EditComponent,
     CrudCategorieComponent,
     ProfilLivreurComponent,
-    EditLivComponent
+    EditLivComponent,
+    LivreurdashComponent,
+    UploadFilesComponent
 
 
 
@@ -162,7 +177,7 @@ const Routes: Routes = [
     MatInputModule,
     NgxPopper,
     NgbModule
-
+,MatCardModule,FileUploadModule
 
   ],
   providers: [UserServiceService,
