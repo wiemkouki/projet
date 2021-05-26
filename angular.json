@@ -34,11 +34,8 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
             ],
             "scripts": [
-
-
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/datatables.net/js/jquery.dataTables.js"
-
             ]
           },
           "configurations": {
@@ -99,9 +96,10 @@
             "assets": [
               "src/favicon.ico",
               "src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
             ]
-           
-        
           }
         },
         "lint": {

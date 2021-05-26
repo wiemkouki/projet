@@ -1,19 +1,13 @@
 var express = require("express");
 var router = express.Router();
 const { Produit } = require("../models");
+// const sequelize = require('sequelize');
 
+// const sequelize = new Sequelize("daijara", "root", "", {
+//   dialect: "mysql",
+//   host: "localhost"
+// });
 
-// require('dotenv').config();
-// var dbConfig = require('./config/config');
-
-// const seq = new sequelize(
-//     dbConfig.development.database,
-//     dbConfig.development.username,
-//     dbConfig.development.password,
-//     {
-//         host: dbConfig.development.host,
-//         dialect: dbConfig.development.dialect
-//     });
 
 const prepareResponse = (response, status, body, type) => {
   console.log(body);
@@ -22,53 +16,74 @@ const prepareResponse = (response, status, body, type) => {
 };
 
 
+//get ALL Produit
 
+router.get("/getAll", function (req, res, next) {
+
+  Produit.findAll({
+    attributes: ["id", "libelle", "marque", "prix", "max_rating", "disponible", "createdAt", "updatedAt"],
+    where: {
+      is_deleted: 0
+    }
+  })
+    .then((produit) => {
+      prepareResponse(res, 200, produit, "application/json");
+    })
+    .catch((error) => {
+      const response = {
+        success: false,
+        message:
+          "Some internal server error has occured while attempting to proceed " +
+          "with your request, please try again.",
+      };
+   prepareResponse(res, 500, response, "application/json");
+    });
+});
 
 /* GET ALL PRODUCTS */
-router.get('/getAllp', function (req, res) {       // Sending Page Query Parameter is mandatory http://localhost:3636/api/products?page=1
+router.get('/getAllp', function (req, res) {
   let page = (req.query.page !== undefined && req.query.page !== 0) ? req.query.page : 1;
-  const limit = (req.query.limit !== undefined && req.query.limit !== 0) ? req.query.limit : 10;   // set limit of items per page
+  const limit = (req.query.limit !== undefined && req.query.limit !== 0) ? req.query.limit : 10;
   let startValue;
   let endValue;
   if (page > 0) {
-      startValue = (page * limit) - limit;     // 0, 10, 20, 30
-      endValue = page * limit;                  // 10, 20, 30, 40
+    startValue = (page * limit) - limit;
+    endValue = page * limit;
   } else {
-      startValue = 0;
-      endValue = 10;
+    startValue = 0;
+    endValue = 10;
   }
-  seq.table('produits as p')
-     
-      .withFields([
-          'p.libelle ',
-          'p.marque',
-          'p.prix',
-          'p.max_rating',
-          'p.disponible',
-          'p.image',
-          'p.id'
-      ])
-      .slice(startValue, endValue)
-      .sort({id: .1})
-      .getAll()
-      .then(prods => {
-          if (prods.length > 0) {
-              res.status(200).json({
-                  count: prods.length,
-                  products: prods
-              });
-          } else {
-              res.json({message: "No products found"});
-          }
-      })
-      .catch(err => console.log(err));
+  database.table('produits as p')
+    .join([
+      {
+        table: "categories as c",
+        on: `c.id = p.id_categorie`
+      }
+    ])
+    .withFields([
+      'p.libelle ',
+      'p.marque',
+      'p.prix',
+      'p.max_rating',
+      'p.disponible',
+      'p.image',
+      'p.id'
+    ])
+    .slice(startValue, endValue)
+    .sort({ id: .1 })
+    .getAll()
+    .then(prods => {
+      if (prods.length > 0) {
+        res.status(200).json({
+          count: prods.length,
+          products: prods
+        });
+      } else {
+        res.json({ message: "No products found" });
+      }
+    })
+    .catch(err => console.log(err));
 });
-
-
-
-
-
-
 
 //get Produit
 router.get("/getPdt/:id", async function (req, res, next) {
@@ -79,14 +94,14 @@ router.get("/getPdt/:id", async function (req, res, next) {
   prepareResponse(res, 200, produit, "application/json");
 });
 // create Produit
-router.post("/createP",  function (req, res, next) {
+router.post("/createP", function (req, res, next) {
   Produit.findOne(
     {
-    attributes: ['libelle'],
-    where: {
-      libelle: req.body.libelle,
-    },
-  }
+      attributes: ['libelle'],
+      where: {
+        libelle: req.body.libelle,
+      },
+    }
   ).then((pdt) => {
     if (pdt) {
       const response = {
@@ -95,10 +110,10 @@ router.post("/createP",  function (req, res, next) {
       };
       prepareResponse(res, 500, response, "application/json");
     } else {
-      let { id,libelle,marque,prix,max_rating,disponible,} = req.body;
-  Produit.create({
-    id,
-      libelle,
+      let { id, libelle, marque, prix, max_rating, disponible } = req.body;
+      Produit.create({
+        id,
+        libelle,
         marque,
         prix,
         max_rating,
@@ -115,65 +130,43 @@ router.post("/createP",  function (req, res, next) {
     }
   });
 });
-//get ALL Produit
 
-router.get("/getAll", function (req, res, next) {
-  Produit.findAll({ attributes: ["id","libelle", "marque", "prix", "max_rating","disponible","createdAt", "updatedAt"], 
-  where: {
-    is_deleted: 0
-  } }
-  
-   
-  )
-    .then((produit) => {
-      prepareResponse(res, 200, produit, "application/json");
-    })
-    .catch((error) => {
-      const response = {
-        success: false,
-        message:
-          "Some internal server error has occured while attempting to proceed " +
-          "with your request, please try again.",
-      };
-
-      prepareResponse(res, 500, response, "application/json");
-    });
-});
 
 
 
 //UPDATE
 
 router.put("/updateP/:id", function (req, res) {
-  let id=req.params.id;
-  Produit.findByPk(id, 
-     {attributes:["id"]})
-  .then((pdt) => {
-    try {
-      let { id,libelle,marque,prix,max_rating,disponible } = req.body;
-      pdt.update({
-        id,
-        libelle,
-        marque,
-        prix,
-        max_rating,
-        disponible,
-        updatedAt: new Date() })
-            .then((pdt) =>
-              prepareResponse(res, 200, { success: true }, "application/json")
-            )
-            .catch((error) => console.log(error));
-   }catch (error) {
-      console.log(error);
-      prepareResponse(res, 500, { success: false }, "application/json");
-  }
-});
+  let id = req.params.id;
+  Produit.findByPk(id,
+    { attributes: ["id"] })
+    .then((pdt) => {
+      try {
+        let { id, libelle, marque, prix, max_rating, disponible } = req.body;
+        pdt.update({
+          id,
+          libelle,
+          marque,
+          prix,
+          max_rating,
+          disponible,
+          updatedAt: new Date()
+        })
+          .then((pdt) =>
+            prepareResponse(res, 200, { success: true }, "application/json")
+          )
+          .catch((error) => console.log(error));
+      } catch (error) {
+        console.log(error);
+        prepareResponse(res, 500, { success: false }, "application/json");
+      }
+    });
 });
 //DELETE Produit
 
 router.get("/delete/:id", function (req, res) {
   let id = req.params.id;
-  Produit.findByPk(id,{attributes:["id"]}).then((produits) => {
+  Produit.findByPk(id, { attributes: ["id"] }).then((produits) => {
     try {
       produits.update({
         is_deleted: true
