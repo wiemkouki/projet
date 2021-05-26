@@ -46,7 +46,6 @@ export class CrudStockComponent implements OnInit {
     }
     this.getProduit()
 
-
     //edit
     this.editForm = this.fb.group({
       id: [''],
@@ -70,41 +69,6 @@ export class CrudStockComponent implements OnInit {
   }
 
 
-//bouton Edit
-
-
-// openModal(targetModal, produits) {
-//   this.modalService.open(targetModal, {
-//    centered: true,
-//    backdrop: 'static'
-//   });
-//   this.editForm.patchValue({
-
-//     libelle:produits.libelle,
-//     marque: produits.marque,
-//     prix: produits.prix,
-//     max_rating:produits.max_rating,
-//     disponible: produits.disponible,
-
-//   });
-//  }
-
-//  onSubmiT() {
-//   console.log(this.editID)
-//   this.productService.updateProduct(parseInt(this.editID))
-//     .subscribe((response) => {
-//       console.log(response);
-//       this.produits = response;
-//        this.ngOnInit();
-//     this.modalService.dismissAll();
-// });
-//   // console.log("res:", this.editForm.getRawValue());
-//  }
-
-
-
-
-
 
   //bouton Delete
   openDelete(targetModal, id: string) {
@@ -122,7 +86,7 @@ export class CrudStockComponent implements OnInit {
         console.log(response);
         this.produits = response;
         is_deleted = true;
-  
+
         this.modalService.dismissAll();
       });
   }
