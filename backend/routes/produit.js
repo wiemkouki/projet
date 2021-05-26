@@ -1,12 +1,15 @@
 var express = require("express");
 var router = express.Router();
 const { Produit } = require("../models");
+<<<<<<< HEAD
 // const sequelize = require('sequelize');
 
 // const sequelize = new Sequelize("daijara", "root", "", {
 //   dialect: "mysql",
 //   host: "localhost"
 // });
+=======
+>>>>>>> 5c305521d657096ebe1ce6cd632530a828b4f8fa
 
 
 const prepareResponse = (response, status, body, type) => {
@@ -16,6 +19,7 @@ const prepareResponse = (response, status, body, type) => {
 };
 
 
+<<<<<<< HEAD
 /* GET ALL PRODUCTS */
 // router.get('/getAllp', function (req, res) {       // Sending Page Query Parameter is mandatory http://localhost:3636/api/products?page=1
 //   let page = (req.query.page !== undefined && req.query.page !== 0) ? req.query.page : 1;
@@ -58,6 +62,32 @@ const prepareResponse = (response, status, body, type) => {
 
 
 
+=======
+
+
+router.get("/getAll", function (req, res, next) {
+  Produit.findAll({ attributes: ["id","libelle", "marque", "prix", "max_rating","description","createdAt", "updatedAt"],
+  where: {
+    is_deleted: 0
+  } }
+
+
+  )
+    .then((produit) => {
+      prepareResponse(res, 200, produit, "application/json");
+    })
+    .catch((error) => {
+      const response = {
+        success: false,
+        message:
+          "Some internal server error has occured while attempting to proceed " +
+          "with your request, please try again.",
+      };
+
+      prepareResponse(res, 500, response, "application/json");
+    });
+});
+>>>>>>> 5c305521d657096ebe1ce6cd632530a828b4f8fa
 
 //get Produit
 router.get("/getPdt/:id", async function (req, res, next) {
@@ -109,6 +139,7 @@ router.post("/createP", function (req, res, next) {
   });
 });
 
+<<<<<<< HEAD
 router.get("/getAll", function (req, res, next) {
   Produit.findAll({ attributes: ["id","libelle", "marque", "prix", "max_rating","description","createdAt", "updatedAt"],
   where: {
@@ -131,12 +162,15 @@ router.get("/getAll", function (req, res, next) {
       prepareResponse(res, 500, response, "application/json");
     });
 });
+=======
+>>>>>>> 5c305521d657096ebe1ce6cd632530a828b4f8fa
 
 
 
 //UPDATE
 
 router.put("/updateP/:id", function (req, res) {
+<<<<<<< HEAD
   let id=req.params.id;
   Produit.findByPk(id,
      {attributes:["id"]})
@@ -160,6 +194,32 @@ router.put("/updateP/:id", function (req, res) {
       prepareResponse(res, 500, { success: false }, "application/json");
   }
 });
+=======
+  let id = req.params.id;
+  Produit.findByPk(id,
+    { attributes: ["id"] })
+    .then((pdt) => {
+      try {
+        let { id, libelle, marque, prix, max_rating, description } = req.body;
+        pdt.update({
+          id,
+          libelle,
+          marque,
+          prix,
+          max_rating,
+          description,
+          updatedAt: new Date()
+        })
+          .then((pdt) =>
+            prepareResponse(res, 200, { success: true }, "application/json")
+          )
+          .catch((error) => console.log(error));
+      } catch (error) {
+        console.log(error);
+        prepareResponse(res, 500, { success: false }, "application/json");
+      }
+    });
+>>>>>>> 5c305521d657096ebe1ce6cd632530a828b4f8fa
 });
 //DELETE Produit
 
