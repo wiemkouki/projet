@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+<<<<<<< HEAD
 const { Produit } = require("../models");
 // const sequelize = require('sequelize');
 
@@ -7,6 +8,12 @@ const { Produit } = require("../models");
 //   dialect: "mysql",
 //   host: "localhost"
 // });
+=======
+const { Produit,categorie } = require("../models");
+const sequelize = require('sequelize');
+
+const  db = {};
+>>>>>>> 4fdb800b74078cc384dfaa76c02dbd9258661b34
 
 
 const prepareResponse = (response, status, body, type) => {
@@ -16,6 +23,7 @@ const prepareResponse = (response, status, body, type) => {
 };
 
 
+<<<<<<< HEAD
 //get ALL Produit
 
 router.get("/getAll", function (req, res, next) {
@@ -84,12 +92,60 @@ router.get('/getAllp', function (req, res) {
     })
     .catch(err => console.log(err));
 });
+=======
+/* GET ALL PRODUCTS */
+// router.get('/getAllp', function (req, res) {       // Sending Page Query Parameter is mandatory http://localhost:3636/api/products?page=1
+//   let page = (req.query.page !== undefined && req.query.page !== 0) ? req.query.page : 1;
+//   const limit = (req.query.limit !== undefined && req.query.limit !== 0) ? req.query.limit : 10;   // set limit of items per page
+//   let startValue;
+//   let endValue;
+//   if (page > 0) {
+//       startValue = (page * limit) - limit;     // 0, 10, 20, 30
+//       endValue = page * limit;                  // 10, 20, 30, 40
+//   } else {
+//       startValue = 0;
+//       endValue = 10;
+//   }
+//   db.table('produits as p')
+
+//       .withFields([
+//           'p.libelle ',
+//           'p.marque',
+//           'p.prix',
+//           'p.max_rating',
+//           'p.disponible',
+//           'p.image',
+//           'p.id'
+//       ])
+//       .slice(startValue, endValue)
+//       .sort({id: .1})
+//       .getAll()
+//       .then(prods => {
+//           if (prods.length > 0) {
+//               res.status(200).json({
+//                   count: prods.length,
+//                   products: prods
+//               });
+//           } else {
+//               res.json({message: "No products found"});
+//           }
+//       })
+//       .catch(err => console.log(err));
+// });
+
+
+
+>>>>>>> 4fdb800b74078cc384dfaa76c02dbd9258661b34
 
 //get Produit
 router.get("/getPdt/:id", async function (req, res, next) {
   let id = req.params.id;
-
-  const produit = await Produit.findByPk(id);
+  const produit = await Produit.findByPk(id,
+    { attributes: ["id","libelle", "marque", "prix", "max_rating","description","createdAt",
+    "updatedAt"],
+  include: [{ model: categorie, attributes: ['id'], as: 'categorie'}],
+ }
+ );
 
   prepareResponse(res, 200, produit, "application/json");
 });
@@ -110,14 +166,21 @@ router.post("/createP", function (req, res, next) {
       };
       prepareResponse(res, 500, response, "application/json");
     } else {
+<<<<<<< HEAD
       let { id, libelle, marque, prix, max_rating, disponible } = req.body;
       Produit.create({
         id,
         libelle,
+=======
+      let { id,libelle,marque,prix,max_rating,description,} = req.body;
+  Produit.create({
+    id,
+      libelle,
+>>>>>>> 4fdb800b74078cc384dfaa76c02dbd9258661b34
         marque,
         prix,
         max_rating,
-        disponible,
+        description,
         is_deleted: false,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -131,12 +194,38 @@ router.post("/createP", function (req, res, next) {
   });
 });
 
+<<<<<<< HEAD
+=======
+router.get("/getAll", function (req, res, next) {
+  Produit.findAll({ attributes: ["id","libelle", "marque", "prix", "max_rating","description","createdAt", "updatedAt"],
+  where: {
+    is_deleted: 0
+  } }
+
+
+  )
+    .then((produit) => {
+      prepareResponse(res, 200, produit, "application/json");
+    })
+    .catch((error) => {
+      const response = {
+        success: false,
+        message:
+          "Some internal server error has occured while attempting to proceed " +
+          "with your request, please try again.",
+      };
+
+      prepareResponse(res, 500, response, "application/json");
+    });
+});
+>>>>>>> 4fdb800b74078cc384dfaa76c02dbd9258661b34
 
 
 
 //UPDATE
 
 router.put("/updateP/:id", function (req, res) {
+<<<<<<< HEAD
   let id = req.params.id;
   Produit.findByPk(id,
     { attributes: ["id"] })
@@ -161,6 +250,31 @@ router.put("/updateP/:id", function (req, res) {
         prepareResponse(res, 500, { success: false }, "application/json");
       }
     });
+=======
+  let id=req.params.id;
+  Produit.findByPk(id,
+     {attributes:["id"]})
+  .then((pdt) => {
+    try {
+      let { id,libelle,marque,prix,max_rating,description } = req.body;
+      pdt.update({
+        id,
+        libelle,
+        marque,
+        prix,
+        max_rating,
+        description,
+        updatedAt: new Date() })
+            .then((pdt) =>
+              prepareResponse(res, 200, { success: true }, "application/json")
+            )
+            .catch((error) => console.log(error));
+   }catch (error) {
+      console.log(error);
+      prepareResponse(res, 500, { success: false }, "application/json");
+  }
+});
+>>>>>>> 4fdb800b74078cc384dfaa76c02dbd9258661b34
 });
 //DELETE Produit
 

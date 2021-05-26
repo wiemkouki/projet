@@ -15,12 +15,13 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      description: DataTypes.STRING,
-      id_admin: {
+      quantite: DataTypes.STRING,
+      
+      id_produit: {
         type: DataTypes.INTEGER,
 
         references: {
-          model: "admins",
+          model: "Produit",
           key: "id",
         },
         onUpdate: "restrict",

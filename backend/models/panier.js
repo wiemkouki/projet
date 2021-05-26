@@ -28,9 +28,16 @@ module.exports = (sequelize, DataTypes) => {
         model: 'clients',
         key: 'id_client'
       },},
+      id_produit:
+      {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Produits',
+          key: 'id_produit'
+        },},
+      quantite: DataTypes.STRING,
 
-
-    is_deleted:DataTypes.BOOLEAN,
   },
 
     {

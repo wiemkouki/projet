@@ -57,21 +57,6 @@ app.use('/file', fileRouter);
 // app.use('/stock', stockRouter);
 // app.use('/sup_admin', sup_adminRouter);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// app.set('port', process.env.PORT || 3000);
-
 const server = http.createServer(app);
 
 server.listen(process.env.PORT || 3000);

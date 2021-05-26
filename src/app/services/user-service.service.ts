@@ -14,7 +14,8 @@ const httpOptions = {
 })
 export class UserServiceService {
   api_prefix: string = "http://localhost:3000/users";
-  private headerrs = new HttpHeaders({'Content-Type': 'application/json'});
+  api_prefixx: string = "http://localhost:3000/client";
+  private headerrs = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<any> {
@@ -37,7 +38,7 @@ export class UserServiceService {
 
   }
 
-  reset( email: string): Observable<any> {
+  reset(email: string): Observable<any> {
     return this.http.post(this.api_prefix + '/forgotpwd', {
       email,
     }, httpOptions)
@@ -45,17 +46,17 @@ export class UserServiceService {
 
   Save(user): Observable<any> {
     return this.http
-    .post(this.api_prefix + '/save', {
-      user,
-    }, httpOptions)
+      .post(this.api_prefix + '/save', {
+        user,
+      }, httpOptions)
   }
 
-  update(username: string, email: string, password: string, role: string): Observable<any> {
-    return this.http.post(this.api_prefix + '/signup', {
-      username,
-      email,
-      role,
-      password
+  updateC(id: number, name: string, tel: number, adresse: string, avatar: string): Observable<any> {
+    return this.http.post(this.api_prefixx + `/updateC/${id}`, {
+      name,
+      tel,
+      adresse,
+      avatar
     }, httpOptions)
 
   }
@@ -80,9 +81,9 @@ export class UserServiceService {
 
 
 
-deleteUser(id: number): Observable<any>{
-  return this.http.get(`http://localhost:3000/users/delete/${id}`);
- }
+  deleteUser(id: number): Observable<any> {
+    return this.http.get(`http://localhost:3000/users/delete/${id}`);
+  }
 
 
 

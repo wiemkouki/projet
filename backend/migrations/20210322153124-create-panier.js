@@ -22,6 +22,9 @@ module.exports = {
       onDelete: 'restrict' },
 
 
+        quantite:{
+          type: Sequelize.STRING
+        },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
