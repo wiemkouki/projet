@@ -125,32 +125,25 @@
                           <span>Dashboard</span>
                       </a>
           </li>
-          <li class="sub-menu">
-            <a href="javascript:;"  >
+          <li class="sub-menu"  routerLinkActive ="active">
+            <!-- <a href="javascript:;"  >
                           <i class="icon_document_alt"></i>
                           <span>Paramétres</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
+                      </a> -->
             <ul class="sub">
               <li class="nav-item" routerLinkActive ="active">
-                <a class="nav-link" [routerLink]="'/liv/upload'" >
-                     <p> Utilisateurs </p></a></li>
-
-             <li class="nav-item" routerLinkActive ="active">
-                <a class="nav-link" [routerLink]="'/admin/stock'" >
-                     <p>Stock</p></a></li>
-
+                <a class="nav-link" [routerLink]="'/liv/cmde'" >
+                     <p>Liste Commandes</p></a></li> 
               <li class="nav-item" routerLinkActive ="active">
-                  <a class="nav-link" [routerLink]="'/admin/categorie/ss_categorie'" >
-                       <p>Catégorie</p></a></li>
+                <a class="nav-link" [routerLink]="'/liv/upload'" >
+                     <p> Upload fichiers </p></a></li>
 
-                       <!-- <li class="nav-item" routerLinkActive ="active">
-                        <a class="nav-link" [routerLink]="'/admin/categorie/ss_categorie'" >
-                             <p>Sous Catégorie</p></a></li> -->
 
-                             <li class="nav-item" routerLinkActive ="active">
-                              <a class="nav-link" [routerLink]="'/admin/cmde'" >
-                                   <p>Commandes</p></a></li>
+         
+                    
+
+                            
 
               <!-- <li><a class="" href="form_validation.html">Fournisseurs</a></li> -->
             </ul>
