@@ -1,6 +1,6 @@
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <div>
     <!-- container section start -->
     <section id="container" class="">
@@ -49,28 +49,28 @@
                   <p class="blue">You have 4 new notifications</p>
                 </li>
                 <li>
-                  <a href="#">
+                  <a>
                                       <span class="label label-primary"><i class="icon_profile"></i></span>
                                       Friend Request
                                       <span class="small italic pull-right">5 mins</span>
                                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a>
                                       <span class="label label-warning"><i class="icon_pin"></i></span>
                                       John location.
                                       <span class="small italic pull-right">50 mins</span>
                                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a>
                                       <span class="label label-danger"><i class="icon_book_alt"></i></span>
                                       Project 3 Completed.
                                       <span class="small italic pull-right">1 hr</span>
                                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a>
                                       <span class="label label-success"><i class="icon_like"></i></span>
                                       Mick appreciated your work.
                                       <span class="small italic pull-right"> Today</span>
@@ -125,12 +125,12 @@
                             <span>Dashboard</span>
                         </a>
             </li>
-            <li class="sub-menu">
-              <a href="javascript:;"  >
+            <li class="sub-menu"  routerLinkActive ="active">
+           <!-- <a href="javascript:;"  >
                             <i class="icon_document_alt"></i>
                             <span>Paramétres</span>
                             <span class="menu-arrow arrow_carrot-right"></span>
-                        </a>
+                        </a>  -->
               <ul class="sub">
                 <li class="nav-item" routerLinkActive ="active">
                   <a class="nav-link" [routerLink]="'/admin/users'" >
@@ -155,63 +155,26 @@
                 <!-- <li><a class="" href="form_validation.html">Fournisseurs</a></li> -->
               </ul>
             </li>
-            <li class="sub-menu">
-              <a href="javascript:;" class="">
-                            <i class="icon_desktop"></i>
-                            <span>UI Fitures</span>
-                            <span class="menu-arrow arrow_carrot-right"></span>
-                        </a>
-              <ul class="sub">
-                <li><a class="" href="general.html">Elements</a></li>
-                <li><a class="" href="buttons.html">Buttons</a></li>
-                <li><a class="" href="grids.html">Grids</a></li>
-              </ul>
-            </li>
+         
 
 
 
-            <li class="sub-menu">
-              <a href="javascript:;" class="">
-                            <i class="icon_table"></i>
-                            <span>Tables</span>
-                            <span class="menu-arrow arrow_carrot-right"></span>
-                        </a>
-              <ul class="sub">
-                <li><a class="" href="basic_table.html">Basic Table</a></li>
-              </ul>
-            </li>
-
-            <li class="sub-menu">
-              <a href="javascript:;" class="">
-                            <i class="icon_documents_alt"></i>
-                            <span>Pages</span>
-                            <span class="menu-arrow arrow_carrot-right"></span>
-                        </a>
-              <ul class="sub">
-                <li><a class="" href="profile.html">Profile</a></li>
-                <li><a class="" href="login.html"><span>Login Page</span></a></li>
-                <li><a class="" href="contact.html"><span>Contact Page</span></a></li>
-                <li><a class="" href="blank.html">Blank Page</a></li>
-                <li><a class="" href="404.html">404 Error</a></li>
-              </ul>
-            </li>
 
           </ul>
-          <!-- sidebar menu end-->
+  
         </div>
       </aside>
-      <!--sidebar end-->
+   
 
-      <!--main content start-->
+
       <section id="main-content">
         <section class="wrapper">
-          <!--overview start-->
           <div class="row">
             <div class="col-lg-12">
-              <!-- <h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3> -->
+              <h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
               <ol class="breadcrumb">
                 <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-                <li><i class="fa fa-laptop"></i>Dashboard</li>
+                <!-- <li><i class="fa fa-laptop"></i>Dashboard</li> -->
               </ol>
             </div>
           </div>
@@ -264,29 +227,14 @@
             <router-outlet></router-outlet>
         </div>
 
-          <!-- Today status end -->
-
-
-
-
-
-
-          <!-- statics end -->
-
-
-
-
-          <!-- project team & activity start -->
-
-
 
         </section>
 
 
       </section>
-      <!--main content end-->
+
     </section>
-  <!-- javascripts -->
+
 
 </div>
 

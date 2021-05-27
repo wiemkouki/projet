@@ -408,7 +408,7 @@ router.get("/confirm/:token", (req, res) => {
             .update({
               is_active: true,
             })
-            .then((user) => res.redirect("http://localhost:4200/pfL"))
+            .then((user) => res.redirect("http://localhost:4200/liv/upload"))
             .catch(error);
         } else if (user.role == "Administrateur") {
           const new_admin = await Admin.create({
@@ -422,7 +422,7 @@ router.get("/confirm/:token", (req, res) => {
             .update({
               is_active: true,
             })
-            .then((user) => res.redirect("http://localhost:4200/admin"))
+            .then((user) => res.redirect("http://localhost:4200/admin/users"))
             .catch((error) => console.log(error));
         } else if (user.role == "Client") {
           const new_clt = await Client.create({

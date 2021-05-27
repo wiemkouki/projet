@@ -54,10 +54,10 @@ import { CrudStockComponent } from './admindash/crud-stock/crud-stock.component'
 import { EditComponent } from './profil/edit/edit.component';
 
 import { CrudCategorieComponent } from './admindash/crud-categorie/crud-categorie.component';
-import { ProfilLivreurComponent } from './profil_livreur/profil-livreur.component';
-import { EditLivComponent } from './profil_livreur/edit-liv/edit-liv.component';
+
 import { LivreurdashComponent } from './livreurdash/livreurdash.component';
 import { UploadFilesComponent } from './livreurdash/upload-files/upload-files.component';
+import { CrudCmdeComponent } from './livreurdash/crud-cmde/crud-cmde.component';
 
 const Routes: Routes = [
  
@@ -86,12 +86,10 @@ const Routes: Routes = [
     path: 'profil', component: ProfilComponent, children: [
       { path: 'edit', component: EditComponent }]
   },
-  {
-    path: 'pfL', component: ProfilLivreurComponent, children: [
-      { path: 'editL', component: EditLivComponent }]
-  },
+
   { path: 'liv', component: LivreurdashComponent, children: [
-    { path: 'upload', component: UploadFilesComponent }] 
+    { path: 'upload', component: UploadFilesComponent },
+    { path: 'cmd', component: CrudCmdeComponent }] 
   },
 
 
@@ -142,10 +140,9 @@ const Routes: Routes = [
     CrudStockComponent,
     EditComponent,
     CrudCategorieComponent,
-    ProfilLivreurComponent,
-    EditLivComponent,
     LivreurdashComponent,
-    UploadFilesComponent
+    UploadFilesComponent,
+    CrudCmdeComponent
 
 
 

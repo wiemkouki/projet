@@ -40,15 +40,14 @@ var categorieRouter = require('./routes/categorie');
 var produitRouter = require('./routes/produit');
 var sous_catRouter = require('./routes/sous_cat');
 var fileRouter = require('./routes/file');
+var cmdeRouter = require('./routes/cmde');
 app.use('/users', usersRouter);
 app.use('/client', clientRouter);
 app.use('/categorie', categorieRouter);
 app.use('/sous_cat', sous_catRouter);
 app.use('/produit', produitRouter);
 app.use('/file', fileRouter);
-
-
-// app.use('/commande', commandeRouter);
+app.use('/cmde', cmdeRouter);
 // app.use('/doc_justificatifs', doc_justificatifsRouter);
 // app.use('/fiche_tech', fiche_techRouter);
 // app.use('/livreur', livreurRouter);
