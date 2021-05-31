@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FileSelectDirective, FileUploader} from 'ng2-file-upload';
 import { FileService } from '../../services/file.service';
-import {saveAs} from 'file-saver';
+// import {saveAs} from 'file-saver';
+import { saveAs } from 'file-saver-es';
+ 
+
 const uri = 'http://localhost:3000/file/upload';
 @Component({
   selector: 'app-upload-files',
