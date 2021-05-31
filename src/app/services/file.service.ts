@@ -22,7 +22,7 @@ export class FileService {
     }
 
     Save() {
-        const url = `http://localhost:3000/file/new`;
+        const url = `http://localhost:3000/file/upload`;
         return this.http.post(url, { headers: this.headerrs });
       }
 }

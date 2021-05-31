@@ -3,7 +3,8 @@ import { FileSelectDirective, FileUploader} from 'ng2-file-upload';
 import { FileService } from '../../services/file.service';
 // import {saveAs} from 'file-saver';
 import { saveAs } from 'file-saver-es';
- 
+
+// var md5 = require('md5');
 
 const uri = 'http://localhost:3000/file/upload';
 @Component({

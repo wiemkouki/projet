@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
 
       id_livreur: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         foreignKey: true,
         references: {
           model: " Livreur",

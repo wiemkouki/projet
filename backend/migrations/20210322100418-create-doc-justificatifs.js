@@ -21,7 +21,7 @@ module.exports = {
       id_livreur:
       {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
          foreignKey: true,
         references: {
           model: 'Livreurs',
