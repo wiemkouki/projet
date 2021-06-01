@@ -3,6 +3,8 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { Observable } from 'rxjs';
 import {AuthService} from './services/auth.service';
 export class User {
+  static role: string;
+
   constructor(
     public token: string,
     public role: string,
@@ -21,8 +23,8 @@ constructor(private auth :AuthService,private router: Router){}
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
       if (this.auth.isLoggedIn()){
-        localStorage.setItem('role',JSON.stringify('token.role') );
-        localStorage.getItem('role');
+        localStorage.setItem("role", User.role);
+
         if (localStorage.getItem('role')=="Administrateur"){
           return true;
         }

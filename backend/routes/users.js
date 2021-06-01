@@ -132,13 +132,14 @@ router.get("/delete/:id", function (req, res) {
 
 //SIGN IN API WITH JWT USING COOKIES
 router.post("/signin", function (req, res, next) {
-  const { username, password, email } = req.body;
+  // let token = req.params.token;
+  const {  password, email } = req.body;
 
   User.findOne({ where: { email: email } }).then((user) => {
     if (user) {
       bcrypt.compare(password, user.password).then((result) => {
         if (result) {
-          jwt.sign(
+           token = jwt.sign(
             { id: user.email, createdAt: user.createdAt, role: user.role },
             process.env.SECRET,
             { expiresIn: parseInt(process.env.EXPIRATION) },
@@ -154,7 +155,9 @@ router.post("/signin", function (req, res, next) {
 
                 prepareResponse(res, 500, response, "application/json");
               } else {
-                await storeToken(res, token);
+
+                
+                 await storeToken(res, token);
 
                 const current = {
                   id: user.id,
@@ -438,7 +441,7 @@ router.get("/confirm/:token", (req, res) => {
               is_active: true,
             })
             .then((user) => res.redirect("http://localhost:4200/profil"))
-            .catch(error);
+            .catch((error) => console.log(error));
         } else if (user.role == "Sup_administrateur") {
           const new_ad = await Sup_admin.create({
             id_user: user.id,
@@ -453,7 +456,7 @@ router.get("/confirm/:token", (req, res) => {
               is_active: true,
             })
             .then((user) => res.redirect("http://localhost:4200/admin"))
-            .catch(error);
+            .catch((error) => console.log(error));
         } else {
           const response = {
             success: false,
@@ -473,11 +476,11 @@ router.get("/test/:id", async function (req, res, next) {
     if (user) {
 
       if (user.role == "Livreur") {
-        (user) => res.redirect("http://localhost:4200/profil");
+        (user) => res.redirect("http://localhost:4200/liv/upload");
         prepareResponse(res, 200, {success: true}, "application/json");
 
       } else if (user.role == "Administrateur") {
-        (user) => res.redirect("http://localhost:4200/admin");
+        (user) => res.redirect("http://localhost:4200/admin/stock");
         prepareResponse(res, 200, {success: true}, "application/json");
 
 

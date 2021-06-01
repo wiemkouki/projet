@@ -60,7 +60,7 @@ import { UploadFilesComponent } from './livreurdash/upload-files/upload-files.co
 import { CrudCmdeComponent } from './livreurdash/crud-cmde/crud-cmde.component';
 
 const Routes: Routes = [
- 
+
   { path: '', component: CatalogComponent },
   { path: 'test', component: TestComponent },
   {
@@ -83,13 +83,14 @@ const Routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   {
-    path: 'profil', component: ProfilComponent, children: [
+    path: 'profil', component: ProfilComponent  ,
+     children: [
       { path: 'edit', component: EditComponent }]
   },
 
   { path: 'liv', component: LivreurdashComponent, children: [
     { path: 'upload', component: UploadFilesComponent },
-    { path: 'cmd', component: CrudCmdeComponent }] 
+    { path: 'cmd', component: CrudCmdeComponent }]
   },
 
 

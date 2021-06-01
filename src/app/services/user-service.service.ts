@@ -28,9 +28,9 @@ export class UserServiceService {
     });
   }
 
-  register(username: string, email: string, password: string, role: string): Observable<any> {
+  register( email: string, password: string, role: string): Observable<any> {
     return this.http.post(this.api_prefix + '/signup', {
-      username,
+
       email,
       role,
       password
