@@ -4,7 +4,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UserServiceService } from '../../services/user-service.service';
 import { Subject } from 'rxjs';
-
+import { NgxSpinnerService } from "ngx-spinner";  
+import { NgxSpinnerModule } from 'ngx-spinner';
 export class User {
   constructor(
     public id: number,
@@ -38,7 +39,9 @@ export class CrudUserComponent implements OnInit {
   deleteID: string;
   editID:string;
   httpClient: any;
-  constructor(private fb: FormBuilder, private http: HttpClient,private modalService: NgbModal ,private userService: UserServiceService) { }
+  constructor(private fb: FormBuilder, private http: HttpClient,private modalService: NgbModal ,private userService: UserServiceService
+    ,  
+    private SpinnerService: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -63,13 +66,19 @@ export class CrudUserComponent implements OnInit {
 
 //Affichage users
 getUsers(){
+  this.SpinnerService.show();  
   this.http.get('http://localhost:3000/users/getAll')
  .subscribe( response => {
-   console.log(response);
-   this.users = response as any;
-   this.dtTrigger.next();
- });
 
+   console.log(response);
+
+   this.users = response as any;
+ 
+   this.dtTrigger.next();
+
+
+ });
+ this.SpinnerService.hide();  
  }
 
 
@@ -104,6 +113,7 @@ console.log(this.deleteID)
 
 //bouton Details
 openDetails(targetModal, users: User) {
+
   this.modalService.open(targetModal, {
    centered: true,
    backdrop: 'static',

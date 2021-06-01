@@ -9,21 +9,11 @@ export class Produit {
     public id: string,
     public libelle: string,
     public marque: string,
-
-    public image: string,
+     public image: string,
     public prix: number,
 
    ) 
-    { 
-      this.id = id;
-      this.libelle = libelle;
-      this.image = image;
-      this.marque = marque;
-      this.prix = prix;
-      // this.max_rating = max_rating;
-      // this.marque = marque;
-      // this.disponible = disponible;
-    }
+    {}
 }
 @Component({
   selector: 'app-catalog',
@@ -33,43 +23,45 @@ export class Produit {
 export class CatalogComponent implements OnInit {
   // produits;
   products: Produit[];
-  constructor(private fb: FormBuilder, private http: HttpClient,private productService: ProductService) {  this.products = [
-    new Produit(
-      'MYSHOES',
-      'Black Running Shoes',
-      '/assets/img/nike.jpeg',
-       'Runings',
-      109.99
-    ),
-    new Produit(
-      'BAT',
-      'A Nice Black Hat',
-      '/assets/img/Bat.jpg',
-    'bat',
-      29.99
-    ),
-    new Produit(
-      'NICHET',
-      'A Nice Black Hat',
-      "https://blueskytechmage.com/ayo/media/catalog/product/cache/21adbbfa8c2a8f065580bb2a26fbd5d4/2/-/2-1_1.jpg",
-   'Hats',
-      29.99
-    ),
-    new Produit(
-      'NICHET',
-      'A Nice Black Hat',
-      "https://blueskytechmage.com/ayo/media/catalog/product/cache/21adbbfa8c2a8f065580bb2a26fbd5d4/2/-/2-1_1.jpg",
-   'Hats',
-      29.99
-    ),
-    new Produit(
-      'NICHET',
-      'A Nice Black Hat',
-      'http://bestjquery.com/tutorial/product-grid/demo9/images/img-4.jpg',
-   'Hats',
-      29.99
-    )
-  ];}
+  constructor(private fb: FormBuilder, private http: HttpClient,private productService: ProductService) {  
+  //   this.products = [
+  //   new Produit(
+  //     'MYSHOES',
+  //     'Black Running Shoes',
+  //     '/assets/img/nike.jpeg',
+  //      'Runings',
+  //     109.99
+  //   ),
+  //   new Produit(
+  //     'BAT',
+  //     'A Nice Black Hat',
+  //     '/assets/img/Bat.jpg',
+  //   'bat',
+  //     29.99
+  //   ),
+  //   new Produit(
+  //     'NICHET',
+  //     'A Nice Black Hat',
+  //     "https://blueskytechmage.com/ayo/media/catalog/product/cache/21adbbfa8c2a8f065580bb2a26fbd5d4/2/-/2-1_1.jpg",
+  //  'Hats',
+  //     29.99
+  //   ),
+  //   new Produit(
+  //     'NICHET',
+  //     'A Nice Black Hat',
+  //     "https://blueskytechmage.com/ayo/media/catalog/product/cache/21adbbfa8c2a8f065580bb2a26fbd5d4/2/-/2-1_1.jpg",
+  //  'Hats',
+  //     29.99
+  //   ),
+  //   new Produit(
+  //     'NICHET',
+  //     'A Nice Black Hat',
+  //     'http://bestjquery.com/tutorial/product-grid/demo9/images/img-4.jpg',
+  //  'Hats',
+  //     29.99
+  //   )
+  // ];
+}
 
   ngOnInit(): void {
     this.getProduit()
@@ -79,7 +71,7 @@ export class CatalogComponent implements OnInit {
   this.http.get('http://localhost:3000/produit/getAll')
     .subscribe(response => {
       console.log(response);
-     this.products = this.products;
+     this.products = response as any;
     });
 }
 

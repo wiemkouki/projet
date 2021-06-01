@@ -14,8 +14,8 @@
                         multiple ng2FileSelect [uploader]="uploader">
                     </div>
                     <div>
-                        <div class="row uploadList" *ngFor="let item of uploader.queue">
-                            <div class="col-sm-4">{{item.file.name}}</div>
+                        <div class="row uploadList" *ngFor="let item of uploader">
+                            <div class="col-sm-4">{{item.file.libelle}}</div>
                             <div class="col-sm-4">
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-striped bg-warning" 

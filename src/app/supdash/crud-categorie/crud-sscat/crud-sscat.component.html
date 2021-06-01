@@ -1,0 +1,195 @@
+<div class="container">
+
+
+
+<div class="border">
+  <button class="btn btn-md btn-outline-primary" (click)="open(content)">
+    <i class="fa fa-product"></i>Add sub Categorie</button>
+</div>
+
+
+
+<table datatable [dtOptions]="dtOptions" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+ 
+       <tr>
+         <th>ID</th>
+         <th>Nom sous catégorie</th>
+        
+         <!-- <th>CreatedAt</th>
+         <th>UpdatedAt</th> -->
+         <th colspan="3" width="6%">
+           Action
+         </th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr *ngFor="let categorie of categories">
+         <td><span>{{ categorie.id }}</span></td>
+         <td><span>{{ categorie.nom_ss_cat }}</span></td>
+     
+         <!-- <td><span>{{ user.createdAt }}</span></td>
+       <td><span>{{ user.updatedAt }}</span></td> -->
+ 
+ 
+         <td><button class="btn btn-warning" (click)="openEdit(contentEdit, categorie)">
+             <i class="fa fa-edit"></i></button> </td>
+ 
+ 
+         <td><button class="btn  btn-danger " (click)="openDelete(contentDelete, categorie.id)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+           <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+           <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+         </svg>
+             <i class="bi bi-trash"></i></button> </td>
+ 
+ 
+ 
+         <td><button class="btn btn-primary btn-small " (click)="openDetails(contentDetails, categorie)"> <i
+               class="fa fa-search"></i> </button> </td>
+ 
+       </tr>
+     </tbody>
+ 
+   </table>
+  </div>
+   <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add sub categorie</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+        <!-- <div class="form-group">
+          <label for="id">ID</label>
+          <div class="input-group">
+            <input id="id" class="form-control" name="id" ngModel>
+          </div>
+        </div> -->
+        <div class="form-group">
+          <label for="nom_ss_cat">Nom sous catégorie</label>
+          <div class="input-group">
+            <input id="nom_cat" class="form-control" name="nom_ss_cat" ngModel>
+          </div>
+        </div>
+        <!-- <div class="form-group">
+          <label for="famille">Famille</label>
+          <div class="input-group">
+            <input id="famille" class="form-control" name="famille" ngModel>
+          </div>
+        </div> -->
+      
+        <div class="border text-center">
+          <button data-dismiss="modal" class="btn btn-info">Submit</button>
+          </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+    </div>
+  </ng-template>
+
+
+
+  <ng-template #contentDelete let-modal >
+    <div class="modal-header">
+      <h4 class="modal-title">Confirm Delete</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h2>Are you sure you want to delete this record.</h2>
+      <div class="border text-center" >
+        <button data-dismiss="modal" class="btn btn-danger" *ngIf="!is_deleted" (click)="onDelete()">Yes, Delete!</button>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+    </div>
+  </ng-template>
+
+
+  <ng-template #contentDetails let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Sub Categorie's Details</h4>
+      <button type="button" class="close" aria-label="Close" aria-hidden="true" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="id">ID</label>
+          <div class="input-group">
+            <input id="id" class="form-control">
+          </div>
+        </div>
+ 
+        <div class="form-group">
+          <label for="nom_ss_cat">Nom sous catégorie</label>
+          <div class="input-group">
+            <input id="nom_ss_cat" class="form-control">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="created" for="dateOfBirth">CreatedAt</label>
+          <div class="input-group">
+  
+            <input id="created" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+        
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="updated" for="dateOfBirth">UpdatedAt</label>
+          <div class="input-group">
+            <input id="updated" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+            <!-- <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+            </div> -->
+          </div>
+        </div>
+  
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div>
+  </ng-template>
+
+
+  
+  <ng-template #contentEdit let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" >Edit sub Catégorie </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="editForm" novalidate>
+        <!-- <div class="form-group">
+          <label for="id">ID</label>
+          <div class="input-group">
+            <input  class="form-control" formControlName="id">
+          </div>
+        </div> -->
+        <div class="form-group">
+          <label for="nom_ss_cat">Nom Sub categorie</label>
+          <div class="input-group">
+            <input  class="form-control" formControlName="nom_ss_cat">
+          </div>
+        </div>
+       
+        <div class="border text-center"> 
+          <button data-dismiss="modal" class="btn btn-info" (click)="onSave()" >Save Changes</button> 
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+    </div>
+  </ng-template>

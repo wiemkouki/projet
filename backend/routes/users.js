@@ -452,7 +452,7 @@ router.get("/confirm/:token", (req, res) => {
             .update({
               is_active: true,
             })
-            .then((user) => res.redirect("http://localhost:4200/admin"))
+            .then((user) => res.redirect("http://localhost:4200/sup/categorie/ss_categorie"))
             .catch(error);
         } else {
           const response = {

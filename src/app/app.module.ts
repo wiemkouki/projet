@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import {FileUploadModule} from 'ng2-file-upload';
+import { FileUploadModule } from 'ng2-file-upload';
 import { AppComponent } from './app.component';
 import { NgxPopper } from 'angular-popper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -47,36 +47,48 @@ import { Prod5Component } from './product/prod5/prod5.component';
 import { Prod6Component } from './product/prod6/prod6.component';
 import { Prod7Component } from './product/prod7/prod7.component';
 import { Prod8Component } from './product/prod8/prod8.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
-import { CrudSScatComponent } from './admindash/crud-categorie/crud-sscat/crud-sscat.component';
+
 import { CmdeComponent } from './admindash/cmde/cmde.component';
 import { CrudStockComponent } from './admindash/crud-stock/crud-stock.component';
 import { EditComponent } from './profil/edit/edit.component';
 
-import { CrudCategorieComponent } from './admindash/crud-categorie/crud-categorie.component';
+import { CrudSScatComponent } from './supdash/crud-categorie/crud-sscat/crud-sscat.component';
+import { CrudCategorieComponent } from './supdash/crud-categorie/crud-categorie.component';
 
 import { LivreurdashComponent } from './livreurdash/livreurdash.component';
 import { UploadFilesComponent } from './livreurdash/upload-files/upload-files.component';
 import { CrudCmdeComponent } from './livreurdash/crud-cmde/crud-cmde.component';
+import { SupdashComponent } from './supdash/supdash.component';
+import { CrudDocComponent } from './supdash/crud-doc/crud-doc.component';
 
 const Routes: Routes = [
- 
+
   { path: '', component: CatalogComponent },
   { path: 'test', component: TestComponent },
+  {
+    path: 'sup', component: SupdashComponent,
+    children: [
+      {
+        path: 'categorie', component: CrudCategorieComponent,
+        children: [
+          { path: 'ss_categorie', component: CrudSScatComponent }
+        ]
+      },
+
+      { path: 'doc', component: CrudDocComponent }
+    ]
+  },
+
   {
     path: 'admin', component: AdmindashComponent,
     children: [
       { path: 'users', component: CrudUserComponent },
       { path: 'stock', component: CrudStockComponent },
-      { path: 'cmde', component: CmdeComponent },
-
-      { path: 'categorie', component: CrudCategorieComponent,
-     children: [
-      { path: 'ss_categorie', component: CrudSScatComponent },
-      ]},
-
-
-    ]},
+      { path: 'cmde', component: CmdeComponent }
+    ]
+  },
 
   { path: 'login', component: LoginComponent },
   { path: 'cart', component: CartComponent },
@@ -87,12 +99,11 @@ const Routes: Routes = [
       { path: 'edit', component: EditComponent }]
   },
 
-  { path: 'liv', component: LivreurdashComponent, children: [
-    { path: 'upload', component: UploadFilesComponent },
-    { path: 'cmd', component: CrudCmdeComponent }] 
+  {
+    path: 'liv', component: LivreurdashComponent, children: [
+      { path: 'upload', component: UploadFilesComponent },
+      { path: 'cmd', component: CrudCmdeComponent }]
   },
-
-
 
 
 
@@ -142,7 +153,9 @@ const Routes: Routes = [
     CrudCategorieComponent,
     LivreurdashComponent,
     UploadFilesComponent,
-    CrudCmdeComponent
+    CrudCmdeComponent,
+    SupdashComponent,
+    CrudDocComponent
 
 
 
@@ -174,7 +187,9 @@ const Routes: Routes = [
     MatInputModule,
     NgxPopper,
     NgbModule
-,MatCardModule,FileUploadModule
+    , MatCardModule,
+    FileUploadModule,
+    NgxSpinnerModule
 
   ],
   providers: [UserServiceService,
