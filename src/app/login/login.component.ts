@@ -125,14 +125,6 @@ export class LoginComponent implements OnInit {
     this.authService.signOut();
   }
 
-
-
-
-
-
-
-
-
   //Inserer email bd
   // onSave(user) {
   //   this.userService.Save(user)
