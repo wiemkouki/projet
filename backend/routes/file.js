@@ -31,19 +31,12 @@ var storage = multer.diskStorage({
 
 var single = multer({ storage: storage }).single("image");
 
-router.post("/", function (req, res, next) {
+router.post("/upload", function (req, res, next) {
   single(req, res, function (err) {
     if (err) {
       return res.status(501).json({ error: err });
     }
-    // doc_justificatifs.create({
-    //     id: parseInt(req.body.id),
-    //     libelle:req.file.originalname,
-    //     url_doc: md5(file.originalname) ,
-    //     is_valide: false,
-    //     createdAt: new Date(),
-    //     updatedAt: new Date()
-    // })
+ 
 
     //do all database record saving activity
     return res.json({
@@ -58,7 +51,7 @@ router.post("/download", function (req, res, next) {
   res.sendFile(filepath);
 });
 
-router.post("/upload", function (req, res, next) {
+router.post("/", function (req, res, next) {
   single(req, res, function (err) {
     if (err instanceof multer.MulterError) {
       const response = {

@@ -10,6 +10,7 @@
 
 
 }
+
 .b {
     float: left;
     width: 22%;
@@ -131,3 +132,280 @@ list-style-type:none;
 }
 h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 
+
+
+.mat-toolbar.mat-primary {
+    background-color: #2A2F46;
+    margin-bottom: 0px;
+    ;
+  }
+  .mat-toolbar.mat-secondary {
+    background-color: #1A1A1A;
+    margin-top: 0px;
+    margin-bottom: 60px;
+  
+  
+  }
+  .b {
+    float: left;
+    width: 10%;
+    padding: 7px;
+    // background: #6c6e6e;
+    color: white;
+    font-size: 16px;
+    // border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor:default;
+  }
+  .mat-toolbar.mat-primary .mat-button{
+    color: #FFFFFF ;
+    font-size: 8pt;
+    font-weight: bold;
+    font-family:  Helvetica ;
+  }
+  
+  .mat-toolbar.mat-secondary .mat-button{
+    color: #FFFFFF ;
+    font-size: 10pt;
+    font-weight: lighter;
+    font-family:  Helvetica ;
+    
+  }
+  .mat-toolbar.mat-footerColor{
+    background-color: #EB692D;
+  }
+  .mat-toolbar.mat-footerColor .mat-button{
+    margin-left: auto;
+    margin-right: auto;
+    color: #FFFFFF ;
+    font-size: 10pt;
+    font-weight: lighter;
+    font-family:  Helvetica ;
+  }
+  
+  label .somme-label {
+    color: #EB692D;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .mat-toolbar.mat-footerColor a.nav-link{
+    text-decoration: none;
+  }
+  
+  .input-group{
+    margin-left: auto ;
+    margin-right: auto;
+    width: 500px ;
+    height: 37px;
+  
+  }
+  .navbar-titles{
+    font-weight: lighter;
+  
+  }
+  .navText{
+    font-size: 8pt;
+    font-family:  Helvetica;
+    font-weight: lighter;
+  }
+  mat-icon {
+    color: #EB692D;
+  }
+  .icons-footer{
+    margin-right: 25%;
+    font-weight: none;
+  }
+  .flag-footer{
+    margin-left: -10%;
+  ;
+  }
+  footer{
+  position:relative;
+  bottom: 0;
+  left: 0;
+  
+  width: 100%;
+  }
+  select{
+    background: transparent;
+    color: white;
+    border: 1px solid #1A1A1A;
+  }
+  .footer-title{
+    color: white;
+    font-weight: bolder;
+  
+  }
+  .ul-liste{
+  color: #E6E6E6;
+  list-style-type:none;
+  }
+  h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
+  
+  
+  
+  @media (min-width: 768px) {
+    .omb_row-sm-offset-3 div:first-child[class*="col-"] {
+        margin-left: 25%;
+   
+    }
+  }
+  
+  .omb_login .omb_authTitle {
+    text-align: center;
+  line-height: 300%;
+  }
+  
+  .omb_login .omb_socialButtons a {
+  color: white; // In yourUse @body-bg
+  opacity:0.9;
+  }
+  .omb_login .omb_socialButtons a:hover {
+    color: white;
+  opacity:1;
+  }
+  .omb_login .omb_socialButtons .omb_btn-facebook {background: #3b5998;}
+  .omb_login .omb_socialButtons .omb_btn-twitter {background: #00aced;}
+  .omb_login .omb_socialButtons .omb_btn-google {background: #c32f10; }
+  
+  
+  .omb_login .omb_loginOr {
+  position: relative;
+  font-size: 1.5em;
+  color: #aaa;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  }
+  .omb_login .omb_loginOr .omb_hrOr {
+  background-color: #cdcdcd;
+  height: 1px;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  }
+  .omb_login .omb_loginOr .omb_spanOr {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: -0.6em;
+  margin-left: -1.5em;
+  background-color: white;
+  width: 3em;
+  text-align: center;
+  }
+  
+  .omb_login .omb_loginForm .input-group.i {
+  width: 2em;
+  }
+  .omb_login .omb_loginForm  .help-block {
+    color: red;
+  }
+  
+  
+  @media (min-width: 768px) {
+    .omb_login .omb_forgotPwd {
+        text-align: right;
+    margin-top:10px;
+   }
+  }
+  
+  /*
+      Note: It is best to use a less version of this file ( see http://css2less.cc
+      For the media queries use @screen-sm-min instead of 768px.
+      For .omb_spanOr use @body-bg instead of white.
+  */
+  
+  @media (min-width: 768px) {
+    .omb_row-sm-offset-3 div:first-child[class*="col-"] {
+        margin-left: 25%;
+    }
+  }
+  
+  .omb_login .omb_authTitle {
+    text-align: center;
+  line-height: 300%;
+  }
+  
+  .omb_login .omb_socialButtons a {
+  color: white; // In yourUse @body-bg
+  opacity:0.9;
+  }
+  .omb_login .omb_socialButtons a:hover {
+    color: white;
+  opacity:1;
+  }
+  
+  
+  .omb_login .omb_loginOr {
+  position: relative;
+  font-size: 1.5em;
+  color: #aaa;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  }
+  .omb_login .omb_loginOr .omb_hrOr {
+  background-color: #cdcdcd;
+  height: 1px;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  }
+  .omb_login .omb_loginOr .omb_spanOr {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: -0.6em;
+  margin-left: -1.5em;
+  background-color: white;
+  width: 3em;
+  text-align: center;
+  }
+  
+  .omb_login .omb_loginForm .input-group.i {
+  width: 2em;
+  }
+  .omb_login .omb_loginForm  .help-block {
+    color: red;
+  }
+  
+  
+  @media (min-width: 768px) {
+    .omb_login .omb_forgotPwd {
+        text-align: right;
+    margin-top:10px;
+   }
+  }
+  .btnn {
+    color: #FF6F61;
+    background: #ffffff;
+    border: 1px solid #FF6F61;
+    border-radius: 15px 15px;
+  }
+  .cart-page .table button.btn-cart {
+    width: auto;
+  }
+  @media (min-width: 768px) {
+    .omb_row-sm-offset-3 div:first-child[class*="col-"] {
+        margin-left: 25%;
+   
+    }
+  }
+  
+  .omb_login .omb_authTitle {
+    text-align: center;
+  line-height: 300%;
+  }
+  
+  .omb_login .omb_socialButtons a {
+  color: white; // In yourUse @body-bg
+  opacity:0.9;
+  }
+  .omb_login .omb_socialButtons a:hover {
+    color: white;
+  opacity:1;
+  }
+  .omb_login .omb_socialButtons .omb_btn-facebook {background: #3b5998;}
+  .omb_login .omb_socialButtons .omb_btn-twitter {background: #00aced;}
+  .omb_login .omb_socialButtons .omb_btn-google {background: #c32f10; }
