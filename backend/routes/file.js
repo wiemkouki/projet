@@ -78,6 +78,9 @@ router.post("/upload", function (req, res, next) {
 
       prepareResponse(res, 500, response, "application/json");
     }
+
+    console.log(req.body);
+
     let { id, libelle, url_doc } = req.body;
     doc_justificatifs
       .create({
@@ -89,6 +92,7 @@ router.post("/upload", function (req, res, next) {
         updatedAt: new Date(),
       })
       .then(() => {
+          
         doc_justificatifs
           .findAll({
             attributes: ["id", " libelle"],

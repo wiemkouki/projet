@@ -8,6 +8,18 @@ var app = express();
 require('dotenv').config();
 
 
+// app.use(express.static(path.join(__dirname, 'uploads')));
+
+
+// app.use((req, res, next) =>{
+//   res.setheader('Access-Control-Allow-Origin' ,'*');
+//   res.setheader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE');
+//   res.setheader('Access-Control-Allow-Headers', 'Content_Type , Authorization');
+//   next();
+// })
+
+
+
 app.use(cors({
     origin: 'http://localhost:4200',
     credentials: true

@@ -1,625 +1,691 @@
 <style>
-    .maindiv {
-        width: 60%;
-        height: 250px;
+    .header-slider{
+        width: 80%;
+        height: 320px;
         position: absolute;
         left: 50%;
-        top: 36%;
-        background-image: url('https://geeknews.fr/wp-content/uploads/2020/06/Le-concept-decommerce.jpg');
+        top: 45%;
+        background-image: url('assets/img/slider-1.jpg');
         background-size: 100% 100%;
         transform: translate(-50%, -50%);
         animation:Slider 13s infinite linear;
         box-shadow: 1px 2px 10px 5px white;
     }
-
+ 
     @keyframes Slider {
         10% {
-            background-image: url('https://www.webmarketing-com.com/wp-content/uploads/2017/07/tof-ecommerce.jpg');
+            background-image: url('assets/img/slider-1.jpg');
         }
-
+ 
         35% {
-            background-image: url('https://fr.mobiletransaction.org/wp-content/uploads/sites/11/2020/06/sumup-eshop-start.jpg');
+            background-image: url('assets/img/slider-3.jpg');
         }
-
+ 
         75% {
-            background-image: url('https://www.netoffensive.blog/wp-content/uploads/2020/04/reassurance-en-ecommerce.jpg');
+            background-image: url('assets/img/slider-1.jpg');
         }
-
+ 
     }
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
     .h {
         margin-top: 18%;
     }
 </style>
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <img src="../assets/daijaraIcon.png" width=" 118,327px" alt="">
-        <div fxShow="true" fxHide.lt-md="true" class="input-group">
-            <input type="text" class="form-control" placeholder="Tout nos catégories">
-            <button type="submit"><i class="fa fa-search b"></i></button>
 
-            <!-- <div class="input-group-append">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<mat-toolbar color="primary"  >
+    <mat-toolbar-row>
+      <img src="../assets/daijaraIcon.png" width=" 118,327px" alt="">
+      <div fxShow="true" fxHide.lt-md="true"  class="input-group">
+        <input  type="text" class="form-control" placeholder="Tout nos catégories">
+        <!-- <button type="submit"><i class="fa fa-search b"></i></button> -->
+      <div class="input-group-append">
           <button class="btn btn-secondary" type="button">
             <i class="fa fa-search"></i>
           </button>
-        </div> -->
-        </div>
-        <img width="20px" height="20px" src="../assets/user.png" alt="">
-        <a mat-button [routerLink]="'/login'"> S' IDENTIFIER </a>
-
-        <a mat-button [routerLink]="'/cart'"> <img src="../assets/image.png" width="50px" height="50px" alt=""> PANIER
-        </a>
-
-
+        </div> 
+      </div>
+      <img width="20px" height="20px" src="../assets/user.png" alt="">
+      <a mat-button [routerLink]="'/login'"> S' IDENTIFIER  </a>
+  
+        <a [routerLink]="'/cart'" class="btn cart"> 
+        <i class="fa fa-shopping-cart"></i>
+        <!-- <img src="../assets/image.png" width="50px" height="50px" alt=""> -->
+        <span>(0)</span> </a>
+  
+  
+  
     </mat-toolbar-row>
-</mat-toolbar>
+  </mat-toolbar>
+  
+  <mat-toolbar  color="secondary" >
+  
+      <div fxShow="true" fxHide.gt-sm="false">
+      <button mat-icon-button  >
+        <mat-icon [routerLink]="'/catalog'">menu</mat-icon>
+      </button>
+      </div>
+  
+  
+      <div fxShow="true" fxHide.lt-md="true" >
+        <a mat-button [routerLink]="'/catalog'">Tout nos produits </a>
+        <a mat-button [routerLink]="'/catalog'"> <img height="21,5px" width="21,5px" src="../assets/DaijaraBasicsIcon.png" alt=""> Daijara Basics </a>
+  
+        <a mat-button [routerLink]="'/accounts'">  <img src="../assets//ElectrinquePhotoIcon.png" alt=""> Electronique et photo </a>
+        <a mat-button [routerLink]="'/create-account'"> <img src="../assets/cuisineIcon.png" alt=""> Cuisine, Ménage et Salon </a>
+        <a mat-button [routerLink]="'/contacts'"> <img src="../assets/ordinateurIcon.png" alt=""> Ordinateur </a>
+        <a mat-button [routerLink]="'/create-contact'"> <img src="../assets/BeautyIcon.png" alt=""> Beauté </a>
+        <a mat-button [routerLink]="'/activities'"> <img src="../assets/LoisirsIcon.png" alt=""> Sports et Loisirs </a>
+        <a mat-button [routerLink]="'/create-activity'"> <img src="../assets/cadeauIcon.png" alt=""> Idées et Cadeau </a>
+        <a mat-button [routerLink]="'/create-activity'"> <img src="../assets/VoyageIcon.png" alt=""> Voyages </a>
+  
+  
+      </div>
+  
+   </mat-toolbar>
+ 
 
-<mat-toolbar color="secondary">
+        
 
-    <div fxShow="true" fxHide.gt-sm="false">
-        <button mat-icon-button>
-            <mat-icon [routerLink]="'/catalog'">menu</mat-icon>
-        </button>
-
-    </div>
-
-
-    <div fxShow="true" fxHide.lt-md="true" class="dropdown">
-        <a mat-button [routerLink]="'/catalog'" style="float:left;" class="dropbtn">Tout nos produits </a>
-        <!-- <div class="dropdown-content" style="left:0;" >
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-          </div>
-         -->
-
-
-        <a mat-button> <img height="21,5px" width="21,5px" src="../assets/DaijaraBasicsIcon.png" alt=""> Daijara Basics
-        </a>
-
-
-        <a mat-button> <img src="../assets//ElectrinquePhotoIcon.png" alt=""> Electronique et photo </a>
-        <a mat-button> <img src="../assets/cuisineIcon.png" alt=""> Cuisine, Ménage et Salon </a>
-        <a mat-button> <img src="../assets/ordinateurIcon.png" alt=""> Ordinateur </a>
-        <a mat-button> <img src="../assets/BeautyIcon.png" alt=""> Beauté </a>
-        <a mat-button> <img src="../assets/LoisirsIcon.png" alt=""> Sports et Loisirs </a>
-        <a mat-button> <img src="../assets/cadeauIcon.png" alt=""> Idées et Cadeau </a>
-        <a mat-button> <img src="../assets/VoyageIcon.png" alt=""> Voyages </a>
-
-
-    </div>
-
-
-</mat-toolbar>
-
-
-<div class="container h">
-    <div class="maindiv">
-    </div>
-    <hr>
-    <h3 class="h3"> Nos promotions </h3>
-    <div class="row">
-        <div class="item" *ngFor="let item of products">
-            <h1>{{item.libelle}}</h1>
-            <img src='{{item.image}}' />
-            <p>{{item.prix}}</p>
-          
-          </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="product-grid">
-                <div class="product-image">
-                    <a href="#">
-                        <img class="pic-1"
-                            src="https://blueskytechmage.com/ayo/media/catalog/product/cache/21adbbfa8c2a8f065580bb2a26fbd5d4/2/-/2-1_1.jpg"
-                            loading="lazy" alt="Australian Large Granny Smith Apples">
-                        <!-- <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo9/images/img-2.jpg"> -->
-                    </a>
-                    <ul class="social">
-                        <li><a href="" data-tip="Quick View" [routerLink]="'/prod1'"><i class="fa fa-search"></i></a>
-                        </li>
-                        <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
-                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
-                    </ul>
-                    <span class="product-new-label">Sale</span>
-                    <span class="product-discount-label">20%</span>
-                </div>
-                <ul class="rating">
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star disable"></li>
-                </ul>
-                <div class="product-content">
-                    <h3 class="title"><a href="#">Bravia Tablette 540x</a></h3>
-                    <div class="price">$16.00
-                        <span>$20.00</span>
+        <!-- Bottom Bar End -->       
+        
+        <!-- Main Slider Start -->
+        <div class="header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <nav class="navbar bg-light">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="fa fa-home"></i>Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="fa fa-shopping-bag"></i>Best Selling</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="fa fa-plus-square"></i>New Arrivals</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="fa fa-female"></i>Fashion & Beauty</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="fa fa-child"></i>Kids & Babies Clothes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="fa fa-tshirt"></i>Men & Women Clothes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="fa fa-mobile-alt"></i>Gadgets & Accessories</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="fa fa-microchip"></i>Electronics & Accessories</a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
-                    <a class="add-to-cart" href="">+ Add To Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="product-grid" >
-                <div class="product-image">
-                    <a href="#">
-                        <img class="pic-1"
-                            src="//cdn.shopify.com/s/files/1/1545/7777/products/Bravia-1_540x.jpg?v=1485592642">
-                        <!-- <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo9/images/img-4.jpg"> -->
-                    </a>
-                    <ul class="social">
-                        <li><a href="" data-tip="Quick View" [routerLink]="'/prod2'"><i class="fa fa-search"></i></a>
-                        </li>
-                        <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
-                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
-                    </ul>
-                    <span class="product-new-label">Sale</span>
-                    <span class="product-discount-label">50%</span>
-                </div>
-                <ul class="rating">
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                </ul>
-                <div class="product-content">
-                    <h3 class="title"><a href="#">Mix table fan</a></h3>
-                    <div class="price">$5.00
-                        <span>$10.00</span>
+                    <div class="col-md-6">
+                        <div class="header-slider ">
+                            <div>
+                                <!-- <img src="assets/img/slider-1.jpg" alt="Slider Image" /> -->
+                                <div class="header-slider-caption">
+                                    <p>Welcome to Daijara</p>
+                                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
+                                </div>
+                            </div>
+                        <!-- <div class="header-slider-item">
+                                <img src="assets/img/slider-2.jpg" alt="Slider Image" />
+                                <div class="header-slider-caption">
+                                    <p>Some text goes here that describes the image</p>
+                                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
+                                </div>
+                            </div> -->
+                         <!-- <div class="header-slider-item">
+                                <img src="assets/img/slider-3.jpg" alt="Slider Image" />
+                                <div class="header-slider-caption">
+                                    <p>Some text goes here that describes the image</p>
+                                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
+                                </div>
+                            </div> -->
+                        </div>
                     </div>
-                    <a class="add-to-cart" href="">+ Add To Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="product-grid">
-                <div class="product-image">
-                    <a href="#">
-                        <img class="pic-1"
-                            src="//cdn.shopify.com/s/files/1/1545/7777/products/mix-table-fan_1200x.jpg?v=1485534261">
-                        <!-- <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo9/images/img-6.jpg"> -->
-                    </a>
-                    <ul class="social">
-                        <li><a href="" data-tip="Quick View" [routerLink]="'/prod3'"><i class="fa fa-search"></i></a>
-                        </li>
-                        <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
-                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
-                    </ul>
-                    <span class="product-new-label">Sale</span>
-                    <span class="product-discount-label">50%</span>
-                </div>
-                <ul class="rating">
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                </ul>
-                <div class="product-content">
-                    <h3 class="title"><a href="#">Cache</a></h3>
-                    <div class="price">$5.00
-                        <span>$10.00</span>
-                    </div>
-                    <a class="add-to-cart" href="">+ Add To Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="product-grid">
-                <div class="product-image">
-                    <a href="#">
-                        <img class="pic-1"
-                            src="//cdn.shopify.com/s/files/1/1545/7777/products/refrigerator_1200x.jpg?v=1478584925">
-                        <!-- <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo9/images/img-8.jpg"> -->
-                    </a>
-                    <ul class="social">
-                        <li><a href="" data-tip="Quick View" [routerLink]="'/prod4'"><i class="fa fa-search"></i></a>
-                        </li>
-                        <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
-                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
-                    </ul>
-                    <span class="product-new-label">Sale</span>
-                    <span class="product-discount-label">50%</span>
-                </div>
-                <ul class="rating">
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                </ul>
-                <div class="product-content">
-                    <h3 class="title"><a href="#">Refrigerator 1200x</a></h3>
-                    <div class="price">$5.00
-                        <span>$10.00</span>
-                    </div>
-                    <a class="add-to-cart" href="">+ Add To Cart</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<hr>
-
-
-
-
-
-
-<div class="container">
-    <h3 class="h3">Nouvelles arrivées</h3>
-    <div class="row">
-        <div class="col-md-3 col-sm-6">
-            <div class="product-grid7">
-                <div class="product-image7">
-                    <a href="#">
-                        <img class="pic-1"
-                            src="https://blueskytechmage.com/ayo/media/catalog/product/cache/21adbbfa8c2a8f065580bb2a26fbd5d4/3/_/3_1.jpg"
-                            loading="lazy" alt="Organic Greenhouse Tomatoes New 18kg">
-                        <!-- <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo8/images/img-2.jpg"> -->
-                    </a>
-                    <ul class="social">
-                        <li><a href="" class="fa fa-search" [routerLink]="'/prod5'"></a></li>
-                        <li><a href="" class="fa fa-shopping-bag"></a></li>
-                        <li><a href="" class="fa fa-shopping-cart"></a></li>
-                    </ul>
-                    <span class="product-new-label">New</span>
-                </div>
-                <div class="product-content">
-                    <h3 class="title"><a href="#">Men's Blazer</a></h3>
-                    <ul class="rating">
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                    </ul>
-                    <div class="price">$15.00
-                        <span>$20.00</span>
+                    <div class="col-md-3">
+                        <div class="header-img">
+                            <div class="img-item">
+                                <img src="assets/img/category-6.jpg" />
+                                <a class="img-text" href="">
+                                    <!-- <p>Some text goes here that describes the image</p> -->
+                                </a>
+                            </div>
+                            <div class="img-item">
+                                <img src="assets/img/category-2.jpg" />
+                                <a class="img-text" href="">
+                                    <!-- <p>Some text goes here that describes the image</p> -->
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="product-grid7">
-                <div class="product-image7">
-                    <a href="#">
-                        <img class="pic-1"
-                            src="https://blueskytechmage.com/ayo/media/catalog/product/cache/21adbbfa8c2a8f065580bb2a26fbd5d4/5/-/5-1.jpg">
-                        <!-- <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo8/images/img-4.jpg"> -->
-                    </a>
-                    <ul class="social">
-                        <li><a href="" class="fa fa-search" [routerLink]="'/prod6'"></a></li>
-                        <li><a href="" class="fa fa-shopping-bag"></a></li>
-                        <li><a href="" class="fa fa-shopping-cart"></a></li>
-                    </ul>
-                </div>
-                <div class="product-content">
-                    <h3 class="title"><a href="#">Women's White Shirt</a></h3>
-                    <ul class="rating">
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                    </ul>
-                    <div class="price">$15.00</div>
+        <!-- Main Slider End -->      
+        
+        <!-- Brand Start -->
+        <!-- <div class="brand">
+            <div class="container-fluid">
+                <div class="brand-slider">
+                    <div class="brand-item"><img src="assets/img/brand-1.png" alt=""></div>
+                    <div class="brand-item"><img src="assets/img/brand-2.png" alt=""></div>
+                    <div class="brand-item"><img src="assets/img/brand-3.png" alt=""></div>
+                    <div class="brand-item"><img src="assets/img/brand-4.png" alt=""></div>
+                    <div class="brand-item"><img src="assets/img/brand-5.png" alt=""></div>
+                    <div class="brand-item"><img src="assets/img/brand-6.png" alt=""></div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="product-grid7">
-                <div class="product-image7">
-                    <a href="#">
-                        <img class="pic-1"
-                            src="https://blueskytechmage.com/ayo/media/catalog/product/cache/21adbbfa8c2a8f065580bb2a26fbd5d4/8/-/8-1.jpg"
-                            loading="lazy" alt="Baby White Washed potatoes New 15kg">
-                        <!-- <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo8/images/img-6.jpg"> -->
-                    </a>
-                    <ul class="social">
-                        <li><a href="" class="fa fa-search" [routerLink]="'/prod7'"></a></li>
-                        <li><a href="" class="fa fa-shopping-bag"></a></li>
-                        <li><a href="" class="fa fa-shopping-cart"></a></li>
-                    </ul>
-                    <span class="product-new-label">New</span>
-                </div>
-                <div class="product-content">
-                    <h3 class="title"><a href="#">Men's Blazer</a></h3>
-                    <ul class="rating">
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                    </ul>
-                    <div class="price">$15.00
-                        <span>$20.00</span>
+        </div> -->
+        <!-- Brand End -->      
+        
+        <!-- Feature Start-->
+        <div class="feature">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-6 feature-col">
+                        <div class="feature-content">
+                            <i class="fab fa-cc-mastercard"></i>
+                            <h2>Secure Payment</h2>
+                            <!-- <p>
+                                Lorem ipsum dolor sit amet consectetur elit
+                            </p> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 feature-col">
+                        <div class="feature-content">
+                            <i class="fa fa-truck"></i>
+                            <h2>Worldwide Delivery</h2>
+                            <!-- <p>
+                                Lorem ipsum dolor sit amet consectetur elit
+                            </p> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 feature-col">
+                        <div class="feature-content">
+                            <i class="fa fa-sync-alt"></i>
+                            <h2>90 Days Return</h2>
+                            <!-- <p>
+                                Lorem ipsum dolor sit amet consectetur elit
+                            </p> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 feature-col">
+                        <div class="feature-content">
+                            <i class="fa fa-comments"></i>
+                            <h2>24/7 Support</h2>
+                            <!-- <p>
+                                Lorem ipsum dolor sit amet consectetur elit
+                            </p> -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="product-grid7">
-                <div class="product-image7">
-                    <a href="#">
-                        <img class="pic-1"
-                            src="https://blueskytechmage.com/ayo/media/catalog/product/cache/21adbbfa8c2a8f065580bb2a26fbd5d4/2/-/2-1_1.jpg"
-                            loading="lazy" alt="Australian Large Granny Smith Apples">
-                        <!-- <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo8/images/img-8.jpg"> -->
-                    </a>
-                    <ul class="social">
-                        <li><a href="" class="fa fa-search" [routerLink]="'/prod8'"></a></li>
-                        <li><a href="" class="fa fa-shopping-bag"></a></li>
-                        <li><a href="" class="fa fa-shopping-cart"></a></li>
-                    </ul>
-                    <span class="product-new-label">New</span>
-                </div>
-                <div class="product-content">
-                    <h3 class="title"><a href="#">Men's Blazer</a></h3>
-                    <ul class="rating">
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                    </ul>
-                    <div class="price">$15.00
-                        <span>$20.00</span>
+        <!-- Feature End-->      
+        
+        <!-- Category Start-->
+ 
+        <!-- Category End-->       
+        
+        <!-- Call to Action Start -->
+        <div class="call-to-action">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h1 style="color:#FF6F61;" >call us for any queries</h1>
+                    </div>
+                    <div class="col-md-6">
+                        <p style="color:#FF6F61;
+                        font-size: 25px;" >+216-22000000</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<hr>
+        <!-- Call to Action End -->       
+        
+        <!-- Featured Product Start -->
+        <div class="featured-product product">
+            <div class="container-fluid">
+                <div class="section-header">
+                    <h1>Featured Product</h1>
+                </div>
+                <div class="row align-items-center product-slider product-slider-4">
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="#">Product Name</a>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="product-image">
+                                <a href="product-detail.html">
+                                    <img src="assets/img/product-1.jpg" alt="Product Image">
+                                </a>
+                                <div class="product-action">
+                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="#"><i class="fa fa-heart"></i></a>
+                                    <a href="#"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <h3><span>$</span>99</h3>
+                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="#">Product Name</a>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="product-image">
+                                <a href="product-detail.html">
+                                    <img src="assets/img/product-2.jpg" alt="Product Image">
+                                </a>
+                                <div class="product-action">
+                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="#"><i class="fa fa-heart"></i></a>
+                                    <a href="#"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <h3><span>$</span>99</h3>
+                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="#">Product Name</a>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="product-image">
+                                <a href="product-detail.html">
+                                    <img src="assets/img/product-3.jpg" alt="Product Image">
+                                </a>
+                                <div class="product-action">
+                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="#"><i class="fa fa-heart"></i></a>
+                                    <a href="#"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <h3><span>$</span>99</h3>
+                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="#">Product Name</a>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="product-image">
+                                <a href="product-detail.html">
+                                    <img src="assets/img/product-4.jpg" alt="Product Image">
+                                </a>
+                                <div class="product-action">
+                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="#"><i class="fa fa-heart"></i></a>
+                                    <a href="#"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <h3><span>$</span>99</h3>
+                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+        <!-- Featured Product End -->       
+        
+        <!-- Newsletter Start -->
+        <div class="newsletter">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1 style="color:#FF6F61;" >Subscribe Our Newsletter</h1>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form">
+                            <input type="email" value="Your email here">
+                            <button >Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Newsletter End -->        
+        
+        <!-- Recent Product Start -->
+        <div class="recent-product product">
+            <div class="container-fluid">
+                <div class="section-header">
+                    <h1>Recent Product</h1>
+                </div>
+                <div class="row align-items-center product-slider product-slider-4">
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="#">Product Name</a>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="product-image">
+                                <a href="product-detail.html">
+                                    <img src="assets/img/product-6.jpg" alt="Product Image">
+                                </a>
+                                <div class="product-action">
+                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="#"><i class="fa fa-heart"></i></a>
+                                    <a href="#"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <h3><span>$</span>99</h3>
+                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="#">Product Name</a>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="product-image">
+                                <a href="product-detail.html">
+                                    <img src="assets/img/product-7.jpg" alt="Product Image">
+                                </a>
+                                <div class="product-action">
+                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="#"><i class="fa fa-heart"></i></a>
+                                    <a href="#"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <h3><span>$</span>99</h3>
+                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="#">Product Name</a>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="product-image">
+                                <a href="product-detail.html">
+                                    <img src="assets/img/product-8.jpg" alt="Product Image">
+                                </a>
+                                <div class="product-action">
+                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="#"><i class="fa fa-heart"></i></a>
+                                    <a href="#"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <h3><span>$</span>99</h3>
+                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="#">Product Name</a>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="product-image">
+                                <a href="product-detail.html">
+                                    <img src="assets/img/product-9.jpg" alt="Product Image">
+                                </a>
+                                <div class="product-action">
+                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="#"><i class="fa fa-heart"></i></a>
+                                    <a href="#"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <h3><span>$</span>99</h3>
+                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                            </div>
+                        </div>
+                    </div>
+               
+                </div>
+            </div>
+        </div>
+        <!-- Recent Product End -->
+        
+    
+        
 
-<div class="container">
-    <h3 class="h3">
+        
 
-        Mode, Vêtements et Accessoires </h3>
-    <div class="row">
-        <div class="col-md-4 col-sm-6">
-            <div class="product-grid8">
-                <div class="product-image8">
-                    <a href="#">
-                        <img class="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo7/images/img-1.jpg">
-                        <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo7/images/img-2.jpg">
-                    </a>
-                    <ul class="social">
-                        <li><a href="" class="fa fa-search"></a></li>
-                        <li><a href="" class="fa fa-shopping-bag"></a></li>
-                        <li><a href="" class="fa fa-shopping-cart"></a></li>
-                    </ul>
-                    <span class="product-discount-label">-20%</span>
-                </div>
-                <div class="product-content">
-                    <div class="price">£ 8.00
-                        <span>£ 10.00</span>
-                    </div>
-                    <span class="product-shipping">Free Shipping</span>
-                    <h3 class="title"><a href="#">Women's Plain Top</a></h3>
-                    <a class="all-deals" href="">See all deals <i class="fa fa-angle-right icon"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <div class="product-grid8" >
-                <div class="product-image8">
-                    <a href="#">
-                        <img class="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo7/images/img-3.jpg">
-                        <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo7/images/img-4.jpg">
-                    </a>
-                    <ul class="social">
-                        <li><a href="" class="fa fa-search"></a></li>
-                        <li><a href="" class="fa fa-shopping-bag"></a></li>
-                        <li><a href="" class="fa fa-shopping-cart"></a></li>
-                    </ul>
-                    <span class="product-discount-label">-30%</span>
-                </div>
-                <div class="product-content">
-                    <div class="price">£ 7.00
-                        <span>£ 10.00</span>
-                    </div>
-                    <span class="product-shipping">Free Shipping</span>
-                    <h3 class="title"><a href="#">Women's Designer Top</a></h3>
-                    <a class="all-deals" href="">See all deals <i class="fa fa-angle-right icon"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <div class="product-grid8">
-                <div class="product-image8">
-                    <a href="#">
-                        <img class="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo7/images/img-5.jpg">
-                        <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo7/images/img-6.jpg">
-                    </a>
-                    <ul class="social">
-                        <li><a href="" class="fa fa-search"></a></li>
-                        <li><a href="" class="fa fa-shopping-bag"></a></li>
-                        <li><a href="" class="fa fa-shopping-cart"></a></li>
-                    </ul>
-                    <span class="product-discount-label">-20%</span>
-                </div>
-                <div class="product-content">
-                    <div class="price">£ 8.00
-                        <span>£ 10.00</span>
-                    </div>
-                    <span class="product-shipping">Free Shipping</span>
-                    <h3 class="title"><a href="#">Women's Plain Top</a></h3>
-                    <a class="all-deals" href="">See all deals <i class="fa fa-angle-right icon"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-<hr>
-
-<!--  -->
-<hr>
-<!-- Footer -->
-<footer fxShow="true" fxHide.gt-sm="false" class="page-footer font-small unique-color-dark">
+     
+        
+        <!-- Back to Top -->
+        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+        
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/lib/easing/easing.min.js"></script>
+        <script src="assets/lib/slick/slick.min.js"></script>
+        
+        <!-- Template Javascript -->
+        <script src="assets/js/main.js"></script>
+  
+ 
+ <!-- Footer -->
+ <footer fxShow="true" fxHide.gt-sm="false" class="page-footer font-small unique-color-dark">
 
     <div class="icons-flag-container" style="background-color: #1A1A1A; height: 70px;">
-
+  
         <!-- Grid row-->
         <div class="row py-4 d-flex align-items-center">
-
-            <div class="col-md-6 col-lg-7 text-center text-md-right">
-
-                <div class="icons-footer">
-                    <a mat-button [routerLink]="'/accounts'"><img src="../assets/twitter-16.png" class="fb-icon" alt="">
-                    </a>
-                    <a mat-button [routerLink]="'/create-account'"><img src="../assets/message-16.png" class="tw-icon"
-                            alt=""> </a>
-                    <a mat-button [routerLink]="'/create-contact'"><img src="../assets/instagram-16.png"
-                            class="gplus-icon" alt=""> </a>
-                    <a mat-button [routerLink]="'/activities'"> <img src="../assets/facebook-16.png" class="li-icon"
-                            alt=""> </a>
-                    <a mat-button [routerLink]="'/create-activity'"> <img src="../assets/linkedin-2-16.png"
-                            class="ins-icon" alt=""> </a>
+  
+          <div class="col-md-6 col-lg-7 text-center text-md-right">
+  
+              <div class="icons-footer">
+                <a mat-button [routerLink]="'/accounts'"><img src="../assets/twitter-16.png" class="fb-icon" alt=""> </a>
+                <a mat-button [routerLink]="'/create-account'"><img src="../assets/message-16.png" class="tw-icon" alt=""> </a>
+                <a mat-button [routerLink]="'/create-contact'"><img src="../assets/instagram-16.png"  class="gplus-icon" alt=""> </a>
+                <a mat-button [routerLink]="'/activities'"> <img src="../assets/facebook-16.png"  class="li-icon" alt=""> </a>
+                <a mat-button >   <img src="../assets/linkedin-2-16.png"  class="ins-icon" alt=""> </a>
+              </div>
                 </div>
-            </div>
-            <div class="flag-footer">
-                <img width="20px" height="20px" src="../assets/tunisia.png" alt="">
-                <select name="" id="">
-                    <option value="">Tunisie</option>
-                    <option value="">France</option>
-                </select>
-                <select name="" id="">
-                    <option value="">Français</option>
-                </select>
-
-            </div>
+                <div class="flag-footer">
+                    <img width="20px" height="20px" src="../assets/tunisia.png" alt="">
+               <select name="" id=""> <option value="">Tunisie</option><option value="">France</option></select>
+                 <select name="" id=""><option value="">Français</option></select>
+  
+          </div>
         </div>
     </div>
-
+  
     <!-- Footer Links -->
-    <div style="background-color: #2A2F46; margin-top: -1.5%; ">
-
-        <!-- Grid row -->
-        <div class="row mt-3">
-
-            <!-- Grid column -->
-
-            <div class="col-md-2 col-lg-3 col-xl-2 mx-auto mb-4">
-
-
-                <!-- Content -->
-                <div>
-
-                    <ul class="ul-liste">
-                        <li> <img src="../assets/daijaraIcon.png" width="70,162 px" alt="">
-                        </li>
-                        <li> <label class="footer-title"> Via Daijara</label></li>
-                        <li> Carrières chez Daijara</li>
-                        <li>à propos de nous</li>
-                        <li> imprimer </li>
-                    </ul>
-                </div>
-
-
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                <div>
-                    <!-- Links -->
-                    <ul class="ul-liste">
-                        <br>
-                        <li> <label class="footer-title"> Gagnez de l'argent avec Daijara</label>
-                        </li>
-                        <li> Programme d'affiliation</li>
-                        <li>Expédié par Daijara</li>
-                        <li>Prime par le vendeur </li>
-                        <li>Faites la promotion de vos produits</li>
-                        <li>Publiez votre livre avec nous
-                        </li>
-                    </ul>
-                </div>
-
-
-
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-
-                <!-- Links -->
-                <div>
-                    <!-- Links -->
-
-                    <ul class="ul-liste">
-                        <br>
-                        <li> <label class="footer-title"> Modes de paiement Daijara
-                            </label> </li>
-                        <li> Shopping avec des points</li>
-                        <li>Cartes de crédit </li>
-                        <li>Pièces justificatives </li>
-                        <li>Facture mensuelle</li>
-                        <li>Prélèvement automatique </li>
-                        <li>Chargez mon compte Daijara </li>
-                    </ul>
-                </div>
-
-
-
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-5 col-lg-4 col-xl-4 mx-auto mb-md-0 mb-4">
-
-                <!-- Links -->
-                <div>
-                    <!-- Links -->
-                    <ul class="ul-liste">
-                        <li><a mat-button style="color:  #EB692D; font-weight: bold; font-family:  Helvetica;" href="">
-                                Qui sommes nous ? </a> <a mat-button
-                                style="color:  #FFFFFF; font-weight: bold; font-family:  Helvetica;" href=""> Plan du
-                                site </a> <a mat-button
-                                style="color:  #FFFFFF; font-weight: bold; font-family:  Helvetica;" href="">Applis
-                                Daijara </a></li>
-                        <li><label class="footer-title"> Nous vous aidons</label></li>
-                        <li>Daijara et COVID-19</li>
-                        <li>Suivre la livraison</li>
-                        <li>Expédition et disponibilité</li>
-                        <li>Retour et remplacement</li>
-                        <li>Mon contenu et mes appareils</li>
-                        <li>Application</li>
-                        <li>Assistant Daijara </li>
-                        <li>Service Clients</li>
-                    </ul>
-                </div>
-            </div>
-
+    <div   style="background-color: #2A2F46; margin-top: -1.5%; ">
+  
+      <!-- Grid row -->
+      <div class="row mt-3">
+  
+        <!-- Grid column -->
+  
+        <div class="col-md-2 col-lg-3 col-xl-2 mx-auto mb-4">
+  
+  
+          <!-- Content -->
+          <div>
+  
+            <ul class="ul-liste" >
+              <li>        <img src="../assets/daijaraIcon.png" width="70,162 px" alt="">
+              </li>
+              <li> <label class="footer-title"> Via Daijara</label></li>
+           <li> Carrières chez Daijara</li>
+           <li>à propos de nous</li>
+           <li> imprimer </li>
+          </ul></div>
+  
+  
         </div>
-        <!-- Grid row -->
-
+        <!-- Grid column -->
+  
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+         <div>
+          <!-- Links -->
+          <ul class="ul-liste" >
+  <br>
+            <li>        <label class="footer-title"> Gagnez de l'argent avec Daijara</label>
+            </li>
+            <li> Programme d'affiliation</li>
+            <li>Expédié par Daijara</li>
+            <li>Prime par le vendeur </li>
+            <li>Faites la promotion de vos produits</li>
+            <li>Publiez votre livre avec nous
+            </li>
+           </ul>
+          </div>
+  
+  
+  
+        </div>
+        <!-- Grid column -->
+  
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+  
+          <!-- Links -->
+          <div>
+            <!-- Links -->
+  
+            <ul class="ul-liste" >
+  <br>
+              <li>    <label class="footer-title"> Modes de paiement Daijara
+              </label>      </li>
+              <li> Shopping avec des points</li>
+              <li>Cartes de crédit </li>
+              <li>Pièces justificatives </li>
+              <li>Facture mensuelle</li>
+              <li>Prélèvement automatique </li>
+              <li>Chargez mon compte Daijara </li>
+             </ul>
+            </div>
+  
+  
+  
+        </div>
+        <!-- Grid column -->
+  
+        <!-- Grid column -->
+        <div class="col-md-5 col-lg-4 col-xl-4 mx-auto mb-md-0 mb-4">
+  
+          <!-- Links -->
+          <div>
+            <!-- Links -->
+            <ul class="ul-liste" >
+              <li><a  mat-button style="color:  #EB692D; font-weight: bold; font-family:  Helvetica;" href=""> Qui sommes nous ? </a> <a mat-button style="color:  #FFFFFF; font-weight: bold; font-family:  Helvetica;" href=""> Plan du site </a> <a mat-button style="color:  #FFFFFF; font-weight: bold; font-family:  Helvetica;" href="">Applis Daijara </a></li>
+              <li><label class="footer-title"> Nous vous aidons</label></li>
+              <li>Daijara et COVID-19</li>
+              <li>Suivre la livraison</li>
+              <li>Expédition et disponibilité</li>
+              <li>Retour et remplacement</li>
+              <li>Mon contenu et mes appareils</li>
+              <li>Application</li>
+              <li>Assistant Daijara </li>
+              <li>Service Clients</li>
+             </ul></div>
+        </div>
+  
+      </div>
+      <!-- Grid row -->
+  
     </div>
     <!-- Footer Links -->
-
+  
     <!-- Copyright -->
-    <mat-toolbar color="footerColor">
-
-
-        <a mat-button [routerLink]="'/accounts'"> Nos conditions </a>
-        <a mat-button [routerLink]="'/create-account'"> Protection des données </a>
-        <a mat-button [routerLink]="'/contacts'">Imprimer </a>
-        <a mat-button [routerLink]="'/create-contact'"> Remarque sur les cookies</a>
-        <a mat-button [routerLink]="'/activities'"> Remarques sur la publicité ciblée par centres d'intérét </a>
-        <a mat-button [routerLink]="'/create-activity'"> Copyright © diajara 2021 </a>
-        <a mat-button [routerLink]="'/create-activity'"> Powered by TunaFanya </a>
-
-    </mat-toolbar>
+      <!-- <mat-toolbar color="footerColor"  >
+  
+  
+          <a mat-button [routerLink]="'/accounts'">  Nos conditions </a>
+          <a mat-button [routerLink]="'/create-account'"> Protection des données </a>
+          <a mat-button [routerLink]="'/contacts'">Imprimer </a>
+          <a mat-button [routerLink]="'/create-contact'"> Remarque sur les cookies</a>
+          <a mat-button [routerLink]="'/activities'"> Remarques sur la publicité ciblée par centres d'intérét  </a>
+          <a mat-button [routerLink]="'/create-activity'"> Copyright © diajara 2021  </a>
+          <a mat-button [routerLink]="'/create-activity'">  Powered by TunaFanya </a>
+  
+     </mat-toolbar> -->
     <!-- Copyright -->
-
-</footer>
-<!-- Footer -->
+  
+  </footer>
+  <!-- Footer -->

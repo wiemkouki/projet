@@ -95,7 +95,8 @@ const Routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   {
-    path: 'profil', component: ProfilComponent, children: [
+    path: 'profil', component: ProfilComponent  ,
+     children: [
       { path: 'edit', component: EditComponent }]
   },
 

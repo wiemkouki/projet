@@ -1,20 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../services/user-service.service';
-import { Router, RouterModule } from '@angular/router';
+import { Router, ActivatedRoute, Params, ParamMap } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SocialAuthService, FacebookLoginProvider, GoogleLoginProvider,SocialUser } from 'angularx-social-login';
+import { SocialAuthService, FacebookLoginProvider, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 import { HttpClient } from '@angular/common/http';
+import { param } from 'express-validator';
 export class User {
+  static token: any;
   constructor(
     public id: number,
     public email: string,
     public role: string,
-    public token :string,
+
     public is_deleted: boolean,
     public createdAt: string,
     public updatedAt: string,
 
-  ) {}
+  ) { }
 }
 
 @Component({
@@ -41,39 +43,60 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
 
 
+
   constructor(private userService: UserServiceService, private router: Router,
     private formBuilder: FormBuilder,
     private authService: SocialAuthService
     , private http: HttpClient) {
-      console.log(this.isLoggedin)
-    }
+    console.log(this.isLoggedin)
+  }
 
-  ngOnInit(): void { this.loginForm = this.formBuilder.group({
-    email: ['', Validators.required],
-    password: ['', Validators.required]
-  });
+  ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
 
-  this.authService.authState.subscribe((user) => {
-    this.user = user;
-    this.isLoggedin = (user != null);
-    console.log(this.user);
-  });
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.isLoggedin = (user != null);
+      console.log(this.user);
+    });
 
 
 
-  // this.onSave()
+    // this.onSave()
   }
 
 
   onSubmit(): void {
-    const { email, password  } = this.form;
+
+    // let fd = new FormData();
+
+    const { email, password } = this.form;
 
     this.userService.login(email, password).subscribe(
-      data => {
-        // localStorage.getItem(token.role);
+      user => {
+        console.log(user);
+        localStorage.setItem("role", user.user.role);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.router.navigate(['/profil'])
+
+        if (localStorage.getItem("role") === "Livreur") {
+          this.router.navigate(['/liv'])
+        } else if (localStorage.getItem("role") === "Administrateur") {
+          
+          this.router.navigate(['/admin'])
+        } else if (localStorage.getItem("role") === "Sup_Administrateur") {
+
+          this.router.navigate(['/admin'])
+        } else if (localStorage.getItem("role") === "Client") {
+
+          this.router.navigate(['/profil'])
+        }
+
+
+
       },
       err => {
         this.errorMessage = err.error.message;
@@ -152,4 +175,8 @@ export class LoginComponent implements OnInit {
 
 
 
+
+function token(arg0: string, token: any) {
+  throw new Error('Function not implemented.');
+}
 
