@@ -14,11 +14,11 @@
                         multiple ng2FileSelect [uploader]="uploader">
                     </div>
                     <div>
-                        <div class="row uploadList" *ngFor="let item of uploader">
-                            <div class="col-sm-4">{{item.file.libelle}}</div>
+                        <div class="row uploadList" *ngFor="let item of uploader.queue">
+                            <div class="col-sm-4">{{item.file.name}}</div>
                             <div class="col-sm-4">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-striped bg-warning" 
+                                    <div class="progress-bar progress-bar-striped bg-warning"
                                     [ngStyle]="{'width':item.progress+'%'}"></div>
                                 </div>
                             </div>
@@ -26,12 +26,12 @@
                                     <button type="button" class="btn btn-dark " (click)="item.upload()">Upload</button>
                                     <button type="button" class="btn btn-light" (click)="item.remove()">Cancel</button>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                     <div class="row" *ngIf="uploader?.queue?.length > 0">
                             <button type="button" class="btn btn-primary bb" (click)="uploader.uploadAll()">Upload All</button>
                     </div>
-                </div>                
+                </div>
             </div>
 
             <div class="row card">
