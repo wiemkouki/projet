@@ -5,7 +5,7 @@ import { FileService } from '../../services/file.service';
 import { saveAs } from 'file-saver-es';
 
 // var md5 = require('md5');
-
+ let fd = new FormData();
 const uri = 'http://localhost:3000/file/upload';
 @Component({
   selector: 'app-upload-files',

@@ -64,7 +64,8 @@ const Routes: Routes = [
   { path: '', component: CatalogComponent },
   { path: 'test', component: TestComponent },
   {
-    path: 'admin', component: AdmindashComponent,
+    path: 'admin', component: AdmindashComponent,canActivate: [AdminGuard],
+
     children: [
       { path: 'users', component: CrudUserComponent },
       { path: 'stock', component: CrudStockComponent },
@@ -83,8 +84,7 @@ const Routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   {
-    path: 'profil', component: ProfilComponent  ,
-     children: [
+    path: 'profil', component: ProfilComponent , canActivate: [AdminGuard], children: [
       { path: 'edit', component: EditComponent }]
   },
 
