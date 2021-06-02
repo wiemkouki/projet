@@ -2,20 +2,21 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import {AuthService} from './services/auth.service';
-export class User {
-  static role: string;
 
+export class User {
   constructor(
-    public token: string,
+
     public role: string,
 
 
   ) {}
 }
+
 @Injectable({
   providedIn: 'root'
 })
 export class AdminGuard implements CanActivate {
+  user: User;
 constructor(private auth :AuthService,private router: Router){}
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -23,9 +24,9 @@ constructor(private auth :AuthService,private router: Router){}
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
       if (this.auth.isLoggedIn()){
-        localStorage.setItem("role", User.role);
+        localStorage.setItem("role", this.user.role);
 
-        if (localStorage.getItem('role')=="Administrateur"){
+        if (localStorage.getItem("role")==="Administrateur"){
           return true;
         }
         return this.router.parseUrl("/admin");

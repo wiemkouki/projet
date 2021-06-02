@@ -6,7 +6,7 @@ import { SocialAuthService, FacebookLoginProvider, GoogleLoginProvider, SocialUs
 import { HttpClient } from '@angular/common/http';
 import { param } from 'express-validator';
 export class User {
-  static token: any;
+
   constructor(
     public id: number,
     public email: string,
@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
 
-    // let fd = new FormData();
+  
 
     const { email, password } = this.form;
 
@@ -85,7 +85,7 @@ export class LoginComponent implements OnInit {
         if (localStorage.getItem("role") === "Livreur") {
           this.router.navigate(['/liv'])
         } else if (localStorage.getItem("role") === "Administrateur") {
-          
+
           this.router.navigate(['/admin'])
         } else if (localStorage.getItem("role") === "Sup_Administrateur") {
 
