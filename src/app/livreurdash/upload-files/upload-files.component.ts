@@ -20,18 +20,18 @@ export class UploadFilesComponent {
 
   constructor(private fileService:FileService){
 
-      this.uploader.onCompleteItem = (item:any, response:any , status:any, headers:any) => {
-          this.attachmentList.push(JSON.parse(response));
-      }
+    this.uploader.onCompleteItem = (item:any, response:any , status:any, headers:any) => {
+      this.attachmentList.push(JSON.parse(response));
   }
+}
 
-  download(index){
-      var filename = this.attachmentList[index].uploadname;
+download(index){
+  var filename = this.attachmentList[index].uploadname;
 
-      this.fileService.downloadFile(filename)
-      .subscribe(
-          data => saveAs(data, filename),
-          error => console.error(error)
-      );
-  }
+  this.fileService.downloadFile(filename)
+  .subscribe(
+      data => saveAs(data, filename),
+      error => console.error(error)
+  );
+}
 }

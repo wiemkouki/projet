@@ -8,7 +8,7 @@
         background-image: url('assets/img/slider-1.jpg');
         background-size: 100% 100%;
         transform: translate(-50%, -50%);
-        animation:Slider 13s infinite linear;
+        animation:Slider 9s infinite linear;
         box-shadow: 1px 2px 10px 5px white;
     }
  
@@ -34,6 +34,24 @@
     .h {
         margin-top: 18%;
     }
+    .scroll-hide ul {
+    max-height: 100px;
+    max-width: 200px;
+    border: 2px solid #f3f3f3;
+    padding-left: 16px;
+    overflow: auto;
+    /* this will hide the scrollbar in mozilla based browsers */
+    overflow: -moz-scrollbars-none;
+    scrollbar-width: none;
+    /* this will hide the scrollbar in internet explorers */
+    -ms-overflow-style: none;
+  }
+  
+  /* this will hide the scrollbar in webkit based browsers - safari, chrome, etc */
+  .scroll-hide ul::-webkit-scrollbar { 
+    width: 0 !important;
+    display: none; 
+  }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
@@ -92,14 +110,14 @@
   
    </mat-toolbar>
  
-
-        
+<!-- 
+<body class="scroll-hide"> -->
 
         <!-- Bottom Bar End -->       
         
         <!-- Main Slider Start -->
         <div class="header">
-            <div class="container-fluid">
+            <div class="container-fluid" >
                 <div class="row">
                     <div class="col-md-3">
                         <nav class="navbar bg-light">
@@ -258,7 +276,7 @@
         <!-- Call to Action End -->       
         
         <!-- Featured Product Start -->
-        <div class="featured-product product">
+        <div class="featured-product product" class="scroll-hide">
             <div class="container-fluid">
                 <div class="section-header">
                     <h1>Featured Product</h1>
@@ -534,7 +552,7 @@
         
         <!-- Back to Top -->
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-        
+      <!-- </body> -->
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>

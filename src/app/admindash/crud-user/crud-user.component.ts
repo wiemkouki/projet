@@ -31,7 +31,7 @@ export class CrudUserComponent implements OnInit {
   closeResult: string;
   title = 'datatables';
  dtOptions: DataTables.Settings = {};
- dtTrigger: Subject<any> = new Subject<any>();
+//  dtTrigger: Subject<any> = new Subject<any>();
  users = [];
  dtElement: any;
 
@@ -74,7 +74,7 @@ getUsers(){
 
    this.users = response as any;
  
-   this.dtTrigger.next();
+  //  this.dtTrigger.next();
 
 
  });
@@ -166,10 +166,7 @@ if (reason === ModalDismissReasons.ESC) {
 }
 }
 
-ngOnDestroy(): void {
-  // Do not forget to unsubscribe the event
-  this.dtTrigger.unsubscribe();
-}
+
 
 }
 

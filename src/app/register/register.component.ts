@@ -89,7 +89,7 @@ reloadPage(): void {
 }
 loginWithFacebook(): void {
   this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-  // this.router.navigate(['/profil'])
+  this.router.navigate(['/profil'])
 }
 
 signOut(): void {

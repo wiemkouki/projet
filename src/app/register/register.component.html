@@ -3,17 +3,21 @@
 	  <img src="../assets/daijaraIcon.png" width=" 118,327px" alt="">
 	  <div fxShow="true" fxHide.lt-md="true"  class="input-group">
 		<input  type="text" class="form-control" placeholder="Tout nos catégories">
-    <button type="submit"><i class="fa fa-search b"></i></button>
+    <!-- <button type="submit"><i class="fa fa-search b"></i></button> -->
 		<!-- <div class="input-group-append">
 		  <button class="btn btn-secondary" type="button">
 			<i class="fa fa-search"></i>
 		  </button>
 		</div> -->
+   
 	  </div>
 	  <img width="20px" height="20px" src="../assets/user.png" alt="">
 	  <a mat-button [routerLink]="'/login'">  S' IDENTIFIER </a>
-
-	  <a mat-button [routerLink]="'/cart'"> <img src="../assets/image.png" width="50px" height="50px" alt=""> PANIER </a>
+    <a [routerLink]="'/cart'" class="btn cart"> 
+      <i class="fa fa-shopping-cart"></i>
+      <!-- <img src="../assets/image.png" width="50px" height="50px" alt=""> -->
+      <span>(0)</span> </a>
+	  <!-- <a mat-button [routerLink]="'/cart'"> <img src="../assets/image.png" width="50px" height="50px" alt=""> PANIER </a> -->
 
 
 	</mat-toolbar-row>
@@ -52,7 +56,8 @@
 <div class="col-md-6">
 <div class="card">
 <header class="card-header">
-  <div class="row omb_row-sm-offset-3 omb_socialButtons">
+  <!-- <div class="row omb_row-sm-offset-3 omb_socialButtons">
+
     <div class="col-xs-2 col-sm-2">
       <a class="btn btn-lg btn-block omb_btn-facebook"  >
         <i class="fa fa-facebook visible-xs" ></i>
@@ -71,8 +76,14 @@
         <span class="hidden-xs"(click)="loginWithGoogle()">Gmail</span>
       </a>
     </div>
-  </div>
-	<h4 class="card-title mt-2">Inscrivez vous!</h4>
+  </div> -->
+  <!-- <h4 class="card-title mt-2">Inscrivez vous!</h4> -->
+    <hr class="my-4"> <button class="btn btn-lg btn-google btn-block " (click)="loginWithGoogle()"  type="submit">
+      <i class="fab fa-google mr-2"></i> S'inscrire avec Google</button> 
+      <button class="btn btn-lg btn-facebook btn-block " (click)="loginWithFacebook()" type="submit">
+        <i class="fab fa-facebook-f mr-2" ></i> S'inscrire avec Facebook</button>
+
+	
 </header>
 <article class="card-body">
 <form *ngIf="!isSuccessful"
@@ -148,7 +159,7 @@
 		</select>
 	  </div>
     <div class="form-group">
-        <button  type="submit" class="btn btn-warning  btn-block" > S'inscrire </button>
+        <button  type="submit" class="btn btn-light  btn-block" > S'inscrire </button>
   <!-- form-group// -->
 
     </div>
