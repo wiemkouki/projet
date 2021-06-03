@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FileSelectDirective, FileUploader} from 'ng2-file-upload';
 import { FileService } from '../../services/file.service';
-// import {saveAs} from 'file-saver';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { saveAs } from 'file-saver-es';
 
-// var md5 = require('md5');
  let fd = new FormData();
 const uri = 'http://localhost:3000/file/upload';
 @Component({
@@ -13,17 +12,30 @@ const uri = 'http://localhost:3000/file/upload';
   styleUrls: ['./upload-files.component.scss'],
   providers:[FileService]
 })
-export class UploadFilesComponent {
-  uploader:FileUploader = new FileUploader({url:uri});
+export class UploadFilesComponent 
+{
+  uploader:FileUploader;
 
+  uploadedFiles: Array < File > ;
   attachmentList:any = [];
 
-  constructor(private fileService:FileService){
-
-    this.uploader.onCompleteItem = (item:any, response:any , status:any, headers:any) => {
-      this.attachmentList.push(JSON.parse(response));
+  constructor(private http: HttpClient ,private fileService:FileService)
+  {
+    
   }
-}
+
+  fileUpload(files)
+  {
+    let file = files[0];
+
+    let formData = new FormData();
+
+    formData.append("file", file);
+
+    let id = localStorage.getItem("id");
+
+    this.fileService.Save(formData, id).subscribe(data => console.log(data));
+  }
 
 download(index){
   var filename = this.attachmentList[index].uploadname;

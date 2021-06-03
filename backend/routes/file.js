@@ -17,18 +17,35 @@ var store = multer.diskStorage({
       cb(null, './uploads');
   },
   filename:function(req,file,cb){
-      cb(null, Date.now()+'.'+file.originalname);
+      cb(null, file.originalname);
   }
 });
 
 
 var upload = multer({storage:store}).single('file');
 
-router.post('/upload', function(req,res,next){
-  upload(req,res,function(err){
-      if(err){
-          return res.status(501).json({error:err});
+router.post('/upload/:id', function(req,res,next){
+  upload(req, res, function(err)
+  {
+      if (err)
+      {
+        console.log(err);
+
+        return res.status(501).json({error:err});
       }
+
+      console.log(req.file.originalname);
+
+      doc_justificatifs
+            .create({
+              libelle:req.file.originalname,
+              url_doc:req.file.originalname,
+              is_valide: false,
+              createdAt: new Date(),
+              updatedAt: new Date(),
+              id_livreur: req.params.id
+            });
+
       //do all database record saving activity
       return res.json({originalname:req.file.originalname, uploadname:req.file.filename});
   });

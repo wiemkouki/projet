@@ -21,8 +21,10 @@ export class FileService {
         });
     }
 
-    Save() {
-        const url = `http://localhost:3000/file/upload`;
-        return this.http.post(url, { headers: this.headerrs });
+    Save(formData, id) 
+    {
+        const url = `http://localhost:3000/file/upload/${id}`;
+
+        return this.http.post(url, formData, { });
       }
 }

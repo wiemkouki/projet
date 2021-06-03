@@ -27,13 +27,14 @@ constructor(private auth :AuthService,private router: Router){}
         localStorage.setItem("role", this.user.role);
 
         if (localStorage.getItem("role")==="Administrateur"){
-          return true;
-        }
+
         return this.router.parseUrl("/admin");
 
-  }else{
+        }
+      }else{
   window.alert('You don\'t have permission to view this page');
   return this.router.parseUrl("/");
-}}
+}
+}
 
 }
