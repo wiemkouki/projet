@@ -10,6 +10,9 @@ export class SupdashComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    user=>{
+      localStorage.setItem("role", user.user.role);
+    }
   }
 
 }

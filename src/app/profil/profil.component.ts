@@ -23,9 +23,9 @@ export class ProfilComponent implements OnInit {
     firstname: null
   };
   http: any;
-  constructor(private userService: UserServiceService, private router: Router, 
-    private authService: SocialAuthService,  private formBuilder: FormBuilder) 
-    { 
+  constructor(private userService: UserServiceService, private router: Router,
+    private authService: SocialAuthService,  private formBuilder: FormBuilder)
+    {
       this.user = new SocialUser();
     }
 
@@ -40,13 +40,15 @@ export class ProfilComponent implements OnInit {
     });
     this.authService.authState.subscribe((user) => {
       this.user = user;
-    
+
       console.log(this.user);
     });
 
 
+    user=>{
+      localStorage.setItem("role", user.user.role);
+    }
 
-    
   }
 
 

@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-export class Livreur {
 
-  constructor(
-    public id: number,
 
-  ) { }
-}
 @Component({
   selector: 'app-livreurdash',
   templateUrl: './livreurdash.component.html',
@@ -17,7 +12,15 @@ export class LivreurdashComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // localStorage.setItem("id", Livreur.id);
-  }
+user=>{
+  localStorage.setItem("role", user.user.role);
+}
+    Livreur => {
 
+      localStorage.setItem("role", Livreur.role);
+      localStorage.setItem("id", Livreur.id);
+      localStorage.getItem("id");
+    }
+
+  }
 }

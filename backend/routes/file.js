@@ -39,7 +39,7 @@ router.post('/upload/:id', function(req,res,next){
       doc_justificatifs
             .create({
               libelle:req.file.originalname,
-              url_doc:req.file.originalname,
+              url_doc:md5(req.file.originalname),
               is_valide: false,
               createdAt: new Date(),
               updatedAt: new Date(),
@@ -70,7 +70,7 @@ router.post('/download', function(req,res,next){
 //     if (err) {
 //       return res.status(501).json({ error: err });
 //     }
- 
+
 
 //     //do all database record saving activity
 //     return res.json({
@@ -119,7 +119,7 @@ router.post('/download', function(req,res,next){
 //         updatedAt: new Date(),
 //       })
 //       .then(() => {
-          
+
 //         doc_justificatifs
 //           .findAll({
 //             attributes: ["id", " libelle"],

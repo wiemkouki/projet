@@ -12,7 +12,7 @@ const uri = 'http://localhost:3000/file/upload';
   styleUrls: ['./upload-files.component.scss'],
   providers:[FileService]
 })
-export class UploadFilesComponent 
+export class UploadFilesComponent
 {
   uploader:FileUploader;
 
@@ -21,7 +21,7 @@ export class UploadFilesComponent
 
   constructor(private http: HttpClient ,private fileService:FileService)
   {
-    
+
   }
 
   fileUpload(files)
@@ -31,7 +31,7 @@ export class UploadFilesComponent
     let formData = new FormData();
 
     formData.append("file", file);
-
+    
     let id = localStorage.getItem("id");
 
     this.fileService.Save(formData, id).subscribe(data => console.log(data));

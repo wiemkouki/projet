@@ -10,6 +10,10 @@ export class AdmindashComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
+    user=>{
+      localStorage.setItem("role", user.user.role);
+    }
   }
 
 }
