@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
 
         console.log(user);
         localStorage.setItem("role", user.user.role);
-        
+        localStorage.setItem("id", user.user.id);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
 

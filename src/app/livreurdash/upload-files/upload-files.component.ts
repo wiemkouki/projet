@@ -31,7 +31,7 @@ export class UploadFilesComponent
     let formData = new FormData();
 
     formData.append("file", file);
-    
+
     let id = localStorage.getItem("id");
 
     this.fileService.Save(formData, id).subscribe(data => console.log(data));

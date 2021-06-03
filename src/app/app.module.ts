@@ -83,7 +83,7 @@ const Routes: Routes = [
   },
 
   {
-    path: 'admin', component: AdmindashComponent, 
+    path: 'admin', component: AdmindashComponent,
     children: [
       { path: 'users', component: CrudUserComponent },
       { path: 'stock', component: CrudStockComponent },
@@ -96,7 +96,7 @@ const Routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   {
-    path: 'profil', component: ProfilComponent ,  children: [
+    path: 'profil', component: ProfilComponent , children: [
       { path: 'edit', component: EditComponent }]
   },
 

@@ -12,15 +12,6 @@ export class LivreurdashComponent implements OnInit {
 
 
   ngOnInit(): void {
-user=>{
-  localStorage.setItem("role", user.user.role);
-}
-    Livreur => {
-
-      localStorage.setItem("role", Livreur.role);
-      localStorage.setItem("id", Livreur.id);
-      localStorage.getItem("id");
-    }
 
   }
 }
