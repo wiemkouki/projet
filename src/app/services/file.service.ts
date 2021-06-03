@@ -1,7 +1,6 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from "@angular/core";
-// import 'rxjs/Rx';
-import {Observable} from 'rxjs';
+
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -21,7 +20,7 @@ export class FileService {
         });
     }
 
-    Save(formData, id) 
+    Save(formData, id)
     {
         const url = `http://localhost:3000/file/upload/${id}`;
 

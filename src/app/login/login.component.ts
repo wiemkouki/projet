@@ -5,19 +5,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SocialAuthService, FacebookLoginProvider, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 import { HttpClient } from '@angular/common/http';
 import { param } from 'express-validator';
-export class User {
+// export class User {
 
-  constructor(
-    public id: number,
-    public email: string,
-    public role: string,
+//   constructor(
+//     public id: number,
+//     public email: string,
+//     public role: string,
 
-    public is_deleted: boolean,
-    public createdAt: string,
-    public updatedAt: string,
+//     public is_deleted: boolean,
+//     public createdAt: string,
+//     public updatedAt: string,
 
-  ) { }
-}
+//   ) { }
+// }
 
 @Component({
   selector: 'app-login',
@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
 
-  
+
 
     const { email, password } = this.form;
 
@@ -79,6 +79,7 @@ export class LoginComponent implements OnInit {
       user => {
         console.log(user);
         localStorage.setItem("role", user.user.role);
+        localStorage.setItem("id", user.user.id);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
 
