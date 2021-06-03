@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "id_categorie",
         as: "categorie",
       });
-      Sup_admin.hasMany(models.doc_justificatifs, {
+      Sup_admin.hasOne(models.doc_justificatifs, {
         foreignKey: "id_doc_justificatifs",
         as: "doc_justificatifs",
       });

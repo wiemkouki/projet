@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "id_livreur",
         as: "livreur",
       });
-      doc_justificatifs.belongsTo(models.Sup_admin, {
+      doc_justificatifs.hasMany(models.Sup_admin, {
         foreignKey: "id_sup_admin",
         as: "sup_admin",
       });

@@ -57,6 +57,22 @@ router.post('/download', function(req,res,next){
   res.sendFile(filepath);
 });
 
+router.get("/activate/:id", function (req, res) {
+  let id_livreur = req.params.id;
+  doc_justificatifs.findByPk(id_livreur, {
+include: [{ model: Livreurs, attributes: ['id_livreur'], as: 'livreur'}],
+}).then((files) => {
+    try {
+      files.update({
+        is_active: true,
+      });
+      prepareResponse(res, 200, { success: true }, "application/json");
+    } catch (error) {
+      console.log(error);
+      prepareResponse(res, 500, { success: false }, "application/json");
+    }
+  });
+});
 
 
 
