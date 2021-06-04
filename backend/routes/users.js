@@ -156,7 +156,7 @@ router.post("/signin", function (req, res, next) {
                 prepareResponse(res, 500, response, "application/json");
               } else {
 
-                
+
                  await storeToken(res, token);
 
                 const current = {
@@ -412,7 +412,7 @@ router.get("/confirm/:token", (req, res) => {
               is_active: true,
             })
             .then((user) => res.redirect("http://localhost:4200/liv/upload"))
-            .catch(error);
+            .catch(error => console.log(error));
         } else if (user.role == "Administrateur") {
           const new_admin = await Admin.create({
             id_user: user.id,

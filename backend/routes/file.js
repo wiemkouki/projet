@@ -58,13 +58,14 @@ router.post('/download', function(req,res,next){
 });
 
 router.get("/activate/:id", function (req, res) {
-  let id_livreur = req.params.id;
-  doc_justificatifs.findByPk(id_livreur, {
+  let id = req.params.id;
+  doc_justificatifs.findByPk(id, {
 include: [{ model: Livreurs, attributes: ['id_livreur'], as: 'livreur'}],
 }).then((files) => {
     try {
       files.update({
         is_active: true,
+        updatedAt: new Date()
       });
       prepareResponse(res, 200, { success: true }, "application/json");
     } catch (error) {
@@ -77,84 +78,5 @@ include: [{ model: Livreurs, attributes: ['id_livreur'], as: 'livreur'}],
 
 
 
-
-
-// var single = multer({ storage: storage }).single("image");
-
-// router.post("/upload", function (req, res, next) {
-//   single(req, res, function (err) {
-//     if (err) {
-//       return res.status(501).json({ error: err });
-//     }
-
-
-//     //do all database record saving activity
-//     return res.json({
-//       originalname: req.file.originalname,
-//       uploadname: req.file.filename,
-//     });
-//   });
-// });
-
-// router.post("/download", function (req, res, next) {
-//   filepath = path.join(__dirname, "../uploads") + "/" + req.body.filename;
-//   res.sendFile(filepath);
-// });
-
-// router.post("/", function (req, res, next) {
-//   single(req, res, function (err) {
-//     if (err instanceof multer.MulterError) {
-//       const response = {
-//         success: false,
-//         message:
-//           "Some internal server error has occured while attempting to proceed ",
-//       };
-
-//       prepareResponse(res, 500, response, "application/json");
-//     } else if (err) {
-//       const response = {
-//         success: false,
-//         message:
-//           "Some internal server error has occured while attempting to proceed " +
-//           "with your request, please try again.",
-//       };
-
-//       prepareResponse(res, 500, response, "application/json");
-//     }
-
-//     console.log(req.body);
-
-//     let { id, libelle, url_doc } = req.body;
-//     doc_justificatifs
-//       .create({
-//         id,
-//         libelle,
-//         url_doc,
-//         is_valide: false,
-//         createdAt: new Date(),
-//         updatedAt: new Date(),
-//       })
-//       .then(() => {
-
-//         doc_justificatifs
-//           .findAll({
-//             attributes: ["id", " libelle"],
-//             order: [["createdAt", "DESC"]],
-//             include: [{ model: Livreurs, attributes: ["id"], as: "livreur" }],
-//           })
-//           .then((docs) => {
-//             prepareResponse(res, 200, docs, "application/json");
-//           })
-//           .catch((error) => {
-//             const response = {
-//               success: false,
-//               message: "Some internal ",
-//             };
-
-//             prepareResponse(res, 500, response, "application/json");
-//           });
-//       });
-//   });
-// });
 
 module.exports = router;

@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         as: "commande",
       });
       Livreur.hasMany(models.doc_justificatifs, {
-        foreignKey: "id_doc_justificatifs",
+        foreignKey: "id",
         as: "doc_justificatifs",
       });
       Livreur.belongsTo(models.User, { foreignKey: "id_user", as: "user" });
