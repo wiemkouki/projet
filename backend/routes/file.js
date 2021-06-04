@@ -4,12 +4,57 @@ var multer = require("multer");
 var md5 = require("md5");
 const fs = require("fs");
 var path = require("path");
-const { doc_justificatifs, Livreurs } = require("../models");
+const { doc_justificatifs, Livreur } = require("../models");
+
 const prepareResponse = (response, status, body, type) => {
   console.log(body);
   response.set("Content-Type", type);
   response.status(status).send(body);
 };
+
+
+
+
+
+
+router.get("/getAll", function (req, res, next) {
+  doc_justificatifs
+  .findAll({ 
+    attributes: ["id","libelle", "url_doc",
+    "createdAt", "updatedAt"],
+    where: {
+      is_valide: 0
+    }
+    })
+    .then((doc) => {
+      prepareResponse(res, 200, doc, "application/json");
+      console.log(doc);
+    })
+    .catch((error) => {
+      const response = {
+        success: false,
+        message:
+          "Some internal server error has occured while attempting to proceed " +
+          "with your request, please try again.",
+      };
+
+      prepareResponse(res, 500, response, "application/json");
+    });
+});
+
+//get doc by id
+router.get("/getDoc/:id", async function (req, res, next) {
+  let id = req.params.id;
+  const doc = await doc_justificatifs.findByPk(id,
+    { attributes: ["id","libelle", "url_doc", "createdAt",
+    "updatedAt"]
+ }
+ );
+
+  prepareResponse(res, 200, doc, "application/json");
+});
+
+
 
 
 var store = multer.diskStorage({

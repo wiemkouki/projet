@@ -150,7 +150,7 @@
       </button>
     </div>
     <div class="modal-body">
-      <h2>Are you sure you want to delete this record.</h2>
+      <h2>Are you sure you want to delete this record?</h2>
       <div class="border text-center" >
         <button data-dismiss="modal" class="btn btn-danger" *ngIf="!is_deleted" (click)="onDelete()">Yes, Delete!</button>
       </div>
@@ -231,7 +231,6 @@
 
 
 
-
   <ng-template #content let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">New Product</h4>
@@ -265,6 +264,7 @@
             <input id="max_rating" class="form-control" name="max_rating"  ngModel >
           </div>
         </div>
+
         <div class="form-group">
           <label for="description">Description</label>
           <div class="input-group">
