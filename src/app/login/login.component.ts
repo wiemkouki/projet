@@ -68,6 +68,10 @@ export class LoginComponent implements OnInit {
         console.log(user);
         localStorage.setItem("role", user.user.role);
         localStorage.setItem("id", user.user.id);
+        Livreur=>{
+          localStorage.setItem("id_liv", Livreur.id);
+        }
+        localStorage.getItem("id_liv");
         this.isLoginFailed = false;
         this.isLoggedIn = true;
 
