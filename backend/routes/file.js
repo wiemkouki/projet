@@ -11,11 +11,14 @@ const prepareResponse = (response, status, body, type) => {
   response.set("Content-Type", type);
   response.status(status).send(body);
 };
-
-
-
-
-
+async function readFile(filePath) {
+  try {
+    const data = await fs.readFile(filePath);
+    console.log(data.toString());
+  } catch (error) {
+    console.error(`Got an error trying to read the file: ${error.message}`);
+  }
+}
 
 router.get("/getAll", function (req, res, next) {
   doc_justificatifs
