@@ -1,5 +1,6 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from "@angular/core";
+import { Observable, throwError } from 'rxjs';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,6 +20,15 @@ export class FileService {
             headers:new HttpHeaders().append('Content-Type','application/json')
         });
     }
+
+
+    download(url: string): Observable<Blob> {
+        return this.http.get(url, {
+          responseType: 'blob'
+        })
+      }
+
+
 
     Save(formData, id)
     {

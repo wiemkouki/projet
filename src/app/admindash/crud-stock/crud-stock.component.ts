@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from '../../services/product.service';
+import {  EventEmitter } from '@angular/core';
+// 
+
 export class Produit {
   constructor(
     public id: string,
@@ -36,7 +39,10 @@ export class CrudStockComponent implements OnInit {
   dtElement: any;
   is_deleted: boolean = false;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private modalService: NgbModal, private productService: ProductService) { }
+  constructor(private fb: FormBuilder, private http: HttpClient,
+     private modalService: NgbModal, private productService: ProductService) {
+ 
+      }
 
   ngOnInit(): void {
     this.dtOptions = {

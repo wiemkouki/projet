@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from 'ng2-file-upload';
 import { AppComponent } from './app.component';
 import { NgxPopper } from 'angular-popper';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatSidenavModule } from "@angular/material/sidenav";
@@ -16,7 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from "../app/utils/navbar/navbar.component";
-import { WavesModule, ButtonsModule, IconsModule } from 'angular-bootstrap-md'
+import { WavesModule, ButtonsModule, IconsModule, MDBBootstrapModule } from 'angular-bootstrap-md'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -49,15 +49,12 @@ import { Prod6Component } from './product/prod6/prod6.component';
 import { Prod7Component } from './product/prod7/prod7.component';
 import { Prod8Component } from './product/prod8/prod8.component';
 import { NgxSpinnerModule } from "ngx-spinner";
-
-
+import { AngularFileViewerModule } from '@taldor-ltd/angular-file-viewer';
 import { CmdeComponent } from './admindash/cmde/cmde.component';
 import { CrudStockComponent } from './admindash/crud-stock/crud-stock.component';
 import { EditComponent } from './profil/edit/edit.component';
-
 import { CrudSScatComponent } from './supdash/crud-categorie/crud-sscat/crud-sscat.component';
 import { CrudCategorieComponent } from './supdash/crud-categorie/crud-categorie.component';
-
 import { LivreurdashComponent } from './livreurdash/livreurdash.component';
 import { UploadFilesComponent } from './livreurdash/upload-files/upload-files.component';
 import { CrudCmdeComponent } from './livreurdash/crud-cmde/crud-cmde.component';
@@ -96,7 +93,7 @@ const Routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   {
-    path: 'profil', component: ProfilComponent , children: [
+    path: 'profil', component: ProfilComponent, children: [
       { path: 'edit', component: EditComponent }]
   },
 
@@ -187,10 +184,14 @@ const Routes: Routes = [
     MatButtonModule,
     MatInputModule,
     NgxPopper,
-    NgbModule
-    , MatCardModule,
+    NgbModule,
+    AngularFileViewerModule,
+    MatCardModule,
     FileUploadModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MDBBootstrapModule.forRoot(),
+    NoopAnimationsModule,
+
 
   ],
   providers: [UserServiceService,
