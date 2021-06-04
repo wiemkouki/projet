@@ -4,7 +4,7 @@ var multer = require("multer");
 var md5 = require("md5");
 const fs = require("fs");
 var path = require("path");
-const { doc_justificatifs, Livreur } = require("../models");
+const { doc_justificatifs, Livreurs } = require("../models");
 
 const prepareResponse = (response, status, body, type) => {
   console.log(body);
@@ -19,7 +19,7 @@ const prepareResponse = (response, status, body, type) => {
 
 router.get("/getAll", function (req, res, next) {
   doc_justificatifs
-  .findAll({ 
+  .findAll({
     attributes: ["id","libelle", "url_doc",
     "createdAt", "updatedAt"],
     where: {
@@ -102,7 +102,7 @@ router.post('/download', function(req,res,next){
   res.sendFile(filepath);
 });
 
-router.put("/activate/:id", function (req, res) {
+router.put("/valide/:id", function (req, res) {
   let id = req.params.id;
       doc_justificatifs.findByPk(id, {
       attributes: ["id"],
