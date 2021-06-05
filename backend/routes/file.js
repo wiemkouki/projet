@@ -35,7 +35,7 @@ router.get("/getList", function (req, res, next) {
 
     doc_justificatifs.forEach((file) => {
       fileInfos.push({
-        name: file,
+        libelle: file,
         url: baseUrl + file,
       });
     });
@@ -44,8 +44,8 @@ router.get("/getList", function (req, res, next) {
   });
 
 })
-router.get("/downfile/:lib", function (req, res, next) {
-  const fileName = req.params.libelle;
+router.get("/downfile/:fileName", function (req, res, next) {
+  const fileName = req.params.fileName;
   const directoryPath = __dirname + "/../uploads/";
 
   res.download(directoryPath + fileName, fileName, (err) => {
