@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Livreur.init(
     {
-      nom: DataTypes.STRING,
+      name: DataTypes.STRING,
       tel: DataTypes.INTEGER,
       adresse: DataTypes.STRING,
       permis: DataTypes.STRING,

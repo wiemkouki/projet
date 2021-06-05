@@ -49,7 +49,7 @@ import { Prod6Component } from './product/prod6/prod6.component';
 import { Prod7Component } from './product/prod7/prod7.component';
 import { Prod8Component } from './product/prod8/prod8.component';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { AngularFileViewerModule } from '@taldor-ltd/angular-file-viewer';
+// import { AngularFileViewerModule } from '@taldor-ltd/angular-file-viewer';
 import { CmdeComponent } from './admindash/cmde/cmde.component';
 import { CrudStockComponent } from './admindash/crud-stock/crud-stock.component';
 import { EditComponent } from './profil/edit/edit.component';
@@ -60,6 +60,7 @@ import { UploadFilesComponent } from './livreurdash/upload-files/upload-files.co
 import { CrudCmdeComponent } from './livreurdash/crud-cmde/crud-cmde.component';
 import { SupdashComponent } from './supdash/supdash.component';
 import { CrudDocComponent } from './supdash/crud-doc/crud-doc.component';
+import { LivProfilComponent } from './livreurdash/liv-profil/liv-profil.component';
 
 const Routes: Routes = [
 
@@ -68,14 +69,12 @@ const Routes: Routes = [
   {
     path: 'sup', component: SupdashComponent,
     children: [
-      {
-        path: 'categorie', component: CrudCategorieComponent,
-        children: [
-          { path: 'ss_categorie', component: CrudSScatComponent }
-        ]
+      {path: 'categorie', component: CrudCategorieComponent,
+        children: [{ path: 'ss_categorie', component: CrudSScatComponent}]
       },
 
       { path: 'doc', component: CrudDocComponent }
+
     ]
   },
 
@@ -100,7 +99,8 @@ const Routes: Routes = [
   {
     path: 'liv', component: LivreurdashComponent, children: [
       { path: 'upload', component: UploadFilesComponent },
-      { path: 'cmd', component: CrudCmdeComponent }]
+      { path: 'cmd', component: CrudCmdeComponent },
+      { path: 'profil', component: LivProfilComponent }]
   },
 
 
@@ -153,7 +153,8 @@ const Routes: Routes = [
     UploadFilesComponent,
     CrudCmdeComponent,
     SupdashComponent,
-    CrudDocComponent
+    CrudDocComponent,
+    LivProfilComponent
 
 
 
@@ -185,7 +186,7 @@ const Routes: Routes = [
     MatInputModule,
     NgxPopper,
     NgbModule,
-    AngularFileViewerModule,
+    // AngularFileViewerModule,
     MatCardModule,
     FileUploadModule,
     NgxSpinnerModule,
