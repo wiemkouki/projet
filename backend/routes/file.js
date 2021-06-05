@@ -4,6 +4,7 @@ var multer = require("multer");
 var md5 = require("md5");
 const fs = require("fs");
 var path = require("path");
+const baseUrl = "http://localhost:3000/file/";
 const { doc_justificatifs, Livreurs } = require("../models");
 
 const prepareResponse = (response, status, body, type) => {
@@ -19,6 +20,45 @@ async function readFile(filePath) {
     console.error(`Got an error trying to read the file: ${error.message}`);
   }
 }
+router.get("/getList", function (req, res, next) {
+
+  const directoryPath = __dirname + "/../uploads/";
+
+  fs.readdir(directoryPath, function (err, doc_justificatifs) {
+    if (err) {
+      res.status(500).send({
+        message: "Unable to scan files!",
+      });
+    }
+
+    let fileInfos = [];
+
+    doc_justificatifs.forEach((file) => {
+      fileInfos.push({
+        name: file,
+        url: baseUrl + file,
+      });
+    });
+
+    return res.status(200).send(fileInfos);
+  });
+
+})
+router.get("/downfile/:lib", function (req, res, next) {
+  const fileName = req.params.libelle;
+  const directoryPath = __dirname + "/../uploads/";
+
+  res.download(directoryPath + fileName, fileName, (err) => {
+    if (err) {
+      res.status(500).send({
+        message: "Could not download the file. " + err,
+      });
+    }
+  });
+})
+
+
+
 
 router.get("/getAll", function (req, res, next) {
   doc_justificatifs
