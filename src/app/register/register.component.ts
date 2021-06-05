@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
   errorMessage = '';
   isSuccessful = false;
   isSignUpFailed = false;
- 
+
 
   constructor(private userService: UserServiceService,
      private router:Router,
@@ -67,15 +67,12 @@ export class RegisterComponent implements OnInit {
 onSubmit(): void {
 
   const {  email, password,role } = this.form;
-
-
-
   this.userService.register( email, password, role).subscribe(
     data => {
       console.log(data);
       this.isSuccessful = true;
       this.isSignUpFailed = false;
-     
+
     },
     err => {
       this.errorMessage = err.error.message;

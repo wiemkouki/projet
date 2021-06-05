@@ -9,8 +9,8 @@ const prepareResponse = (response, status, body, type) => {
   response.status(status).send(body);
 };
 //UPDATE
-router.put("/up/:id", function (req, res) {
-  let id = req.params.id;
+router.put("/up", function (req, res) {
+  // let id = req.params.id;
   Livreurs.findByPk(id,
     { attributes: ["id"] }).then((livreur) => {
       try {
