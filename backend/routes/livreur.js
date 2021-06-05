@@ -9,18 +9,19 @@ const prepareResponse = (response, status, body, type) => {
   response.status(status).send(body);
 };
 //UPDATE
-router.put("/up", function (req, res) {
-  // let id = req.params.id;
+router.put("/up/:id", function (req, res) {
+  let id = req.params.id;
   Livreurs.findByPk(id,
     { attributes: ["id"] }).then((livreur) => {
       try {
-        let {  tel, adresse, cin,permis ,name} = req.body;
+        let {  name,tel, adresse, cin,permis} = req.body;
         livreur.update({
+          name,
           tel,
           cin,
           adresse,
           permis,
-          name,
+         
           updatedAt: new Date(),
         })
         prepareResponse(res, 200, { success: true}, "application/json");

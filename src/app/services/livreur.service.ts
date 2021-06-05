@@ -11,8 +11,8 @@ const httpOptions = {
 export class LivreurService {
   constructor(private http: HttpClient) { }
 
-  update( name: string, tel: number, adresse: string): Observable<any> {
-    return this.http.put('http://localhost:3000/livreur/up', {
+  update(id:string, name: string, tel: number, adresse: string): Observable<any> {
+    return this.http.put(`http://localhost:3000/livreur/up/${id}`, {
       name,
       tel,
       adresse

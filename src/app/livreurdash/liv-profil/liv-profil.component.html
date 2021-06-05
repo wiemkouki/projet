@@ -17,26 +17,29 @@
               </div>
 
               <div class="row mt-3">
-                  <div class="col-md-12"><label class="labels">Nom & Prénom</label><input type="text" class="form-control"
+                  <div class="col-md-12"><label class="labels">Nom & Prénom</label>
+                    <input type="text" class="form-control"
                     name="name"
                     [(ngModel)]="form.name"
                     required
-                   name
+                     name
                     #name="ngModel" ></div>
-                  <div class="col-md-12"><label class="labels">Telephone</label><input type="text" class="form-control"
+                  <div class="col-md-12"><label class="labels">Telephone</label>
+                    <input type="text" class="form-control"
                     name="tel"
                     [(ngModel)]="form.tel"
                     required
                     tel
                     #tel="ngModel"></div>
-                  <div class="col-md-12"><label class="labels">Adresse</label><input type="text" class="form-control"
+                  <div class="col-md-12"><label class="labels">Adresse</label>
+                    <input type="text" class="form-control"
                     name="adresse"
                     [(ngModel)]="form.adresse"
                     required
                     adresse
                     #adresse="ngModel" ></div>
               </div>
-              <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+              <div class="mt-5 text-center"><button class="btn btn-light  btn-block" type="submit">Save Profile</button></div>
 
 
             </div>

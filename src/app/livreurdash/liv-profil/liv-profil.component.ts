@@ -16,9 +16,9 @@ export class LivProfilComponent implements OnInit {
   isLoggedin: boolean = null;
   form: any = {
 
-    email: null,
-    role:null,
-    password: null
+    name: null,
+    tel:null,
+    adresse: null
   };
   isLoggedIn = false;
   isLoginFailed = false;
@@ -34,12 +34,13 @@ export class LivProfilComponent implements OnInit {
     this.updateForm = this.formBuilder.group({
       name: ['', Validators.required],
       tel: ['', Validators.required],
-      adresse: ['', Validators.required]
+      adresse:['', Validators.required]
     });}
 
   onSubmit(): void {
-    const {  name, tel, adresse } = this.form;
-    this.livservice.update(name, tel, adresse).subscribe(
+    const {name, tel, adresse } = this.form;
+    let id = localStorage.getItem("id");
+    this.livservice.update(id,name, tel, adresse).subscribe(
       data => {
         console.log(data);
         this.isSuccessful = true;
