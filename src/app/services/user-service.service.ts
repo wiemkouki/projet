@@ -51,12 +51,12 @@ export class UserServiceService {
       }, httpOptions)
   }
 
-  updateC(id: number, name: string, tel: number, adresse: string, avatar: string): Observable<any> {
+  updateC(id: string, name: string, tel: number, adresse: string): Observable<any> {
     return this.http.post(this.api_prefixx + `/updateC/${id}`, {
       name,
       tel,
-      adresse,
-      avatar
+      adresse
+      
     }, httpOptions)
 
   }

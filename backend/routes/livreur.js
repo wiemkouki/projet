@@ -33,7 +33,7 @@ router.put("/up/:id", function (req, res) {
 });
 
 
-///get client
+///get Livreurs
 router.get("/get/:id", async function (req, res, next) {
   let id = req.params.id;
 
@@ -42,7 +42,8 @@ router.get("/get/:id", async function (req, res, next) {
   prepareResponse(res, 200, livreur, "application/json");
 });
 
-//get ALL CLient
+
+//get ALL Livreurs
 
 router.get("/getAll", function (req, res, next) {
   Livreurs.findAll({ attributes: ["id", "name", "tel", "adresse"] }
