@@ -38,7 +38,7 @@ export class LivProfilComponent implements OnInit {
     });}
 
   onSubmit(): void {
-    const {name, tel, adresse } = this.form;
+    const { name, tel, adresse } = this.form;
     let id = localStorage.getItem("id");
     this.livservice.update(id,name, tel, adresse).subscribe(
       data => {

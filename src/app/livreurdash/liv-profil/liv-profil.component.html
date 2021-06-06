@@ -24,6 +24,12 @@
                     required
                      name
                     #name="ngModel" ></div>
+                    <div
+                    class="alert alert-danger"
+                    role="alert"
+                    *ngIf="name.errors && f.submitted"
+                  >Veuillez remplir ce champ !
+                  </div>
                   <div class="col-md-12"><label class="labels">Telephone</label>
                     <input type="text" class="form-control"
                     name="tel"
@@ -31,6 +37,12 @@
                     required
                     tel
                     #tel="ngModel"></div>
+                    <div
+                    class="alert alert-danger"
+                    role="alert"
+                    *ngIf="tel.errors && f.submitted"
+                  >Veuillez remplir ce champ !
+                  </div>
                   <div class="col-md-12"><label class="labels">Adresse</label>
                     <input type="text" class="form-control"
                     name="adresse"
@@ -39,6 +51,12 @@
                     adresse
                     #adresse="ngModel" ></div>
               </div>
+              <div
+                    class="alert alert-danger"
+                    role="alert"
+                    *ngIf="adresse.errors && f.submitted"
+                  >Veuillez remplir ce champ !
+                  </div>
               <div class="mt-5 text-center"><button class="btn btn-light  btn-block" type="submit">Save Profile</button></div>
 
 

@@ -166,9 +166,27 @@ router.put("/valide/:id", function (req, res) {
     }
   });
 });
+router.put("/delete/:id", function (req, res) {
+  let id = req.params.id;
+      doc_justificatifs.findByPk(id, {
+      attributes: ["id"],
+      include: [{ model: Livreurs, attributes: ['id'], as: 'livreur'}],
 
+    }).then((file) => {
 
-
+      try {
+      file.update({
+        is_deleted: true,
+        updatedAt: new Date()
+      });
+      prepareResponse(res, 200, { success: true }, "application/json");
+      }
+      catch (error) {
+      console.log(error);
+      prepareResponse(res, 500, { success: false }, "application/json");
+    }
+  });
+});
 
 
 module.exports = router;
