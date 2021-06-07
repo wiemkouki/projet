@@ -12,6 +12,8 @@ export class LivreurdashComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    Livreur=>{
+      localStorage.setItem("id_liv", Livreur.id);
+    }
   }
 }

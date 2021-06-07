@@ -52,13 +52,17 @@ export class CrudCmdeComponent implements OnInit {
 
 //Affichage cmdes
 getCmd(){
+  (Livreur)=>{
+    localStorage.setItem("id_liv", Livreur.id);
+
+localStorage.getItem("id_liv");
   this.http.get('http://localhost:3000/cmde/getAll')
  .subscribe( response => {
    console.log(response);
    this.cmdes = response as any;
    this.dtTrigger.next();
  });
-
+  }
  }
 
 
