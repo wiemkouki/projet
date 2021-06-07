@@ -60,18 +60,19 @@ router.get("/downfile/:fileName", function (req, res, next) {
 
 
 
-router.get("/getAll", function (req, res, next) {
-  doc_justificatifs
+router.get("/getAll", async function (req, res, next) {
+ const doc = await doc_justificatifs
   .findAll({
     attributes: ["id","libelle", "url_doc",
     "createdAt", "updatedAt"],
+    include: [{ model: Livreurs, attributes: ['name'], as:'livreur'}],
     where: {
       is_valide: 0
     }
     })
     .then((doc) => {
       prepareResponse(res, 200, doc, "application/json");
-      console.log(doc);
+      console.log(JSON.stringify(doc, null, 2));
     })
     .catch((error) => {
       const response = {
@@ -90,7 +91,8 @@ router.get("/getDoc/:id", async function (req, res, next) {
   let id = req.params.id;
   const doc = await doc_justificatifs.findByPk(id,
     { attributes: ["id","libelle", "url_doc", "createdAt",
-    "updatedAt"]
+    "updatedAt"],
+
  }
  );
 

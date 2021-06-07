@@ -1,8 +1,6 @@
 var express = require("express");
 var router = express.Router();
 const { Livreurs } = require("../models");
-
-
 const prepareResponse = (response, status, body, type) => {
   console.log(body);
   response.set("Content-Type", type);
@@ -14,14 +12,11 @@ router.put("/up/:id", function (req, res) {
   Livreurs.findByPk(id,
     { attributes: ["id"] }).then((livreur) => {
       try {
-        let {  name,tel, adresse, cin,permis} = req.body;
+        let { name, tel, adresse} = req.body;
         livreur.update({
           name,
           tel,
-          cin,
           adresse,
-          permis,
-         
           updatedAt: new Date(),
         })
         prepareResponse(res, 200, { success: true}, "application/json");
