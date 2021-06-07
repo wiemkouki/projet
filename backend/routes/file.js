@@ -63,8 +63,7 @@ router.get("/downfile/:fileName", function (req, res, next) {
 router.get("/getAll", async function (req, res, next) {
  const doc = await doc_justificatifs
   .findAll({
-    attributes: ["id","libelle", "url_doc",
-    "createdAt", "updatedAt"],
+    attributes: ["id","libelle", "url_doc"],
     include: [{ model: Livreurs, attributes: ['name'], as:'livreur'}],
     where: {
       is_valide: 0
