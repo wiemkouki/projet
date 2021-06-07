@@ -237,18 +237,16 @@ width: 2em;
 }
 
 
-@media (min-width: 768px) {
-  .omb_login .omb_forgotPwd {
-      text-align: right;
-  margin-top:10px;
- }
+
+.span {
+  color: #fffdfd;
+
 }
-.btnn {
-  color: #FF6F61;
-  background: #ffffff;
-  border: 1px solid #FF6F61;
-  border-radius: 15px 15px;
-}
-.cart-page .table button.btn-cart {
-  width: auto;
-}
+
+// .btn:hover,
+// .btn:active,
+// .btn:focus {
+//     color: #ffffff;
+//     background: #FF6F61;
+//     box-shadow: none;
+// }

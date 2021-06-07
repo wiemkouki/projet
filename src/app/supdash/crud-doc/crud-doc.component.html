@@ -2,8 +2,9 @@
     <thead>
  
        <tr>
-         <th>ID</th>
-         <th>libelle</th>
+  
+         <th>Nom de livreur</th>
+         <th>Nom de fichier</th>
          <th>Url</th>
    
          <th colspan="3" width="6%">
@@ -13,9 +14,9 @@
      </thead>
      <tbody>
        <tr *ngFor="let doc of docs">
-         <td><span>{{ doc.id }}</span></td>
+         <td><span>{{ doc.id_livreur }}</span></td>
          <td><span>{{ doc.libelle }}</span></td>
-         <td><span>{{ doc.url_doc }}</span></td>
+         <td><span>backend/uploads/{{ doc.url_doc }}</span></td>
  
          <td><button class="btn btn-warning" (click)="openEdit(contentEdit, user)">
              <i class="fa fa-valid"></i> Valid</button> </td>

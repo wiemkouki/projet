@@ -2,18 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 // import { FileService } from '../../services/file.service';
-
 export class doc_justificatifs {
   constructor(
     public id: number,
-    public libelle: string,
-    public url_doc: string,
-    public is_valide: Date,
+    public id_livreur: number,
+ 
     public createdAt: string,
     public updatedAt: string,
-
-  ) { }
+  
+  ) {} 
 }
+
 @Component({
   selector: 'app-crud-doc',
   templateUrl: './crud-doc.component.html',
@@ -22,8 +21,10 @@ export class doc_justificatifs {
 export class CrudDocComponent implements OnInit {
   closeResult: string;
   title = 'datatables';
+
   dtOptions: DataTables.Settings = {};
   docs = [];
+  livs = [];
   dtElement: any;
 
 
@@ -38,6 +39,15 @@ export class CrudDocComponent implements OnInit {
       processing: true
     }
     this.getDoc();
+    this.getLiv();
+  }
+  getLiv() {
+    this.http.get('http://localhost:3000/livreur/getAll')
+      .subscribe(response => {
+        console.log(response);
+       
+        this.livs = response as any;
+      });
   }
 
   // Affichage docs
@@ -46,6 +56,7 @@ export class CrudDocComponent implements OnInit {
       .subscribe(response => {
         console.log(response);
         this.docs = response as any;
+        this.livs = response as any;
       });
   }
 
