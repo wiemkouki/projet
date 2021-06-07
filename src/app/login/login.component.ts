@@ -76,13 +76,13 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
 
         if (localStorage.getItem("role") === "Livreur") {
-          this.router.navigate(['/liv'])
+          this.router.navigate(['/liv/upload'])
         } else if (localStorage.getItem("role") === "Administrateur") {
 
-          this.router.navigate(['/admin'])
+          this.router.navigate(['/admin/users'])
         } else if (localStorage.getItem("role") === "Sup_Administrateur") {
 
-          this.router.navigate(['/admin'])
+          this.router.navigate(['/sup/doc'])
         } else if (localStorage.getItem("role") === "Client") {
 
           this.router.navigate(['/profil'])
