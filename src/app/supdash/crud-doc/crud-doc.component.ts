@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-// import { FileService } from '../../services/file.service';
-export class doc_justificatifs {
-  constructor(
-    public id: number,
-    public id_livreur: number,
+import { FileService } from '../../services/file.service';
+import { UserServiceService } from '../../services/user-service.service';
+
+// export class doc_justificatifs {
+//   constructor(
+//     public id: number,
+//     public id_livreur: number,
  
-    public createdAt: string,
-    public updatedAt: string,
+//     public createdAt: string,
+//     public updatedAt: string,
   
-  ) {} 
-}
+//   ) {} 
+// }
 
 @Component({
   selector: 'app-crud-doc',
@@ -29,7 +31,7 @@ export class CrudDocComponent implements OnInit {
 
 
   constructor( private http: HttpClient, private modalService: NgbModal
-    // , private fileService: FileService
+    , private userService: UserServiceService
     ) { }
 
   ngOnInit(): void {
@@ -56,11 +58,19 @@ export class CrudDocComponent implements OnInit {
       .subscribe(response => {
         console.log(response);
         this.docs = response as any;
-        this.livs = response as any;
+       
       });
   }
 
-
+  onValid(id: number) {
+      this.userService.valid(id)
+        .subscribe((response) => {
+          console.log(response);
+          this.docs = response as any;
+          this.ngOnInit();
+        });
+      }
+    
 }
 
 

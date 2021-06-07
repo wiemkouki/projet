@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UserServiceService } from '../../services/user-service.service';
-import { Subject } from 'rxjs';
+
 import { NgxSpinnerService } from "ngx-spinner";  
-import { NgxSpinnerModule } from 'ngx-spinner';
+
 export class User {
   constructor(
     public id: number,
@@ -66,7 +66,7 @@ export class CrudUserComponent implements OnInit {
 
 //Affichage users
 getUsers(){
-  this.SpinnerService.show();  
+
   this.http.get('http://localhost:3000/users/getAll')
  .subscribe( response => {
 
@@ -78,11 +78,11 @@ getUsers(){
 
 
  });
- this.SpinnerService.hide();  
+
  }
 
 
-//bouton Edit
+
 
 
 //bouton Delete

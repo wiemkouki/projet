@@ -51,6 +51,12 @@ export class UserServiceService {
       }, httpOptions)
   }
 
+
+  valid(id: number) {
+    const url = `http://localhost:3000/file/valide/${id}`;
+    return this.http.put(url, { headers: this.headerrs });
+  }
+  
   updateC(id: string, name: string, tel: number, adresse: string): Observable<any> {
     return this.http.post(this.api_prefixx + `/updateC/${id}`, {
       name,

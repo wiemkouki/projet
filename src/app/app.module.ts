@@ -61,6 +61,7 @@ import { CrudCmdeComponent } from './livreurdash/crud-cmde/crud-cmde.component';
 import { SupdashComponent } from './supdash/supdash.component';
 import { CrudDocComponent } from './supdash/crud-doc/crud-doc.component';
 import { LivProfilComponent } from './livreurdash/liv-profil/liv-profil.component';
+import { DocValidComponent } from './supdash/doc-valid/doc-valid.component';
 
 const Routes: Routes = [
 
@@ -74,7 +75,9 @@ const Routes: Routes = [
       },
 
       { path: 'doc', component: CrudDocComponent }
+      ,
 
+      { path: 'valid', component: DocValidComponent }
     ]
   },
 
@@ -153,7 +156,8 @@ const Routes: Routes = [
     CrudCmdeComponent,
     SupdashComponent,
     CrudDocComponent,
-    LivProfilComponent
+    LivProfilComponent,
+    DocValidComponent
 
 
 
