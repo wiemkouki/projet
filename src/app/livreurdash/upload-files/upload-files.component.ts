@@ -1,28 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { FileSelectDirective, FileUploader} from 'ng2-file-upload';
+import { FileUploader} from 'ng2-file-upload';
 import { FileService } from '../../services/file.service';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { saveAs } from 'file-saver-es';
 
- let fd = new FormData();
-const uri = 'http://localhost:3000/file/upload';
 @Component({
   selector: 'app-upload-files',
   templateUrl: './upload-files.component.html',
   styleUrls: ['./upload-files.component.scss'],
   providers:[FileService]
 })
-export class UploadFilesComponent
+export class UploadFilesComponent implements OnInit
 {
   uploader:FileUploader;
 
   uploadedFiles: Array < File > ;
   attachmentList:any = [];
 
-  constructor(private http: HttpClient ,private fileService:FileService)
-  {
+  constructor(private http: HttpClient ,private fileService:FileService){}
 
-  }
+  ngOnInit(): void {}
 
   fileUpload(files)
   {
@@ -32,7 +29,7 @@ export class UploadFilesComponent
 
     formData.append("file", file);
 
-    let id = localStorage.getItem("id");
+    let id = localStorage.getItem("id_liv");
 
     this.fileService.Save(formData, id).subscribe(data => console.log(data));
   }

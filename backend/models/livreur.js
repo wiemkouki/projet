@@ -11,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "id",
         as: "doc_justificatifs",
       });
-      Livreur.belongsTo(models.User, { foreignKey: "id_user", as: "user" });
+      Livreur.belongsTo(models.User, {
+        foreignKey: "id_user",
+        as: "user",
+      });
     }
   }
 
