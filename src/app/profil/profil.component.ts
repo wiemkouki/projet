@@ -4,7 +4,19 @@ import { UserServiceService } from '../services/user-service.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SocialAuthService } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
+export class User {
 
+  constructor(
+    public id: number,
+    public email: string,
+    public role: string,
+
+    public is_deleted: boolean,
+    public createdAt: string,
+    public updatedAt: string,
+
+  ) { }
+}
 
 @Component({
   selector: 'app-profil',
@@ -36,7 +48,7 @@ export class ProfilComponent implements OnInit {
       email: ['', Validators.required],
       photoUrl: ['', Validators.required],
       name: ['', Validators.required],
-      firstname: ['', Validators.required],
+    
     });
     this.authService.authState.subscribe((user) => {
       this.user = user;
@@ -52,23 +64,6 @@ export class ProfilComponent implements OnInit {
   }
 
 
-  //  this.activatedRoute.paramMap.subscribe(
-  //     (p: ParamMap) => {
-  //       this.userService.getClient(p.get('id')).subscribe(
-  //         (client : Client) => {
-  //           this.client = client;
-  //         },
-  //         (error) => {
-  //           console.log("Error with getClient");
-  //         }
-  //       )
-  //     },
-
-  //     (error) => {
-  //       console.log("Error with paramMap");
-  //     }
-  //   )
-  // }
 
 
 

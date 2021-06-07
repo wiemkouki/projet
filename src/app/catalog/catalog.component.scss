@@ -155,8 +155,13 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
     color: #FF6F61;
     background: #ffffff;
     border: 1px solid #FF6F61;
+    font-size: 11px;
 }
-
+.span {
+    color: #fffdfd;
+    font-size:14px;
+  
+  }
 .btn:hover,
 .btn:active,
 .btn:focus {

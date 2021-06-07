@@ -52,7 +52,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 // import { AngularFileViewerModule } from '@taldor-ltd/angular-file-viewer';
 import { CmdeComponent } from './admindash/cmde/cmde.component';
 import { CrudStockComponent } from './admindash/crud-stock/crud-stock.component';
-import { EditComponent } from './profil/edit/edit.component';
+
 import { CrudSScatComponent } from './supdash/crud-categorie/crud-sscat/crud-sscat.component';
 import { CrudCategorieComponent } from './supdash/crud-categorie/crud-categorie.component';
 import { LivreurdashComponent } from './livreurdash/livreurdash.component';
@@ -92,8 +92,7 @@ const Routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   {
-    path: 'profil', component: ProfilComponent, children: [
-      { path: 'edit', component: EditComponent }]
+    path: 'profil', component: ProfilComponent
   },
 
   {
@@ -147,7 +146,7 @@ const Routes: Routes = [
     CrudSScatComponent,
     CmdeComponent,
     CrudStockComponent,
-    EditComponent,
+ 
     CrudCategorieComponent,
     LivreurdashComponent,
     UploadFilesComponent,
