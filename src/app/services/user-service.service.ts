@@ -57,6 +57,19 @@ export class UserServiceService {
     return this.http.put(url, { headers: this.headerrs });
   }
   
+
+  
+  downfile(fileName: Blob) {
+    const url = `http://localhost:3000/file/downfile/${fileName}`;
+    return this.http.get(url, { headers: this.headerrs });
+  }
+  download() {
+    const url = `http://localhost:3000/file/download`;
+    return this.http.post(url, { headers: this.headerrs });
+  }
+
+
+  
   updateC(id: string, name: string, tel: number, adresse: string): Observable<any> {
     return this.http.post(this.api_prefixx + `/updateC/${id}`, {
       name,

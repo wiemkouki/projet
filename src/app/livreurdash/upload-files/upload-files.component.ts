@@ -12,6 +12,13 @@ import { saveAs } from 'file-saver-es';
 })
 export class UploadFilesComponent implements OnInit
 {
+  closeResult: string;
+  title = 'datatables';
+
+  dtOptions: DataTables.Settings = {};
+  docs = [];
+  dtElement: any;
+
   uploader:FileUploader;
 
   uploadedFiles: Array < File > ;
@@ -19,8 +26,24 @@ export class UploadFilesComponent implements OnInit
 
   constructor(private http: HttpClient ,private fileService:FileService){}
 
-  ngOnInit(): void {}
-
+  ngOnInit(): void {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 2,
+      processing: true
+    }
+    this.getDoc();
+ 
+  }
+  // Affichage docs
+  getDoc() {
+    this.http.get('http://localhost:3000/file/getAll')
+      .subscribe(response => {
+        console.log(response);
+        this.docs = response as any;
+       
+      });
+  }
   fileUpload(files)
   {
     let file = files[0];
@@ -43,4 +66,25 @@ download(index){
       error => console.error(error)
   );
 }
+//bouton Delete
+// openDelete(targetModal, id: string) {
+//   this.deleteID = id;
+//   this.modalService.open(targetModal, {
+//     backdrop: 'static',
+//     size: 'lg'
+//   });
+// }
+
+// onDelete(is_deleted: boolean) {
+// console.log(this.deleteID)
+//   this.userService.deleteUser(parseInt(this.deleteID))
+//     .subscribe((response) => {
+//       console.log(response);
+//       this.users = response;
+//       is_deleted=true;
+  
+//       this.modalService.dismissAll();
+
+//     });
+//   }
 }

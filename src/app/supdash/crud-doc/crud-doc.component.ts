@@ -4,16 +4,18 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FileService } from '../../services/file.service';
 import { UserServiceService } from '../../services/user-service.service';
 
-// export class doc_justificatifs {
-//   constructor(
-//     public id: number,
-//     public id_livreur: number,
+import {saveAs} from 'file-saver';
+
+export class doc_justificatifs {
+  constructor(
+    public id: number,
+    public libelle: string,
  
-//     public createdAt: string,
-//     public updatedAt: string,
+    public createdAt: string,
+    public updatedAt: string,
   
-//   ) {} 
-// }
+  ) {} 
+}
 
 @Component({
   selector: 'app-crud-doc',
@@ -21,12 +23,14 @@ import { UserServiceService } from '../../services/user-service.service';
   styleUrls: ['./crud-doc.component.scss']
 })
 export class CrudDocComponent implements OnInit {
+   
+    
+ 
   closeResult: string;
   title = 'datatables';
 
   dtOptions: DataTables.Settings = {};
   docs = [];
-  livs = [];
   dtElement: any;
 
 
@@ -41,16 +45,9 @@ export class CrudDocComponent implements OnInit {
       processing: true
     }
     this.getDoc();
-    this.getLiv();
+ 
   }
-  getLiv() {
-    this.http.get('http://localhost:3000/livreur/getAll')
-      .subscribe(response => {
-        console.log(response);
-       
-        this.livs = response as any;
-      });
-  }
+
 
   // Affichage docs
   getDoc() {
@@ -70,7 +67,37 @@ export class CrudDocComponent implements OnInit {
           this.ngOnInit();
         });
       }
+
+
+      onDownfile(fileName: Blob) {
+        this.userService.downfile(fileName)
+          .subscribe((response) => {
+            console.log(response);
+            this.docs = response as any;
+            this.ngOnInit();
+          });
+        }
+
+        onDownload() {
+          this.userService.download()
+            .subscribe((response) => {
+              console.log(response);
+              this.docs = response as any;
+              this.ngOnInit();
+            });
+          }
+        
+
+        //   download(filename){
+        //     var filename = this.libelle;
     
+        //     this._fileService.downloadFile(filename)
+        //     .subscribe(
+        //         data => saveAs(data, filename),
+        //         error => console.error(error)
+        //     );
+        // }
+        
 }
 
 
