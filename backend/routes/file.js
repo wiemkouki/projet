@@ -58,8 +58,32 @@ router.get("/downfile/:fileName", function (req, res, next) {
 })
 
 
+//DELETE doc
+
+router.delete("/delete/:id", function (req, res) {
+  let id = req.params.id;
+  doc_justificatifs.destroy({
+    where: {
+      id
+    }
+  })
+  .then((doc) =>
+  {
+
+    prepareResponse(res, 200, { success: true }, "application/json");
+
+  })
+  .catch((error)  =>
+{
+  prepareResponse(res, 500, { success: false }, "application/json");
+}
+
+  )
+     
+});
 
 
+//GET ALL
 router.get("/getAll", async function (req, res, next) {
  const doc = await doc_justificatifs
   .findAll({

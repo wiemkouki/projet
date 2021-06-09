@@ -15,6 +15,7 @@ module.exports = {
       url_doc: {
         type: Sequelize.STRING
       },
+
       is_valide: {
         type: Sequelize.BOOLEAN
       },
