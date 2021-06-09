@@ -3,6 +3,20 @@ import { FileUploader} from 'ng2-file-upload';
 import { FileService } from '../../services/file.service';
 import { HttpClient } from '@angular/common/http';
 import { saveAs } from 'file-saver-es';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+
+import { UserServiceService } from '../../services/user-service.service';
+
+export class doc_justificatifs {
+  constructor(
+    public id: number,
+    public libelle: string,
+ 
+    public createdAt: string,
+    public updatedAt: string,
+  
+  ) {} 
+}
 
 @Component({
   selector: 'app-upload-files',
@@ -19,12 +33,17 @@ export class UploadFilesComponent implements OnInit
   docs = [];
   dtElement: any;
 
+  is_deleted: boolean = false;
+  deleteID: string;
   uploader:FileUploader;
 
   uploadedFiles: Array < File > ;
   attachmentList:any = [];
 
-  constructor(private http: HttpClient ,private fileService:FileService){}
+  constructor(private http: HttpClient 
+    ,private fileService:FileService
+    ,private userService: UserServiceService
+    ,private modalService: NgbModal ){}
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -67,24 +86,22 @@ download(index){
   );
 }
 //bouton Delete
-// openDelete(targetModal, id: string) {
-//   this.deleteID = id;
-//   this.modalService.open(targetModal, {
-//     backdrop: 'static',
-//     size: 'lg'
-//   });
-// }
+openDelete(targetModal, id: string) {
+  this.deleteID = id;
+  this.modalService.open(targetModal, {
+    backdrop: 'static',
+    size: 'lg'
+  });
+}
 
-// onDelete(is_deleted: boolean) {
-// console.log(this.deleteID)
-//   this.userService.deleteUser(parseInt(this.deleteID))
-//     .subscribe((response) => {
-//       console.log(response);
-//       this.users = response;
-//       is_deleted=true;
-  
-//       this.modalService.dismissAll();
+onDelete(id: string) {
+  console.log( this.deleteID);
+  this.userService.deleteDoc( this.deleteID)
+    .subscribe((response) => {
+      console.log(response);
+      this.docs = response;
+      this.modalService.dismissAll();
 
-//     });
-//   }
+    });
+  }
 }

@@ -68,8 +68,13 @@ export class UserServiceService {
     return this.http.post(url, { headers: this.headerrs });
   }
 
-
+  deleteDoc(id: string): Observable<any>{
+    return this.http.delete(`http://localhost:3000/file/delete/${id}`);
+   }
   
+
+
+   
   updateC(id: string, name: string, tel: number, adresse: string): Observable<any> {
     return this.http.post(this.api_prefixx + `/updateC/${id}`, {
       name,
@@ -77,6 +82,10 @@ export class UserServiceService {
       adresse
       
     }, httpOptions)
+
+
+    
+
 
   }
 
