@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       tel: DataTypes.INTEGER,
       adresse: DataTypes.STRING,
-      is_deleted: DataTypes.BOOLEAN,
+      // is_deleted: DataTypes.BOOLEAN,
       id_user: {
         type: DataTypes.INTEGER,
         allowNull: false,

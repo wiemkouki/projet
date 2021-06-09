@@ -15,13 +15,14 @@ const prepareResponse = (response, status, body, type) => {
       { attributes: ["id"] }).
       then((fiche) => {
         try {
-          let { description,
+          let { caract_principale,
             taille,
             couleur,
             modele,
             matiere,} = req.body;
+
           fiche.update({
-            description,
+            caract_principale,
             taille,
             couleur,
             modele,
