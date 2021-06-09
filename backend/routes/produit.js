@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const { Produit } = require("../models");
+const { Produit,fiche_teches } = require("../models");
 
 
 const prepareResponse = (response, status, body, type) => {
@@ -56,8 +56,9 @@ router.post("/createP", function (req, res, next) {
         libelle: req.body.libelle,
       },
     }
-  ).then((pdt) => {
-    if (pdt) {
+  ).then(async (pdt) => {
+    if (pdt)
+    {
       const response = {
         success: false,
         message: "Produit already exist !",
@@ -65,9 +66,9 @@ router.post("/createP", function (req, res, next) {
       prepareResponse(res, 500, response, "application/json");
     } else {
       let { id,libelle,marque,prix,max_rating,description,} = req.body;
-  Produit.create({
-    id,
-      libelle,
+      const produit = await Produit.create({
+        id,
+        libelle,
         marque,
         prix,
         max_rating,
@@ -75,14 +76,20 @@ router.post("/createP", function (req, res, next) {
         is_deleted: false,
         createdAt: new Date(),
         updatedAt: new Date(),
-      });
+      })
+      fiche_teches.create({
+        id_produit:produit.id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      })
       const response = {
         success: true,
         message: "Produit created successfully.",
       };
       prepareResponse(res, 200, response, "application/json");
     }
-  });
+  })
+  .catch((error) => console.log(error));
 });
 
 

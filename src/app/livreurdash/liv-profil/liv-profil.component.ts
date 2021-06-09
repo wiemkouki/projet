@@ -16,7 +16,7 @@ export class LivProfilComponent implements OnInit {
   isLoggedin: boolean = null;
   form: any = {
 
-    name: null,
+    fullname: null,
     tel:null,
     adresse: null
   };
@@ -32,15 +32,16 @@ export class LivProfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      fullname: ['', Validators.required],
       tel: ['', Validators.required],
       adresse:['', Validators.required]
     });}
 
   onSubmit(): void {
-    const { name, tel, adresse } = this.form;
+    const { fullname, tel, adresse } = this.form;
     let id = localStorage.getItem("id");
-    this.livservice.update(id,name, tel, adresse).subscribe(
+    console.log(this.form);
+    this.livservice.update(id,fullname, tel, adresse).subscribe(
       data => {
         console.log(data);
         this.isSuccessful = true;

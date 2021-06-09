@@ -29,7 +29,7 @@ export class UploadFilesComponent implements OnInit
 
     formData.append("file", file);
 
-    let id = localStorage.getItem("id_liv");
+    let id = localStorage.getItem("id");
 
     this.fileService.Save(formData, id).subscribe(data => console.log(data));
   }
