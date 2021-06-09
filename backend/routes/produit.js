@@ -112,24 +112,26 @@ router.post('/uploadPic/:id', function(req,res,next){
       {  console.log(err);
         return res.status(501).json({error:err});
       }
+      else{
+        Produit.findOne({attributes:["id","libelle", "marque", "prix", "max_rating","description","createdAt",
+        "updatedAt"],
+       where: { id_produit: req.params.id  } }).then((pdt)=>{
       console.log(req.file.originalname);
       console.log(req.params.id);
-    // const livreur=  await Livreurs.findOne({id:req.params.id})
-    //   console.log(livreur)
-
       images_produit
             .create({
-
-              url:md5(req.file.originalname),
+              url:req.file.originalname,
               is_deleted: false,
               createdAt: new Date(),
               updatedAt: new Date(),
-              id_produit: req.params.id
+              id_produit:id
             });
-
+            })
       //do all database record saving activity
       return res.json({originalname:req.file.originalname, uploadname:req.file.filename});
-  });
+
+          }
+   });
 });
 
 //UPDATE

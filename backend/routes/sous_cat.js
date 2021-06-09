@@ -12,17 +12,18 @@ const prepareResponse = (response, status, body, type) => {
 router.get("/getssCat/:id", async function (req, res, next) {
 
     let id = req.params.id;
-  
+
     const cat = await Sous_cat.findByPk(id);
-  
+
     prepareResponse(res, 200, cat, "application/json");
   });
-  
+
   //GET ALL
-  
+
   router.get("/getAll", function (req, res, next) {
     Sous_cat
     .findAll({ attributes: ["id", "nom_ss_cat"],
+    include: [{ model: categorie , attributes: ['nom_cat'], as:'categorie'}],
     where: {
       is_deleted: 0
     } } )
@@ -38,7 +39,7 @@ router.get("/getssCat/:id", async function (req, res, next) {
         };
       });
   });
-  
+
   //CREATE CATEGORIE
   router.post("/create", function (req, res, next) {
     Sous_cat
@@ -53,7 +54,7 @@ router.get("/getssCat/:id", async function (req, res, next) {
           const resp = {
             success: false,
             message: "SUBCATEGORIE already exist !",
-          } 
+          }
           prepareResponse(res, 500, resp ,"application/json");
         } else {
           let { nom_ss_cat} = req.body;
@@ -75,12 +76,12 @@ router.get("/getssCat/:id", async function (req, res, next) {
   router.put("/update/:id", function (req, res) {
 
     let id = req.params.id;
-    Sous_cat.findByPk(id, 
+    Sous_cat.findByPk(id,
      {attributes:["id"]})
      .then((ss_cat) => {
       try {
         let { nom_ss_cat} = req.body;
-  
+
         ss_cat
           .update({
             nom_ss_cat,
@@ -95,7 +96,7 @@ router.get("/getssCat/:id", async function (req, res, next) {
     });
   });
   //DELETE CATEGORIE
-  
+
   router.get("/delete/:id", function (req, res) {
     let id = req.params.id;
     Sous_cat.findByPk(id,

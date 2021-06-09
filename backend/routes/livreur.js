@@ -18,7 +18,6 @@ router.put("/up/:id", function (req, res) {
           name,
           tel,
           adresse,
-        
           updatedAt: new Date(),
         })
         prepareResponse(res, 200, { success: true}, "application/json");
