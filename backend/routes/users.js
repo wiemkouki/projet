@@ -403,7 +403,6 @@ router.get("/confirm/:token", (req, res) => {
           const new_liv = await Livreurs.create({
             id_user: user.id,
             token,
-
             createdAt: new Date(),
             updatedAt: new Date(),
           });

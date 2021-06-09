@@ -9,6 +9,7 @@ const prepareResponse = (response, status, body, type) => {
 //UPDATE
 router.put("/up/:id", function (req, res) {
   let id = req.params.id;
+  console.log(req.body);
   Livreurs.findByPk(id,
     { attributes: ["id"] }).then((livreur) => {
       try {

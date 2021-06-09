@@ -5,7 +5,7 @@ var md5 = require("md5");
 const fs = require("fs");
 var path = require("path");
 const baseUrl = "http://localhost:3000/file/";
-const { doc_justificatifs, Livreurs } = require("../models");
+const { doc_justificatifs, Livreurs , User} = require("../models");
 
 const prepareResponse = (response, status, body, type) => {
   console.log(body);
@@ -106,11 +106,11 @@ router.get("/getValid", async function (req, res, next) {
            "Some internal server error has occured while attempting to proceed " +
            "with your request, please try again.",
        };
- 
+
        prepareResponse(res, 500, response, "application/json");
      });
  });
- 
+
 //get doc by id
 router.get("/getDoc/:id", async function (req, res, next) {
   let id = req.params.id;
@@ -150,7 +150,7 @@ router.post('/upload/:id', function(req,res,next){
       }
 
       console.log(req.file.originalname);
-
+      console.log(req.params.id);
       doc_justificatifs
             .create({
               libelle:req.file.originalname,
