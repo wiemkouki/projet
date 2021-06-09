@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   fiche_tech.init({
-    description: DataTypes.STRING,
+    caract_principale: DataTypes.STRING,
     taille: DataTypes.INTEGER,
     couleur: DataTypes.STRING,
     modele: DataTypes.STRING,

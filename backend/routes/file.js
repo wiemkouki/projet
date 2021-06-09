@@ -140,27 +140,34 @@ var store = multer.diskStorage({
 var upload = multer({storage:store}).single('file');
 
 router.post('/upload/:id', function(req,res,next){
-  upload(req, res, function(err)
+  upload(req, res, async function(err)
   {
       if (err)
-      {
-        console.log(err);
-
+      {  console.log(err);
         return res.status(501).json({error:err});
       }
-
+      else{
       console.log(req.file.originalname);
       console.log(req.params.id);
-      doc_justificatifs
-            .create({
-              libelle:req.file.originalname,
-              url_doc:md5(req.file.originalname),
-              is_valide: false,
-              createdAt: new Date(),
-              updatedAt: new Date(),
-              id_livreur: req.params.id
-            });
+     Livreurs.findOne({attributes:["id","name", "tel", "adresse"],
+       where: { id_user: req.params.id  } }).then((livreur)=>{
+       try {
+        doc_justificatifs
+        .create({
+          libelle:req.file.originalname,
+          url_doc:md5(req.file.originalname),
+          is_valide: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          id_livreur: livreur.id
+        });
+       } catch (error) {
+        console.log(error);
+        prepareResponse(res, 500, { success: false }, "application/json");
+       }
 
+     })
+    }
       //do all database record saving activity
       return res.json({originalname:req.file.originalname, uploadname:req.file.filename});
   });

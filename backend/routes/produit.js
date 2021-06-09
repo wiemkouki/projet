@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
-const { Produit,fiche_teches } = require("../models");
+var multer = require("multer");
+var md5 = require("md5");
+const { Produit,fiche_teches ,images_produit} = require("../models");
 
 
 const prepareResponse = (response, status, body, type) => {
@@ -9,7 +11,17 @@ const prepareResponse = (response, status, body, type) => {
   response.status(status).send(body);
 };
 
+var store = multer.diskStorage({
+  destination:function(req,file,cb){
+      cb(null, './uploads');
+  },
+  filename:function(req,file,cb){
+      cb(null, file.originalname);
+  }
+});
 
+
+var upload = multer({storage:store}).single('file');
 
 
 router.get("/getAll", function (req, res, next) {
@@ -93,7 +105,32 @@ router.post("/createP", function (req, res, next) {
 });
 
 
+router.post('/uploadPic/:id', function(req,res,next){
+  upload(req, res, async function(err)
+  {
+      if (err)
+      {  console.log(err);
+        return res.status(501).json({error:err});
+      }
+      console.log(req.file.originalname);
+      console.log(req.params.id);
+    // const livreur=  await Livreurs.findOne({id:req.params.id})
+    //   console.log(livreur)
 
+      images_produit
+            .create({
+
+              url:md5(req.file.originalname),
+              is_deleted: false,
+              createdAt: new Date(),
+              updatedAt: new Date(),
+              id_produit: req.params.id
+            });
+
+      //do all database record saving activity
+      return res.json({originalname:req.file.originalname, uploadname:req.file.filename});
+  });
+});
 
 //UPDATE
 

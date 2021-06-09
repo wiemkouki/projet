@@ -10,14 +10,15 @@ const prepareResponse = (response, status, body, type) => {
 router.put("/up/:id", function (req, res) {
   let id = req.params.id;
   console.log(req.body);
-  Livreurs.findByPk(id,
-    { attributes: ["id"] }).then((livreur) => {
+  Livreurs.findOne({attributes:["id","name", "tel", "adresse"],
+  where: { id_user: req.params.id  } }).then((livreur)=>{
       try {
         let { name, tel, adresse} = req.body;
         livreur.update({
           name,
           tel,
           adresse,
+        
           updatedAt: new Date(),
         })
         prepareResponse(res, 200, { success: true}, "application/json");
