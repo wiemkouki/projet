@@ -20,9 +20,7 @@ module.exports = {
         type: Sequelize.STRING
       },
 
-      avatar: {
-        type: Sequelize.STRING
-      },
+     
       is_deleted:{
         type: Sequelize.BOOLEAN
       },

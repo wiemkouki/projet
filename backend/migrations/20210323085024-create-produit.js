@@ -24,16 +24,14 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
-      avatar: {
-        type: Sequelize.STRING
-      },
+    
       quantite: {
         type: Sequelize.INTEGER
       },
       is_deleted:{
         type: Sequelize.BOOLEAN
       },
-     
+
 
       createdAt: {
         allowNull: false,

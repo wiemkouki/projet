@@ -22,14 +22,8 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-        permis: {
-          type: Sequelize.STRING,
-          allowNull: false
-        },
-        cin: {
-          type: Sequelize.INTEGER,
-          allowNull: false
-        },
+
+
         // id_user:
         // {
         //   type: Sequelize.INTEGER,
