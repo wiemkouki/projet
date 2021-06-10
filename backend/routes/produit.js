@@ -4,6 +4,12 @@ var multer = require("multer");
 var md5 = require("md5");
 const { Produit,fiche_teches ,images_produit} = require("../models");
 
+const MIME_TYPES = {
+  'image/jpg': 'jpg',
+  'image/jpeg': 'jpg',
+  'image/png': 'png',
+  'image/bmp': 'bmp'
+};
 
 const prepareResponse = (response, status, body, type) => {
   console.log(body);
@@ -11,18 +17,17 @@ const prepareResponse = (response, status, body, type) => {
   response.status(status).send(body);
 };
 
-var store = multer.diskStorage({
+
+var storage = multer.diskStorage({
   destination:function(req,file,cb){
-      cb(null, './uploads');
+      cb(null, './uploads/image_produit');
   },
   filename:function(req,file,cb){
-      cb(null, file.originalname);
+    cb(null, (file.originalname) + "." + MIME_TYPES[file.mimetype]);
   }
 });
 
-
-var upload = multer({storage:store}).single('file');
-
+var images = multer({storage:storage}).single('file');
 
 router.get("/getAll", function (req, res, next) {
   Produit.findAll({ attributes: ["id","libelle", "marque", "prix", "max_rating","description","createdAt", "updatedAt"],
@@ -104,29 +109,24 @@ router.post("/createP", function (req, res, next) {
   .catch((error) => console.log(error));
 });
 
-
+// Ajouter IMAGES PRODUITS
 router.post('/uploadPic/:id', function(req,res,next){
-  upload(req, res, async function(err)
+  images(req, res, async function(err)
   {
       if (err)
       {  console.log(err);
         return res.status(501).json({error:err});
       }
       else{
-        Produit.findOne({attributes:["id","libelle", "marque", "prix", "max_rating","description","createdAt",
-        "updatedAt"],
-       where: { id_produit: req.params.id  } }).then((pdt)=>{
-      console.log(req.file.originalname);
-      console.log(req.params.id);
-      images_produit
-            .create({
-              url:req.file.originalname,
+
+      images_produit .create({
+              url:(req.file.originalname) + "." + MIME_TYPES[req.file.mimetype],
               is_deleted: false,
               createdAt: new Date(),
               updatedAt: new Date(),
-              id_produit:id
+              id_produit:req.params.id
             });
-            })
+            // })
       //do all database record saving activity
       return res.json({originalname:req.file.originalname, uploadname:req.file.filename});
 
