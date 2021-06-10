@@ -18,13 +18,11 @@ module.exports = {
       tel: {
         type: Sequelize.INTEGER
       },
-     
+
       adresse: {
         type: Sequelize.STRING
       },
-      logo: {
-        type: Sequelize.STRING
-      },
+    
       is_deleted:{
         type: Sequelize.BOOLEAN
       },

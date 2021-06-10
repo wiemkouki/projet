@@ -28,7 +28,12 @@ var storage = multer.diskStorage({
 });
 
 var images = multer({storage:storage}).single('file');
+//get Product by ID
 
+
+
+
+//get ALL products
 router.get("/getAll", function (req, res, next) {
   Produit.findAll({ attributes: ["id","libelle", "marque", "prix", "max_rating","description","createdAt", "updatedAt"],
   where: {

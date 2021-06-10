@@ -18,9 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     Admin.init({
       nom_boutique: DataTypes.STRING,
       tel: DataTypes.INTEGER,
-
       adresse: DataTypes.STRING,
-      logo: DataTypes.STRING,
       is_deleted:DataTypes.BOOLEAN,
       id_user:
     {
