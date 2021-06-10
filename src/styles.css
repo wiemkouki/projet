@@ -9,13 +9,20 @@
 /**********************************/
 /********** General CSS ***********/
 /**********************************/
+@media only screen and (max-width:450px){
 body {
   color: #353535;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   background: #f3f6ff;
+
+}
+}
+body .steve{
+  overflow-x:hidden !important;
 }
 
+ 
 a {
   color: #FF6F61;
 }

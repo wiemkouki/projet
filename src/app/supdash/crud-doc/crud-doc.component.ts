@@ -3,18 +3,18 @@ import { HttpClient } from '@angular/common/http';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FileService } from '../../services/file.service';
 import { UserServiceService } from '../../services/user-service.service';
+import * as $ from 'jquery';
 
-import {saveAs} from 'file-saver';
 
 export class doc_justificatifs {
   constructor(
     public id: number,
     public libelle: string,
- 
+    public url_doc: string,
     public createdAt: string,
     public updatedAt: string,
-  
-  ) {} 
+
+  ) { }
 }
 
 @Component({
@@ -23,9 +23,9 @@ export class doc_justificatifs {
   styleUrls: ['./crud-doc.component.scss']
 })
 export class CrudDocComponent implements OnInit {
-   
-    
- 
+
+
+
   closeResult: string;
   title = 'datatables';
 
@@ -34,9 +34,9 @@ export class CrudDocComponent implements OnInit {
   dtElement: any;
 
 
-  constructor( private http: HttpClient, private modalService: NgbModal
+  constructor(private http: HttpClient, private modalService: NgbModal
     , private userService: UserServiceService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -45,7 +45,7 @@ export class CrudDocComponent implements OnInit {
       processing: true
     }
     this.getDoc();
- 
+
   }
 
 
@@ -55,49 +55,69 @@ export class CrudDocComponent implements OnInit {
       .subscribe(response => {
         console.log(response);
         this.docs = response as any;
-       
+
       });
   }
 
   onValid(id: number) {
-      this.userService.valid(id)
-        .subscribe((response) => {
-          console.log(response);
-          this.docs = response as any;
-          this.ngOnInit();
-        });
-      }
+    this.userService.valid(id)
+      .subscribe((response) => {
+        console.log(response);
+        this.docs = response as any;
+        this.ngOnInit();
+      });
+  }
 
 
-      onDownfile(fileName: Blob) {
-        this.userService.downfile(fileName)
-          .subscribe((response) => {
-            console.log(response);
-            this.docs = response as any;
-            this.ngOnInit();
-          });
-        }
+  onDownfile(fileName: Blob) {
+    this.userService.downfile(fileName)
+      .subscribe((response) => {
+        console.log(response);
+        this.docs = response as any;
+        this.ngOnInit();
+      });
+  }
 
-        onDownload() {
-          this.userService.download()
-            .subscribe((response) => {
-              console.log(response);
-              this.docs = response as any;
-              this.ngOnInit();
-            });
-          }
-        
+  onDownload() {
+    this.userService.download()
+      .subscribe((response) => {
+        console.log(response);
+        this.docs = response as any;
+        this.ngOnInit();
+      });
+  }
 
-        //   download(filename){
-        //     var filename = this.libelle;
-    
-        //     this._fileService.downloadFile(filename)
-        //     .subscribe(
-        //         data => saveAs(data, filename),
-        //         error => console.error(error)
-        //     );
-        // }
-        
+
+
+  open(content ,id:number) {
+    // alert(id);
+    const path= $("#photo_"+id).val();
+  var appendp= "" ;
+  appendp+="<img src='http://localhost:3000/backend/uploads/"+path+"'>";
+
+  $("#preview").html("");
+  $("#preview").text("appendp");
+
+
+
+
+
+
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
 }
 
 

@@ -1,3 +1,5 @@
+
+
 <table datatable [dtOptions]="dtOptions" class="table table-striped table-bordered" cellspacing="0" width="100%">
   <thead>
 
@@ -16,14 +18,36 @@
     <tr *ngFor="let doc of docs">
       <td><span>{{ doc.livreur.name }}</span></td>
       <td><span>{{ doc.libelle }}</span></td>
-      <td><span>backend/uploads/{{ doc.url_doc }}</span></td>
+      <td><span>backend/uploads/{{ doc.url_doc }}</span>
+
+        <!-- <input type="hidden" id="photo_{{ doc.id }}" value="{{ doc.libelle }}"> -->
+        <ng-template #contentShow let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title">Preview</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="preview">
+          
+            <img src='http://localhost:4200/backend/uploads/{{ doc.libelle }}'>
+        
+        
+        
+        
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+          </div>
+        </ng-template>
+      </td>
 
       <td><button class="btn btn-warning" (click)="onValid(doc.id)">
           <i class="fa fa-check"></i> Valider </button> </td>
 
 
 
-      <td><button (click)="onDownload(doc.libelle)"  (click)="open(mymodal)" class="btn btn-primary btn-small "> <i class="fa fa-search"></i>
+      <td><button   (click)="open(contentShow , doc.id)" class="btn btn-primary btn-small "> <i class="fa fa-search"></i>
           Afficher</button>
       </td>
 
@@ -31,123 +55,7 @@
   </tbody>
 
 </table>
-<!-- 
-<ng-template #mymodal let-modal>  
-  <div class="modal-header">  
-    <h4 class="modal-title" id="modal-basic-title">Preview</h4>  
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">  
-      <span aria-hidden="true">?</span>  
-    </button>  
-  </div>  
-  <div class="modal-body">  
-    
-  </div>  
-  <div class="modal-footer">  
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>  
-  </div>  
-</ng-template>   -->
-<ng-template #contentDetails let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">User's Details</h4>
-    <button type="button" class="close" aria-label="Close" aria-hidden="true" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
 
 
-    <form>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <div class="input-group">
-          <input id="email" class="form-control">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="role">Role</label>
-        <div class="input-group">
-          <input id="role" class="form-control">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="createdAt" for="dateOfBirth">CreatedAt</label>
-        <div class="input-group">
 
-          <input id="created" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
-          <!-- <div class="input-group-append">
-           <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
-         </div> -->
-        </div>
-      </div>
 
-      <div class="form-group">
-        <label for="updatedAt" for="dateOfBirth">UpdatedAt</label>
-        <div class="input-group">
-          <input id="updated" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
-          <!-- <div class="input-group-append">
-             <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
-           </div> -->
-        </div>
-      </div>
-
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
-  </div>
-</ng-template>
-
-<ng-template #contentEdit let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">Edit product</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form [formGroup]="editForm" novalidate>
-      <div class="form-group">
-        <label for="id">ID</label>
-        <div class="input-group">
-          <input class="form-control" formControlName="id">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <div class="input-group">
-          <input class="form-control" formControlName="email">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="role">Role</label>
-        <div class="input-group">
-          <input class="form-control" formControlName="role">
-        </div>
-      </div>
-      <div class="border text-center">
-        <button data-dismiss="modal" class="btn btn-info" (click)="onSave()">Save Changes</button>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
-  </div>
-</ng-template>
-
-<ng-template #contentDelete let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">Confirm Delete</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <h2>Are you sure you want to delete this record.</h2>
-    <div class="border text-center">
-      <button data-dismiss="modal" class="btn btn-danger" *ngIf="!is_deleted" (click)="onDelete()">Yes, Delete!</button>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
-  </div>
-</ng-template>
