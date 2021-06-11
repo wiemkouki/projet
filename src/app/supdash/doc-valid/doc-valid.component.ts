@@ -41,19 +41,6 @@ getDoc() {
 }
 
 open(content ,id:number) {
-  // alert(id);
-  const path= $("#photo_"+id).val();
-var appendp= "" ;
-appendp+="<img src='http://localhost:3000/backend/uploads/"+path+"'>";
-
-$("#preview").html("");
-$("#preview").text("appendp");
-
-
-
-
-
-
   this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
     this.closeResult = `Closed with: ${result}`;
   }, (reason) => {
