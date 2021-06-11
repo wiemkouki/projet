@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const { Sous_cat } = require("../models");
+const { Sous_cat, categorie } = require("../models");
 
 
 const prepareResponse = (response, status, body, type) => {
@@ -42,26 +42,20 @@ router.get("/getssCat/:id", async function (req, res, next) {
 
   //CREATE SUB_CATEGORIE
   router.post("/create/:id", function (req, res, next) {
-    Sous_cat
+    categorie
       .findOne({
-        attributes: ["nom_ss_cat"],
+        attributes: ["id", "nom_cat"],
         where: {
-          nom_ss_cat: req.body.nom_ss_cat,
+          id: req.params.id,
         },
       })
-      .then( function (ss_cat) {
-        if (ss_cat) {
-          const resp = {
-            success: false,
-            message: "SUBCATEGORIE already exist !",
-          }
-          prepareResponse(res, 500, resp ,"application/json");
-        } else {
+      .then( function (cat) {
+
           let { nom_ss_cat} = req.body;
           Sous_cat.create({
             nom_ss_cat,
             is_deleted: false,
-            id_categorie:req.params.id,
+            id_categorie:categorie.id,
             createdAt: new Date(),
             updatedAt: new Date(),
           });
@@ -71,7 +65,7 @@ router.get("/getssCat/:id", async function (req, res, next) {
           }
           prepareResponse(res, 200, response, "application/json");
         }
-      }).catch((error)=> console.log(error));
+      ).catch((error)=> console.log(error));
   });
   //UPDATE CATEGORIE
   router.put("/update/:id", function (req, res) {

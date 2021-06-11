@@ -24,7 +24,7 @@ const prepareResponse = (response, status, body, type) => {
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./uploads/image_produit");
+    cb(null, "../src/assets/uploads/image_produit");
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname + "." + MIME_TYPES[file.mimetype]);
@@ -87,7 +87,7 @@ router.get("/getAll", function (req, res, next) {
 
 //GET PRODUCTS BY Category
 router.get("/getP", async function (req, res, next) {
- 
+
   const produit = await Produit.findAll({
     attributes: [
       "id",

@@ -12,6 +12,24 @@ const prepareResponse = (response, status, body, type) => {
   response.set("Content-Type", type);
   response.status(status).send(body);
 };
+
+
+var store = multer.diskStorage({
+  destination:function(req,file,cb){
+      cb(null, '../src/assets/uploads');
+  },
+  filename:function(req,file,cb){
+      cb(null, file.originalname);
+  }
+});
+
+
+var upload = multer({storage:store}).single('file');
+
+
+
+
+
 async function readFile(filePath) {
   try {
     const data = await fs.readFile(filePath);
@@ -151,17 +169,6 @@ router.get("/getDoc/:id", async function (req, res, next) {
 
 
 
-var store = multer.diskStorage({
-  destination:function(req,file,cb){
-      cb(null, './uploads');
-  },
-  filename:function(req,file,cb){
-      cb(null, file.originalname);
-  }
-});
-
-
-var upload = multer({storage:store}).single('file');
 
 router.post('/upload/:id', function(req,res,next){
   upload(req, res, async function(err)
