@@ -93,10 +93,11 @@ router.get("/getAll", function (req, res, next) {
 router.put("/updateAdmin/:id", function (req, res) {
   let id = req.params.id;
   // console.log(req.body);
-  Admin.findByPk(id, { attributes: ["id"] }).then((admin) => {
+  Admin.findOne({attributes:["id","nom_boutique", "tel", "adresse"],
+  where: { id_user: req.params.id  } }).then((admin) => {
     try {
       let { nom_boutique, tel, adresse } = req.body;
-      users
+      admin
         .update({
           nom_boutique,
           tel,
