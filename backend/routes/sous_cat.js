@@ -40,8 +40,8 @@ router.get("/getssCat/:id", async function (req, res, next) {
       });
   });
 
-  //CREATE CATEGORIE
-  router.post("/create", function (req, res, next) {
+  //CREATE SUB_CATEGORIE
+  router.post("/create/:id", function (req, res, next) {
     Sous_cat
       .findOne({
         attributes: ["nom_ss_cat"],
@@ -61,6 +61,7 @@ router.get("/getssCat/:id", async function (req, res, next) {
           Sous_cat.create({
             nom_ss_cat,
             is_deleted: false,
+            id_categorie:req.params.id,
             createdAt: new Date(),
             updatedAt: new Date(),
           });

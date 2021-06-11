@@ -61,7 +61,7 @@ const prepareEmailSending = () => {
 router.get("/getUser/:id", async function (req, res, next) {
   let id = req.params.id;
 
-  const user = await User.findByPk(id , {attributes:["id","email","role"]});
+  const user = await User.findByPk(id, { attributes: ["id", "email", "role"] });
 
   prepareResponse(res, 200, user, "application/json");
 });
@@ -88,25 +88,27 @@ router.get("/getAll", function (req, res, next) {
       prepareResponse(res, 500, response, "application/json");
     });
 });
-//update USER DONE
+//update ADMIN
 
-router.put("/updateUser/:id", function (req, res) {
+router.put("/updateAdmin/:id", function (req, res) {
   let id = req.params.id;
   // console.log(req.body);
-  User.findByPk(id,
-    {attributes:["id"]}).then((users) => {
+  Admin.findByPk(id, { attributes: ["id"] }).then((admin) => {
     try {
-      let { role, email } = req.body;
-       users.update({
+      let { nom_boutique, tel, adresse } = req.body;
+      users
+        .update({
+          nom_boutique,
+          tel,
+          adresse,
 
-              role,
-              email,
-              createdAt: new Date(),
-              updatedAt: new Date(),
-            })
-            .then((users) => prepareResponse(res, 200, { success: true }, "application/json"))
-            .catch((error) => console.log(error));
-
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        })
+        .then((admin) =>
+          prepareResponse(res, 200, { success: true }, "application/json")
+        )
+        .catch((error) => console.log(error));
     } catch (error) {
       console.log(error);
       prepareResponse(res, 500, { success: false }, "application/json");
@@ -133,13 +135,13 @@ router.get("/delete/:id", function (req, res) {
 //SIGN IN API WITH JWT USING COOKIES
 router.post("/signin", function (req, res, next) {
   // let token = req.params.token;
-  const {  password, email } = req.body;
+  const { password, email } = req.body;
 
   User.findOne({ where: { email: email } }).then((user) => {
     if (user) {
       bcrypt.compare(password, user.password).then((result) => {
         if (result) {
-           token = jwt.sign(
+          token = jwt.sign(
             { id: user.email, createdAt: user.createdAt, role: user.role },
             process.env.SECRET,
             { expiresIn: parseInt(process.env.EXPIRATION) },
@@ -155,23 +157,20 @@ router.post("/signin", function (req, res, next) {
 
                 prepareResponse(res, 500, response, "application/json");
               } else {
-
-
-                 await storeToken(res, token);
+                await storeToken(res, token);
 
                 const current = {
                   id: user.id,
-                 email: user.email,
+                  email: user.email,
                   lastSignIn: user.lastSignIn,
                   role: user.role,
-
                 };
 
                 const response = {
                   success: true,
                   message: "You have signed in successfully.",
                   user: current,
-                  token:token
+                  token: token,
                 };
 
                 user
@@ -336,7 +335,7 @@ router.post("/forgotpwd", function (req, res, next) {
 router.post("/resetpassword", function (req, res) {
   const id = req.body.id;
   console.log(req.body);
-  User.findByPk(id,  { attributes: ["id"] }).then((user) => {
+  User.findByPk(id, { attributes: ["id"] }).then((user) => {
     console.log(user);
     try {
       bcrypt.genSalt(saltRounds, function (err, salt) {
@@ -368,15 +367,23 @@ router.post("/changepwd/:id", function (req, res) {
         if (result) {
           try {
             bcrypt.genSalt(saltRounds, function (err, salt) {
-              bcrypt.hash( req.body.newpassword,salt,async function (err, hash) {
-                  user.update({
+              bcrypt.hash(
+                req.body.newpassword,
+                salt,
+                async function (err, hash) {
+                  user
+                    .update({
                       password: hash,
                     })
                     .then((user) =>
-                      prepareResponse(res,200,{ success: true },"application/json")
+                      prepareResponse(
+                        res,
+                        200,
+                        { success: true },
+                        "application/json"
+                      )
                     )
-                    .catch((error) =>
-                    {
+                    .catch((error) => {
                       console.log(error);
                     });
                 }
@@ -411,7 +418,7 @@ router.get("/confirm/:token", (req, res) => {
               is_active: true,
             })
             .then((user) => res.redirect("http://localhost:4200/liv/upload"))
-            .catch(error => console.log(error));
+            .catch((error) => console.log(error));
         } else if (user.role == "Administrateur") {
           const new_admin = await Admin.create({
             id_user: user.id,
@@ -471,39 +478,31 @@ router.get("/confirm/:token", (req, res) => {
 router.get("/test/:id", async function (req, res, next) {
   let id = req.params.id;
   const user = await User.findByPk(id)
-  .then(async function (user) {
-    if (user) {
-
-      if (user.role == "Livreur") {
-        (user) => res.redirect("http://localhost:4200/liv/upload");
-        prepareResponse(res, 200, {success: true}, "application/json");
-
-      } else if (user.role == "Administrateur") {
-        (user) => res.redirect("http://localhost:4200/admin/stock");
-        prepareResponse(res, 200, {success: true}, "application/json");
-
-
-      } else if (user.role == "Client") {
-        (user) => res.redirect("http://localhost:4200/profil");
-        prepareResponse(res, 200, {success: true}, "application/json");
-
-
-      } else if (user.role == "Sup_administrateur") {
-        (user) => res.redirect("http://localhost:4200/admin");
-        prepareResponse(res, 200, {success: true}, "application/json");
-
-      } else {
-        const response = {
-          success: false,
-          message: "user not found !!",
-        };
-        prepareResponse(res, 500, response, "application/json");
+    .then(async function (user) {
+      if (user) {
+        if (user.role == "Livreur") {
+          (user) => res.redirect("http://localhost:4200/liv/upload");
+          prepareResponse(res, 200, { success: true }, "application/json");
+        } else if (user.role == "Administrateur") {
+          (user) => res.redirect("http://localhost:4200/admin/stock");
+          prepareResponse(res, 200, { success: true }, "application/json");
+        } else if (user.role == "Client") {
+          (user) => res.redirect("http://localhost:4200/profil");
+          prepareResponse(res, 200, { success: true }, "application/json");
+        } else if (user.role == "Sup_administrateur") {
+          (user) => res.redirect("http://localhost:4200/admin");
+          prepareResponse(res, 200, { success: true }, "application/json");
+        } else {
+          const response = {
+            success: false,
+            message: "user not found !!",
+          };
+          prepareResponse(res, 500, response, "application/json");
+        }
       }
-    }
-  })
+    })
 
-  .catch((error) => console.log(error));
-
+    .catch((error) => console.log(error));
 
   prepareResponse(res, 200, user, "application/json");
 });
@@ -519,24 +518,13 @@ router.get("/logout", (req, res, next) => {
   }
 });
 
-
 //SAVE info fb
 router.post("/save", (req, res) => {
   const email = req.body.email;
- let query = "INSERT INTO Users email "
- res.status(201).json({
-  message: 'user created successfuly!'
-})
-
-
+  let query = "INSERT INTO Users email ";
+  res.status(201).json({
+    message: "user created successfuly!",
+  });
 });
-
-
-
-
-
-
-
-
 
 module.exports = router;

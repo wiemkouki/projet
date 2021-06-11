@@ -11,8 +11,8 @@ export class categorie {
     public is_deleted: boolean,
     public createdAt: string,
     public updatedAt: string,
-  
-  ) {} 
+
+  ) {}
 }
 
 @Component({
@@ -81,7 +81,7 @@ getCategorie(){
   document.getElementById('famille').setAttribute('value', categories.famille);
   document.getElementById('created').setAttribute('value', categories.createdAt);
   document.getElementById('updated').setAttribute('value', categories.updatedAt);
- 
+
 }
 
 
@@ -119,8 +119,8 @@ openEdit(targetModal, categories: categorie) {
     id:categories.id,
     nom_cat:categories.nom_cat,
     famille: categories.famille,
-   
-  
+
+
   });
 
 }
@@ -137,19 +137,9 @@ onSave() {
 
 
 
-
-
-
-
-
-
-
-
-
-
 //add
-onSubmit(f: NgForm) {
-  const url = 'http://localhost:3000/categorie/createCat';
+onSubmit(f: NgForm , id : string) {
+  const url = `http://localhost:3000/categorie/createCat/${id}`;
   this.http.post(url, f.value)
     .subscribe((result) => {
       this.ngOnInit(); //reload the table
@@ -164,7 +154,7 @@ onSubmit(f: NgForm) {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
-  
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';

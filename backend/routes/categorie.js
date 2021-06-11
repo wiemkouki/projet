@@ -18,6 +18,7 @@ router.get("/getCat/:id", async function (req, res, next) {
   prepareResponse(res, 200, cat, "application/json");
 });
 
+
 //GET ALL
 
 router.get("/getAllC", function (req, res, next) {

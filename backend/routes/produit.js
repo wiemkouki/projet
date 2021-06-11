@@ -1,8 +1,8 @@
 var express = require("express");
 var router = express.Router();
 var multer = require("multer");
-var md5 = require("md5");
-const { Produit,fiche_teches ,images_produit} = require("../models");
+
+const { Produit,fiche_teches ,images_produit,categorie} = require("../models");
 
 const MIME_TYPES = {
   'image/jpg': 'jpg',
@@ -30,7 +30,17 @@ var storage = multer.diskStorage({
 var images = multer({storage:storage}).single('file');
 //get Product by ID
 
+router.get("/getPdt/:id", async function (req, res, next) {
+  let id = req.params.id;
+  const produit = await Produit.findByPk(id,
+    { attributes: ["id","libelle", "marque", "prix", "max_rating","description","createdAt",
+    "updatedAt"],
+  include: [{ model: categorie, attributes: ['id'], as: 'categorie'}],
+ }
+ );
 
+  prepareResponse(res, 200, produit, "application/json");
+});
 
 
 //get ALL products
@@ -57,18 +67,20 @@ router.get("/getAll", function (req, res, next) {
     });
 });
 
-//get Produit
-router.get("/getPdt/:id", async function (req, res, next) {
+//get Product by categorie
+router.get("/getP/:id", async function (req, res, next) {
   let id = req.params.id;
   const produit = await Produit.findByPk(id,
     { attributes: ["id","libelle", "marque", "prix", "max_rating","description","createdAt",
     "updatedAt"],
   include: [{ model: categorie, attributes: ['id'], as: 'categorie'}],
- }
+     }
  );
 
   prepareResponse(res, 200, produit, "application/json");
 });
+
+
 // create Produit
 router.post("/createP", function (req, res, next) {
   Produit.findOne(

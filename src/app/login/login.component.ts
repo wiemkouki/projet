@@ -69,8 +69,8 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("role", user.user.role);
         localStorage.setItem("id", user.user.id);
 
-       
-        localStorage.getItem("id_liv");
+
+
         this.isLoginFailed = false;
         this.isLoggedIn = true;
 
@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/admin/users'])
         } else if (localStorage.getItem("role") === "Sup_Administrateur") {
 
-          this.router.navigate(['/sup/doc'])
+          this.router.navigate(['/sup/categorie'])
         } else if (localStorage.getItem("role") === "Client") {
 
           this.router.navigate(['/profil'])
@@ -117,17 +117,6 @@ export class LoginComponent implements OnInit {
   logOut(): void {
     this.authService.signOut();
   }
-
-  //Inserer email bd
-  // onSave(user) {
-  //   this.userService.Save(user)
-  //     .subscribe(response => {
-  //       console.log(response);
-  //       this.user = response;
-  //       this.ngOnInit();
-  //     });
-
-  // }
 
 
 
