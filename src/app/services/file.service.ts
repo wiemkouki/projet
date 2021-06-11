@@ -17,7 +17,9 @@ export class FileService {
 
         return this.http.post('http://localhost:3000/file/download',body,{
             responseType : 'blob',
-            headers:new HttpHeaders().append('Content-Type','application/json')
+            headers:new HttpHeaders().append('Content-Type','application/json'),
+            withCredentials:true
+
         });
     }
 
@@ -34,9 +36,9 @@ export class FileService {
     {
         const url = `http://localhost:3000/file/upload/${id}`;
 
-        return this.http.post(url, formData, { });
-      }
+        return this.http.post(url, formData, { withCredentials: true });
+    }
 
 
-    
+
 }

@@ -6,7 +6,7 @@ const fs = require("fs");
 var path = require("path");
 const baseUrl = "http://localhost:3000/file/";
 const { doc_justificatifs, Livreurs , User} = require("../models");
-
+const verifyToken = require("./auth/verifyToken");
 const prepareResponse = (response, status, body, type) => {
   console.log(body);
   response.set("Content-Type", type);
@@ -121,7 +121,7 @@ router.get("/getAll", async function (req, res, next) {
            "Some internal server error has occured while attempting to proceed " +
            "with your request, please try again.",
        };
- 
+
        prepareResponse(res, 500, response, "application/json");
      });
  });
@@ -206,7 +206,7 @@ router.get("/getDoc/:id", async function (req, res, next) {
 
 
 
-router.post('/upload/:id', function(req,res,next){
+router.post('/upload/:id', verifyToken , function(req,res,next){
   upload(req, res, async function(err)
   {
       if (err)
