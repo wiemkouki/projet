@@ -7,16 +7,16 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 import { UserServiceService } from '../../services/user-service.service';
 
-export class doc_justificatifs {
-  constructor(
-    public id: number,
-    public libelle: string,
+// export class doc_justificatifs {
+//   constructor(
+//     public id: number,
+//     public libelle: string,
  
-    public createdAt: string,
-    public updatedAt: string,
+//     public createdAt: string,
+//     public updatedAt: string,
   
-  ) {} 
-}
+//   ) {} 
+// }
 
 @Component({
   selector: 'app-upload-files',
@@ -51,15 +51,17 @@ export class UploadFilesComponent implements OnInit
       pageLength: 2,
       processing: true
     }
-    this.getDoc();
+
  
   }
   // Affichage docs
   getDoc() {
-    this.http.get('http://localhost:3000/file/getAll')
+    let id = localStorage.getItem("id");
+    this.http.get(`http://localhost:3000/file/getDoc/${id}`)
       .subscribe(response => {
         console.log(response);
         this.docs = response as any;
+        this.ngOnInit();
        
       });
   }

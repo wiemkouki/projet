@@ -15,26 +15,22 @@ export class FileService {
     downloadFile(file:String){
         var body = {filename:file};
 
-        return this.http.post('http://localhost:3000/file/download',body,{
+        return this.http.post('http://localhost:3000/file/download', body, {
             responseType : 'blob',
-            headers:new HttpHeaders().append('Content-Type','application/json')
+            headers: new HttpHeaders().append('Content-Type','application/json'),
+            withCredentials: false
         });
     }
 
 
-    download(url: string): Observable<Blob> {
-        return this.http.get(url, {
-          responseType: 'blob'
-        })
-      }
-
+ 
 
 
     Save(formData, id)
     {
         const url = `http://localhost:3000/file/upload/${id}`;
 
-        return this.http.post(url, formData, { });
+        return this.http.post(url, formData, {withCredentials: true  });
       }
 
 
