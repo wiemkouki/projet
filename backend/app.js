@@ -55,6 +55,7 @@ var fileRouter = require('./routes/file');
 var cmdeRouter = require('./routes/cmde');
 var livreurRouter = require('./routes/livreur');
 var fiche_techRouter = require('./routes/fiche_tech');
+var panierRouter = require('./routes/panier');
 app.use('/users', usersRouter);
 app.use('/client', clientRouter);
 app.use('/categorie', categorieRouter);
@@ -66,7 +67,7 @@ app.use('/livreur', livreurRouter);
 // app.use('/doc_justificatifs', doc_justificatifsRouter);
 app.use('/fiche_tech', fiche_techRouter);
 
-// app.use('/panier', panierRouter);
+app.use('/panier', panierRouter);
 
 // app.use('/stock', stockRouter);
 // app.use('/sup_admin', sup_adminRouter);
