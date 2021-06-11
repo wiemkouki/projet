@@ -18,18 +18,19 @@ export class ClientGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (this.auth.isLoggedIn()) {
-      localStorage.setItem("role", this.user.role);
+      if (this.auth.isLoggedIn()){
+        let role =localStorage.getItem("role");
+         if (role==="Client"){
 
-      if (localStorage.getItem("role") === "Client") {
-        return true;
-      }
-      return this.router.parseUrl("/profil");
+         return this.router.parseUrl("/profil");
 
-    } else {
-      window.alert('You don\'t have permission to view this page');
-      return this.router.parseUrl("/");
-    }
+         }
+
+       }else{
+
+   window.alert('You don\'t have permission to view this page');
+   return this.router.parseUrl("/");
+ }
   }
 
 }
