@@ -62,6 +62,9 @@ import { SupdashComponent } from './supdash/supdash.component';
 import { CrudDocComponent } from './supdash/crud-doc/crud-doc.component';
 import { LivProfilComponent } from './livreurdash/liv-profil/liv-profil.component';
 import { DocValidComponent } from './supdash/doc-valid/doc-valid.component';
+import { AdminProfilComponent } from './admindash/admin-profil/admin-profil.component';
+import { NotifLivComponent } from './admindash/notif-liv/notif-liv.component';
+import { EditComponent } from './admindash/admin-profil/edit/edit.component';
 
 const Routes: Routes = [
 
@@ -86,17 +89,18 @@ const Routes: Routes = [
     children: [
       { path: 'users', component: CrudUserComponent },
       { path: 'stock', component: CrudStockComponent },
-      { path: 'cmde', component: CmdeComponent }
-    ]
-  },
-
+      { path: 'cmde', component: CmdeComponent } ,
+      { path: 'notif', component: NotifLivComponent } ,
+      { path: 'profil', component: AdminProfilComponent, children: [
+      { path: 'edit', component: EditComponent }
+    ]},
+]
+},
   { path: 'login', component: LoginComponent },
   { path: 'cart', component: CartComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  {
-    path: 'profil', component: ProfilComponent
-  },
+  {path: 'profil', component: ProfilComponent},
 
   {
     path: 'liv', component: LivreurdashComponent, children: [
@@ -116,9 +120,9 @@ const Routes: Routes = [
   { path: 'prod5', component: Prod5Component },
   { path: 'prod6', component: Prod6Component },
   { path: 'prod7', component: Prod7Component },
-  { path: 'prod8', component: Prod8Component },
+  { path: 'prod8', component: Prod8Component }
 
-
+  
 
 ]
 
@@ -157,7 +161,10 @@ const Routes: Routes = [
     SupdashComponent,
     CrudDocComponent,
     LivProfilComponent,
-    DocValidComponent
+    DocValidComponent,
+    AdminProfilComponent,
+    NotifLivComponent,
+    EditComponent
 
 
 

@@ -21,7 +21,7 @@ export class Produit {
   styleUrls: ['./catalog.component.scss']
 })
 export class CatalogComponent implements OnInit {
-  // produits;
+
   products:[];
   constructor(private fb: FormBuilder, private http: HttpClient,private productService: ProductService) {  
  

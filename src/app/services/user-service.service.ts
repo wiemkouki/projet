@@ -73,7 +73,14 @@ export class UserServiceService {
    }
   
 
+   updateAdmin(id:string, nom_boutique: string, tel: number, adresse: string): Observable<any> {
+    return this.http.put(`http://localhost:3000/users/updateAdmin/${id}`, {
+      nom_boutique,
+      tel,
+      adresse
+    }, httpOptions)
 
+  }
    
   updateC(id: string, name: string, tel: number, adresse: string): Observable<any> {
     return this.http.post(this.api_prefixx + `/updateC/${id}`, {

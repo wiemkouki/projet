@@ -1,0 +1,53 @@
+
+<div class="container">
+<table datatable [dtOptions]="dtOptions" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+ 
+       <tr>
+         <th>Nom de livreur</th>
+         <th>Téléphone</th>
+         <th>Zone de travail</th>
+    
+         <th colspan="3" width="6%">
+           Action
+         </th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr *ngFor="let liv of livs">
+         <td><span>{{ liv.name }}</span></td>
+         <td><span>{{ liv.tel }}</span></td>
+         <td><span>{{ liv.adresse }}</span></td>
+ 
+ 
+ 
+         <td><button class="btn btn-success" (click)="openEdit(contentEdit, user)">
+             <i class="fa fa-bell"></i> Notifier</button> </td>
+ 
+ 
+ 
+       </tr>
+     </tbody>
+ 
+   </table>
+</div>
+
+ 
+ <ng-template #contentDelete let-modal >
+   <div class="modal-header">
+     <h4 class="modal-title">Confirm Delete</h4>
+     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+       <span aria-hidden="true">&times;</span>
+     </button>
+   </div>
+   <div class="modal-body">
+     <h2>Are you sure you want to delete this record.</h2>
+     <div class="border text-center" >
+       <button data-dismiss="modal" class="btn btn-danger" *ngIf="!is_deleted" (click)="onDelete()">Yes, Delete!</button>
+     </div>
+   </div>
+   <div class="modal-footer">
+     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+   </div>
+ </ng-template>
+ 

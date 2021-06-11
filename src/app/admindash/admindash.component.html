@@ -132,14 +132,22 @@
                             <span class="menu-arrow arrow_carrot-right"></span>
                         </a>  -->
               <ul class="sub">
+
+                <li class="nav-item" routerLinkActive ="active">
+                  <a class="nav-link" [routerLink]="'/admin/profil'" >
+                       <p>Mon Profil</p></a></li>
+
                 <li class="nav-item" routerLinkActive ="active">
                   <a class="nav-link" [routerLink]="'/admin/users'" >
                        <p> Utilisateurs </p></a></li>
 
                <li class="nav-item" routerLinkActive ="active">
                   <a class="nav-link" [routerLink]="'/admin/stock'" >
-                       <p>Stock</p></a></li>
+                       <p>Gestion Stock</p></a></li>
 
+                       <li class="nav-item" routerLinkActive ="active">
+                        <a class="nav-link" [routerLink]="'/admin/notif'" >
+                             <p>Liste livreurs </p></a></li>
                 <!-- <li class="nav-item" routerLinkActive ="active">
                     <a class="nav-link" [routerLink]="'/admin/categorie/ss_categorie'" >
                          <p>Catégorie</p></a></li> -->
@@ -152,6 +160,8 @@
                                 <a class="nav-link" [routerLink]="'/admin/cmde'" >
                                      <p>Commandes</p></a></li>
 
+                                     
+                     
                 <!-- <li><a class="" href="form_validation.html">Fournisseurs</a></li> -->
               </ul>
             </li>
