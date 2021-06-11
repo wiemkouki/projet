@@ -101,11 +101,15 @@ router.delete("/delete/:id", function (req, res) {
 });
 
 
-//GET ALL
+//GET ALL BY LIVREUR
 router.get("/getDoc/:id", async function (req, res, next) {
 
-Livreurs.findByPk(req.params.id,{attributes:["id"],
-where :[id= req.params.id] }).then((livreur) => {
+Livreurs.findByPk(req.params.id,
+  {attributes:["id"],
+where :
+  {id_user: req.params.id}
+
+ }).then((livreur) => {
 
    doc_justificatifs
   .findAll({
@@ -113,7 +117,7 @@ where :[id= req.params.id] }).then((livreur) => {
     include: [{ model: Livreurs, attributes: ['name'], as:'livreur'}],
     where: {
       is_valide: 0,
-      id_livreur:id
+      id_livreur:livreur.id
     }
     })
     .then((doc) => {
