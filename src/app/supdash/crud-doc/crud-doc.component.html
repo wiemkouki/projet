@@ -18,38 +18,40 @@
     <tr *ngFor="let doc of docs">
       <td><span>{{ doc.livreur.name }}</span></td>
       <td><span>{{ doc.libelle }}</span></td>
-      <td><span>backend/uploads/{{ doc.url_doc }}</span>
+      <td><span>backend/uploads/{{ doc.url_doc }}</span>  </td>
+      <td>  <ng-template #contentShow let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Preview</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="preview">
+        
+          <img src= "./../../uploads/{{doc.libelle}}" width="50">
+          <!-- <a href='http://localhost:3000/backend/uploads/'#{doc.libelle} >
+          </a>  -->
+      
+        
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+        </div>
+      </ng-template>
 
-        <!-- <input type="hidden" id="photo_{{ doc.id }}" value="{{ doc.libelle }}"> -->
-        <ng-template #contentShow let-modal>
-          <div class="modal-header">
-            <h4 class="modal-title">Preview</h4>
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body" id="preview">
-          
-            <img src='http://localhost:4200/backend/uploads/{{ doc.libelle }}'>
-        
-        
-        
-        
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
-          </div>
-        </ng-template>
-      </td>
+
+    </td>
+
 
       <td><button class="btn btn-warning" (click)="onValid(doc.id)">
           <i class="fa fa-check"></i> Valider </button> </td>
 
+          <td><button   (click)="open(contentShow , doc.id)" class="btn btn-primary btn-small "> <i class="fa fa-search"></i>
+            Afficher</button>
+        </td>
+          <!-- <input type="hidden" id="photo_{{ doc.id }}" value="{{ doc.libelle }}"> -->
 
-
-      <td><button   (click)="open(contentShow , doc.id)" class="btn btn-primary btn-small "> <i class="fa fa-search"></i>
-          Afficher</button>
-      </td>
+ 
 
     </tr>
   </tbody>
