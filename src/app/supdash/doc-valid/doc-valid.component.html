@@ -7,8 +7,6 @@
   
         <th>Nom de livreur</th>
         <th>Nom de fichier</th>
-        <!-- <th>Url</th> -->
-  
         <th colspan="3" width="6%">
           Action
         </th>
@@ -18,7 +16,7 @@
       <tr *ngFor="let doc of docs">
         <td><span>{{doc.livreur.name}}</span></td>
         <td><span>{{ doc.libelle }}</span></td>
-        <td>  <ng-template #contentShow let-modal>
+        <td>  <ng-template #contentShow let-modal  class="template">
           <div class="modal-header">
             <h4 class="modal-title">Preview</h4>
             <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -28,9 +26,6 @@
           <div class="modal-body" >
           
             <img src= "../assets/uploads/{{doc.libelle}}" width="300px">
-     
-        
-          
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
@@ -41,7 +36,7 @@
       </td>
   
   
-        <td><button (click)="download(i)" class="btn btn-primary btn-small "> <i class="fa fa-search"></i>
+        <td><button (click)="open(contentShow , doc.id)"  class="btn btn-primary btn-small "> <i class="fa fa-search"></i>
             Afficher</button>
         </td>
   

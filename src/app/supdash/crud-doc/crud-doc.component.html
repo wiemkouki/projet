@@ -29,15 +29,11 @@
         <div class="modal-body" >
         
           <img src= "../assets/uploads/{{doc.libelle}}" width="300px">
-   
-      
-        
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
         </div>
       </ng-template>
-
 
     </td>
 
@@ -48,9 +44,6 @@
           <td><button   (click)="open(contentShow , doc.id)" class="btn btn-primary btn-small "> <i class="fa fa-search"></i>
             Afficher</button>
         </td>
-          <!-- <input type="hidden" id="photo_{{ doc.id }}" value="{{ doc.libelle }}"> -->
-
- 
 
     </tr>
   </tbody>

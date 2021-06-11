@@ -100,7 +100,31 @@ router.delete("/delete/:id", function (req, res) {
 
 });
 
-
+//GET ALL
+router.get("/getAll", async function (req, res, next) {
+  const doc = await doc_justificatifs
+   .findAll({
+     attributes: ["id","libelle", "url_doc"],
+     include: [{ model: Livreurs, attributes: ['name'], as:'livreur'}],
+     where: {
+       is_valide: 0
+     }
+     })
+     .then((doc) => {
+       prepareResponse(res, 200, doc, "application/json");
+       console.log(JSON.stringify(doc, null, 2));
+     })
+     .catch((error) => {
+       const response = {
+         success: false,
+         message:
+           "Some internal server error has occured while attempting to proceed " +
+           "with your request, please try again.",
+       };
+ 
+       prepareResponse(res, 500, response, "application/json");
+     });
+ });
 //GET ALL
 router.get("/getAll", async function (req, res, next) {
  const doc = await doc_justificatifs
