@@ -85,7 +85,7 @@ const Routes: Routes = [
   },
 
   {
-    path: 'admin', component: AdmindashComponent,
+    path: 'admin', component: AdmindashComponent, canActivate:[AdminGuard],
     children: [
       { path: 'users', component: CrudUserComponent },
       { path: 'stock', component: CrudStockComponent },
@@ -122,7 +122,7 @@ const Routes: Routes = [
   { path: 'prod7', component: Prod7Component },
   { path: 'prod8', component: Prod8Component }
 
-  
+
 
 ]
 
@@ -153,7 +153,7 @@ const Routes: Routes = [
     CrudSScatComponent,
     CmdeComponent,
     CrudStockComponent,
- 
+
     CrudCategorieComponent,
     LivreurdashComponent,
     UploadFilesComponent,

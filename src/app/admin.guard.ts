@@ -23,6 +23,7 @@ constructor(private auth :AuthService,private router: Router){}
         }
 
       }else{
+        
   window.alert('You don\'t have permission to view this page');
   return this.router.parseUrl("/");
 }

@@ -125,14 +125,25 @@ router.get("/getAll", async function (req, res, next) {
        prepareResponse(res, 500, response, "application/json");
      });
  });
-//GET ALL
-router.get("/getAll", async function (req, res, next) {
- const doc = await doc_justificatifs
+
+
+//GET ALL BY LIVREUR
+router.get("/getDoc/:id", async function (req, res, next) {
+
+Livreurs.findByPk(req.params.id,
+  {attributes:["id"],
+where :
+  {id_user: req.params.id}
+
+ }).then((livreur) => {
+
+   doc_justificatifs
   .findAll({
     attributes: ["id","libelle", "url_doc"],
     include: [{ model: Livreurs, attributes: ['name'], as:'livreur'}],
     where: {
-      is_valide: 0
+      is_valide: 0,
+      id_livreur:livreur.id
     }
     })
     .then((doc) => {
@@ -149,6 +160,7 @@ router.get("/getAll", async function (req, res, next) {
 
       prepareResponse(res, 500, response, "application/json");
     });
+  })
 });
 
 
