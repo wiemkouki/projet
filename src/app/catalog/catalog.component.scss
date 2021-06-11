@@ -24,7 +24,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     background: #f3f6ff;
-    overflow-y:hidden;
+    overflow-y:hidden !important;
     display: none;
     -ms-overflow-style: none;  /* IE and Edge */
     

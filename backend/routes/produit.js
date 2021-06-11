@@ -136,7 +136,7 @@ router.post('/uploadPic/:id', function(req,res,next){
       }
       else{
 
-      images_produit .create({
+      images_produit.create({
               url:(req.file.originalname) + "." + MIME_TYPES[req.file.mimetype],
               is_deleted: false,
               createdAt: new Date(),

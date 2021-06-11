@@ -277,15 +277,16 @@
         
         <!-- Featured Product Start -->
         <div class="featured-product product" class="scroll-hide">
-            <div class="container-fluid">
-                <div class="section-header">
+            <div class="container-fluid"  *ngFor="let pdt of products">
+                <div class="section-header" >
                     <h1>Featured Product</h1>
                 </div>
                 <div class="row align-items-center product-slider product-slider-4">
                     <div class="col-lg-3">
                         <div class="product-item">
                             <div class="product-title">
-                                <a href="#">Product Name</a>
+                                <a>{{ pdt.libelle }}</a>
+                             
                                 <div class="ratting">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -296,6 +297,7 @@
                             </div>
                             <div class="product-image">
                                 <a href="product-detail.html">
+                                    <!-- <img [src]="pdt.images_produit.url">  -->
                                     <img src="assets/img/product-9.jpg" alt="Product Image">
                                 </a>
                                 <div class="product-action">
@@ -305,7 +307,7 @@
                                 </div>
                             </div>
                             <div class="product-price">
-                                <h3><span>$</span>99</h3>
+                                <h3>{{ pdt.prix }}<span>Dt</span></h3>
                                 <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
@@ -313,7 +315,7 @@
                     <div class="col-lg-3">
                         <div class="product-item">
                             <div class="product-title">
-                                <a href="#">Product Name</a>
+                                <a>{{ pdt.libelle }}</a>
                                 <div class="ratting">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -333,7 +335,7 @@
                                 </div>
                             </div>
                             <div class="product-price">
-                                <h3><span>$</span>99</h3>
+                                <h3>{{ pdt.prix }}<span>Dt</span></h3>
                                 <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
@@ -341,7 +343,7 @@
                     <div class="col-lg-3">
                         <div class="product-item">
                             <div class="product-title">
-                                <a href="#">Product Name</a>
+                                <a>{{ pdt.libelle }}</a>
                                 <div class="ratting">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -361,7 +363,7 @@
                                 </div>
                             </div>
                             <div class="product-price">
-                                <h3><span>$</span>99</h3>
+                                <h3>{{ pdt.prix }}<span>Dt</span></h3>
                                 <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
@@ -369,7 +371,7 @@
                     <div class="col-lg-3">
                         <div class="product-item">
                             <div class="product-title">
-                                <a href="#">Product Name</a>
+                                <a>{{ pdt.libelle }}</a>
                                 <div class="ratting">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -380,7 +382,7 @@
                             </div>
                             <div class="product-image">
                                 <a href="product-detail.html">
-                                    <img src="assets/img/product-4.jpg" alt="Product Image">
+                                    <img src="assets/img/product-4.jpg" >
                                 </a>
                                 <div class="product-action">
                                     <a href="#"><i class="fa fa-cart-plus"></i></a>
@@ -389,7 +391,7 @@
                                 </div>
                             </div>
                             <div class="product-price">
-                                <h3><span>$</span>99</h3>
+                                <h3>{{ pdt.prix }}<span>Dt</span></h3>
                                 <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
@@ -420,7 +422,7 @@
         
         <!-- Recent Product Start -->
         <div class="recent-product product">
-            <div class="container-fluid">
+            <div class="container-fluid"  *ngFor="let pdt of products">
                 <div class="section-header">
                     <h1>Recent Product</h1>
                 </div>
@@ -428,7 +430,7 @@
                     <div class="col-lg-3">
                         <div class="product-item">
                             <div class="product-title">
-                                <a href="#">Product Name</a>
+                                <a>{{ pdt.libelle }}</a>
                                 <div class="ratting">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -448,7 +450,7 @@
                                 </div>
                             </div>
                             <div class="product-price">
-                                <h3><span>$</span>99</h3>
+                                <h3>{{ pdt.prix }}<span>Dt</span></h3>
                                 <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
