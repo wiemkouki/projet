@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var multer = require("multer");
-
+const verifyToken = require("./auth/verifyToken");
 const {
   Produit,
   fiche_teches,
@@ -112,7 +112,7 @@ router.get("/getP", async function (req, res, next) {
 });
 
 // create Produit
-router.post("/createP/:id", function (req, res, next) {
+router.post("/createP/:id", verifyToken, function (req, res, next) {
 
   categorie.findOne({attributes:["id","nom_cat", "famille"],
        where: { id: req.params.id  } }).then((categorie)=>{
@@ -161,7 +161,7 @@ router.post("/createP/:id", function (req, res, next) {
 });
 
 // Ajouter IMAGES PRODUITS
-router.post("/uploadPic/:id", function (req, res, next) {
+router.post("/uploadPic/:id",verifyToken, function (req, res, next) {
   images(req, res, async function (err) {
     if (err) {
       console.log(err);
@@ -186,7 +186,7 @@ router.post("/uploadPic/:id", function (req, res, next) {
 
 //UPDATE
 
-router.put("/updateP/:id", function (req, res) {
+router.put("/updateP/:id", verifyToken,function (req, res) {
   let id = req.params.id;
   Produit.findByPk(id, { attributes: ["id"] }).then((pdt) => {
     try {
@@ -213,7 +213,7 @@ router.put("/updateP/:id", function (req, res) {
 });
 //DELETE Produit
 
-router.get("/delete/:id", function (req, res) {
+router.get("/delete/:id", verifyToken,function (req, res) {
   let id = req.params.id;
   Produit.findByPk(id, { attributes: ["id"] }).then((produits) => {
     try {

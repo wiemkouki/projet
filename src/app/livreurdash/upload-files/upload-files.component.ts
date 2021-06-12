@@ -11,11 +11,11 @@ export class doc_justificatifs {
   constructor(
     public id: number,
     public libelle: string,
- 
+
     public createdAt: string,
     public updatedAt: string,
-  
-  ) {} 
+
+  ) {}
 }
 
 @Component({
@@ -40,7 +40,7 @@ export class UploadFilesComponent implements OnInit
   uploadedFiles: Array < File > ;
   attachmentList:any = [];
 
-  constructor(private http: HttpClient 
+  constructor(private http: HttpClient
     ,private fileService:FileService
     ,private userService: UserServiceService
     ,private modalService: NgbModal ){}
@@ -52,15 +52,16 @@ export class UploadFilesComponent implements OnInit
       processing: true
     }
     this.getDoc();
- 
+
   }
   // Affichage docs
   getDoc() {
-    this.http.get('http://localhost:3000/file/getAll')
+    let id = localStorage.getItem("id");
+    this.http.get(`http://localhost:3000/file/getDoc/${id}`)
       .subscribe(response => {
         console.log(response);
         this.docs = response as any;
-       
+
       });
   }
   fileUpload(files)

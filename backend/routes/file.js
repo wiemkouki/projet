@@ -78,7 +78,7 @@ router.get("/downfile/:fileName", function (req, res, next) {
 
 //DELETE doc
 
-router.delete("/delete/:id", function (req, res) {
+router.delete("/delete/:id",verifyToken, function (req, res) {
   let id = req.params.id;
   doc_justificatifs.destroy({
     where: {
@@ -129,11 +129,12 @@ router.get("/getAll", async function (req, res, next) {
 
 //GET ALL BY LIVREUR
 router.get("/getDoc/:id", async function (req, res, next) {
+  let id = req.params.id;
+Livreurs.findOne(
 
-Livreurs.findByPk(req.params.id,
-  {attributes:["id"],
-where :
-  {id_user: req.params.id}
+       {attributes:["id"],
+       where :
+       {id_user:req.params.id}
 
  }).then((livreur) => {
 
@@ -142,7 +143,7 @@ where :
     attributes: ["id","libelle", "url_doc"],
     include: [{ model: Livreurs, attributes: ['name'], as:'livreur'}],
     where: {
-      is_valide: 0,
+     
       id_livreur:livreur.id
     }
     })
@@ -246,7 +247,7 @@ router.post('/download', function(req,res,next){
   res.sendFile(filepath);
 });
 
-router.put("/valide/:id", function (req, res) {
+router.put("/valide/:id",verifyToken, function (req, res) {
   let id = req.params.id;
       doc_justificatifs.findByPk(id, {
       attributes: ["id"],
@@ -267,7 +268,7 @@ router.put("/valide/:id", function (req, res) {
     }
   });
 });
-router.put("/delete/:id", function (req, res) {
+router.put("/delete/:id",verifyToken, function (req, res) {
   let id = req.params.id;
       doc_justificatifs.findByPk(id, {
       attributes: ["id"],
