@@ -78,7 +78,7 @@ router.get("/downfile/:fileName", function (req, res, next) {
 
 //DELETE doc
 
-router.delete("/delete/:id",verifyToken, function (req, res) {
+router.delete("/delete/:id", function (req, res) {
   let id = req.params.id;
   doc_justificatifs.destroy({
     where: {
@@ -129,7 +129,7 @@ router.get("/getAll", async function (req, res, next) {
 
 //GET ALL BY LIVREUR
 router.get("/getDoc/:id", async function (req, res, next) {
-  let id = req.params.id;
+
 Livreurs.findOne(
 
        {attributes:["id"],
@@ -140,10 +140,10 @@ Livreurs.findOne(
 
    doc_justificatifs
   .findAll({
-    attributes: ["id","libelle", "url_doc"],
+    attributes: ["libelle"],
     include: [{ model: Livreurs, attributes: ['name'], as:'livreur'}],
     where: {
-     
+
       id_livreur:livreur.id
     }
     })
@@ -268,27 +268,27 @@ router.put("/valide/:id",verifyToken, function (req, res) {
     }
   });
 });
-router.put("/delete/:id",verifyToken, function (req, res) {
-  let id = req.params.id;
-      doc_justificatifs.findByPk(id, {
-      attributes: ["id"],
-      include: [{ model: Livreurs, attributes: ['id'], as: 'livreur'}],
+// router.put("/delete/:id",verifyToken, function (req, res) {
+//   let id = req.params.id;
+//       doc_justificatifs.findOne( {
+//       attributes: ["id"],
+//       include: [{ model: Livreurs, attributes: ['id'], as: 'livreur'}],
 
-    }).then((file) => {
+//     }).then((file) => {
 
-      try {
-      file.update({
-        is_deleted: true,
-        updatedAt: new Date()
-      });
-      prepareResponse(res, 200, { success: true }, "application/json");
-      }
-      catch (error) {
-      console.log(error);
-      prepareResponse(res, 500, { success: false }, "application/json");
-    }
-  });
-});
+//       try {
+//       file.update({
+//         is_deleted: true,
+//         updatedAt: new Date()
+//       });
+//       prepareResponse(res, 200, { success: true }, "application/json");
+//       }
+//       catch (error) {
+//       console.log(error);
+//       prepareResponse(res, 500, { success: false }, "application/json");
+//     }
+//   });
+// });
 
 
 module.exports = router;

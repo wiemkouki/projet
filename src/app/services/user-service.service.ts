@@ -56,9 +56,9 @@ export class UserServiceService {
     const url = `http://localhost:3000/file/valide/${id}`;
     return this.http.put(url, { headers: this.headerrs });
   }
-  
 
-  
+
+
   downfile(fileName: Blob) {
     const url = `http://localhost:3000/file/downfile/${fileName}`;
     return this.http.get(url, { headers: this.headerrs });
@@ -70,8 +70,8 @@ export class UserServiceService {
 
   deleteDoc(id: string): Observable<any>{
     return this.http.delete(`http://localhost:3000/file/delete/${id}`);
-   }
-  
+    }
+
 
    updateAdmin(id:string, nom_boutique: string, tel: number, adresse: string): Observable<any> {
     return this.http.put(`http://localhost:3000/users/updateAdmin/${id}`, {
@@ -81,17 +81,17 @@ export class UserServiceService {
     }, httpOptions)
 
   }
-   
+
   updateC(id: string, name: string, tel: number, adresse: string): Observable<any> {
     return this.http.post(this.api_prefixx + `/updateC/${id}`, {
       name,
       tel,
       adresse
-      
+
     }, httpOptions)
 
 
-    
+
 
 
   }
