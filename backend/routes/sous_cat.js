@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const { Sous_cat, categorie } = require("../models");
-
+const verifyToken = require("./auth/verifyToken");
 
 const prepareResponse = (response, status, body, type) => {
   response.set("Content-Type", type);
@@ -41,7 +41,7 @@ router.get("/getssCat/:id", async function (req, res, next) {
   });
 
   //CREATE SUB_CATEGORIE
-  router.post("/create/:id", function (req, res, next) {
+  router.post("/create/:id",verifyToken, function (req, res, next) {
     categorie
       .findOne({
         attributes: ["id", "nom_cat"],
@@ -68,7 +68,7 @@ router.get("/getssCat/:id", async function (req, res, next) {
       ).catch((error)=> console.log(error));
   });
   //UPDATE CATEGORIE
-  router.put("/update/:id", function (req, res) {
+  router.put("/update/:id", verifyToken,function (req, res) {
 
     let id = req.params.id;
     Sous_cat.findByPk(id,
@@ -92,7 +92,7 @@ router.get("/getssCat/:id", async function (req, res, next) {
   });
   //DELETE CATEGORIE
 
-  router.get("/delete/:id", function (req, res) {
+  router.get("/delete/:id", verifyToken,function (req, res) {
     let id = req.params.id;
     Sous_cat.findByPk(id,
       {attributes:["id"]}).then((ss_cat) => {

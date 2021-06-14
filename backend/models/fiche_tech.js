@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     couleur: DataTypes.STRING,
     modele: DataTypes.STRING,
     matiere: DataTypes.STRING,
-    id_produits:
+    id_produit:
       {type: DataTypes.INTEGER,
         allowNull: true,
         foreignKey: true,

@@ -6,7 +6,7 @@ const fs = require("fs");
 var path = require("path");
 const baseUrl = "http://localhost:3000/file/";
 const { doc_justificatifs, Livreurs , User} = require("../models");
-
+const verifyToken = require("./auth/verifyToken");
 const prepareResponse = (response, status, body, type) => {
   console.log(body);
   response.set("Content-Type", type);
@@ -121,7 +121,7 @@ router.get("/getAll", async function (req, res, next) {
            "Some internal server error has occured while attempting to proceed " +
            "with your request, please try again.",
        };
- 
+
        prepareResponse(res, 500, response, "application/json");
      });
  });
@@ -130,19 +130,20 @@ router.get("/getAll", async function (req, res, next) {
 //GET ALL BY LIVREUR
 router.get("/getDoc/:id", async function (req, res, next) {
 
-Livreurs.findByPk(req.params.id,
-  {attributes:["id"],
-where :
-  {id_user: req.params.id}
+Livreurs.findOne(
+
+       {attributes:["id"],
+       where :
+       {id_user:req.params.id}
 
  }).then((livreur) => {
 
    doc_justificatifs
   .findAll({
-    attributes: ["id","libelle", "url_doc"],
+    attributes: ["libelle"],
     include: [{ model: Livreurs, attributes: ['name'], as:'livreur'}],
     where: {
-      is_valide: 0,
+
       id_livreur:livreur.id
     }
     })
@@ -206,7 +207,7 @@ router.get("/getDoc/:id", async function (req, res, next) {
 
 
 
-router.post('/upload/:id', function(req,res,next){
+router.post('/upload/:id', verifyToken , function(req,res,next){
   upload(req, res, async function(err)
   {
       if (err)
@@ -246,7 +247,7 @@ router.post('/download', function(req,res,next){
   res.sendFile(filepath);
 });
 
-router.put("/valide/:id", function (req, res) {
+router.put("/valide/:id",verifyToken, function (req, res) {
   let id = req.params.id;
       doc_justificatifs.findByPk(id, {
       attributes: ["id"],
@@ -267,27 +268,27 @@ router.put("/valide/:id", function (req, res) {
     }
   });
 });
-router.put("/delete/:id", function (req, res) {
-  let id = req.params.id;
-      doc_justificatifs.findByPk(id, {
-      attributes: ["id"],
-      include: [{ model: Livreurs, attributes: ['id'], as: 'livreur'}],
+// router.put("/delete/:id",verifyToken, function (req, res) {
+//   let id = req.params.id;
+//       doc_justificatifs.findOne( {
+//       attributes: ["id"],
+//       include: [{ model: Livreurs, attributes: ['id'], as: 'livreur'}],
 
-    }).then((file) => {
+//     }).then((file) => {
 
-      try {
-      file.update({
-        is_deleted: true,
-        updatedAt: new Date()
-      });
-      prepareResponse(res, 200, { success: true }, "application/json");
-      }
-      catch (error) {
-      console.log(error);
-      prepareResponse(res, 500, { success: false }, "application/json");
-    }
-  });
-});
+//       try {
+//       file.update({
+//         is_deleted: true,
+//         updatedAt: new Date()
+//       });
+//       prepareResponse(res, 200, { success: true }, "application/json");
+//       }
+//       catch (error) {
+//       console.log(error);
+//       prepareResponse(res, 500, { success: false }, "application/json");
+//     }
+//   });
+// });
 
 
 module.exports = router;
