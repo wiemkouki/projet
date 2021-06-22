@@ -252,7 +252,7 @@ router.post("/signup", function (req, res, next) {
             emailSender.send({
               template: "email",
               message: {
-                to: "wiemk08@gmail.com",
+                to: "rahma.kalai0@gmail.com",
                 attachments: [
                   {
                     path: `${__dirname}/../emails/email/images/daijara.png`,
