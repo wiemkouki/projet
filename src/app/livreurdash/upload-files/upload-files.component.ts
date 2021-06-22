@@ -51,8 +51,8 @@ export class UploadFilesComponent implements OnInit
       pageLength: 2,
       processing: true
     }
-    this.getDoc();
 
+ 
   }
   // Affichage docs
   getDoc() {
@@ -61,7 +61,8 @@ export class UploadFilesComponent implements OnInit
       .subscribe(response => {
         console.log(response);
         this.docs = response as any;
-
+        this.ngOnInit();
+       
       });
   }
   fileUpload(files)

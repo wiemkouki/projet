@@ -24,11 +24,8 @@ export class doc_justificatifs {
 })
 export class CrudDocComponent implements OnInit {
 
-
-
   closeResult: string;
   title = 'datatables';
-
   dtOptions: DataTables.Settings = {};
   docs = [];
   dtElement: any;
