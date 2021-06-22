@@ -11,21 +11,19 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   categorie.init({
-    id: {
-      primaryKey: true,
-      type: DataTypes.INTEGER,
-      allowNull: true,
+    id:  {primaryKey : true,
+         type: DataTypes.INTEGER,
+          allowNull: true,
     },
     nom_cat: DataTypes.STRING,
     famille: DataTypes.STRING,
-    is_deleted: DataTypes.BOOLEAN,
+    is_deleted:DataTypes.BOOLEAN,
 
 
 
-  },
-    {
-      sequelize,
-      modelName: 'categorie',
-    });
+    },
+    { sequelize,
+    modelName: 'categorie',
+  });
   return categorie;
 };

@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from '../../services/product.service';
 import {  EventEmitter } from '@angular/core';
-//
+// 
 
 export class Produit {
   constructor(
@@ -41,7 +41,7 @@ export class CrudStockComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private http: HttpClient,
      private modalService: NgbModal, private productService: ProductService) {
-
+ 
       }
 
   ngOnInit(): void {
@@ -67,8 +67,7 @@ export class CrudStockComponent implements OnInit {
 
   //Affichage produits
   getProduit() {
-    let id=localStorage.getItem("id")
-    this.http.get(`http://localhost:3000/produit/getP/${id}`)
+    this.http.get('http://localhost:3000/produit/getAll')
       .subscribe(response => {
         console.log(response);
         this.produits = response;
@@ -151,12 +150,11 @@ export class CrudStockComponent implements OnInit {
 
 //add
 onSubmit(f: NgForm) {
-  let id =localStorage.getItem("id");
-  const url = `http://localhost:3000/produit/createP/${id}`;
-  this.http.post(url, f.value,  )
+  const url = 'http://localhost:3000/produit/createP';
+  this.http.post(url, f.value)
     .subscribe((result) => {
       this.ngOnInit(); //reload the table
-      });
+    });
   this.modalService.dismissAll(); //dismiss the modal
 }
 

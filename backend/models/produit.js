@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       Produit.hasMany(models.images_produit, { foreignKey: 'id_images_produit', as: 'images_produit' });
       Produit.hasMany(models.Paniers, { foreignKey: 'id_panier', as: 'panier' });
       Produit.hasOne(models.fiche_teches, { foreignKey: 'id_fiche_tech', as: 'fiche_teches' });
-      Produit.belongsTo(models.Admin, { foreignKey: 'id_admin', as: 'admin' });
+
     }
   };
   Produit.init({
@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     prix: DataTypes.INTEGER,
     max_rating: DataTypes.INTEGER,
     description: DataTypes.STRING,
+   
     quantite: DataTypes.INTEGER,
     is_deleted :DataTypes.BOOLEAN,
     id_categorie: {
@@ -38,15 +39,7 @@ module.exports = (sequelize, DataTypes) => {
         key: "id",
       },
     },
-    id_admin: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      foreignKey: true,
-      references: {
-        model: "Admin",
-        key: "id",
-      },
-    },
+
   },
     {
       sequelize,

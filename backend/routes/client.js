@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
 const { Client } = require("../models");
-const verifyToken = require("./auth/verifyToken");
 const prepareResponse = (response, status, body, type) => {
   console.log(body);
   response.set("Content-Type", type);
@@ -41,7 +40,7 @@ router.get("/getAll", function (req, res, next) {
 });
 //UPDATE_Client
 
-router.put("/updateC/:id",verifyToken, function (req, res, next) {
+router.put("/updateC/:id", function (req, res, next) {
   let id = req.params.id;
   console.log(req.body);
   Client.findByPk(id, { attributes: ["id"] }).then((client) => {
@@ -68,7 +67,7 @@ router.put("/updateC/:id",verifyToken, function (req, res, next) {
 
 //DELETE CLIENT
 
-router.get("/delete/:id", verifyToken,function (req, res) {
+router.get("/delete/:id", function (req, res) {
   let id = req.params.id;
 
   Client.findByPk(id, { attributes: ["id"] }).then((client) => {

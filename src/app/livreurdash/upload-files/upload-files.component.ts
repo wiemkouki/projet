@@ -7,16 +7,16 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 import { UserServiceService } from '../../services/user-service.service';
 
-export class doc_justificatifs {
-  constructor(
-    public id: number,
-    public libelle: string,
-
-    public createdAt: string,
-    public updatedAt: string,
-
-  ) {}
-}
+// export class doc_justificatifs {
+//   constructor(
+//     public id: number,
+//     public libelle: string,
+ 
+//     public createdAt: string,
+//     public updatedAt: string,
+  
+//   ) {} 
+// }
 
 @Component({
   selector: 'app-upload-files',
@@ -40,7 +40,7 @@ export class UploadFilesComponent implements OnInit
   uploadedFiles: Array < File > ;
   attachmentList:any = [];
 
-  constructor(private http: HttpClient
+  constructor(private http: HttpClient 
     ,private fileService:FileService
     ,private userService: UserServiceService
     ,private modalService: NgbModal ){}

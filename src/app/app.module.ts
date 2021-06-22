@@ -85,7 +85,7 @@ const Routes: Routes = [
   },
 
   {
-    path: 'admin', component: AdmindashComponent,
+    path: 'admin', component: AdmindashComponent, canActivate:[AdminGuard],
     children: [
       { path: 'users', component: CrudUserComponent },
       { path: 'stock', component: CrudStockComponent },
