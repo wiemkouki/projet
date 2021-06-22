@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       Admin.hasMany(models.Commande, { foreignKey: 'id_commande', as: 'commande' });
       Admin.hasMany(models.stock, { foreignKey: 'id_stock', as: 'stock' });
       Admin.belongsTo(models.User, { foreignKey: 'id_user', as: 'user' });
-      Admin.hasMany(models.Produit, { foreignKey: 'id_produit', as: 'produit' });
+
 
     }
 

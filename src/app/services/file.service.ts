@@ -17,9 +17,8 @@ export class FileService {
 
         return this.http.post('http://localhost:3000/file/download', body, {
             responseType : 'blob',
-            headers:new HttpHeaders().append('Content-Type','application/json'),
-            withCredentials:true
-
+            headers: new HttpHeaders().append('Content-Type','application/json'),
+            withCredentials: false
         });
     }
 
@@ -35,4 +34,5 @@ export class FileService {
       }
 
 
+    
 }

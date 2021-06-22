@@ -35,7 +35,7 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { TestComponent } from './test/test.component';
 import { AdmindashComponent } from './admindash/admindash.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CrudUserComponent } from './supdash/crud-user/crud-user.component';
+import { CrudUserComponent } from './Admindash/crud-user/crud-user.component';
 import { AuthService } from './services/auth.service';
 import { AdminGuard } from './admin.guard';
 import { ClientGuard } from './client.guard';
@@ -48,8 +48,11 @@ import { Prod5Component } from './product/prod5/prod5.component';
 import { Prod6Component } from './product/prod6/prod6.component';
 import { Prod7Component } from './product/prod7/prod7.component';
 import { Prod8Component } from './product/prod8/prod8.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+// import { AngularFileViewerModule } from '@taldor-ltd/angular-file-viewer';
 import { CmdeComponent } from './admindash/cmde/cmde.component';
 import { CrudStockComponent } from './admindash/crud-stock/crud-stock.component';
+
 import { CrudSScatComponent } from './supdash/crud-categorie/crud-sscat/crud-sscat.component';
 import { CrudCategorieComponent } from './supdash/crud-categorie/crud-categorie.component';
 import { LivreurdashComponent } from './livreurdash/livreurdash.component';
@@ -77,15 +80,14 @@ const Routes: Routes = [
       { path: 'doc', component: CrudDocComponent }
       ,
 
-      { path: 'valid', component: DocValidComponent },
-      { path: 'users', component: CrudUserComponent }
+      { path: 'valid', component: DocValidComponent }
     ]
   },
 
   {
-    path: 'admin', component: AdmindashComponent,
+    path: 'admin', component: AdmindashComponent, canActivate:[AdminGuard],
     children: [
-     
+      { path: 'users', component: CrudUserComponent },
       { path: 'stock', component: CrudStockComponent },
       { path: 'cmde', component: CmdeComponent } ,
       { path: 'notif', component: NotifLivComponent } ,
@@ -197,7 +199,7 @@ const Routes: Routes = [
     // AngularFileViewerModule,
     MatCardModule,
     FileUploadModule,
- 
+    NgxSpinnerModule,
     MDBBootstrapModule.forRoot(),
     NoopAnimationsModule,
 

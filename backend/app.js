@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
 const sequelize = require('sequelize');
 const http = require('http');
 const cors = require('cors');
@@ -13,9 +12,6 @@ app.use(cors({
     origin: 'http://localhost:4200',
     credentials: true
 }));
-
-app.use(cookieParser());
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

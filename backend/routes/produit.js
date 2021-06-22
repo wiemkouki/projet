@@ -1,13 +1,12 @@
 var express = require("express");
 var router = express.Router();
 var multer = require("multer");
-const verifyToken = require("./auth/verifyToken");
+
 const {
   Produit,
   fiche_teches,
   images_produit,
   categorie,
-  Admin
 } = require("../models");
 
 const MIME_TYPES = {
@@ -87,17 +86,9 @@ router.get("/getAll", function (req, res, next) {
 });
 
 //GET PRODUCTS BY Category
-router.get("/getP/:id",  function (req, res, next) {
-  let id = req.params.id;
-  Admin.findOne(
+router.get("/getP", async function (req, res, next) {
 
-         {attributes:["id"],
-         where :
-         {id_user:id}
-
-   }).then(async(admin) => {
-
- const produit= await Produit.findAll({
+  const produit = await Produit.findAll({
     attributes: [
       "id",
       "libelle",
@@ -112,35 +103,23 @@ router.get("/getP/:id",  function (req, res, next) {
         model: categorie,
         attributes: ["nom_cat"],
         as: "categorie",
-
+        order: [["nom_cat", "ASC"]],
       },
     ],
-    where: {
-      is_deleted: 0,
-      id_admin:admin.id
-    }
   });
 
   prepareResponse(res, 200, produit, "application/json");
 });
-});
+
 // create Produit
-router.post("/createP/:id", verifyToken,function (req, res, next) {
-  Admin.findOne(
-
-    {attributes:["id","nom_boutique","tel"],
-    where :
-    {id_user:req.params.id}
-
-}).then((admin) => {
+router.post("/createP/:id", function (req, res, next) {
 
   categorie.findOne({attributes:["id","nom_cat", "famille"],
-       where: { id: req.body.id  } }).then((categorie)=>{
+       where: { id: req.params.id  } }).then((categorie)=>{
   Produit.findOne({
     attributes: ["libelle"],
     where: {
       libelle: req.body.libelle,
-      id_categorie:categorie.id
     },
   })
     .then(async (pdt) => {
@@ -149,13 +128,11 @@ router.post("/createP/:id", verifyToken,function (req, res, next) {
           success: false,
           message: "Produit already exist !",
         };
-
         prepareResponse(res, 500, response, "application/json");
-
       } else {
-        let {  libelle, marque, prix, max_rating, description, quantite } = req.body;
-
+        let { id, libelle, marque, prix, max_rating, description,quantite } = req.body;
         const produit = await Produit.create({
+          id,
           libelle,
           marque,
           prix,
@@ -163,7 +140,6 @@ router.post("/createP/:id", verifyToken,function (req, res, next) {
           description,
           quantite,
           id_categorie:categorie.id,
-          id_admin:admin.id,
           is_deleted: false,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -181,12 +157,11 @@ router.post("/createP/:id", verifyToken,function (req, res, next) {
       }
     })
   })
-})
     .catch((error) => console.log(error));
 });
 
 // Ajouter IMAGES PRODUITS
-router.post("/uploadPic/:id",verifyToken, function (req, res, next) {
+router.post("/uploadPic/:id", function (req, res, next) {
   images(req, res, async function (err) {
     if (err) {
       console.log(err);
@@ -211,7 +186,7 @@ router.post("/uploadPic/:id",verifyToken, function (req, res, next) {
 
 //UPDATE
 
-router.put("/updateP/:id", verifyToken,function (req, res) {
+router.put("/updateP/:id", function (req, res) {
   let id = req.params.id;
   Produit.findByPk(id, { attributes: ["id"] }).then((pdt) => {
     try {
@@ -238,7 +213,7 @@ router.put("/updateP/:id", verifyToken,function (req, res) {
 });
 //DELETE Produit
 
-router.get("/delete/:id", verifyToken,function (req, res) {
+router.get("/delete/:id", function (req, res) {
   let id = req.params.id;
   Produit.findByPk(id, { attributes: ["id"] }).then((produits) => {
     try {

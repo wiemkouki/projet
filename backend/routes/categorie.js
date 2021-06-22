@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 const { categorie  } = require("../models");
 const bodyParser = require ('body-parser');
-const verifyToken = require("./auth/verifyToken");
+
 
 const prepareResponse = (response, status, body, type) => {
   response.set("Content-Type", type);
@@ -43,7 +43,7 @@ router.get("/getAllC", function (req, res, next) {
 });
 
 //CREATE CATEGORIE
-router.post("/createCat",verifyToken, function (req, res, next) {
+router.post("/createCat", function (req, res, next) {
   categorie
     .findOne({
       attributes: ["nom_cat"],
@@ -76,7 +76,7 @@ router.post("/createCat",verifyToken, function (req, res, next) {
     }).catch((error)=> console.log(error));
 });
 //UPDATE CATEGORIE
-router.put("/updateC/:id",verifyToken, function (req, res) {
+router.put("/updateC/:id", function (req, res) {
 
   let id = req.params.id;
 
@@ -100,7 +100,7 @@ router.put("/updateC/:id",verifyToken, function (req, res) {
 });
 //DELETE CATEGORIE
 
-router.get("/delete/:id",verifyToken, function (req, res) {
+router.get("/delete/:id", function (req, res) {
   let id = req.params.id;
   categorie.findByPk(id
     ,{attributes:["id"]}).then((cat) => {
