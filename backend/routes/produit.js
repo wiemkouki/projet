@@ -125,7 +125,7 @@ router.get("/getP/:id",  function (req, res, next) {
 });
 });
 // create Produit
-router.post("/createP/:id", verifyToken, function (req, res, next) {
+router.post("/createP/:id", verifyToken,function (req, res, next) {
   Admin.findOne(
 
     {attributes:["id","nom_boutique","tel"],
