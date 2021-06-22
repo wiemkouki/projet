@@ -27,7 +27,6 @@ module.exports = (sequelize, DataTypes) => {
     prix: DataTypes.INTEGER,
     max_rating: DataTypes.INTEGER,
     description: DataTypes.STRING,
-    avatar: DataTypes.STRING,
     quantite: DataTypes.INTEGER,
     is_deleted :DataTypes.BOOLEAN,
     id_categorie: {

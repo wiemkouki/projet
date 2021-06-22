@@ -150,14 +150,15 @@ export class CrudStockComponent implements OnInit {
 
 
 //add
-// onSubmit(f: NgForm) {
-//   let id =localStorage.getItem("id");
-//   this.http.CreateProduct(id)
-//     .subscribe((result) => {
-//       this.ngOnInit(); //reload the table
-//       });
-//   this.modalService.dismissAll(); //dismiss the modal
-// }
+onSubmit(f: NgForm) {
+  let id =localStorage.getItem("id");
+  const url = `http://localhost:3000/produit/createP/${id}`;
+  this.http.post(url, f.value,  )
+    .subscribe((result) => {
+      this.ngOnInit(); //reload the table
+      });
+  this.modalService.dismissAll(); //dismiss the modal
+}
 
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {

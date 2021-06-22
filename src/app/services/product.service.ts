@@ -21,17 +21,16 @@ export class ProductService {
   deleteProduct(id: string): Observable<any>{
     return this.http.get(`http://localhost:3000/produit/delete/${id}`);
    }
-
-
-  updateProduct(id: number) : Observable<any>{
+  //  updateProduct(id: number): Observable<any>{
+  //   return this.http.get(`http://localhost:3000/produit/updateP/${id}`);
+  //  }
+  
+  updateProduct(id: number) {
     const url = `${this.api_prefix}/updateP/${id}`;
     return this.http.put(url, { headers: this.headerrs });
   }
 
-  CreateProduct(id: number) : Observable<any>{
-    const url = `${this.api_prefix}/createP/${id}`;
-    return this.http.post(url, { headers: this.headerrs ,withCredentials: true});
-  }
+
 
 
 
